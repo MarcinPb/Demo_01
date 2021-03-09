@@ -168,6 +168,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\DataContainer_MoveFirstHS.png" />
+    <Resource Include="Resources\DataContainer_MoveLastHS.png" />
+    <Resource Include="Resources\DataContainer_MoveNextHS.png" />
+    <Resource Include="Resources\DataContainer_MovePreviousHS.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

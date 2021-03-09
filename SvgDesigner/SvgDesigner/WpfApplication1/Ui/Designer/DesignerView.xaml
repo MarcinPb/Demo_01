@@ -104,8 +104,22 @@
                     <Button Name="CmdSelect" ToolTip="Select" Command="{Binding AddCommand}"  >
                         <Image Source="..\..\Resources\PointerHS.png"  />
                     </Button>
-                    <Button Name="CmdMoveHorizontally" ToolTip="Move Horizontally" Command="{Binding MoveCommand}">
+                    <Separator/>
+                    <!--<Button Name="CmdMoveHorizontally" ToolTip="Move Horizontally" Command="{Binding MoveCommand}">
                         <Image Source="..\..\Resources\DeleteHS.png"  />
+                    </Button>-->
+                    <Button Name="MoveFirst" ToolTip="Move First" Command="{Binding AddCommand}"  >
+                        <Image Source="..\..\Resources\DataContainer_MoveFirstHS.png"  />
+                    </Button>
+                    <Button Name="MovePrevious" ToolTip="Move Previous" Command="{Binding AddCommand}"  >
+                        <Image Source="..\..\Resources\DataContainer_MovePreviousHS.png"  />
+                    </Button>
+                    <xctk:DateTimePicker Grid.Row="1" Grid.Column="4" Margin="7 0 0 0" Value="{Binding StartDate}" Format="Custom" FormatString="dd-MM-yyyy HH:mm" />
+                    <Button Name="MoveNext" ToolTip="Move Next" Command="{Binding AddCommand}"  >
+                        <Image Source="..\..\Resources\DataContainer_MoveNextHS.png"  />
+                    </Button>
+                    <Button Name="MoveLast" ToolTip="Move Last" Command="{Binding AddCommand}"  >
+                        <Image Source="..\..\Resources\DataContainer_MoveLastHS.png"  />
                     </Button>
                 </ToolBar>
             </ToolBarTray>
@@ -127,7 +141,10 @@
                             <ItemsControl ItemsSource="{Binding ObjList}" >
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
+                                        <!--
                                         <Canvas Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}" Name="Layer" ClipToBounds="True" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="AliceBlue">
+                                        -->
+                                        <Canvas Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}" Name="Layer" ClipToBounds="True" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" >
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="MouseLeftButtonDown">
                                                     <utility:EventCommandExecuter  Command="{Binding Path=OnMouseDoubleClickCmd, Mode=OneTime}" />

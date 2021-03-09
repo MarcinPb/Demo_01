@@ -14,6 +14,7 @@ namespace WpfApplication1.Ui.Designer
 {
     public class DesignerViewModel : ViewModelBase
     {
+        public DateTime StartDate { get; set; }
         public double CanvasWidth { get; set; }
         public double CanvasHeight { get; set; }
 
@@ -74,6 +75,7 @@ namespace WpfApplication1.Ui.Designer
         public DesignerViewModel()
         {
             //ObjList = _objTempList;
+            StartDate = Convert.ToDateTime("2021-03-09 11:30");
 
             OnMouseDoubleClickCmd = new RelayCommand<object>(OnMouseDoubleClickCmdExecute);
 
