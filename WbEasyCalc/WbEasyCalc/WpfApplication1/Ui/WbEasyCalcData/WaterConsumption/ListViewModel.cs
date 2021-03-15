@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using DataRepository;
+using DataRepository.WaterConsumption;
 using GlobalRepository;
 using NLog;
 using WpfApplication1.Utility;
@@ -19,7 +20,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        #region Props: List, SelectedRow, RowsQty
+        #region Props: List, SelectedRow, RowsQty, WaterConsumptionEditedViewModel
 
         private ObservableCollection<RowViewModel> _list;
         public ObservableCollection<RowViewModel> List
@@ -46,7 +47,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                 CloneCmd.RaiseCanExecuteChanged();
 
                 WaterConsumptionEditedViewModel = null;
-                OpenRowCmdExecute();
+                //OpenRowCmdExecute();
             }
         }
 
@@ -87,8 +88,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                 {
                     SelectedRow = null;
                 }
-                WaterConsumptionEditedViewModel = new EditedViewModel(0);
-
+                //WaterConsumptionEditedViewModel = new EditedViewModel(0);
+                var result = DialogUtility.ShowModal(new EditedViewModel(0));
             }
             catch (Exception exception)
             {
@@ -112,8 +113,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                     return;
                 }
 
-                WaterConsumptionEditedViewModel = new EditedViewModel(SelectedRow.Model.WaterConsumptionId);
-
+                //WaterConsumptionEditedViewModel = new EditedViewModel(SelectedRow.Model.WaterConsumptionId);
+                var result = DialogUtility.ShowModal(new EditedViewModel(SelectedRow.Model.WaterConsumptionId));
             }
             catch (Exception e)
             {
@@ -157,28 +158,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
             return SelectedRow != null && SelectedRow.Model.IsArchive == false;
         }
 
-        public RelayCommand SaveRowCmd { get; }
-        private void SaveRowCmdExecute()
-        {
-            try
-            {
-                DataModel.WaterConsumption row = GlobalConfig.DataRepository.WaterConsumptionListRepository.SaveItem(WaterConsumptionEditedViewModel.Model.Model);
-                LoadData();
-                SelectedRow = List.FirstOrDefault(x => x.Model.WaterConsumptionId == row.WaterConsumptionId);
-
-            }
-            catch (Exception e)
-            {
-                Logger.Error(e.Message);
-                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        public bool SaveRowCmdCanExecute()
-        {
-            return true;
-        }
-
-
         public RelayCommand CloneCmd { get; }
 
         private void CloneCmdExecute()
@@ -212,18 +191,32 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
         }
         #endregion
 
-        public ListViewModel()
+
+
+
+        public ListViewModel(int id = 0)
         {
             try
             {
+                if (id == 0)
+                {
+                    GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp = new ListRepositoryTemp(new List<DataModel.WaterConsumption>());
+                }
+                else
+                {
+                    var modelList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList().Where(x => x.WbEasyCalcDataId == id).ToList();
+                    GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp = new ListRepositoryTemp(modelList);
+                }
+
                 AddRowCmd = new RelayCommand(AddRowCmdExecute, AddRowCmdCanExecute);
                 OpenRowCmd = new RelayCommand(OpenRowCmdExecute, OpenRowCmdCanExecute);
                 RemoveRowCmd = new RelayCommand(RemoveRowCmdExecute, RemoveRowCmdCanExecute);
-                SaveRowCmd = new RelayCommand(SaveRowCmdExecute, SaveRowCmdCanExecute);
+                //SaveRowCmd = new RelayCommand(SaveRowCmdExecute, SaveRowCmdCanExecute);
                 CloneCmd = new RelayCommand(CloneCmdExecute, CloneCmdCanExecute);
 
                 ReadSelectedItemsCmd = new RelayCommand<IList>(ReadSelectedItemsExecute);
 
+                Messenger.Default.Register<DataModel.WaterConsumption>(this, OnSaveModel);
                 LoadData();
             }
             catch (Exception e)
@@ -232,14 +225,20 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void OnSaveModel(DataModel.WaterConsumption model)
+        {
+            LoadData();
+            SelectedRow = List.FirstOrDefault(x => x.Model.WaterConsumptionId == model.WaterConsumptionId);
+        }
 
         private void LoadData()
         {
             Logger.Info("'Water Consumption' data loaded.");
 
-            List = new ObservableCollection<RowViewModel>(GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList().Select(x => new RowViewModel(x)).ToList());
+            var modelList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
+            var list = modelList.Select(x => new RowViewModel(x)).OrderByDescending(x => x.Model.WaterConsumptionId);
+            List = new ObservableCollection<RowViewModel>(list);
             RowsQty = List.Count;
         }
-
     }
 }

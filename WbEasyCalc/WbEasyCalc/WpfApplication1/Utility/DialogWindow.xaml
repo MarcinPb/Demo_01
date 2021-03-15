@@ -1,0 +1,31 @@
+﻿<Window x:Class="WpfApplication1.Utility.DialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication1"
+        mc:Ignorable="d"
+        Title="DialogWindow" 
+        
+        SizeToContent="WidthAndHeight"  
+        ResizeMode="NoResize"
+        Loaded="Window_Loaded" WindowStyle="ThreeDBorderWindow"
+        Closed="DialogWindow_OnClosed"
+        >
+    <!--
+        Closing="DialogWindow_OnClosing"
+        -->
+    <Grid Margin="10" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Margin="0 10 0 0" Grid.Row="0" BorderThickness="1" BorderBrush="Gray" >
+            <ContentControl Content="{Binding}" />
+        </Border>
+        <StackPanel Grid.Row="1" Orientation="Horizontal"  HorizontalAlignment="Right" >
+            <Button Padding="5 0" Content="Save" Margin="10 10 0 0" Click="ButtonSave_Click"/>
+            <Button Padding="5 0" Content="Cancel" Margin="10 10 0 0" Click="ButtonCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

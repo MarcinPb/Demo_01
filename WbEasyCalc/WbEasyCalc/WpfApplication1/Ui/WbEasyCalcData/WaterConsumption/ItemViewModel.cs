@@ -16,6 +16,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
         public DataModel.WaterConsumption Model => new DataModel.WaterConsumption()
         {
             WaterConsumptionId = Id,
+            WbEasyCalcDataId = WbEasyCalcDataId,
             Description = Description,
             IsArchive = IsArchive,
             IsAccepted = IsAccepted,
@@ -38,6 +39,13 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
         {
             get => _id;
             set { _id = value; RaisePropertyChanged(nameof(Id)); }
+        }
+
+        private int _wbEasyCalcDataId;
+        public int WbEasyCalcDataId
+        {
+            get => _wbEasyCalcDataId;
+            set { _wbEasyCalcDataId = value; RaisePropertyChanged(nameof(WbEasyCalcDataId)); }
         }
 
         private string _createLogin;
@@ -183,6 +191,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
 
             if (model.WaterConsumptionId != 0)
             {
+                WbEasyCalcDataId = model.WbEasyCalcDataId;
                 ZoneId = model.ZoneId;
                 WaterConsumptionCategoryId = model.WaterConsumptionCategoryId;
                 WaterConsumptionStatusId = model.WaterConsumptionStatusId;
@@ -191,6 +200,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
             }
             else
             {
+                WbEasyCalcDataId = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetList().First().WbEasyCalcDataId; 
                 ZoneId = GlobalConfig.DataRepository.ZoneList.First().ZoneId;
                 WaterConsumptionCategoryId = GlobalConfig.DataRepository.WaterConsumptionCategoryList.First().Id;
                 WaterConsumptionStatusId = GlobalConfig.DataRepository.WaterConsumptionStatusList.First().Id;

@@ -11,8 +11,9 @@ namespace DataRepository
 {
     public interface IDataRepository
     {
-        IWbEasyCalcDataListRepository WbEasyCalcDataListRepository { get; }
-        IListRepository WaterConsumptionListRepository { get; }
+        WbEasyCalcData.IListRepository WbEasyCalcDataListRepository { get; }
+        WaterConsumption.IListRepository WaterConsumptionListRepository { get; }
+        WaterConsumption.IListRepository WaterConsumptionListRepositoryTemp { get; set; }
 
         List<IdNamePair> YearList { get; }
         List<IdNamePair> MonthList { get; }

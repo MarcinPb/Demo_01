@@ -213,7 +213,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             IsAccepted = model.IsAccepted;
 
             EasyCalcViewModel = new ExcelViewModel(model.EasyCalcModel);
-            WaterConsumptionListViewModel = new Ui.WbEasyCalcData.WaterConsumption.ListViewModel();
+
+            WaterConsumptionListViewModel = new Ui.WbEasyCalcData.WaterConsumption.ListViewModel(Id);
 
             WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel();
         }

@@ -1,6 +1,6 @@
 ﻿namespace DataRepository.WbEasyCalcData
 {
-    public interface IWbEasyCalcDataListRepository : IMultiDeleteListRepository<DataModel.WbEasyCalcData>
+    public interface IListRepository : IMultiDeleteListRepository<DataModel.WbEasyCalcData>
     {
         int Clone(int id);
         int CreateAll();

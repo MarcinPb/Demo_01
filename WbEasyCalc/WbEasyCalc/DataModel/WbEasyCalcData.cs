@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using WbEasyCalcModel;
 using WbEasyCalcModel.WbEasyCalc;
 
@@ -29,6 +31,8 @@ namespace DataModel
             set => easyCalcModel = value; 
         }
 
+        public List<WaterConsumption> WaterConsumptionModelList { get; set; } = new List<WaterConsumption>();
+
         public object Clone()
         {
             return new WbEasyCalcData()
@@ -48,6 +52,8 @@ namespace DataModel
                 MonthNo = MonthNo,
 
                 EasyCalcModel = (EasyCalcModel)EasyCalcModel.Clone(),
+                WaterConsumptionModelList = WaterConsumptionModelList.Select(x => (WaterConsumption)x.Clone()).ToList(),
+                //WaterConsumptionModelList = WaterConsumptionModelList.Cast<WaterConsumption>().ToList(),
             };
         }
     }

@@ -6,6 +6,7 @@ namespace DataModel
     public class WaterConsumption : ICloneable
     {
         public int WaterConsumptionId { get; set; }
+        public int WbEasyCalcDataId { get; set; }
 
         public string CreateLogin { get; set; }
         public DateTime CreateDate { get; set; }
@@ -30,6 +31,7 @@ namespace DataModel
             return new WaterConsumption()
             {
                 WaterConsumptionId = WaterConsumptionId,
+                WbEasyCalcDataId = WbEasyCalcDataId,
                 CreateLogin = CreateLogin,
                 CreateDate = CreateDate,
                 ModifyLogin = ModifyLogin,

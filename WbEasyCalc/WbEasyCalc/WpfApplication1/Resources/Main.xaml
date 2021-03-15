@@ -7,6 +7,7 @@
     xmlns:controls="clr-namespace:WpfApplication1.Controls"
     xmlns:map="clr-namespace:WpfApplication1.Map"
     xmlns:customer="clr-namespace:WpfApplication1.Ui.WbEasyCalcData"
+    xmlns:waterExcelConsumption="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.WaterConsumption"
     xmlns:waterConsumption="clr-namespace:WpfApplication1.Ui.WaterConsumption"
     xmlns:waterConsumptionReport="clr-namespace:WpfApplication1.Ui.WaterConsumptionReport"
     xmlns:configuration="clr-namespace:WpfApplication1.Ui.Configuration"
@@ -30,7 +31,10 @@
     <DataTemplate DataType="{x:Type waterConsumption:EditedViewModel}">
         <waterConsumption:EditedView />
     </DataTemplate>
-
+    
+    <DataTemplate DataType="{x:Type waterExcelConsumption:EditedViewModel}">
+            <waterExcelConsumption:EditedView />
+    </DataTemplate>
     <DataTemplate DataType="{x:Type waterConsumptionReport:EditedViewModel}">
         <waterConsumptionReport:EditedView />
     </DataTemplate>

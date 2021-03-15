@@ -16,15 +16,15 @@ namespace DataRepository
     {
         private readonly string _cnnString;
 
-        public IWbEasyCalcDataListRepository WbEasyCalcDataListRepository { get; private set; }
-        public IListRepository WaterConsumptionListRepository { get; private set; }
-
+        public WbEasyCalcData.IListRepository WbEasyCalcDataListRepository { get; private set; }
+        public WaterConsumption.IListRepository WaterConsumptionListRepository { get; private set; }
+        public WaterConsumption.IListRepository WaterConsumptionListRepositoryTemp { get; set; }
 
         public DataRepository(string cnnString)
         {
             _cnnString = cnnString;
-            WbEasyCalcDataListRepository = new WbEasyCalcDataListRepository(_cnnString);
-            WaterConsumptionListRepository = new ListRepository(_cnnString);
+            WbEasyCalcDataListRepository = new WbEasyCalcData.ListRepository(_cnnString);
+            WaterConsumptionListRepository = new WaterConsumption.ListRepository(_cnnString);
         }
 
         private List<ZoneItem> _zoneList;

@@ -7,7 +7,7 @@ using Dapper;
 
 namespace DataRepository.WbEasyCalcData
 {
-    public class WbEasyCalcDataListRepository : IWbEasyCalcDataListRepository
+    public class ListRepository : IListRepository
     {
 
         private List<DataModel.WbEasyCalcData> _list;
@@ -257,6 +257,27 @@ namespace DataRepository.WbEasyCalcData
 
                 model.WbEasyCalcDataId = p.Get<int>("@id");
 
+                var waterConsumptionRepo = new WaterConsumption.ListRepository(_cnnString);
+                var oldList = waterConsumptionRepo.GetList().Where(x => x.WbEasyCalcDataId == model.WbEasyCalcDataId).ToList();
+                // Delete
+                foreach (var item in oldList)
+                {
+                    if (!model.WaterConsumptionModelList.Any(x => x.WaterConsumptionId == item.WaterConsumptionId))
+                    {
+                        waterConsumptionRepo.DeleteItem(item.WaterConsumptionId);
+                    }
+                }
+                // Add and updaate
+                foreach (var orderHeaderModel in model.WaterConsumptionModelList)
+                {
+                    if (!oldList.Any(x => x.WaterConsumptionId == orderHeaderModel.WaterConsumptionId))
+                    {
+                        orderHeaderModel.WaterConsumptionId = 0;
+                        orderHeaderModel.WbEasyCalcDataId = model.WbEasyCalcDataId;
+                    }
+                    waterConsumptionRepo.SaveItem(orderHeaderModel);
+                }
+
                 return model;
             }
         }
@@ -313,7 +334,7 @@ namespace DataRepository.WbEasyCalcData
         }
 
         private readonly string _cnnString;
-        public WbEasyCalcDataListRepository(string cnnString)
+        public ListRepository(string cnnString)
         {
             _cnnString = cnnString;
         }

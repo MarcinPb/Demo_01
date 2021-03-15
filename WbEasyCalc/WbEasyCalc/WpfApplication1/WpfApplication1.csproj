@@ -205,7 +205,12 @@
     </Compile>
     <Compile Include="Ui\WbEasyCalcData\WaterConsumption\ListViewModel.cs" />
     <Compile Include="Ui\WbEasyCalcData\WaterConsumption\RowViewModel.cs" />
+    <Compile Include="Utility\DialogUtility.cs" />
+    <Compile Include="Utility\DialogWindow.xaml.cs">
+      <DependentUpon>DialogWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utility\EventCommandExecuter.cs" />
+    <Compile Include="Utility\IDialogViewModel.cs" />
     <Compile Include="Utility\Messenger.cs" />
     <Compile Include="Utility\SelectingItemAttachedProperty.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
@@ -325,6 +330,10 @@
     <Page Include="Ui\WbEasyCalcData\WaterConsumption\ListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Utility\DialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@ using WpfApplication1.Utility;
 
 namespace WpfApplication1.Ui.WbEasyCalcData
 {
-    public class EditedViewModel : ViewModelBase
+    public class EditedViewModel : ViewModelBase, IDialogViewModel
     {
         private ItemViewModel _model;
         public ItemViewModel ItemViewModel
@@ -93,6 +93,22 @@ namespace WpfApplication1.Ui.WbEasyCalcData
 
         #endregion
 
+        #region IDialogViewModel
+
+        public string Title { get; set; } = "Customer";
+
+        public bool Save()
+        {
+            DataModel.WbEasyCalcData model = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.SaveItem(ItemViewModel.Model);
+            Messenger.Default.Send<DataModel.WbEasyCalcData>(model);
+            return true;
+        }
+
+        public void Close()
+        {
+        }
+
+        #endregion
 
         public EditedViewModel(int id)
         {

@@ -6,26 +6,63 @@
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
         Title="MainWindow" 
-        SizeToContent="WidthAndHeight"        
+        Width="1000" Height="700"
         >
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
     <Window.Resources>
-        
+
     </Window.Resources>
-    <TabControl Margin="10" Width="1740" Height="950">
-        <TabItem Header="WB-EasyCalc List"  >
-            <ContentControl  Content="{Binding WbEasyCalcDataViewModel}" Margin="10" />
-        </TabItem>
-        <TabItem Header="Water Consumption List" >
-            <ContentControl Content="{Binding WaterConsumptionListViewModel}" Margin="10" />
-        </TabItem>
-        <TabItem Header="Water Consumption Report" >
-            <ContentControl Content="{Binding WaterConsumptionReportViewModel}" Margin="10" />
-        </TabItem>
-        <TabItem Header="Configuration">
-            <ContentControl Content="{Binding ConfigurationViewModel}" Margin="10"  />
-        </TabItem>
-    </TabControl>
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" MinHeight="100"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="New" Command="{Binding NewCommand}"/>
+                <MenuItem Header="Open" Command="{Binding OpenCommand}"/>
+                <MenuItem Header="Close" Command="{Binding CloseCommand}" IsEnabled="{Binding IsOpen}" />
+                <Separator/>
+                <MenuItem Header="Edit Config" Command="{Binding EditConfigCommand}" IsEnabled="{Binding IsOpen}" />
+                <Separator/>
+                <MenuItem Header="Exit" Command="{Binding ExitCommand}" CommandParameter="{Binding ElementName=TheMainWindow}"/>
+            </MenuItem>
+            <MenuItem Header="Data" IsEnabled="{Binding IsOpen}">
+                <MenuItem Header="Recalculate" Command="{Binding DataRecalculateCommand}"/>
+            </MenuItem>
+        </Menu>
+        <TabControl  Grid.Row="1" Margin="5" >
+            <TabItem Header="WB-EasyCalc List"  >
+                <ContentControl  Content="{Binding WbEasyCalcDataViewModel}" />
+            </TabItem>
+            <TabItem Header="Water Consumption List" >
+                <ContentControl Content="{Binding WaterConsumptionListViewModel}" />
+            </TabItem>
+            <TabItem Header="Water Consumption Report" >
+                <ContentControl Content="{Binding WaterConsumptionReportViewModel}" />
+            </TabItem>
+            <TabItem Header="Configuration">
+                <ContentControl Content="{Binding ConfigurationViewModel}" />
+            </TabItem>
+        </TabControl>
+        <StatusBar Grid.Row="2" >
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <TextBlock Text="{Binding AppFileName}" />
+            <StatusBarItem Grid.Column="1">
+                <TextBlock Text="..." />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
 </Window>

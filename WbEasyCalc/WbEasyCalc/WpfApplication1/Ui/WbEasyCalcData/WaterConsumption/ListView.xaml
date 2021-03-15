@@ -3,25 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:waterConsumption="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.WaterConsumption"
+             xmlns:waterExcelConsumption="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.WaterConsumption"
              xmlns:utility="clr-namespace:WpfApplication1.Utility"
              xmlns:controls="clr-namespace:WpfApplication1.Controls"
              mc:Ignorable="d" 
-             Width="1680" Height="540"
              >
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type waterConsumption:EditedViewModel}">
-            <waterConsumption:EditedView />
-        </DataTemplate>
+        <!--<DataTemplate DataType="{x:Type waterExcelConsumption:EditedViewModel}">
+            <waterExcelConsumption:EditedView />
+        </DataTemplate>-->
     </UserControl.Resources>
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="340" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <Border BorderThickness="1 1 1 1" BorderBrush="Black" >
+        <Border BorderThickness="1 1 1 1" BorderBrush="LightGray" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -30,24 +22,21 @@
                 </Grid.RowDefinitions>
                 <ToolBar Grid.Row="0" >
                     <Button Command="{Binding AddRowCmd}" Content="Add"/>
-                    <!--
-                <Button Command="{Binding OpenRowCmd}" Content="Open"/>
-                -->
-                    <Separator/>
+                    <Button Command="{Binding OpenRowCmd}" Content="Open"/>
                     <Button Command="{Binding RemoveRowCmd}" Content="Delete" ToolTipService.ShowOnDisabled="True" ToolTip="Disabled for rows with a switched on 'Archived' option."/>
                     <Separator/>
                     <Button Command="{Binding CloneCmd}" Content="Clone"/>
                     <Separator/>
                 </ToolBar>
                 <controls:FilteredDataGridCtrl  x:Name="DataGrid1" 
-                Grid.Row="1" 
-                ItemsSource="{Binding List}" 
-                SelectedItem="{Binding SelectedRow}"      
-                AutoGenerateColumns="False" 
-                IsReadOnly="True"
-                utility:SelectingItemAttachedProperty.SelectingItem="{Binding SelectedRow}" 
-                BorderThickness="0 1"
-                >
+                    Grid.Row="1" 
+                    ItemsSource="{Binding List}" 
+                    SelectedItem="{Binding SelectedRow}"      
+                    AutoGenerateColumns="False" 
+                    IsReadOnly="True"
+                    utility:SelectingItemAttachedProperty.SelectingItem="{Binding SelectedRow}" 
+                    BorderThickness="0 1"
+                    >
                     <DataGrid.InputBindings>
                         <MouseBinding Gesture="LeftDoubleClick" Command="{Binding OpenRowCmd}"/>
                     </DataGrid.InputBindings>
@@ -74,16 +63,4 @@
                 </StatusBar>
             </Grid>
         </Border>
-        <Border Grid.Row="1" BorderThickness="1" BorderBrush="Black" Margin="0 20 0 5">
-            <ContentControl Content="{Binding WaterConsumptionEditedViewModel}" />
-        </Border>
-        <Grid Grid.Row="2" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Command="{Binding SaveRowCmd}"  Content="Save" Width="Auto" Padding="30 0"/>
-        </Grid>
-    </Grid>
 </UserControl>

@@ -48,6 +48,7 @@ namespace DataRepository.WaterConsumption
                 p.Add("@IsAccepted", model.IsAccepted);
 
                 // input
+                p.Add("@WbEasyCalcDataId", model.WbEasyCalcDataId);
                 p.Add("@WaterConsumptionCategoryId", model.WaterConsumptionCategoryId);
                 p.Add("@WaterConsumptionStatusId", model.WaterConsumptionStatusId);
                 p.Add("@StartDate", model.StartDate);

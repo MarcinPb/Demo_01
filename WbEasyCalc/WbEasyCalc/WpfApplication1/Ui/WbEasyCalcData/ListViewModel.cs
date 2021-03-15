@@ -43,9 +43,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 CloneCmd.RaiseCanExecuteChanged();
                 CreateAllCmd.RaiseCanExecuteChanged();
 
-                //WbEasyCalcDataEditedViewModel?.Close();
                 WbEasyCalcDataEditedViewModel = null;
-                OpenRowCmdExecute();
+                //OpenRowCmdExecute();
             }
         }
 
@@ -84,7 +83,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             {
                 SelectedRow = null;
             }
-            WbEasyCalcDataEditedViewModel = new EditedViewModel(0);
+            //WbEasyCalcDataEditedViewModel = new EditedViewModel(0);
+            var result = DialogUtility.ShowModal(new EditedViewModel(0));
         }
         public bool AddRowCmdCanExecute()
         {
@@ -100,7 +100,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 return;
             }
 
-            WbEasyCalcDataEditedViewModel = new EditedViewModel(SelectedRow.Model.WbEasyCalcDataId);
+            //WbEasyCalcDataEditedViewModel = new EditedViewModel(SelectedRow.Model.WbEasyCalcDataId);
+            var result = DialogUtility.ShowModal(new EditedViewModel(SelectedRow.Model.WbEasyCalcDataId));
         }
         public bool OpenRowCmdCanExecute()
         {
@@ -136,20 +137,20 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             return SelectedRow != null && SelectedRow.Model.IsArchive==false;
         }
 
-        public RelayCommand SaveRowCmd { get; }
-        private void SaveRowCmdExecute()
-        {
-            try
-            {
-                DataModel.WbEasyCalcData row = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.SaveItem(WbEasyCalcDataEditedViewModel.ItemViewModel.Model);
-                LoadData();
-                SelectedRow = List.FirstOrDefault(x => x.Model.WbEasyCalcDataId == row.WbEasyCalcDataId);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error",MessageBoxButton.OK,MessageBoxImage.Error);
-            }
-        }
+        //public RelayCommand SaveRowCmd { get; }
+        //private void SaveRowCmdExecute()
+        //{
+        //    try
+        //    {
+        //        DataModel.WbEasyCalcData row = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.SaveItem(WbEasyCalcDataEditedViewModel.ItemViewModel.Model);
+        //        LoadData();
+        //        SelectedRow = List.FirstOrDefault(x => x.Model.WbEasyCalcDataId == row.WbEasyCalcDataId);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show(e.Message, "Error",MessageBoxButton.OK,MessageBoxImage.Error);
+        //    }
+        //}
         public bool SaveRowCmdCanExecute()
         {
             return true;
@@ -226,12 +227,13 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 AddRowCmd = new RelayCommand(AddRowCmdExecute, AddRowCmdCanExecute);
                 OpenRowCmd = new RelayCommand(OpenRowCmdExecute, OpenRowCmdCanExecute);
                 RemoveRowCmd = new RelayCommand(RemoveRowCmdExecute, RemoveRowCmdCanExecute);
-                SaveRowCmd = new RelayCommand(SaveRowCmdExecute, SaveRowCmdCanExecute);
+                //SaveRowCmd = new RelayCommand(SaveRowCmdExecute, SaveRowCmdCanExecute);
                 CloneCmd = new RelayCommand(CloneCmdExecute, CloneCmdCanExecute);
                 CreateAllCmd = new RelayCommand(CreateAllCmdExecute, CreateAllCmdCanExecute);
 
                 ReadSelectedItemsCmd = new RelayCommand<IList>(ReadSelectedItemsExecute);
 
+                Messenger.Default.Register<DataModel.WbEasyCalcData>(this, OnSaveModel);
                 LoadData();
             }
             catch (Exception e)
@@ -239,12 +241,16 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void OnSaveModel(DataModel.WbEasyCalcData model)
+        {
+            LoadData();
+            SelectedRow = List.FirstOrDefault(x => x.Model.WbEasyCalcDataId == model.WbEasyCalcDataId);
+        }
 
         private void LoadData()
         {
             List = new ObservableCollection<RowViewModel>(GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetList().Select(x => new RowViewModel(x)).ToList());
             RowsQty = List.Count;
         }
-
     }
 }

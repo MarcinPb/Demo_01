@@ -17,9 +17,26 @@ using NLog;
 
 namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
 {
-    public class EditedViewModel : ViewModelBase
+    public class EditedViewModel : ViewModelBase, IDialogViewModel
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #region IDialogViewModel
+
+        public string Title { get; set; } = "Customer";
+
+        public bool Save()
+        {
+            DataModel.WaterConsumption model = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.SaveItem(Model.Model);
+            Messenger.Default.Send<DataModel.WaterConsumption>(model);
+            return true;
+        }
+
+        public void Close()
+        {
+        }
+
+        #endregion
 
         private ItemViewModel _model;
         public ItemViewModel Model
