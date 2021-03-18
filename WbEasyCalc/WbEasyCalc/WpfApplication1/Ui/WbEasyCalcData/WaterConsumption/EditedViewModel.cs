@@ -23,7 +23,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
 
         #region IDialogViewModel
 
-        public string Title { get; set; } = "Customer";
+        public string Title { get; set; } = "Water Consamption";
 
         public bool Save()
         {

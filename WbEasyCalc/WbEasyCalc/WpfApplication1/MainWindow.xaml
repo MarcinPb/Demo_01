@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="Water Management" 
         Width="1000" Height="700"
         >
     <Window.DataContext>
@@ -22,24 +22,15 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="File">
-                <MenuItem Header="New" Command="{Binding NewCommand}"/>
-                <MenuItem Header="Open" Command="{Binding OpenCommand}"/>
-                <MenuItem Header="Close" Command="{Binding CloseCommand}" IsEnabled="{Binding IsOpen}" />
-                <Separator/>
-                <MenuItem Header="Edit Config" Command="{Binding EditConfigCommand}" IsEnabled="{Binding IsOpen}" />
-                <Separator/>
                 <MenuItem Header="Exit" Command="{Binding ExitCommand}" CommandParameter="{Binding ElementName=TheMainWindow}"/>
             </MenuItem>
-            <MenuItem Header="Data" IsEnabled="{Binding IsOpen}">
-                <MenuItem Header="Recalculate" Command="{Binding DataRecalculateCommand}"/>
+            <MenuItem Header="Tools" IsEnabled="{Binding IsOpen}">
+                <MenuItem Header="Configuration" Command="{Binding DataRecalculateCommand}"/>
             </MenuItem>
         </Menu>
-        <TabControl  Grid.Row="1" Margin="5" >
+        <TabControl  Grid.Row="1" Margin="10" >
             <TabItem Header="WB-EasyCalc List"  >
                 <ContentControl  Content="{Binding WbEasyCalcDataViewModel}" />
-            </TabItem>
-            <TabItem Header="Water Consumption List" >
-                <ContentControl Content="{Binding WaterConsumptionListViewModel}" />
             </TabItem>
             <TabItem Header="Water Consumption Report" >
                 <ContentControl Content="{Binding WaterConsumptionReportViewModel}" />

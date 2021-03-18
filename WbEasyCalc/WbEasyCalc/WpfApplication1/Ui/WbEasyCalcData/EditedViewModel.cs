@@ -95,7 +95,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
 
         #region IDialogViewModel
 
-        public string Title { get; set; } = "Customer";
+        public string Title { get; set; } = "Excel Calculations & Water Consumptions";
 
         public bool Save()
         {

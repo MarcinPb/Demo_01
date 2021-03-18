@@ -90,7 +90,6 @@
                 </ToolBar>
 
                 <m:Map 
-                    Height="400"
                     Grid.Row="1" 
                     Opacity="{Binding MapOpacity}" 
                     Center="{Binding Center, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
