@@ -9,7 +9,7 @@ using DataModel;
 using DataRepository;
 using GlobalRepository;
 using WpfApplication1.Utility;
-using WpfApplication1.Ui.WbEasyCalcData;
+//using WpfApplication1.Ui.WbEasyCalcData;
 using NLog;
 
 namespace WpfApplication1
@@ -23,14 +23,25 @@ namespace WpfApplication1
         public Ui.WaterConsumptionReport.EditedViewModel WaterConsumptionReportViewModel { get; set; }
         public Ui.Configuration.EditedViewModel ConfigurationViewModel { get; set; }
 
+
+        public RelayCommand OptionsCmd { get; set; }
+        private void OptionsCmdExecute()
+        {
+            DialogUtility.ShowModal(new Ui.Configuration.EditedViewModel());
+        }
+
+
+
+
         public MainWindowViewModel()
         {
             Logger.Info("'MainWindowViewModel' started.");
+            OptionsCmd = new RelayCommand(OptionsCmdExecute);
 
             GlobalConfig.InitializeConnection(DatabaseType.Sql);
+
             WbEasyCalcDataViewModel = new Ui.WbEasyCalcData.ListViewModel();
-            WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel();
-            ConfigurationViewModel = new Ui.Configuration.EditedViewModel();
+            WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel(0, 0, 0);
         }
 
     }

@@ -22,6 +22,10 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+        private int _yearNo;
+        private int _monthNo;
+        private int _zoneId;
+
         //private ItemViewModel _model;
         //public ItemViewModel Model
         //{
@@ -37,7 +41,7 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
         public DateTime FilterStartDate
         {
             get => _filterStartDate;
-            set { _filterStartDate = value; RaisePropertyChanged(nameof(FilterStartDate)); LoadData(); }
+            set { _filterStartDate = value; RaisePropertyChanged(nameof(FilterStartDate)); LoadData(_yearNo, _monthNo, _zoneId); }
         }
 
         public DateTime FilterEndDate { get; set; }
@@ -76,11 +80,15 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
 
         #endregion
 
-        public EditedViewModel()
+        public EditedViewModel(int yearNo, int monthNo, int zoneId)
         {
             try
             {
                 Logger.Info("New 'EditedViewModel' was created.");
+
+                _yearNo = yearNo;
+                _monthNo = monthNo;
+                _zoneId = zoneId;
 
                 MapOpacity = 1;
                 ZoomLevel = 15;
@@ -90,10 +98,19 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
                 WaterConsumptionCategoryList = GlobalConfig.DataRepository.WaterConsumptionCategoryList;
                 WaterConsumptionStatusList = GlobalConfig.DataRepository.WaterConsumptionStatusList;
                 ZoneItemList = GlobalConfig.DataRepository.ZoneList;
-                FilterStartDate = new DateTime(2019, 1, 1, 0, 0, 0);
-                FilterEndDate = new DateTime(2022, 1, 1, 0, 0, 0);
 
-                LoadData();
+                if (_yearNo == 0)
+                {
+                    FilterStartDate = new DateTime(2019, 1, 1, 0, 0, 0);
+                    FilterEndDate = new DateTime(2022, 1, 1, 0, 0, 0);
+                }
+                else
+                {
+                    FilterStartDate = new DateTime(_yearNo, _monthNo, 1, 0, 0, 0);
+                    FilterEndDate = FilterStartDate.AddMonths(1).AddSeconds(-1);
+                }
+
+                LoadData(_yearNo, _monthNo, _zoneId);
 
                 MouseMoveCmd = new RelayCommand<object>(MouseMove);
             }
@@ -105,9 +122,13 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
 
         }
 
-        private void LoadData()
+        private void LoadData(int yearNo, int monthNo, int zoneId)
         {
             var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList().Where(x => x.StartDate >= FilterStartDate && x.EndDate <= FilterEndDate).Select(x => new RowViewModel(x));
+            if (_yearNo != 0)
+            {
+                rowModelList = rowModelList.Where(x => x.Model.ZoneId == _zoneId);
+            }
             var mapItemList = rowModelList.Select(x => new MapItem1()
             {
                 Id = 1,

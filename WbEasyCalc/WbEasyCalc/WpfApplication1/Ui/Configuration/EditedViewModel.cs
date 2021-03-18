@@ -17,9 +17,29 @@ using NLog;
 
 namespace WpfApplication1.Ui.Configuration
 {
-    public class EditedViewModel : ViewModelBase
+    public class EditedViewModel : ViewModelBase, IDialogViewModel
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #region IDialogViewModel
+
+        public string Title { get; set; } = "Options";
+
+        public bool Save()
+        {
+            //DataModel.WaterConsumption model = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.SaveItem(Model.Model);
+            //Messenger.Default.Send<EditedViewModel>(this);
+            return true;
+        }
+
+        public void Close()
+        {
+        }
+
+        #endregion
+
+
+
 
         //private ItemViewModel _model;
         //public ItemViewModel Model

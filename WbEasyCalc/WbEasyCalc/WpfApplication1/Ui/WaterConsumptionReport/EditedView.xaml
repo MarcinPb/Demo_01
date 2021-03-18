@@ -7,7 +7,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:utility="clr-namespace:WpfApplication1.Utility"
              xmlns:converters="clr-namespace:WpfApplication1.Converters"
-             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              >
     <UserControl.Resources>
         <converters:FloatConverter x:Key="FloatConverter" />
@@ -20,11 +21,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0 0 0 10">
+        <Grid Grid.Column="0" Grid.Row="0" Margin="0 0 0 10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0"/>
@@ -69,15 +70,15 @@
         </Grid>
         <Border Grid.Row="1" BorderBrush="Gainsboro" BorderThickness="1">
             <Grid>
-                <Grid.ColumnDefinitions>
+                <!--<Grid.ColumnDefinitions>
                     <ColumnDefinition Width="420*"/>
                     <ColumnDefinition Width="289*"/>
-                </Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>-->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <ToolBar Grid.ColumnSpan="2"  >
+                <ToolBar>
                     <!--
                     <Button Content="Export" HorizontalAlignment="Left" Command="{Binding ExportCmd}"/>
                     <Separator/>
@@ -92,7 +93,11 @@
                     <Separator/>
                 </ToolBar>
 
-                <m:Map Grid.Row="1" Opacity="{Binding MapOpacity}" Center="{Binding Center, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ZoomLevel="{Binding ZoomLevel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" CredentialsProvider="{StaticResource MyCredentials}" Culture="pl-pl" Grid.ColumnSpan="2">
+                <m:Map 
+                    Grid.Row="1" Opacity="{Binding MapOpacity}" Center="{Binding Center, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                    ZoomLevel="{Binding ZoomLevel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                    CredentialsProvider="{StaticResource MyCredentials}" Culture="pl-pl"
+                    >
                     <m:MapItemsControl Name="x" ItemsSource="{Binding MapItemList}" />
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">

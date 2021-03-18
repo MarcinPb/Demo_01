@@ -227,7 +227,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
 
             WaterConsumptionListViewModel = new Ui.WbEasyCalcData.WaterConsumption.ListViewModel(Id);
 
-            WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel();
+            WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel(YearNo, MonthNo, ZoneId);
         }
 
         private void CalculateDaysNumber()

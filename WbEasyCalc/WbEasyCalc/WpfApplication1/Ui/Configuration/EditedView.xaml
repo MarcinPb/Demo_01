@@ -7,8 +7,9 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:utility="clr-namespace:WpfApplication1.Utility"
              xmlns:converters="clr-namespace:WpfApplication1.Converters"
-             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             Width="1690" Height="900"             
+             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             Width="400" Height="200"             
              >
     <UserControl.Resources>
         <converters:FloatConverter x:Key="FloatConverter" />
@@ -20,36 +21,30 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0 0 0 10">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Margin="7 7 0 0" Text="Average Tariff" />
-                <TextBlock Grid.Row="0" Grid.Column="1" Margin="7 7 0 0" Text="Cost of Water" />
-                <TextBlock Grid.Row="0" Grid.Column="2" Margin="7 7 0 0" Text="Currency" />
+        <Grid HorizontalAlignment="Left" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <!--<RowDefinition Height="*"/>-->
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <!--<ColumnDefinition Width="*"/>-->
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="7 7 0 0" Text="Average Tarif" />
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="7 7 0 0" Text="Cost of Water" />
+            <TextBlock Grid.Row="0" Grid.Column="2" Margin="7 7 0 0" Text="Currency" />
 
-                <TextBox Grid.Row="1" Grid.Column="0" Margin="7 7 0 0" Text="10" />
-                <TextBox Grid.Row="1" Grid.Column="2" Margin="7 7 0 0" Text="1" />
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="7 7 0 0" Text="PLN" />
-            </Grid>
-
+            <TextBox Grid.Row="1" Grid.Column="0" Margin="7 7 0 0" Text="10" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="7 7 0 0" Text="1" />
+            <TextBox Grid.Row="1" Grid.Column="2" Margin="7 7 0 0" Text="PLN" />
         </Grid>
     </Grid>
-    
 </UserControl>

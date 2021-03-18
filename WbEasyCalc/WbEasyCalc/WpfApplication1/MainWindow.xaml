@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
         Title="Water Management" 
-        Width="1000" Height="700"
+        Width="1500" Height="650"
         >
     <Window.DataContext>
         <local:MainWindowViewModel/>
@@ -22,10 +22,10 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="File">
-                <MenuItem Header="Exit" Command="{Binding ExitCommand}" CommandParameter="{Binding ElementName=TheMainWindow}"/>
+                <MenuItem Header="Exit" Command="{Binding ExitCmd}" CommandParameter="{Binding ElementName=TheMainWindow}"/>
             </MenuItem>
             <MenuItem Header="Tools" IsEnabled="{Binding IsOpen}">
-                <MenuItem Header="Configuration" Command="{Binding DataRecalculateCommand}"/>
+                <MenuItem Header="Options..." Command="{Binding OptionsCmd}"/>
             </MenuItem>
         </Menu>
         <TabControl  Grid.Row="1" Margin="10" >
@@ -34,9 +34,6 @@
             </TabItem>
             <TabItem Header="Water Consumption Report" >
                 <ContentControl Content="{Binding WaterConsumptionReportViewModel}" />
-            </TabItem>
-            <TabItem Header="Configuration">
-                <ContentControl Content="{Binding ConfigurationViewModel}" />
             </TabItem>
         </TabControl>
         <StatusBar Grid.Row="2" >

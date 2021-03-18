@@ -9,6 +9,7 @@
              xmlns:converters="clr-namespace:WpfApplication1.Converters"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" 
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             MinHeight="500"
              >
     <UserControl.Resources>
         <converters:FloatConverter x:Key="FloatConverter" />
