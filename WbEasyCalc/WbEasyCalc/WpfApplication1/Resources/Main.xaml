@@ -25,12 +25,12 @@
     <DataTemplate DataType="{x:Type customer:EditedViewModel}">
         <customer:EditedView/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type waterConsumption:ListViewModel}">
+    <!--<DataTemplate DataType="{x:Type waterConsumption:ListViewModel}">
         <waterConsumption:ListView />
     </DataTemplate>
     <DataTemplate DataType="{x:Type waterConsumption:EditedViewModel}">
         <waterConsumption:EditedView />
-    </DataTemplate>
+    </DataTemplate>-->
     
     <DataTemplate DataType="{x:Type waterExcelConsumption:EditedViewModel}">
             <waterExcelConsumption:EditedView />

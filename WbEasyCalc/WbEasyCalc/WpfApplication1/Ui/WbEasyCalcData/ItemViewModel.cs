@@ -147,6 +147,16 @@ namespace WpfApplication1.Ui.WbEasyCalcData
 
         #endregion
 
+        //private Ui.WbEasyCalcData.WaterConsumption.ListViewModel _waterConsumptionViewModel;
+        //public Ui.WbEasyCalcData.WaterConsumption.ListViewModel WaterConsumptionListViewModel
+        //{
+        //    get => _waterConsumptionViewModel;
+        //    set { _waterConsumptionViewModel = value; RaisePropertyChanged(); }
+        //}
+        public Ui.WbEasyCalcData.WaterConsumption.ListViewModel WaterConsumptionListViewModel { get; set; }
+
+
+
         private ExcelViewModel _easyCalcViewModel;
         public ExcelViewModel EasyCalcViewModel
         {
@@ -154,34 +164,35 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             set { _easyCalcViewModel = value; RaisePropertyChanged(nameof(EasyCalcViewModel)); }
         }
 
-        private Ui.WbEasyCalcData.WaterConsumption.ListViewModel _waterConsumptionViewModel;
-        public Ui.WbEasyCalcData.WaterConsumption.ListViewModel WaterConsumptionListViewModel
-        {
-            get => _waterConsumptionViewModel;
-            set { _waterConsumptionViewModel = value; RaisePropertyChanged(); }
-        }
 
         public Ui.WaterConsumptionReport.EditedViewModel WaterConsumptionReportViewModel { get; set; }
 
 
-        public DataModel.WbEasyCalcData Model => new DataModel.WbEasyCalcData()
+        public DataModel.WbEasyCalcData Model
         {
-            WbEasyCalcDataId = this.Id,
+            get
+            {
+                return new DataModel.WbEasyCalcData()
+                {
+                    WbEasyCalcDataId = this.Id,
 
-            CreateLogin = CreateLogin,
-            CreateDate = CreateDate,
-            ModifyLogin = ModifyLogin,
-            ModifyDate = ModifyDate,
+                    CreateLogin = CreateLogin,
+                    CreateDate = CreateDate,
+                    ModifyLogin = ModifyLogin,
+                    ModifyDate = ModifyDate,
 
-            YearNo = YearNo,
-            MonthNo = MonthNo,
-            ZoneId = ZoneId,
-            Description = Description,
-            IsArchive = IsArchive,
-            IsAccepted = IsAccepted,
+                    YearNo = YearNo,
+                    MonthNo = MonthNo,
+                    ZoneId = ZoneId,
+                    Description = Description,
+                    IsArchive = IsArchive,
+                    IsAccepted = IsAccepted,
 
-            EasyCalcModel = EasyCalcViewModel?.Model,
-        };
+                    WaterConsumptionModelList = WaterConsumptionListViewModel.List.Select(x => x.Model).ToList(),
+                    EasyCalcModel = EasyCalcViewModel?.Model,
+                };
+            }
+        }
 
         public ItemViewModel(DataModel.WbEasyCalcData model)
         {

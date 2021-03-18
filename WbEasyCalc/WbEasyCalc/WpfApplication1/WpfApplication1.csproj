@@ -111,16 +111,6 @@
     </Compile>
     <Compile Include="Ui\Configuration\EditedViewModel.cs" />
     <Compile Include="Ui\Configuration\ItemViewModel.cs" />
-    <Compile Include="Ui\WaterConsumptionList\EditedView.xaml.cs">
-      <DependentUpon>EditedView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Ui\WaterConsumptionList\EditedViewModel.cs" />
-    <Compile Include="Ui\WaterConsumptionList\ItemViewModel.cs" />
-    <Compile Include="Ui\WaterConsumptionList\ListView.xaml.cs">
-      <DependentUpon>ListView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Ui\WaterConsumptionList\ListViewModel.cs" />
-    <Compile Include="Ui\WaterConsumptionList\RowViewModel.cs" />
     <Compile Include="Ui\WaterConsumptionReport\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
@@ -228,14 +218,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ui\Configuration\EditedView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Ui\WaterConsumptionList\EditedView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Ui\WaterConsumptionList\ListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -151,10 +151,10 @@ namespace WpfApplication1.Ui.WbEasyCalcData
         //        MessageBox.Show(e.Message, "Error",MessageBoxButton.OK,MessageBoxImage.Error);
         //    }
         //}
-        public bool SaveRowCmdCanExecute()
-        {
-            return true;
-        }
+        //public bool SaveRowCmdCanExecute()
+        //{
+        //    return true;
+        //}
 
 
         public RelayCommand CloneCmd { get; }

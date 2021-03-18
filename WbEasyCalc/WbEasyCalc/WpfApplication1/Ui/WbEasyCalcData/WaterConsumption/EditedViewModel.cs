@@ -28,7 +28,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
         public bool Save()
         {
             DataModel.WaterConsumption model = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.SaveItem(Model.Model);
-            Messenger.Default.Send<DataModel.WaterConsumption>(model);
+            //Messenger.Default.Send<DataModel.WaterConsumption>(model);
+            Messenger.Default.Send<EditedViewModel>(this);
             return true;
         }
 

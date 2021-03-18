@@ -14,6 +14,7 @@ using WpfApplication1.Map;
 using System.Windows.Input;
 using System.Windows.Controls;
 using NLog;
+using WpfApplication1.Ui.WbEasyCalcData.WaterConsumption;
 
 namespace WpfApplication1.Ui.WaterConsumptionReport
 {
@@ -106,7 +107,7 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
 
         private void LoadData()
         {
-            var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList().Where(x => x.StartDate >= FilterStartDate && x.EndDate <= FilterEndDate).Select(x => new WaterConsumption.RowViewModel(x));
+            var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList().Where(x => x.StartDate >= FilterStartDate && x.EndDate <= FilterEndDate).Select(x => new RowViewModel(x));
             var mapItemList = rowModelList.Select(x => new MapItem1()
             {
                 Id = 1,
