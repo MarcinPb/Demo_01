@@ -102,7 +102,7 @@
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <utility:EventCommandExecuter 
-                                Command="{Binding Path=MouseMoveCmd, Mode=OneTime}" 
+                                Command="{Binding Path=MouseDoubleClickCmd, Mode=OneTime}" 
                                 />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>

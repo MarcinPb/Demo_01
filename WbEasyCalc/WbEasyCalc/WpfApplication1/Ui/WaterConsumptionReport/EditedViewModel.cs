@@ -76,7 +76,7 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
             set { _mapOpacity = value; RaisePropertyChanged(); }
         }
 
-        public RelayCommand<object> MouseMoveCmd { get; }
+        public RelayCommand<object> MouseDoubleClickCmd { get; }
 
         #endregion
 
@@ -112,7 +112,7 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
 
                 LoadData(_yearNo, _monthNo, _zoneId);
 
-                MouseMoveCmd = new RelayCommand<object>(MouseMove);
+                MouseDoubleClickCmd = new RelayCommand<object>(MouseDoubleClick);
             }
             catch (Exception exception)
             {
@@ -139,8 +139,7 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
             MapItemList = new ObservableCollection<IMapItem>(mapItemList);
         }
 
-
-        private void MouseMove(object obj)
+        private void MouseDoubleClick(object obj)
         {
             var ea = (MouseEventArgs)obj;
             var originalSource = ea.OriginalSource;
@@ -152,11 +151,8 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
                 Point mousePosition = ea.GetPosition(map);
                 Location mouseLocation = map.ViewportPointToLocation(mousePosition);
 
-                MapItemList[0].Location = mouseLocation;
-                MapItemList[0].Name = GetPushPinName(mouseLocation);
-
-                //Model.Latitude = mouseLocation.Latitude;
-                //Model.Lontitude = mouseLocation.Longitude;
+                // todo
+                var result = DialogUtility.ShowModal(new Ui.WbEasyCalcData.WaterConsumption.EditedViewModel(0));
             }
         }
 

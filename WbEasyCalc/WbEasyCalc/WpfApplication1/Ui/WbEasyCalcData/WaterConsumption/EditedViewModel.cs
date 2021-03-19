@@ -76,7 +76,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
             set { _mapOpacity = value; RaisePropertyChanged(); }
         }
 
-        public RelayCommand<object> MouseMoveCmd { get; }
+        public RelayCommand<object> MouseDoubleClickCmd { get; }
 
         #endregion
 
@@ -111,7 +111,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                 Model.Lontitude = defaulLocation.Longitude;
 
 
-                MouseMoveCmd = new RelayCommand<object>(MouseMove);
+                MouseDoubleClickCmd = new RelayCommand<object>(MouseDoubleClick);
             }
             catch (Exception exception)
             {
@@ -121,7 +121,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
 
         }
 
-        private void MouseMove(object obj)
+        private void MouseDoubleClick(object obj)
         {
             var ea = (MouseEventArgs)obj;
             var originalSource = ea.OriginalSource;
