@@ -48,13 +48,14 @@
         <Label Grid.Row="2" Grid.Column="2" Content="[m3]"   Style="{StaticResource LabelBlueColTitleStyle}" />
         <Label Grid.Row="2" Grid.Column="4" Content="Error Margin&#xD;&#xA;    [+/- %]"   Style="{StaticResource LabelBlueColTitleStyle}" />
 
-        <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding Path=SysInput_Desc_B6}" Style="{StaticResource TextListLeftStyle}"/>
-        <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Path=SysInput_Desc_B7}" Style="{StaticResource TextListLeftStyle}"/>
-        <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Path=SysInput_Desc_B8}" Style="{StaticResource TextListLeftStyle}"/>
+        <!--<TextBox Grid.Row="4" Grid.Column="0" Text="{Binding Path=SysInput_Desc_B6}" Style="{StaticResource TextListLeftStyle}" IsEnabled="False" />-->
+        <TextBox Grid.Row="4" Grid.Column="0" Text="Consumption in the zone (SCADA)" Style="{StaticResource TextListLeftStyle}" IsEnabled="False" />
+        <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Path=SysInput_Desc_B7}" Style="{StaticResource TextListLeftStyle}" />
+        <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Path=SysInput_Desc_B8}" Style="{StaticResource TextListLeftStyle}" />
         <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding Path=SysInput_Desc_B9}" Style="{StaticResource TextListLeftStyle}" />
         <Border Grid.Row="4" Grid.Column="0" Grid.RowSpan="4" BorderBrush="Black" BorderThickness="1"/>
 
-        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=SysInput_SystemInputVolumeM3_D6, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
+        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=SysInput_SystemInputVolumeM3_D6, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" IsEnabled="False" />
         <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Path=SysInput_SystemInputVolumeM3_D7, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
         <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Path=SysInput_SystemInputVolumeM3_D8, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
         <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding Path=SysInput_SystemInputVolumeM3_D9, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />

@@ -24,12 +24,13 @@ namespace DataModel
         public bool IsAccepted { get; set; }
 
 
-        private EasyCalcModel easyCalcModel;
-        public EasyCalcModel EasyCalcModel 
-        { 
-            get => easyCalcModel; 
-            set => easyCalcModel = value; 
-        }
+        //private EasyCalcModel easyCalcModel;
+        //public EasyCalcModel EasyCalcModel 
+        //{ 
+        //    get => easyCalcModel; 
+        //    set => easyCalcModel = value; 
+        //}
+        public EasyCalcModel EasyCalcModel { get; set; } = new EasyCalcModel();
 
         public List<WaterConsumption> WaterConsumptionModelList { get; set; } = new List<WaterConsumption>();
 

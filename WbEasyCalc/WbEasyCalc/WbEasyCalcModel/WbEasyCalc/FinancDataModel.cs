@@ -10,7 +10,7 @@ namespace WbEasyCalcModel.WbEasyCalc
     {
         // Input
         public double FinancData_G6 { get; set; }
-        public string FinancData_K6 { get; set; }
+        public string FinancData_K6 { get; set; } = "PLN";
         public double FinancData_G8 { get; set; }
         public double FinancData_D26 { get; set; }
         public double FinancData_G35 { get; set; }

@@ -112,6 +112,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
 
         public EditedViewModel(int id)
         {
+
             ItemViewModel = new ItemViewModel(GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetItem(id));
 
             YearList = GlobalConfig.DataRepository.YearList;
@@ -122,6 +123,12 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 new IdNamePair(){ Id=1, Name="1"},
                 new IdNamePair(){ Id=2, Name="2"},
             };
+            Messenger.Default.Register<WaterConsumption.ListViewModel>(this, OnWaterConsumptionChangedReceived);
+        }
+        private void OnWaterConsumptionChangedReceived(WaterConsumption.ListViewModel obj)
+        {
+            var sum = obj.List.Sum(x => x.Model.Value);
+            ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_BilledMetConsBulkWatSupExpM3_D6 = sum;
         }
 
         private void LoadDataFromSystem()
@@ -135,9 +142,12 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 {
                     ItemViewModel.EasyCalcViewModel.Model.SysInputModel.SysInput_SystemInputVolumeM3_D6 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_SystemInputVolumeM3_D6;
                     ItemViewModel.EasyCalcViewModel.Model.BilledConsModel.BilledCons_BilledMetConsBulkWatSupExpM3_D6 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_BilledMetConsBulkWatSupExpM3_D6;
+                    //ItemViewModel.EasyCalcViewModel.Model.BilledConsModel.BilledCons_UnbMetConsM3_D8 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_UnbMetConsM3_D8;
+                    
                     ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_DistributionAndTransmissionMains_D7 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_DistributionAndTransmissionMains_D7;
                     ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_NoOfConnOfRegCustomers_H10 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_NoOfConnOfRegCustomers_H10;
                 }
+
                 // Sum parameters for all year.
                 else
                 {

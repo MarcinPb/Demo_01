@@ -43,16 +43,18 @@
         <Label Grid.Row="2" Grid.Column="2" Content="[m3]"   Style="{StaticResource LabelBlueColTitleStyle}" />
 
         <Label Grid.Row="4" Grid.Column="0" Content="Bulk Water Supply (Export)" Style="{StaticResource LabelBlueLeftStyle}" />
-        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=BilledCons_BilledMetConsBulkWatSupExpM3_D6, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextRightStyle}" />
+        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=BilledCons_BilledMetConsBulkWatSupExpM3_D6, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextRightStyle}" IsEnabled="False" />
 
-        <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Path=BilledCons_Desc_B8}"  Style="{StaticResource TextListLeftStyle}"/>
-        <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding Path=BilledCons_Desc_B9}"  Style="{StaticResource TextListLeftStyle}"/>
+        <!--<TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Path=BilledCons_Desc_B8}"  Style="{StaticResource TextListLeftStyle}"/>-->
+        <TextBox Grid.Row="6" Grid.Column="0" Text="Sales based on Customer Meters (GIS)"  Style="{StaticResource TextListLeftStyle}" IsEnabled="False" />
+        <!--<TextBox Grid.Row="7" Grid.Column="0" Text="{Binding Path=BilledCons_Desc_B9}"  Style="{StaticResource TextListLeftStyle}"/>-->
+        <TextBox Grid.Row="7" Grid.Column="0" Text="Hydrants (Water Consumption)"  Style="{StaticResource TextListLeftStyle}" IsEnabled="False" />
         <TextBox Grid.Row="8" Grid.Column="0" Text="{Binding Path=BilledCons_Desc_B10}" Style="{StaticResource TextListLeftStyle}"/>
         <TextBox Grid.Row="9" Grid.Column="0" Text="{Binding Path=BilledCons_Desc_B11}" Style="{StaticResource TextListLeftStyle}" />
         <Border Grid.Row="6" Grid.Column="0" Grid.RowSpan="4" BorderBrush="Black" BorderThickness="1"/>
 
-        <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Path=BilledCons_UnbMetConsM3_D8, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
-        <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding Path=BilledCons_UnbMetConsM3_D9, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
+        <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Path=BilledCons_UnbMetConsM3_D8, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" IsEnabled="False" />
+        <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding Path=BilledCons_UnbMetConsM3_D9, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}"  IsEnabled="False" />
         <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding Path=BilledCons_UnbMetConsM3_D10, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
         <TextBox Grid.Row="9" Grid.Column="2" Text="{Binding Path=BilledCons_UnbMetConsM3_D11, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
         <Border Grid.Row="6" Grid.Column="2" Grid.RowSpan="4" BorderBrush="Black" BorderThickness="1"/>
@@ -68,15 +70,16 @@
         <Label Grid.Row="2" Grid.Column="6" Content="[m3]"   Style="{StaticResource LabelBlueColTitleStyle}" />
 
         <Label Grid.Row="4" Grid.Column="4" Content="Bulk Water Supply (Export)" Style="{StaticResource LabelBlueLeftStyle}" />
-        <TextBox Grid.Row="4" Grid.Column="6" Text="{Binding Path=BilledCons_BilledUnmetConsBulkWatSupExpM3_H6, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextRightStyle}" />
+        <TextBox Grid.Row="4" Grid.Column="6" Text="{Binding Path=BilledCons_BilledUnmetConsBulkWatSupExpM3_H6, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextRightStyle}" IsEnabled="False" />
 
-        <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding Path=BilledCons_Desc_F8}"  Style="{StaticResource TextListLeftStyle}"/>
+        <!--<TextBox Grid.Row="6" Grid.Column="4" Text="{Binding Path=BilledCons_Desc_F8}"  Style="{StaticResource TextListLeftStyle}"/>-->
+        <TextBox Grid.Row="6" Grid.Column="4" Text="Additional Sales (Water Consumption)"  Style="{StaticResource TextListLeftStyle}" IsEnabled="False" />
         <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding Path=BilledCons_Desc_F9}"  Style="{StaticResource TextListLeftStyle}"/>
         <TextBox Grid.Row="8" Grid.Column="4" Text="{Binding Path=BilledCons_Desc_F10}" Style="{StaticResource TextListLeftStyle}"/>
         <TextBox Grid.Row="9" Grid.Column="4" Text="{Binding Path=BilledCons_Desc_F11}" Style="{StaticResource TextListLeftStyle}" />
         <Border Grid.Row="6" Grid.Column="4" Grid.RowSpan="4" BorderBrush="Black" BorderThickness="1"/>
 
-        <TextBox Grid.Row="6" Grid.Column="6" Text="{Binding Path=BilledCons_UnbUnmetConsM3_H8, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
+        <TextBox Grid.Row="6" Grid.Column="6" Text="{Binding Path=BilledCons_UnbUnmetConsM3_H8, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" IsEnabled="False" />
         <TextBox Grid.Row="7" Grid.Column="6" Text="{Binding Path=BilledCons_UnbUnmetConsM3_H9, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
         <TextBox Grid.Row="8" Grid.Column="6" Text="{Binding Path=BilledCons_UnbUnmetConsM3_H10, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
         <TextBox Grid.Row="9" Grid.Column="6" Text="{Binding Path=BilledCons_UnbUnmetConsM3_H11, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />

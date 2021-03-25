@@ -70,6 +70,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
         {
             if (model == null) return;
             Messenger.Default.Register<BaseSheetViewModel>(this, OnBaseSheetViewModelReceived);
+            //Messenger.Default.Register<WaterConsumption.ListViewModel>(this, OnWaterConsumptionChangedReceived);
             
             StartViewModel = new Start.ViewModel(model.StartModel);
             SysInputViewModel = new SysInput.ViewModel(model.SysInputModel);
@@ -89,13 +90,17 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
             BaseSheetViewModelCalculate();
         }
 
+        //private void OnWaterConsumptionChangedReceived(WaterConsumption.ListViewModel obj)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         private void OnBaseSheetViewModelReceived(BaseSheetViewModel sheet)
         {
             BaseSheetViewModelCalculate();
         }
         private void BaseSheetViewModelCalculate()
         {
-
             if (
                 StartViewModel == null ||
                 SysInputViewModel == null ||

@@ -213,7 +213,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
 
                 ReadSelectedItemsCmd = new RelayCommand<IList>(ReadSelectedItemsExecute);
 
-                //Messenger.Default.Register<DataModel.WaterConsumption>(this, OnSaveModel);
                 Messenger.Default.Register<EditedViewModel>(this, OnSaveModel);
                 LoadData();
             }
@@ -223,15 +222,11 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        //private void OnSaveModel(DataModel.WaterConsumption model)
-        //{
-        //    LoadData();
-        //    SelectedRow = List.FirstOrDefault(x => x.Model.WaterConsumptionId == model.WaterConsumptionId);
-        //}
         private void OnSaveModel(EditedViewModel model)
         {
             LoadData();
             SelectedRow = List.FirstOrDefault(x => x.Model.WaterConsumptionId == model.Model.Model.WaterConsumptionId);
+            Messenger.Default.Send<ListViewModel>(this);
         }
 
         private void LoadData()
