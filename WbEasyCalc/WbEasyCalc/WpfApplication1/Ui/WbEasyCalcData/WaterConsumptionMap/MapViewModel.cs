@@ -14,11 +14,10 @@ using WpfApplication1.Map;
 using System.Windows.Input;
 using System.Windows.Controls;
 using NLog;
-using WpfApplication1.Ui.WbEasyCalcData.WaterConsumption;
 
-namespace WpfApplication1.Ui.WaterConsumptionReport
+namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
 {
-    public class EditedViewModel : ViewModelBase
+    public class MapViewModel : ViewModelBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -41,7 +40,7 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
         public DateTime FilterStartDate
         {
             get => _filterStartDate;
-            set { _filterStartDate = value; RaisePropertyChanged(nameof(FilterStartDate)); LoadData(); }
+            set { _filterStartDate = value; RaisePropertyChanged(nameof(FilterStartDate)); LoadData(_yearNo, _monthNo, _zoneId); }
         }
 
         public DateTime FilterEndDate { get; set; }
@@ -88,19 +87,19 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
         //    _zoneId = WbEasyCalcDataModel.ZoneId;
         //}
 
-        public EditedViewModel()
+        public MapViewModel(int yearNo, int monthNo, int zoneId)
         {
             try
             {
                 Logger.Info("New 'EditedViewModel' was created.");
 
-                //_yearNo = yearNo;
-                //_monthNo = monthNo;
-                //_zoneId = zoneId;
+                _yearNo = yearNo;
+                _monthNo = monthNo;
+                _zoneId = zoneId;
 
                 MapOpacity = 1;
                 ZoomLevel = 15;
-                Center = new Location(51.20150, 16.17970);        
+                Center = new Location(51.20150, 16.17970);
 
 
                 WaterConsumptionCategoryList = GlobalConfig.DataRepository.WaterConsumptionCategoryList;
@@ -118,7 +117,7 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
                     FilterEndDate = FilterStartDate.AddMonths(1).AddSeconds(-1);
                 }
 
-                LoadData();
+                LoadData(_yearNo, _monthNo, _zoneId);
 
                 MouseDoubleClickCmd = new RelayCommand<object>(MouseDoubleClick);
             }
@@ -130,9 +129,13 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
 
         }
 
-        private void LoadData()
+        private void LoadData(int yearNo, int monthNo, int zoneId)
         {
             var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList().Where(x => x.StartDate >= FilterStartDate && x.EndDate <= FilterEndDate).Select(x => new RowViewModel(x));
+            if (_yearNo != 0)
+            {
+                rowModelList = rowModelList.Where(x => x.Model.ZoneId == _zoneId);
+            }
             var mapItemList = rowModelList.Select(x => new MapItem1()
             {
                 Id = 1,
@@ -156,7 +159,7 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
                 Location mouseLocation = map.ViewportPointToLocation(mousePosition);
 
                 // todo
-                var result = DialogUtility.ShowModal(new Ui.WbEasyCalcData.WaterConsumption.EditedViewModel(0));
+                var result = DialogUtility.ShowModal(new WaterConsumption.EditedViewModel(0));
             }
         }
 

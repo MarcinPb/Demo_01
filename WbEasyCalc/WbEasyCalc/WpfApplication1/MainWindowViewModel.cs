@@ -11,6 +11,7 @@ using GlobalRepository;
 using WpfApplication1.Utility;
 //using WpfApplication1.Ui.WbEasyCalcData;
 using NLog;
+using WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap;
 
 namespace WpfApplication1
 {
@@ -41,7 +42,7 @@ namespace WpfApplication1
             GlobalConfig.InitializeConnection(DatabaseType.Sql);
 
             WbEasyCalcDataViewModel = new Ui.WbEasyCalcData.ListViewModel();
-            WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel(0, 0, 0);
+            WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel();
         }
 
     }

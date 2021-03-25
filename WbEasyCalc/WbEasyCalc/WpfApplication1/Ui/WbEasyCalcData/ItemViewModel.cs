@@ -165,7 +165,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
         }
 
 
-        public Ui.WaterConsumptionReport.EditedViewModel WaterConsumptionReportViewModel { get; set; }
+        public WaterConsumptionMap.MapViewModel WaterConsumptionReportViewModel { get; set; }
 
 
         public DataModel.WbEasyCalcData Model
@@ -227,7 +227,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
 
             WaterConsumptionListViewModel = new Ui.WbEasyCalcData.WaterConsumption.ListViewModel(Id);
 
-            WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel(YearNo, MonthNo, ZoneId);
+            WaterConsumptionReportViewModel = new Ui.WbEasyCalcData.WaterConsumptionMap.MapViewModel(YearNo, MonthNo, ZoneId);
         }
 
         private void CalculateDaysNumber()
