@@ -9,7 +9,7 @@ using DataRepository.WbEasyCalcData;
 
 namespace DataRepository
 {
-    public interface IDataRepository
+    public interface IMainRepo
     {
         WbEasyCalcData.IListRepository WbEasyCalcDataListRepository { get; }
         WaterConsumption.IListRepository WaterConsumptionListRepository { get; }

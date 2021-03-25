@@ -12,7 +12,7 @@ using DataRepository.WbEasyCalcData;
 
 namespace DataRepository
 {
-    public class DataRepository : IDataRepository
+    public class MainRepo : IMainRepo
     {
         private readonly string _cnnString;
 
@@ -20,7 +20,7 @@ namespace DataRepository
         public WaterConsumption.IListRepository WaterConsumptionListRepository { get; private set; }
         public WaterConsumption.IListRepository WaterConsumptionListRepositoryTemp { get; set; }
 
-        public DataRepository(string cnnString)
+        public MainRepo(string cnnString)
         {
             _cnnString = cnnString;
             WbEasyCalcDataListRepository = new WbEasyCalcData.ListRepository(_cnnString);

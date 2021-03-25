@@ -13,7 +13,7 @@ namespace GlobalRepository
 
         public static IWbEasyCalcExcel WbEasyCalcExcel { get; set; }
 
-        public static IDataRepository DataRepository { get; private set; }
+        public static IMainRepo DataRepository { get; private set; }
 
 
         public static void InitializeConnection(DatabaseType db)
@@ -23,7 +23,7 @@ namespace GlobalRepository
 
             if (db == DatabaseType.Sql)
             {
-                DataRepository = new DataRepository.DataRepository(CnnString("TWDB"));
+                DataRepository = new DataRepository.MainRepo(CnnString("TWDB"));
             }
             else if (db == DatabaseType.TextFile)
             {

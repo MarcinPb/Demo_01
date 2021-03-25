@@ -17,7 +17,7 @@ namespace DataRepository.Test
         [TestMethod]
         public void TestMethod1()
         {
-            DataRepository dataRepository = new DataRepository(_cnnString);
+            MainRepo dataRepository = new MainRepo(_cnnString);
 
             //GlobalConfig.InitializeConnection(DatabaseType.Sql);
             DataModel.WbEasyCalcData model = new DataModel.WbEasyCalcData()
@@ -65,7 +65,7 @@ namespace DataRepository.Test
         [TestMethod]
         public void TestMethod2()
         {
-            DataRepository dataRepository = new DataRepository("_cnnString");
+            MainRepo dataRepository = new MainRepo("_cnnString");
             //GlobalConfig.InitializeConnection(DatabaseType.Sql);
             var list = dataRepository.WbEasyCalcDataListRepository.GetList();
         }
