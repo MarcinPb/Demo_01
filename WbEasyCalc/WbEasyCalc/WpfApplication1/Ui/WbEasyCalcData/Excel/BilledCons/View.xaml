@@ -15,11 +15,11 @@
     </UserControl.Resources>
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="270"/>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="270"/>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="80"/>
         </Grid.ColumnDefinitions>
@@ -42,7 +42,7 @@
         <Label Grid.Row="2" Grid.Column="0" Content="Description"  Style="{StaticResource LabelBlueColTitleStyle}" />
         <Label Grid.Row="2" Grid.Column="2" Content="[m3]"   Style="{StaticResource LabelBlueColTitleStyle}" />
 
-        <Label Grid.Row="4" Grid.Column="0" Content="Bulk Water Supply (Export)" Style="{StaticResource LabelBlueLeftStyle}" />
+        <Label Grid.Row="4" Grid.Column="0" Content="Bulk Water Supply (Export) (Water Consumption)" Style="{StaticResource LabelBlueLeftStyle}" />
         <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=BilledCons_BilledMetConsBulkWatSupExpM3_D6, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextRightStyle}" IsEnabled="False" />
 
         <!--<TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Path=BilledCons_Desc_B8}"  Style="{StaticResource TextListLeftStyle}"/>-->
@@ -69,7 +69,7 @@
         <Label Grid.Row="2" Grid.Column="4" Content="Description"  Style="{StaticResource LabelBlueColTitleStyle}" />
         <Label Grid.Row="2" Grid.Column="6" Content="[m3]"   Style="{StaticResource LabelBlueColTitleStyle}" />
 
-        <Label Grid.Row="4" Grid.Column="4" Content="Bulk Water Supply (Export)" Style="{StaticResource LabelBlueLeftStyle}" />
+        <Label Grid.Row="4" Grid.Column="4" Content="Bulk Water Supply (Export)  (Water Consumption)" Style="{StaticResource LabelBlueLeftStyle}" />
         <TextBox Grid.Row="4" Grid.Column="6" Text="{Binding Path=BilledCons_BilledUnmetConsBulkWatSupExpM3_H6, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextRightStyle}" IsEnabled="False" />
 
         <!--<TextBox Grid.Row="6" Grid.Column="4" Text="{Binding Path=BilledCons_Desc_F8}"  Style="{StaticResource TextListLeftStyle}"/>-->

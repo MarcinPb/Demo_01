@@ -177,6 +177,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.BilledCons
             BilledCons_Sum_H28 = model.BilledCons_Sum_H28;
         }
 
+        //public ViewModel() { }
         public ViewModel(BilledConsModel model)
         {
             if (model == null) return;

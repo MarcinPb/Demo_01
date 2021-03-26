@@ -66,6 +66,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
             Pis = PisViewModel.Model,
         };
 
+        public ExcelViewModel() { }
         public ExcelViewModel(EasyCalcModel model)
         {
             if (model == null) return;

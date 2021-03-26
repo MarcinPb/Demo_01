@@ -142,7 +142,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                 );
                 if (res == MessageBoxResult.Yes)
                 {
-                    GlobalConfig.DataRepository.WaterConsumptionListRepository.DeleteItem(SelectedRow.Model.WaterConsumptionId);
+                    GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.DeleteItem(SelectedRow.Model.WaterConsumptionId);
                     LoadData();
                     SelectedRow = null;
                 }

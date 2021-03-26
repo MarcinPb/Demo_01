@@ -27,8 +27,6 @@ namespace WpfApplication1.Ui.Configuration
 
         public bool Save()
         {
-            //DataModel.WaterConsumption model = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.SaveItem(Model.Model);
-            //Messenger.Default.Send<EditedViewModel>(this);
             return true;
         }
 

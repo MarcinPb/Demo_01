@@ -198,21 +198,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData
         {
             Id = model.WbEasyCalcDataId;
 
-            if (model.WbEasyCalcDataId != 0)
-            {
-                ZoneId = model.ZoneId;
-                YearNo = model.YearNo;
-                MonthNo = model.MonthNo;
-                //Start_PeriodDays_M21 = model.EasyCalcModel.StartModel.Start_PeriodDays_M21;
-            }
-            else
-            {
-                ZoneId = GlobalConfig.DataRepository.ZoneList.First().ZoneId;
-                YearNo = DateTime.Now.Year;
-                MonthNo = DateTime.Now.Month;
-                //Start_PeriodDays_M21 = model.Start_PeriodDays_M21;
-                CalculateDaysNumber();
-            }
 
             CreateLogin = model.CreateLogin;
             CreateDate = model.CreateDate;
@@ -225,8 +210,22 @@ namespace WpfApplication1.Ui.WbEasyCalcData
 
             EasyCalcViewModel = new ExcelViewModel(model.EasyCalcModel);
 
-            WaterConsumptionListViewModel = new Ui.WbEasyCalcData.WaterConsumption.ListViewModel(Id);
+            if (model.WbEasyCalcDataId != 0)
+            {
+                ZoneId = model.ZoneId;
+                YearNo = model.YearNo;
+                MonthNo = model.MonthNo;
+                // It has to be here because two lines above trigger CalculateDaysNumber() method and change value of Start_PeriodDays_M21.
+                EasyCalcViewModel.StartViewModel.Start_PeriodDays_M21 = model.EasyCalcModel.StartModel.Start_PeriodDays_M21;
+            }
+            else
+            {
+                ZoneId = GlobalConfig.DataRepository.ZoneList.First().ZoneId;
+                YearNo = DateTime.Now.Year;
+                MonthNo = DateTime.Now.Month;
+            }
 
+            WaterConsumptionListViewModel = new Ui.WbEasyCalcData.WaterConsumption.ListViewModel(Id);
             WaterConsumptionReportViewModel = new Ui.WbEasyCalcData.WaterConsumptionMap.MapViewModel(YearNo, MonthNo, ZoneId);
         }
 
@@ -236,8 +235,10 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             {
                 return;
             }
-            //Start_PeriodDays_M21 = MonthNo == 13 ? new DateTime(YearNo, 12, 31).DayOfYear : DateTime.DaysInMonth(YearNo, MonthNo);
+            if (EasyCalcViewModel != null && EasyCalcViewModel.StartViewModel != null)
+            {
+                EasyCalcViewModel.StartViewModel.Start_PeriodDays_M21 = MonthNo == 13 ? new DateTime(YearNo, 12, 31).DayOfYear : DateTime.DaysInMonth(YearNo, MonthNo);
+            }
         }
-
     }
 }

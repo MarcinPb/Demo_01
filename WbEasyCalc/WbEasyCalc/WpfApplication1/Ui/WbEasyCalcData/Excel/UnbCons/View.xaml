@@ -17,11 +17,11 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="270"/>
+                    <ColumnDefinition Width="290"/>
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="270"/>
+                    <ColumnDefinition Width="290"/>
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="10"/>
@@ -54,7 +54,7 @@
                 <Label Grid.Row="2" Grid.Column="0" Content="Description"  Style="{StaticResource LabelBlueColTitleStyle}" />
                 <Label Grid.Row="2" Grid.Column="2" Content="[m3]"   Style="{StaticResource LabelBlueColTitleStyle}" />
 
-                <Label Grid.Row="4" Grid.Column="0" Content="Bulk Water Supply (Export)" Style="{StaticResource LabelBlueLeftStyle}" />
+                <Label Grid.Row="4" Grid.Column="0" Content="Bulk Water Supply (Export) (Water Consumption)" Style="{StaticResource LabelBlueLeftStyle}" />
                 <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=UnbilledCons_MetConsBulkWatSupExpM3_D6, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextRightStyle}" IsEnabled="False" />
 
                 <!--<TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Path=UnbilledCons_Desc_D8}"  Style="{StaticResource TextListLeftStyle}"/>-->
@@ -87,7 +87,7 @@
                 <Label Grid.Row="2" Grid.Column="8" Content="Error Margin&#xD;&#xA;     [+/- %]"   Style="{StaticResource LabelBlueColTitleStyle}" />
 
                 <!--<TextBox Grid.Row="4" Grid.Column="4" Text="{Binding Path=UnbilledCons_Desc_F6}"  Style="{StaticResource TextListLeftStyle}"/>-->
-                <TextBox Grid.Row="4" Grid.Column="4" Text="Estimated Own Consumption (Water Cons.)"  Style="{StaticResource TextListLeftStyle}" IsEnabled="False" />
+                <TextBox Grid.Row="4" Grid.Column="4" Text="Estimated Own Consumption (Water Consumption)"  Style="{StaticResource TextListLeftStyle}" IsEnabled="False" />
                 <TextBox Grid.Row="5" Grid.Column="4" Text="{Binding Path=UnbilledCons_Desc_F7}"  Style="{StaticResource TextListLeftStyle}" />
                 <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding Path=UnbilledCons_Desc_F8}"  Style="{StaticResource TextListLeftStyle}" />
                 <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding Path=UnbilledCons_Desc_F9}"  Style="{StaticResource TextListLeftStyle}" />

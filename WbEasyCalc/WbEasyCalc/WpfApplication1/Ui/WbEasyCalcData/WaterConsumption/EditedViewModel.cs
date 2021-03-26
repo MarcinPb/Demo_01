@@ -85,7 +85,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
             {
                 Logger.Info("New 'EditedViewModel' was created.");
 
-                Model = new ItemViewModel(GlobalConfig.DataRepository.WaterConsumptionListRepository.GetItem(id));
+                Model = new ItemViewModel(GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetItem(id));
 
                 WaterConsumptionCategoryList = GlobalConfig.DataRepository.WaterConsumptionCategoryList;
                 WaterConsumptionStatusList = GlobalConfig.DataRepository.WaterConsumptionStatusList;

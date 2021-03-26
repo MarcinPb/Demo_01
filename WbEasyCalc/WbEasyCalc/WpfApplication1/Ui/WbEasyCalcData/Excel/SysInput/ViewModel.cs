@@ -150,6 +150,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.SysInput
             SysInput_Max_D77 = model.SysInput_Max_D77;
             SysInput_BestEstimate_D79 = model.SysInput_BestEstimate_D79;
         }
+        
+        //public ViewModel() { }
 
         public ViewModel(SysInputModel model)
         {
