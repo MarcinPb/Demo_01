@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ConfigMatrix.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="WaterConsumptionCategoryStatusExcel.cs" />
     <Compile Include="IdNamePair.cs" />
     <Compile Include="WaterConsumption.cs" />
     <Compile Include="WbEasyCalcData.cs" />

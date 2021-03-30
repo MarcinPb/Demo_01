@@ -122,7 +122,12 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
         public int WaterConsumptionCategoryId
         {
             get => _waterConsumptionCategoryId;
-            set { _waterConsumptionCategoryId = value; RaisePropertyChanged(nameof(WaterConsumptionCategoryId)); }
+            set 
+            { 
+                _waterConsumptionCategoryId = value; 
+                RaisePropertyChanged(nameof(WaterConsumptionCategoryId));
+                Messenger.Default.Send<ItemViewModel>(this);
+            }
         }
 
         private int _waterConsumptionStatusId;

@@ -14,7 +14,7 @@ using WpfApplication1.Utility;
 
 namespace WpfApplication1.Ui.WbEasyCalcData
 {
-    public class ListViewModel : ViewModelBase
+    public class ListViewModel : ViewModelBase, IDisposable
     {
         #region Props: List, SelectedRow, RowsQty
 
@@ -83,8 +83,9 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             {
                 SelectedRow = null;
             }
-            //WbEasyCalcDataEditedViewModel = new EditedViewModel(0);
-            var result = DialogUtility.ShowModal(new EditedViewModel(0));
+            var editedViewModel = new EditedViewModel(0);
+            var result = DialogUtility.ShowModal(editedViewModel);
+            editedViewModel.Dispose();
         }
         public bool AddRowCmdCanExecute()
         {
@@ -100,8 +101,9 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 return;
             }
 
-            //WbEasyCalcDataEditedViewModel = new EditedViewModel(SelectedRow.Model.WbEasyCalcDataId);
-            var result = DialogUtility.ShowModal(new EditedViewModel(SelectedRow.Model.WbEasyCalcDataId));
+            var editedViewModel = new EditedViewModel(SelectedRow.Model.WbEasyCalcDataId);
+            var result = DialogUtility.ShowModal(editedViewModel);
+            editedViewModel.Dispose();
         }
         public bool OpenRowCmdCanExecute()
         {
@@ -241,6 +243,11 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        public void Dispose()
+        {
+            Messenger.Default.Unregister(this);
+        }
+
         private void OnSaveModel(DataModel.WbEasyCalcData model)
         {
             LoadData();
@@ -252,5 +259,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             List = new ObservableCollection<RowViewModel>(GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetList().Select(x => new RowViewModel(x)).ToList());
             RowsQty = List.Count;
         }
+
     }
 }

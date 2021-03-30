@@ -17,7 +17,7 @@ using NLog;
 
 namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
 {
-    public class EditedViewModel : ViewModelBase, IDialogViewModel
+    public class EditedViewModel : ViewModelBase, IDialogViewModel, IDisposable
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -46,7 +46,14 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
         }
 
         public List<IdNamePair> WaterConsumptionCategoryList { get; set; }
-        public List<IdNamePair> WaterConsumptionStatusList { get; set; }
+
+        private ObservableCollection<IdNamePair> _waterConsumptionStatusList;
+        public ObservableCollection<IdNamePair> WaterConsumptionStatusList 
+        {
+            get => _waterConsumptionStatusList;
+            set { _waterConsumptionStatusList = value; RaisePropertyChanged(); }
+        }
+
         public List<ZoneItem> ZoneItemList { get; set; }
 
 
@@ -88,7 +95,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                 Model = new ItemViewModel(GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetItem(id));
 
                 WaterConsumptionCategoryList = GlobalConfig.DataRepository.WaterConsumptionCategoryList;
-                WaterConsumptionStatusList = GlobalConfig.DataRepository.WaterConsumptionStatusList;
+                WaterConsumptionStatusList = GetWaterConsumptionStatusList();
+
                 ZoneItemList = GlobalConfig.DataRepository.ZoneList;
 
                 MapOpacity = 1;
@@ -109,15 +117,33 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                 Model.Latitude = defaulLocation.Latitude;
                 Model.Lontitude = defaulLocation.Longitude;
 
-
                 MouseDoubleClickCmd = new RelayCommand<object>(MouseDoubleClick);
+                Messenger.Default.Register<ItemViewModel>(this, OnCategoryChange);
             }
             catch (Exception exception)
             {
                 Logger.Error(exception.Message);
                 MessageBox.Show(exception.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        public void Dispose()
+        {
+            Messenger.Default.Unregister(this);
+        }
 
+        private void OnCategoryChange(ItemViewModel obj)
+        {
+            WaterConsumptionStatusList = GetWaterConsumptionStatusList();
+            Model.WaterConsumptionStatusId = WaterConsumptionStatusList.FirstOrDefault().Id;
+        }
+
+        private ObservableCollection<IdNamePair> GetWaterConsumptionStatusList()
+        {
+            //return GlobalConfig.DataRepository.WaterConsumptionStatusList;
+            var categoryId = Model.Model.WaterConsumptionCategoryId;
+            var statusIdList = GlobalConfig.DataRepository.WaterConsumptionCategoryStatusExcelList.Where(x => x.CategoryId == categoryId);
+            var statusList = GlobalConfig.DataRepository.WaterConsumptionStatusList.Where(x => statusIdList.Any(y => x.Id == y.StatusId));
+            return new ObservableCollection<IdNamePair>(statusList);
         }
 
         private void MouseDoubleClick(object obj)
@@ -141,5 +167,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
         }
 
         private string GetPushPinName(Location location) => $"{location.Latitude} - {location.Longitude}";
+
     }
 }

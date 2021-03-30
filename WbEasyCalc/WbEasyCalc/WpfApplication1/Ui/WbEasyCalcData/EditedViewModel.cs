@@ -14,7 +14,7 @@ using WpfApplication1.Utility;
 
 namespace WpfApplication1.Ui.WbEasyCalcData
 {
-    public class EditedViewModel : ViewModelBase, IDialogViewModel
+    public class EditedViewModel : ViewModelBase, IDialogViewModel, IDisposable
     {
         private ItemViewModel _model;
         public ItemViewModel ItemViewModel
@@ -127,6 +127,12 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             };
             Messenger.Default.Register<WaterConsumption.ListViewModel>(this, OnWaterConsumptionChangedReceived);
         }
+        public void Dispose()
+        {
+            ItemViewModel.Dispose();
+            Messenger.Default.Unregister(this);
+        }
+
         private void OnWaterConsumptionChangedReceived(WaterConsumption.ListViewModel obj)
         {
             var sum = obj.List.Sum(x => x.Model.Value);
@@ -393,11 +399,11 @@ namespace WpfApplication1.Ui.WbEasyCalcData
         {
             try
             {
+                if (ItemViewModel.EasyCalcViewModel != null) 
+                { 
+                    ItemViewModel.EasyCalcViewModel.Dispose();  
+                }
                 EasyCalcModel easyCalcModel = GlobalConfig.WbEasyCalcExcel.LoadFromExcelFile(excelFileName);
-                //ItemViewModel.Model.EasyCalcModel = null;
-                //ItemViewModel.Model.EasyCalcModel = easyCalcModel;
-                //easyCalcModelCalculateExcelNew();
-
                 ItemViewModel.EasyCalcViewModel = new ExcelViewModel(easyCalcModel);
             }
             catch (Exception e)
@@ -405,5 +411,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
     }
 }

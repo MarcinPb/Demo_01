@@ -158,8 +158,9 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
                 Point mousePosition = ea.GetPosition(map);
                 Location mouseLocation = map.ViewportPointToLocation(mousePosition);
 
-                // todo
-                var result = DialogUtility.ShowModal(new WaterConsumption.EditedViewModel(0));
+                var editedViewModel = new WaterConsumption.EditedViewModel(0);
+                var result = DialogUtility.ShowModal(editedViewModel);
+                editedViewModel.Dispose();
             }
         }
 

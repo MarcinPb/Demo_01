@@ -31,9 +31,6 @@ namespace WpfApplication1
             DialogUtility.ShowModal(new Ui.Configuration.EditedViewModel());
         }
 
-
-
-
         public MainWindowViewModel()
         {
             Logger.Info("'MainWindowViewModel' started.");

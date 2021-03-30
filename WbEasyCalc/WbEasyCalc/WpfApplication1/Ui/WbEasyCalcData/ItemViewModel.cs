@@ -13,7 +13,7 @@ using WpfApplication1.Utility;
 namespace WpfApplication1.Ui.WbEasyCalcData
 {
 
-    public class ItemViewModel : ViewModelBase
+    public class ItemViewModel : ViewModelBase, IDisposable
     {
 
         #region Props ViewModel: Id, ZoneId,...
@@ -228,6 +228,11 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             WaterConsumptionListViewModel = new Ui.WbEasyCalcData.WaterConsumption.ListViewModel(Id);
             WaterConsumptionReportViewModel = new Ui.WbEasyCalcData.WaterConsumptionMap.MapViewModel(YearNo, MonthNo, ZoneId);
         }
+        public void Dispose()
+        {
+            WaterConsumptionListViewModel.Dispose();
+            EasyCalcViewModel.Dispose();
+        }
 
         private void CalculateDaysNumber()
         {
@@ -240,5 +245,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 EasyCalcViewModel.StartViewModel.Start_PeriodDays_M21 = MonthNo == 13 ? new DateTime(YearNo, 12, 31).DayOfYear : DateTime.DaysInMonth(YearNo, MonthNo);
             }
         }
+
     }
 }

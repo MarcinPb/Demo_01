@@ -22,9 +22,9 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private int _yearNo;
-        private int _monthNo;
-        private int _zoneId;
+        //private int _yearNo;
+        //private int _monthNo;
+        //private int _zoneId;
 
         //private ItemViewModel _model;
         //public ItemViewModel Model
@@ -80,23 +80,11 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
 
         #endregion
 
-        //public EditedViewModel(int id)
-        //{
-        //    var WbEasyCalcDataModel = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetItem(id);
-        //    _yearNo = WbEasyCalcDataModel.YearNo;
-        //    _monthNo = WbEasyCalcDataModel.MonthNo;
-        //    _zoneId = WbEasyCalcDataModel.ZoneId;
-        //}
-
         public EditedViewModel()
         {
             try
             {
                 Logger.Info("New 'EditedViewModel' was created.");
-
-                //_yearNo = yearNo;
-                //_monthNo = monthNo;
-                //_zoneId = zoneId;
 
                 MapOpacity = 1;
                 ZoomLevel = 15;
@@ -107,16 +95,16 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
                 WaterConsumptionStatusList = GlobalConfig.DataRepository.WaterConsumptionStatusList;
                 ZoneItemList = GlobalConfig.DataRepository.ZoneList;
 
-                if (_yearNo == 0)
-                {
-                    FilterStartDate = new DateTime(2019, 1, 1, 0, 0, 0);
-                    FilterEndDate = new DateTime(2022, 1, 1, 0, 0, 0);
-                }
-                else
-                {
-                    FilterStartDate = new DateTime(_yearNo, _monthNo, 1, 0, 0, 0);
-                    FilterEndDate = FilterStartDate.AddMonths(1).AddSeconds(-1);
-                }
+                //if (_yearNo == 0)
+                //{
+                //}
+                //else
+                //{
+                //    FilterStartDate = new DateTime(_yearNo, _monthNo, 1, 0, 0, 0);
+                //    FilterEndDate = FilterStartDate.AddMonths(1).AddSeconds(-1);
+                //}
+                FilterStartDate = new DateTime(2019, 1, 1, 0, 0, 0);
+                FilterEndDate = new DateTime(2022, 1, 1, 0, 0, 0);
 
                 LoadData();
 
@@ -155,8 +143,9 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
                 Point mousePosition = ea.GetPosition(map);
                 Location mouseLocation = map.ViewportPointToLocation(mousePosition);
 
-                // todo
-                var result = DialogUtility.ShowModal(new Ui.WbEasyCalcData.WaterConsumption.EditedViewModel(0));
+                var editedViewModel = new Ui.WbEasyCalcData.WaterConsumption.EditedViewModel(0);
+                var result = DialogUtility.ShowModal(editedViewModel);
+                editedViewModel.Dispose();
             }
         }
 

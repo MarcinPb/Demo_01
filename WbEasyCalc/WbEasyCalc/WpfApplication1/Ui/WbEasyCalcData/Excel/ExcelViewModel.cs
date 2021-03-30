@@ -11,7 +11,7 @@ using WpfApplication1.Utility;
 
 namespace WpfApplication1.Ui.WbEasyCalcData.Excel
 {
-    public class ExcelViewModel : ViewModelBase
+    public class ExcelViewModel : ViewModelBase, IDisposable
     {
 
         public Start.ViewModel StartViewModel { get; set; }
@@ -66,12 +66,10 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
             Pis = PisViewModel.Model,
         };
 
-        public ExcelViewModel() { }
         public ExcelViewModel(EasyCalcModel model)
         {
             if (model == null) return;
             Messenger.Default.Register<BaseSheetViewModel>(this, OnBaseSheetViewModelReceived);
-            //Messenger.Default.Register<WaterConsumption.ListViewModel>(this, OnWaterConsumptionChangedReceived);
             
             StartViewModel = new Start.ViewModel(model.StartModel);
             SysInputViewModel = new SysInput.ViewModel(model.SysInputModel);
@@ -90,11 +88,10 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
 
             BaseSheetViewModelCalculate();
         }
-
-        //private void OnWaterConsumptionChangedReceived(WaterConsumption.ListViewModel obj)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void Dispose()
+        {
+            Messenger.Default.Unregister(this);
+        }
 
         private void OnBaseSheetViewModelReceived(BaseSheetViewModel sheet)
         {

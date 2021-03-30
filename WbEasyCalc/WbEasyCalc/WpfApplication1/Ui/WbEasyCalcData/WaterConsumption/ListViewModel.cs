@@ -16,7 +16,7 @@ using WpfApplication1.Utility;
 
 namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
 {
-    public class ListViewModel : ViewModelBase
+    public class ListViewModel : ViewModelBase, IDisposable
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -88,8 +88,9 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                 {
                     SelectedRow = null;
                 }
-                //WaterConsumptionEditedViewModel = new EditedViewModel(0);
-                var result = DialogUtility.ShowModal(new EditedViewModel(0));
+                var editedViewModel = new EditedViewModel(0);
+                var result = DialogUtility.ShowModal(editedViewModel);
+                editedViewModel.Dispose();
             }
             catch (Exception exception)
             {
@@ -113,8 +114,9 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                     return;
                 }
 
-                //WaterConsumptionEditedViewModel = new EditedViewModel(SelectedRow.Model.WaterConsumptionId);
-                var result = DialogUtility.ShowModal(new EditedViewModel(SelectedRow.Model.WaterConsumptionId));
+                var editedViewModel = new EditedViewModel(SelectedRow.Model.WaterConsumptionId);
+                var result = DialogUtility.ShowModal(editedViewModel);
+                editedViewModel.Dispose();
             }
             catch (Exception e)
             {
@@ -222,6 +224,12 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        public void Dispose()
+        {
+            Messenger.Default.Unregister(this);
+        }
+
+
         private void OnSaveModel(EditedViewModel model)
         {
             LoadData();

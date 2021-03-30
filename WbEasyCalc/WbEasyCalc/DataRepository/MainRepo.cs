@@ -117,6 +117,24 @@ namespace DataRepository
             set => throw new System.NotImplementedException();
         }
 
+        private List<WaterConsumptionCategoryStatusExcel> _waterConsumptionCategoryStatusExcelList;
+        public List<WaterConsumptionCategoryStatusExcel> WaterConsumptionCategoryStatusExcelList
+        {
+            get
+            {
+                if (_waterConsumptionCategoryStatusExcelList == null)
+                {
+                    using (IDbConnection cnn = new SqlConnection(_cnnString))
+                    {
+                        _waterConsumptionCategoryStatusExcelList = cnn.Query<WaterConsumptionCategoryStatusExcel>("dbo.spWaterConsumptionCategoryStatusExcelList", commandType: CommandType.StoredProcedure).ToList();
+                        return _waterConsumptionCategoryStatusExcelList;
+                    }
+                }
+                return _waterConsumptionCategoryStatusExcelList;
+            }
+            set => throw new System.NotImplementedException();
+        }
+
         public DataModel.WbEasyCalcData GetAutomaticData(int yearNo, int monthNo, int zoneId)
         {
             using (IDbConnection connection = new SqlConnection(_cnnString))
@@ -139,9 +157,9 @@ namespace DataRepository
                 p.Add("@SysInput_SystemInputVolumeM3_D9", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@SysInput_SystemInputVolumeError_F9", dbType: DbType.Double, direction: ParameterDirection.Output);
 
-                p.Add("@BilledCons_BilledMetConsBulkWatSupExpM3_D6", dbType: DbType.Double, direction: ParameterDirection.Output);          // @ZoneSale
+                p.Add("@BilledCons_BilledMetConsBulkWatSupExpM3_D6", dbType: DbType.Double, direction: ParameterDirection.Output);          
                 p.Add("@BilledCons_BilledUnmetConsBulkWatSupExpM3_H6", dbType: DbType.Double, direction: ParameterDirection.Output);                
-                p.Add("@BilledCons_UnbMetConsM3_D8", dbType: DbType.Double, direction: ParameterDirection.Output);
+                p.Add("@BilledCons_UnbMetConsM3_D8", dbType: DbType.Double, direction: ParameterDirection.Output);                          // @ZoneSale
                 p.Add("@BilledCons_UnbUnmetConsM3_H8", dbType: DbType.Double, direction: ParameterDirection.Output);
 
                 p.Add("@UnbilledCons_MetConsBulkWatSupExpM3_D6", dbType: DbType.Double, direction: ParameterDirection.Output);
@@ -173,6 +191,7 @@ namespace DataRepository
                 p.Add("@MetErrors_CorruptMetReadPractMetUndrreg_H38", dbType: DbType.Double, direction: ParameterDirection.Output);
 
                 p.Add("@Network_DistributionAndTransmissionMains_D7", dbType: DbType.Double, direction: ParameterDirection.Output);         // @NetworkLength
+                p.Add("@Network_NoCustomers_H7", dbType: DbType.Double, direction: ParameterDirection.Output);                              // @CustomerMeterQuantity
                 p.Add("@Network_NoOfConnOfRegCustomers_H10", dbType: DbType.Double, direction: ParameterDirection.Output);                  // @CustomersQuantity
                 p.Add("@Network_NoOfInactAccountsWSvcConns_H18", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32", dbType: DbType.Double, direction: ParameterDirection.Output);
@@ -252,6 +271,7 @@ namespace DataRepository
                         NetworkModel = new WbEasyCalcModel.WbEasyCalc.NetworkModel
                         {
                             Network_DistributionAndTransmissionMains_D7 = p.Get<double>("@Network_DistributionAndTransmissionMains_D7"),            // @NetworkLength
+                            Network_NoCustomers_H7 = p.Get<double>("@Network_NoCustomers_H7"),                                                      // @CustomerMetersQuantity 
                             Network_NoOfConnOfRegCustomers_H10 = p.Get<double>("@Network_NoOfConnOfRegCustomers_H10"),                              // @CustomersQuantity 
                             Network_NoOfInactAccountsWSvcConns_H18 = p.Get<double>("@Network_NoOfInactAccountsWSvcConns_H18"),                      // 
                             Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32 = p.Get<double>("@Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32"),    // 

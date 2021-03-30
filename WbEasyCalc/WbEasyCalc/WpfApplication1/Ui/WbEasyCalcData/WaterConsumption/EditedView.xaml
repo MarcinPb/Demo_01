@@ -49,8 +49,10 @@
                 <TextBlock Grid.Row="0" Grid.Column="5" Margin="7 0 0 0" Text="End" />
                 <TextBlock Grid.Row="0" Grid.Column="6" Margin="7 0 0 0" Text="Value [m3]" />
                 <TextBlock Grid.Row="0" Grid.Column="7" Margin="7 0 0 0" Text="Description"/>
+                <!--
                 <TextBlock Grid.Row="0" Grid.Column="8" Margin="7 0 0 0" Text="Archived"/>
                 <TextBlock Grid.Row="0" Grid.Column="9" Margin="7 0 0 0" Text="Accepted"/>
+                -->
 
                 <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=Model.Id, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" />
                 <ComboBox Grid.Row="1" Grid.Column="1" Margin="7 0 0 0" ItemsSource="{Binding Path=WaterConsumptionCategoryList}" SelectedValuePath="Id" DisplayMemberPath="Name" SelectedValue="{Binding Path=Model.WaterConsumptionCategoryId}" />
@@ -64,8 +66,10 @@
                 -->
                 <TextBox Grid.Row="1" Grid.Column="6" Margin="7 0 0 0" Text="{Binding Path=Model.Value, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"/>
                 <TextBox Grid.Row="1" Grid.Column="7" Margin="7 0 0 0" Text="{Binding Path=Model.Description, UpdateSourceTrigger=PropertyChanged}"/>
+                <!--
                 <CheckBox Grid.Row="1" Grid.Column="8" Margin="7 0 0 0" IsChecked="{Binding Path=Model.IsArchive}" IsEnabled="{Binding Path=Model.IsAccepted, Converter={StaticResource NegConverter}}"/>
                 <CheckBox Grid.Row="1" Grid.Column="9" Margin="7 0 0 0" IsChecked="{Binding Path=Model.IsAccepted}" IsEnabled="{Binding Path=Model.IsArchive}" />
+                -->
             </Grid>
 
         </Grid>
