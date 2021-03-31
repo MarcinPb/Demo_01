@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using AutoMapper;
 using DataModel;
@@ -133,10 +134,43 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             Messenger.Default.Unregister(this);
         }
 
-        private void OnWaterConsumptionChangedReceived(WaterConsumption.ListViewModel obj)
+        private void OnWaterConsumptionChangedReceived(WaterConsumption.ListViewModel waterConsumptionListViewModel)
         {
-            var sum = obj.List.Sum(x => x.Model.Value);
-            ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_BilledMetConsBulkWatSupExpM3_D6 = sum;
+            //ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_BilledMetConsBulkWatSupExpM3_D6 = sum;
+            var waterConsumptionList = waterConsumptionListViewModel.List.Select(x => x.Model);
+            var WaterConsumptionCategoryStatusExcelList = GlobalConfig.DataRepository.WaterConsumptionCategoryStatusExcelList;
+            var list = waterConsumptionList.Join(
+                WaterConsumptionCategoryStatusExcelList,
+                l => l.WaterConsumptionCategoryId * 1000 + l.WaterConsumptionStatusId,
+                r => r.CategoryId * 1000 + r.StatusId,
+                (l, r) => new { r.ExcelCellName, l.Value, }
+                );
+            var grouppedList = list.GroupBy(g => g.ExcelCellName).Select(x => new { x.Key, Sum = x.Sum(c => c.Value) });
+
+            foreach(var item in grouppedList)
+            {
+                //Type type = ItemViewModel.EasyCalcViewModel.GetType();
+                //PropertyInfo pi = type.GetProperty("UnbConsViewModel");
+                //object obj = ItemViewModel.EasyCalcViewModel.UnbConsViewModel;
+                //SetValue(obj, item.Key, item.Sum);
+
+                if (item.Key.StartsWith("Bil"))
+                {
+                    SetValue(ItemViewModel.EasyCalcViewModel.BilledConsViewModel, item.Key, item.Sum);
+                }
+                else
+                { 
+                    SetValue(ItemViewModel.EasyCalcViewModel.UnbConsViewModel, item.Key, item.Sum);
+                }                
+            }
+        }
+        public void SetValue<T>(T obj, string propertyName, object value)
+        {
+            // these should be cached if possible
+            Type type = typeof(T);
+            PropertyInfo pi = type.GetProperty(propertyName);
+
+            pi.SetValue(obj, Convert.ChangeType(value, pi.PropertyType), null);
         }
 
         private void LoadDataFromSystem()
