@@ -69,6 +69,7 @@ namespace Grundfos.WO.Test
         private static List<DomainObjectData> GetWgObjects(DomainDataSetProxy dataSetProvider)
         {
             //log.Info("Reading WaterGEMS objects.");
+
             var pipeReader = new PipeReader(dataSetProvider);
             var pipes = pipeReader.ReadObjects(new List<string>());
 
@@ -111,7 +112,8 @@ namespace Grundfos.WO.Test
             var custReader = new CustomerMeterReader(dataSetProvider);
             var cust = custReader.ReadObjects(new List<string>());
 
-            var allObjects = pipes
+            var allObjects = 
+                 pipes
                 .Union(junctions)
                 .Union(hydrants)
                 .Union(reservoirs)
