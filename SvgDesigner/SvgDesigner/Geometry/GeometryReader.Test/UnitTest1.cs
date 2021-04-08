@@ -111,9 +111,51 @@ namespace GeometryReader.Test
                 .ToDictionary(x => x.Key, x => x.ToList());
         }
 
+        [TestMethod]
+        public void TestMethod5()
+        {
+            Dictionary<int, string> zoneDict;
+            Dictionary<int, string> objTypeDict;
+            List<DomainObjectData> domainObjects;
+            using (var dataSetProvider = new DomainDataSetProxy(@"K:\temp\sandbox\Nowy model testowy\testOPC.wtg.sqlite"))
+            //using (var dataSetProvider = new DomainDataSetProxy(@"K:\temp\sandbox\Nowy model testowy\_archiw\2019-11-19\testOPC.wtg.sqlite"))
+            {
+                var reader = new GenericObjectReader(dataSetProvider);
 
+                zoneDict = reader.ReadZoneList();
+                objTypeDict = reader.ReadOjectTypeList();
+                domainObjects = GetWgObjects2(dataSetProvider, reader.ReadOjectTypeList());
+            }
+            WaterGemsData waterGemsData = new WaterGemsData()
+            {
+                ObjTypeDict = objTypeDict,
+                ZoneDict = zoneDict,
+                DomainObjectDataList = domainObjects,
+            };
 
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(@"K:\temp\sandbox\Nowy model testowy\WgData.bin", FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter.Serialize(stream, waterGemsData);
+            stream.Close();
 
+            //Dictionary<ObjectTypes, List<DomainObjectData>> domainGrouppedObjects = domainObjects
+            //    .GroupBy(x => x.ObjectType)
+            //    .ToDictionary(x => x.Key, x => x.ToList());
+        }
+
+        private static List<DomainObjectData> GetWgObjects2(DomainDataSetProxy dataSetProvider, Dictionary<int, string> typeDict)
+        {
+            var junctionReader = new GenericObjectReader(dataSetProvider, GeometryReader.Constants.ObjectTypes.Pipe);
+            List<DomainObjectData> domainObjectDataList = new List<DomainObjectData>();
+            
+            foreach(var type in typeDict)
+            {
+                var junctions = junctionReader.ReadObjects(type.Key);
+                domainObjectDataList.AddRange(junctions);
+            }
+
+            return domainObjectDataList;
+        }
         private static List<DomainObjectData> GetWgObjects(DomainDataSetProxy dataSetProvider)
         {
             //log.Info("Reading WaterGEMS objects.");

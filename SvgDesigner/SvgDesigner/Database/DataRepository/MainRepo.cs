@@ -17,8 +17,8 @@ namespace Database.DataRepository
 {
     public class MainRepo
     {
-        private static List<DomainObjectData> domainObjectDataList = GetDomainObjectDataList();
-        private static Dictionary<ObjectTypes, List<DomainObjectData>> domainGrouppedObjects = GetWgObjectTypeList();
+        private static List<DomainObjectData> _domainObjectDataList = GetDomainObjectDataList();
+        private static Dictionary<ObjectTypes, List<DomainObjectData>> _domainGrouppedObjects = GetWgObjectTypeList();
 
         public static List<DomainObjectData> GetDomainObjectDataList()
         {
@@ -31,7 +31,7 @@ namespace Database.DataRepository
         }
         public static Dictionary<ObjectTypes, List<DomainObjectData>> GetWgObjectTypeList()
         {
-            Dictionary<ObjectTypes, List<DomainObjectData>> domainGrouppedObjects = domainObjectDataList
+            Dictionary<ObjectTypes, List<DomainObjectData>> domainGrouppedObjects = _domainObjectDataList
                 .GroupBy(x => x.ObjectType)
                 .ToDictionary(x => x.Key, x => x.ToList());
 
@@ -40,12 +40,12 @@ namespace Database.DataRepository
 
         public static DomainObjectData GetItem(int id)
         {
-            return domainObjectDataList.FirstOrDefault(x => x.ID==id);
+            return _domainObjectDataList.FirstOrDefault(x => x.ID==id);
         }
 
         public static List<DomainObjectData> GetJunctionList()
         {
-            return domainGrouppedObjects[ObjectTypes.Junction];
+            return _domainGrouppedObjects[ObjectTypes.Junction];
         }
 
         public static Point2D GetPointTopLeft()
@@ -65,18 +65,29 @@ namespace Database.DataRepository
 
         public static List<DomainObjectData> GetCustomerNodeList()
         {
-            return domainGrouppedObjects[ObjectTypes.CustomerNode];
+            return _domainGrouppedObjects[ObjectTypes.CustomerNode];
         }
 
         public static List<DomainObjectData> GetPipeList()
         {
-            return domainGrouppedObjects[ObjectTypes.Pipe];
+            return _domainGrouppedObjects[ObjectTypes.Pipe];
         }
 
 
+
+        #region Database WaterInfra_5
+        private static string GetConnectionString(string name = "DapperDB")
+        {
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+        }
+        #endregion
+
+        #region Database WaterInfra_4
+
+        // Import data from \Wg\MyFile.bin file to WaterInfra_4 database.
         public static void ImportInfraToDatabase()
         {
-            var list = GetPipeList().Where(x => (int)x.Fields["HMITopologyStartNodeID"] == (int)x.Fields["HMITopologyStopNodeID"]).ToList();
+            //var list = GetPipeList().Where(x => (int)x.Fields["HMITopologyStartNodeID"] == (int)x.Fields["HMITopologyStopNodeID"]).ToList();
 
             //var list = GetCustomerNodeList().Select(x => new InfraObj() 
             var infraObjectList = GetDomainObjectDataList().Select(x => new InfraObj() 
@@ -142,14 +153,14 @@ namespace Database.DataRepository
             var infraConnectionList = infraConnectionCustomerNodeList                
                 .Union(infraConnectionPipeStartList)
                 .Union(infraConnectionPipeStopList)
-                .Where(x => domainObjectDataList.Any(y => x.ChildObjId==y.ID) && domainObjectDataList.Any(y => x.ParentObjId==y.ID))
+                .Where(x => _domainObjectDataList.Any(y => x.ChildObjId==y.ID) && _domainObjectDataList.Any(y => x.ParentObjId==y.ID))
                 .ToList();
 
             List<InfraField> infraFieldList = MainRepo.GetInfraFieldList();
 
             var infraObjectFieldList = infraObjectList
                 .Join(
-                    domainObjectDataList,
+                    _domainObjectDataList,
                     l => l.ObjId,
                     r => r.ID,
                     (l, r) => new { l.ObjId, l.ObjTypeId, r.Fields }
@@ -175,7 +186,6 @@ namespace Database.DataRepository
 
             WriteSet(infraObjectList, infraConnectionList, infraObjectFieldList);
         }
-
 
         private static void WriteSet(List<InfraObj> infraObjectList, List<InfraConn> infraConnectionList, List<InfraValue> infraObjectFieldValueList)
         {
@@ -217,6 +227,8 @@ namespace Database.DataRepository
 
             }
         }
+
+        // Get data from database
         public static List<InfraField> GetInfraFieldList()
         {
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
@@ -229,10 +241,35 @@ namespace Database.DataRepository
             }
         }
 
-        private static string GetConnectionString(string name = "DapperDB")
+
+        #endregion
+
+
+        #region Database WaterInfra_5
+
+        public static void InsertToInfraObjType(IDictionary<int,string> dict)
         {
-            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString("WaterInfra_5_ConnStr")))
+            {
+                string sql;
+
+                sql = $@"
+                    DELETE FROM dbo.tbInfraObjType;
+                ";
+                cnn.Execute(sql, dict.Select(x => new { ObjTypeId = x.Key, Name = x.Value}));
+
+                sql = $@"
+                    INSERT INTO dbo.tbInfraObjType (
+                        ObjTypeId,  Name
+                    ) VALUES (
+                        @ObjTypeId, @Name
+                    );
+                ";
+            }
         }
+
+        #endregion
+
 
     }
 }

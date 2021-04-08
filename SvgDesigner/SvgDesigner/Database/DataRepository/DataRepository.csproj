@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImportRepo.cs" />
     <Compile Include="MainRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -64,6 +65,7 @@
     <Content Include="SqlScript\WaterInfra_2.sql" />
     <Content Include="SqlScript\WaterInfra_3.sql" />
     <Content Include="SqlScript\WaterInfra_4.sql" />
+    <Content Include="SqlScript\WaterInfra_5.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
