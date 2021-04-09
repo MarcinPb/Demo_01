@@ -15,5 +15,6 @@ namespace Database.DataModel
         public string Notes { get; set; }
         public string Category { get; set; }
         public int DataTypeId { get; set; }
+        public int FieldTypeId { get; set; }
     }
 }

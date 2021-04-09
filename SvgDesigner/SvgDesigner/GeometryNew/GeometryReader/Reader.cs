@@ -31,9 +31,9 @@ namespace GeometryReader
                 foreach (int objectTypeId in objectTypeDict.Keys)
                 {
                     var manager = domainDataSet.DomainElementManager(objectTypeId);
+                    var manager1 = domainDataSet.FieldManager;
                     // Get list suported fields for a particular objectTypeId. 
                     IEnumerable<IField> supportedFields = manager.SupportedFields().Cast<IField>();
-
                     supportedFieldDict.AddRange(supportedFields.Select(x => new ImportedField() {
                         Id = x.Id,
                         ObjTypeId = objectTypeId,
@@ -41,10 +41,22 @@ namespace GeometryReader
                         Label = x.Label,
                         Notes = x.Notes,
                         Category = x.Category,
-                        DataTypeId = (int)x.FieldDataType
+                        DataTypeId = (int)x.FieldDataType,
+                        FieldTypeId = 1,    // not result field
                     }));
 
-                    //IEnumerable<IField> supportedResultFields = manager.SupportedResultFields().Cast<IField>();
+                    //var supportedResultFields = manager.SupportedResultFields().Cast<IField>();;
+                    //supportedFieldDict.AddRange(supportedResultFields.Select(x => new ImportedField()
+                    //{
+                    //    Id = x.Id,
+                    //    ObjTypeId = objectTypeId,
+                    //    Name = x.Name,
+                    //    Label = x.Label,
+                    //    Notes = x.Notes,
+                    //    Category = x.Category,
+                    //    DataTypeId = (int)x.FieldDataType,
+                    //    FieldTypeId = 2,    // result field
+                    //}));
                 }
                 ImportRepo.InsertToInfraField(supportedFieldDict);
 
@@ -141,7 +153,7 @@ namespace GeometryReader
                             }
                             infraValueList.Add(infraValue);
                         }
-                        break;
+                        //break;
                     }
                 }
                 ImportRepo.InsertToInfraObj(infraObjList);

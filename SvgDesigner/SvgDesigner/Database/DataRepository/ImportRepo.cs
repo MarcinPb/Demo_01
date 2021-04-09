@@ -51,9 +51,9 @@ namespace Database.DataRepository
                 sql = $@"    
                     INSERT INTO dbo.tbInfraFieldTemp (
                     --INSERT INTO @TbInfraFieldTemp (
-                        ObjTypeId,  FieldId,  Name,  DataTypeId,  Description,  Label,  Category
+                        ObjTypeId,  FieldId,  Name,  DataTypeId,  Description,  Label,  Category,  FieldTypeId
                     ) VALUES (
-                        @ObjTypeId, @FieldId, @Name, @DataTypeId, @Description, @Label, @Category
+                        @ObjTypeId, @FieldId, @Name, @DataTypeId, @Description, @Label, @Category, @FieldTypeId
                     );
                 ";
                 cnn.Execute(sql, list.Select(x => new {
@@ -64,6 +64,7 @@ namespace Database.DataRepository
                     Description = x.Notes,
                     Label = x.Label,
                     Category = x.Category,
+                    FieldTypeId = x.FieldTypeId
                 }));
 
                 sql = $@"    

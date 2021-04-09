@@ -83,13 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\FieldNames.cs" />
-    <Compile Include="Constants\ObjectTypes.cs" />
     <Compile Include="DomainDataSetProxy.cs" />
-    <Compile Include="Extensions\ConversionExtensions.cs" />
-    <Compile Include="ObjectReaders\CustomerMeterReader.cs" />
-    <Compile Include="ObjectReaders\GenericObjectReader.cs" />
-    <Compile Include="ObjectReaders\PipeReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reader.cs" />
   </ItemGroup>
