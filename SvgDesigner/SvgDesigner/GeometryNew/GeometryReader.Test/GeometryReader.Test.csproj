@@ -57,10 +57,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GeometryModel\GeometryModel.csproj">
-      <Project>{b41ce3a4-83b6-4fdf-b167-2e74476b7e3f}</Project>
-      <Name>GeometryModel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GeometryReader\GeometryReader.csproj">
       <Project>{ed714e90-41b7-4d83-a0bc-3f04b2e7348b}</Project>
       <Name>GeometryReader</Name>

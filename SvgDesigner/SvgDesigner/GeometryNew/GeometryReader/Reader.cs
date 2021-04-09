@@ -1,16 +1,12 @@
-﻿using Database.DataModel;
-using Database.DataRepository;
-using GeometryModel;
-using GeometryReader;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Haestad.Domain;
 using Haestad.Domain.ModelingObjects;
 using Haestad.Domain.ModelingObjects.Water;
 using Haestad.Support.Support;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Database.DataModel;
+using Database.DataRepository;
 
 namespace GeometryReader
 {
@@ -89,9 +85,7 @@ namespace GeometryReader
                 List<InfraObjTypeField> infraObjTypeFieldList = ImportRepo.GetObjTypeFieldList().ToList();
                 List<InfraField> infraFieldList = ImportRepo.GetFieldList();
                 
-                foreach (int objTypeId in infraObjTypeList
-                    //.Where(x => x==69)                
-                    )
+                foreach (int objTypeId in infraObjTypeList)
                 { 
                     // InfraObj
                     var manager = domainDataSet.DomainElementManager(objTypeId);
@@ -137,7 +131,7 @@ namespace GeometryReader
                                     infraValue.BooleanValue = (bool)supportedField.GetValue(objId);
                                     break;
                                 case 7:     // LongBinary   
-                                    infraGeometryList.AddRange(ManageLongBinary(supportedField, objId, infraValue));
+                                    infraGeometryList.AddRange(GetLongBinary(supportedField, objId, infraValue));
                                     break;
                                 case 8:     // Referenced   
                                     ManageReferenced(supportedField, objId, infraValue);
@@ -205,7 +199,7 @@ namespace GeometryReader
             }
         }
 
-        private static List<InfraGeometry> ManageLongBinary(IField supportedField, int objId, InfraValue infraValue)
+        private static List<InfraGeometry> GetLongBinary(IField supportedField, int objId, InfraValue infraValue)
         {
             if (supportedField.Name != "HMIGeometry")
             {

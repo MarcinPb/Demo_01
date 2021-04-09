@@ -109,10 +109,6 @@
       <Project>{46f523d5-6c02-448a-9037-d4e1d133f978}</Project>
       <Name>DataRepository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GeometryModel\GeometryModel.csproj">
-      <Project>{b41ce3a4-83b6-4fdf-b167-2e74476b7e3f}</Project>
-      <Name>GeometryModel</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
