@@ -152,8 +152,8 @@ namespace GeometryReader
                             }
                             infraValueList.Add(infraValue);
                         }
+                        OnInnerProgressChanged((double)++innerCounter / objQty);
                         //break;
-                        OnInnerProgressChanged((double)++innerCounter / objQty, "");
                     }
                 }
                 OnProgressChanged((double) 1);
@@ -162,7 +162,8 @@ namespace GeometryReader
                 ImportRepo.InsertToInfraValue(infraValueList);
                 ImportRepo.InsertToInfraGeometry(infraGeometryList);
                 
-                OnProgressChanged((double) 0);
+                OnInnerProgressChanged(0);
+                OnProgressChanged(0, $"Successfully imported {infraObjList.Count} objects, {infraValueList.Count} fields and {infraGeometryList.Count} geometries.");
             }
         }
 
@@ -232,9 +233,10 @@ namespace GeometryReader
                 throw new NotSupportedException("Unknown geometry type: " + geometry.GetType().ToString());
             }
 
-            return geomArr.Select(x => new InfraGeometry()
+            return geomArr.Select((x, idx) => new InfraGeometry()
             {
                 ValueId = infraValue.ValueId,
+                OrderNo = idx,
                 Xp = x.X,
                 Yp = x.Y,
             }).ToList();

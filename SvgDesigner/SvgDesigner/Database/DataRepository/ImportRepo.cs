@@ -253,9 +253,9 @@ namespace Database.DataRepository
 
                 sql = $@"
                     INSERT INTO dbo.tbInfraGeometry (
-                        ValueId,  Xp,  Yp
+                        ValueId,  OrderNo,  Xp,  Yp
                     ) VALUES (
-                        @ValueId, @Xp, @Yp
+                        @ValueId, @OrderNo, @Xp, @Yp
                     );
                 ";
                 cnn.Execute(sql, infraGeometryList);
