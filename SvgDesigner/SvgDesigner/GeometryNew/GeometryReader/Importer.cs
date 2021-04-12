@@ -10,9 +10,13 @@ using Database.DataRepository;
 
 namespace GeometryReader
 {
-    public class Reader
+    public class Importer
     {
-        public static void ReadBase(string fileName)
+        public event EventHandler<ProgressEventArgs> ProgressChanged;
+        public event EventHandler<ProgressEventArgs> InnerProgressChanged;
+
+
+        public void ImportBase(string fileName)
         {
             using (DomainDataSetProxy domainDataSetProxy = new DomainDataSetProxy(fileName))
             {
@@ -55,15 +59,10 @@ namespace GeometryReader
                     //}));
                 }
                 ImportRepo.InsertToInfraField(supportedFieldDict);
-
-                // Zone list
-                IdahoDomainDataSet idahoDomainDataSet = (IdahoDomainDataSet)domainDataSet;
-                IDictionary<int, string> zoneDict = idahoDomainDataSet.ZoneElementManager.Elements().Cast<ModelingElementBase>().ToDictionary(x => x.Id, x => x.Label);
-                ImportRepo.InsertToInfraZone(zoneDict);
             }
         }
 
-        public static void ReadData(string fileName)
+        public void ImportData(string fileName)
         {
             using (DomainDataSetProxy domainDataSetProxy = new DomainDataSetProxy(fileName))
             {
@@ -81,27 +80,33 @@ namespace GeometryReader
                 List<InfraValue> infraValueList = new List<InfraValue>();
                 List<InfraGeometry> infraGeometryList = new List<InfraGeometry>();
 
-                List<int> infraObjTypeList = ImportRepo.GetObjTypeList().Select(x => x.ObjTypeId).ToList();
+                List<InfraObjType> infraObjTypeList = ImportRepo.GetObjTypeList().ToList();
                 List<InfraObjTypeField> infraObjTypeFieldList = ImportRepo.GetObjTypeFieldList().ToList();
                 List<InfraField> infraFieldList = ImportRepo.GetFieldList();
-                
-                foreach (int objTypeId in infraObjTypeList)
-                { 
+
+                int counter = 0;
+                foreach (var objType in infraObjTypeList)
+                {
+                    OnProgressChanged((double) counter++ / infraObjTypeList.Count, objType.Name);
+
                     // InfraObj
-                    var manager = domainDataSet.DomainElementManager(objTypeId);
+                    var manager = domainDataSet.DomainElementManager(objType.ObjTypeId);
                     var supportedFields = manager.SupportedFields().Cast<IField>();
                     var objIdList = manager.ElementIDs();
+
+                    int innerCounter = 0;
+                    int objQty = objIdList.Count;
                     foreach (var objId in objIdList)
                     {
                         var infraObj = new InfraObj
                         {
                             ObjId = objId,
-                            ObjTypeId = objTypeId,
+                            ObjTypeId = objType.ObjTypeId,
                         };
                         infraObjList.Add(infraObj);
 
                         // InfraValue
-                        var fieldList = infraFieldList.Where(x => infraObjTypeFieldList.Where(y => y.ObjTypeId == objTypeId).Any(y => x.FieldId == y.FieldId));
+                        var fieldList = infraFieldList.Where(x => infraObjTypeFieldList.Where(y => y.ObjTypeId == objType.ObjTypeId).Any(y => x.FieldId == y.FieldId));
                         foreach (var field in fieldList)
                         {
                             var supportedField = supportedFields.FirstOrDefault(x => x.Id==field.FieldId);
@@ -148,15 +153,20 @@ namespace GeometryReader
                             infraValueList.Add(infraValue);
                         }
                         //break;
+                        OnInnerProgressChanged((double)++innerCounter / objQty, "");
                     }
                 }
+                OnProgressChanged((double) 1);
+
                 ImportRepo.InsertToInfraObj(infraObjList);
                 ImportRepo.InsertToInfraValue(infraValueList);
                 ImportRepo.InsertToInfraGeometry(infraGeometryList);
+                
+                OnProgressChanged((double) 0);
             }
         }
 
-        private static void ManageEnumerated(IField supportedField, int objId, InfraValue infraValue)
+        private void ManageEnumerated(IField supportedField, int objId, InfraValue infraValue)
         {
             try
             {
@@ -171,7 +181,7 @@ namespace GeometryReader
         }
 
         //private static List<string> _collectionList = new List<string>();
-        private static void ManageCollection(IField supportedField, int objId, InfraValue infraValue)
+        private void ManageCollection(IField supportedField, int objId, InfraValue infraValue)
         {
             try
             {
@@ -185,7 +195,7 @@ namespace GeometryReader
                 return;
             }
         }
-        private static void ManageReferenced(IField supportedField, int objId, InfraValue infraValue)
+        private void ManageReferenced(IField supportedField, int objId, InfraValue infraValue)
         {
             try
             {
@@ -199,7 +209,7 @@ namespace GeometryReader
             }
         }
 
-        private static List<InfraGeometry> GetLongBinary(IField supportedField, int objId, InfraValue infraValue)
+        private List<InfraGeometry> GetLongBinary(IField supportedField, int objId, InfraValue infraValue)
         {
             if (supportedField.Name != "HMIGeometry")
             {
@@ -231,7 +241,7 @@ namespace GeometryReader
 
         }
 
-        private static void ManageReal(IField supportedField, int objId, InfraValue infraValue)
+        private void ManageReal(IField supportedField, int objId, InfraValue infraValue)
         {
             double v = (double)supportedField.GetValue(objId);
             if (double.IsNaN(v))
@@ -242,6 +252,15 @@ namespace GeometryReader
             {
                 infraValue.FloatValue = v;
             }
+        }
+        protected virtual void OnProgressChanged(double ratio, string message = "")
+        {
+            this.ProgressChanged?.Invoke(this, new ProgressEventArgs(ratio, message));
+        }
+
+        protected virtual void OnInnerProgressChanged(double ratio, string message = "")
+        {
+            this.InnerProgressChanged?.Invoke(this, new ProgressEventArgs(ratio, message));
         }
 
     }

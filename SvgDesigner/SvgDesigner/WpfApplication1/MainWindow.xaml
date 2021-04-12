@@ -54,6 +54,7 @@
             </MenuItem>
             <MenuItem Header="Data">
                 <MenuItem Header="Data" />
+                <MenuItem Header="Import" Command="{Binding ImportDataCmd}"/>
             </MenuItem>
         </Menu>
 
@@ -99,8 +100,14 @@
         </Grid>
 
         <StatusBar Grid.Row="2">
-            <StatusBarItem Content="Rows"/>
-            <StatusBarItem Content="rows"/>
+            <StatusBarItem >
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Progress: "/>
+                    <ProgressBar Value="{Binding ProgressPercent, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="1" Width="200"/>
+                    <ProgressBar Value="{Binding InnerProgressPercent, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="1" Width="200" Margin="20 0 0 0"/>
+                    <Label Content="{Binding ProgressMessage}" />
+                </StackPanel>
+            </StatusBarItem>
         </StatusBar>
     </Grid>
 </Window>

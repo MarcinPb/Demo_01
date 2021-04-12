@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace GeometryReader.Test
 {
@@ -10,12 +11,20 @@ namespace GeometryReader.Test
         [TestMethod]
         public void ReadBaseTest()
         {
-            Reader.ReadBase(_sqliteFile);
+            new Importer().ImportBase(_sqliteFile);
         }
         [TestMethod]
         public void ReadDataTest()
         {
-            Reader.ReadData(_sqliteFile);
+            var importer = new Importer();
+            importer.ProgressChanged += OnProgressChanged;
+            importer.ImportData(_sqliteFile);
+        }
+
+        private void OnProgressChanged(object sender, ProgressEventArgs e)
+        {
+            var ratio = e.ProgressRatio;
+            var message = e.Message;
         }
     }
 }

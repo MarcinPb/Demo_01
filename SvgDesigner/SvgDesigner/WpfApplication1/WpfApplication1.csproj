@@ -200,6 +200,10 @@
       <Project>{46f523d5-6c02-448a-9037-d4e1d133f978}</Project>
       <Name>DataRepository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GeometryNew\GeometryReader\GeometryReader.csproj">
+      <Project>{ed714e90-41b7-4d83-a0bc-3f04b2e7348b}</Project>
+      <Name>GeometryReader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Geometry\GeometryModel\GeometryModel.csproj">
       <Project>{4f166da1-aa06-4b20-9173-67f6c307e275}</Project>
       <Name>GeometryModel</Name>
