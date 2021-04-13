@@ -68,8 +68,11 @@ namespace WpfApplication1
             var importer = new Importer();
             importer.ProgressChanged += OnProgressChanged;
             importer.InnerProgressChanged += OnInnerProgressChanged;
-            await Task.Run(() => importer.ImportData(_sqliteFile));
+            int aaa = await Task<int>.Run(() => importer.ImportData(_sqliteFile));
+            //importer.InnerProgressChanged -= OnInnerProgressChanged;
             //importer.ProgressChanged -= OnProgressChanged;
+
+            var b = aaa;
         }
 
         private void OnInnerProgressChanged(object sender, GeometryReader.ProgressEventArgs e)

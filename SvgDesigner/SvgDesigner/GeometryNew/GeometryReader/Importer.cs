@@ -62,7 +62,7 @@ namespace GeometryReader
             }
         }
 
-        public void ImportData(string fileName)
+        public int ImportData(string fileName)
         {
             using (DomainDataSetProxy domainDataSetProxy = new DomainDataSetProxy(fileName))
             {
@@ -153,17 +153,19 @@ namespace GeometryReader
                             infraValueList.Add(infraValue);
                         }
                         OnInnerProgressChanged((double)++innerCounter / objQty);
-                        //break;
+                        break;
                     }
                 }
                 OnProgressChanged(1, "Saving data to database.");
 
-                ImportRepo.InsertToInfraObj(infraObjList);
-                ImportRepo.InsertToInfraValue(infraValueList);
-                ImportRepo.InsertToInfraGeometry(infraGeometryList);
+                //ImportRepo.InsertToInfraObj(infraObjList);
+                //ImportRepo.InsertToInfraValue(infraValueList);
+                //ImportRepo.InsertToInfraGeometry(infraGeometryList);
                 
                 OnInnerProgressChanged(0);
                 OnProgressChanged(0, $"Successfully imported {infraObjList.Count} objects, {infraValueList.Count} fields and {infraGeometryList.Count} geometries.");
+                
+                return 1;
             }
         }
 
