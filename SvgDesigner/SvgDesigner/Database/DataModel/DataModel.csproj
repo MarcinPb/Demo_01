@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImportedBaseOutputLists.cs" />
+    <Compile Include="ImportedDataInputLists.cs" />
+    <Compile Include="ImportedDataOutputLists.cs" />
     <Compile Include="ImportedField.cs" />
     <Compile Include="InfraConn.cs" />
     <Compile Include="InfraGeometry.cs" />

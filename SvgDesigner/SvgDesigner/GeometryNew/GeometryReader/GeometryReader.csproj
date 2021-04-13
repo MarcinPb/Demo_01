@@ -106,10 +106,6 @@
       <Project>{4aae4024-22d4-4917-879f-587c9da6a387}</Project>
       <Name>DataModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Database\DataRepository\DataRepository.csproj">
-      <Project>{46f523d5-6c02-448a-9037-d4e1d133f978}</Project>
-      <Name>DataRepository</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

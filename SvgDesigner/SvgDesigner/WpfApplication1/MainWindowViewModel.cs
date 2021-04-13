@@ -1,6 +1,9 @@
-﻿using GeometryModel;
+﻿using Database.DataModel;
+using Database.DataRepository;
+using GeometryModel;
 using GeometryReader;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -65,14 +68,26 @@ namespace WpfApplication1
 
         private async void ImportDataCmdExecute(object obj)
         {
+            ImportedDataInputLists importedDataInputLists = new ImportedDataInputLists()
+            {
+                InfraObjTypeList = ImportRepo.GetObjTypeList().ToList(),
+                InfraObjTypeFieldList = ImportRepo.GetObjTypeFieldList().ToList(),
+                InfraFieldList = ImportRepo.GetFieldList(),
+            };
+
             var importer = new Importer();
             importer.ProgressChanged += OnProgressChanged;
             importer.InnerProgressChanged += OnInnerProgressChanged;
-            int aaa = await Task<int>.Run(() => importer.ImportData(_sqliteFile));
+            ImportedDataOutputLists importedDataOutputLists = await Task<int>.Run(() => importer.ImportData(_sqliteFile, importedDataInputLists));
             //importer.InnerProgressChanged -= OnInnerProgressChanged;
             //importer.ProgressChanged -= OnProgressChanged;
 
-            var b = aaa;
+            ImportRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);
+            ImportRepo.InsertToInfraObj(importedDataOutputLists.InfraObjList);
+            ImportRepo.InsertToInfraValue(importedDataOutputLists.InfraValueList);
+            ImportRepo.InsertToInfraGeometry(importedDataOutputLists.InfraGeometryList);
+
+
         }
 
         private void OnInnerProgressChanged(object sender, GeometryReader.ProgressEventArgs e)

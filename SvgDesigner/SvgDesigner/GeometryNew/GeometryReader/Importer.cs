@@ -6,7 +6,6 @@ using Haestad.Domain.ModelingObjects;
 using Haestad.Domain.ModelingObjects.Water;
 using Haestad.Support.Support;
 using Database.DataModel;
-using Database.DataRepository;
 
 namespace GeometryReader
 {
@@ -52,20 +51,24 @@ namespace GeometryReader
                 }
                 //ImportRepo.InsertToInfraField(supportedFieldDict);
             }
+
             return new ImportedBaseOutputLists() { InfraObjTypeList = objectTypeDict, ImportedFieldList = supportedFieldDict };
         }
 
-        public int ImportData(string fileName)
+        public ImportedDataOutputLists ImportData(string fileName, ImportedDataInputLists importedDataInputLists)
         {
             using (DomainDataSetProxy domainDataSetProxy = new DomainDataSetProxy(fileName))
             {
+                List<InfraObjType> infraObjTypeList = importedDataInputLists.InfraObjTypeList;
+                List<InfraObjTypeField> infraObjTypeFieldList = importedDataInputLists.InfraObjTypeFieldList;
+                List<InfraField> infraFieldList = importedDataInputLists.InfraFieldList;
+
                 IDomainDataSet domainDataSet = domainDataSetProxy.OpenDomainDataSet();
 
 
                 // Zone list
                 IdahoDomainDataSet idahoDomainDataSet = (IdahoDomainDataSet)domainDataSet;
                 IDictionary<int, string> zoneDict = idahoDomainDataSet.ZoneElementManager.Elements().Cast<ModelingElementBase>().ToDictionary(x => x.Id, x => x.Label);
-                ImportRepo.InsertToInfraZone(zoneDict);
 
 
                 // InfraObj list
@@ -73,14 +76,10 @@ namespace GeometryReader
                 List<InfraValue> infraValueList = new List<InfraValue>();
                 List<InfraGeometry> infraGeometryList = new List<InfraGeometry>();
 
-                List<InfraObjType> infraObjTypeList = ImportRepo.GetObjTypeList().ToList();
-                List<InfraObjTypeField> infraObjTypeFieldList = ImportRepo.GetObjTypeFieldList().ToList();
-                List<InfraField> infraFieldList = ImportRepo.GetFieldList();
-
                 int counter = 0;
                 foreach (var objType in infraObjTypeList)
                 {
-                    OnProgressChanged((double) counter++ / infraObjTypeList.Count, objType.Name);
+                    OnProgressChanged((double)counter++ / infraObjTypeList.Count, objType.Name);
 
                     // InfraObj
                     var manager = domainDataSet.DomainElementManager(objType.ObjTypeId);
@@ -146,19 +145,21 @@ namespace GeometryReader
                             infraValueList.Add(infraValue);
                         }
                         OnInnerProgressChanged((double)++innerCounter / objQty);
-                        break;
+                        //break;
                     }
                 }
-                OnProgressChanged(1, "Saving data to database.");
+                OnInnerProgressChanged(1);
+                OnProgressChanged(1, $"Successfully imported {infraObjList.Count} objects, {infraValueList.Count} fields, {infraGeometryList.Count} geometries and {zoneDict.Count} zones.");
 
-                //ImportRepo.InsertToInfraObj(infraObjList);
-                //ImportRepo.InsertToInfraValue(infraValueList);
-                //ImportRepo.InsertToInfraGeometry(infraGeometryList);
-                
-                OnInnerProgressChanged(0);
-                OnProgressChanged(0, $"Successfully imported {infraObjList.Count} objects, {infraValueList.Count} fields and {infraGeometryList.Count} geometries.");
-                
-                return 1;
+                ImportedDataOutputLists importedDataOutputLists = new ImportedDataOutputLists
+                {
+                    InfraObjList = infraObjList,
+                    InfraValueList = infraValueList,
+                    InfraGeometryList = infraGeometryList,
+                    ZoneDict = zoneDict
+                };
+
+                return importedDataOutputLists;
             }
         }
 

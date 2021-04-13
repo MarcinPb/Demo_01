@@ -1,6 +1,9 @@
-﻿using Database.DataRepository;
+﻿using Database.DataModel;
+using Database.DataRepository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GeometryReader.Test
 {
@@ -25,9 +28,21 @@ namespace GeometryReader.Test
         [TestMethod]
         public void ReadDataTest()
         {
+            ImportedDataInputLists importedDataInputLists = new ImportedDataInputLists()
+            {
+                InfraObjTypeList = ImportRepo.GetObjTypeList().ToList(),
+                InfraObjTypeFieldList = ImportRepo.GetObjTypeFieldList().ToList(),
+                InfraFieldList = ImportRepo.GetFieldList(),
+            };
+
             var importer = new Importer();
             importer.ProgressChanged += OnProgressChanged;
-            importer.ImportData(_sqliteFile);
+            ImportedDataOutputLists importedDataOutputLists = importer.ImportData(_sqliteFile, importedDataInputLists);
+
+            ImportRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);
+            ImportRepo.InsertToInfraObj(importedDataOutputLists.InfraObjList);
+            ImportRepo.InsertToInfraValue(importedDataOutputLists.InfraValueList);
+            ImportRepo.InsertToInfraGeometry(importedDataOutputLists.InfraGeometryList);
         }
 
         private void OnProgressChanged(object sender, ProgressEventArgs e)
