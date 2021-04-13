@@ -156,7 +156,7 @@ namespace GeometryReader
                         //break;
                     }
                 }
-                OnProgressChanged((double) 1);
+                OnProgressChanged(1, "Saving data to database.");
 
                 ImportRepo.InsertToInfraObj(infraObjList);
                 ImportRepo.InsertToInfraValue(infraValueList);

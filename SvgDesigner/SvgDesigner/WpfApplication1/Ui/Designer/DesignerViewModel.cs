@@ -56,6 +56,7 @@ namespace WpfApplication1.Ui.Designer
             var position = e.GetPosition(e.Device.Target);
             if (e.Device.Target is Line)
             {
+                var line = (Line)e.Device.Target;
                 id = Convert.ToInt32(((Line)e.Device.Target).Tag);
             }
             if (e.Device.Target is Ellipse)
@@ -94,23 +95,59 @@ namespace WpfApplication1.Ui.Designer
             var yFactor = svgHeight / (pointBottomRight.Y - pointTopLeft.Y);
 
 
-
-
             var pipeList = MainRepo.GetPipeList();
             pipeList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
-            var linkMyList = pipeList.Select(o => new LinkMy
-            {
-                Id = o.ID,
-                Name = o.Label,
-                X = o.Geometry[0].X,
-                Y = o.Geometry[0].Y,
+            //var linkMyList = pipeList.Select(o => new LinkMy
+            //{
+            //    Id = o.ID,
+            //    Name = o.Label,
+            //    X = o.Geometry[0].X,
+            //    Y = o.Geometry[0].Y,
 
-                X2 = o.Geometry.Last().X - o.Geometry[0].X,
-                Y2 = o.Geometry.Last().Y - o.Geometry[0].Y,
+            //    X2 = o.Geometry.Last().X - o.Geometry[0].X,
+            //    Y2 = o.Geometry.Last().Y - o.Geometry[0].Y,
 
-                Path = o.Geometry,
-                TypeId = 6,
-            });
+            //    Path = o.Geometry,
+            //    TypeId = 6,
+            //});
+            var linkList = pipeList
+                .SelectMany(x => x.Geometry,  (p, c) => new 
+                    {
+                        Id = p.ID,
+                        Name = p.Label,
+                        X = c.X,
+                        Y = c.Y,
+                    })
+                .Select((g, idx) => new 
+                    {
+                        Id = g.Id,
+                        Name = g.Name,
+                        X = g.X,
+                        Y = g.Y,
+                        Idx = idx
+                    })
+                ;
+            var linkMyList = linkList.Join(
+                        linkList,
+                        l => l.Idx,
+                        r => r.Idx + 1,
+                        (l, r) => new { l, r }
+                    )
+                    .Where(x => x.l.Id == x.r.Id)
+                    .Select(o => new LinkMy
+                    {
+                        Id = o.l.Id,
+                        Name = o.l.Name,
+                        X = o.l.X,
+                        Y = o.l.Y,
+
+                        X2 = o.r.X - o.l.X,
+                        Y2 = o.r.Y - o.l.Y,
+
+                        TypeId = 6,
+                    })
+                    .ToList()
+                    ;
 
             var junctionList = MainRepo.GetJunctionList();
             //junctionList.ForEach(p => { p.Geometry[0].X = (p.Geometry[0].X - pointTopLeft.X) * xFactor + margin; p.Geometry[0].Y = (pointBottomRight.Y - p.Geometry[0].Y) * yFactor + margin; });
