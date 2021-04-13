@@ -16,27 +16,32 @@ namespace GeometryReader
         public event EventHandler<ProgressEventArgs> InnerProgressChanged;
 
 
-        public void ImportBase(string fileName)
+        public ImportedBaseOutputLists ImportBase(string fileName)
         {
+            List<InfraObjType> objectTypeDict;
+            List<ImportedField> supportedFieldDict;
+
             using (DomainDataSetProxy domainDataSetProxy = new DomainDataSetProxy(fileName))
             {
                 IDomainDataSet domainDataSet = domainDataSetProxy.OpenDomainDataSet();
 
                 // ObjectType list
-                IDictionary<int, string> objectTypeDict = domainDataSet.DomainDataSetType().DomainElementTypes().Cast<IDomainElementType>().ToDictionary(x => x.Id, x => x.Label);
-                ImportRepo.InsertToInfraObjType(objectTypeDict);
+                //IDictionary<int, string> objectTypeDict = domainDataSet.DomainDataSetType().DomainElementTypes().Cast<IDomainElementType>().ToDictionary(x => x.Id, x => x.Label);
+                objectTypeDict = domainDataSet.DomainDataSetType().DomainElementTypes().Cast<IDomainElementType>().Select(x => new InfraObjType() { ObjTypeId = x.Id, Name = x.Label }).ToList();
+                //ImportRepo.InsertToInfraObjType(objectTypeDict);
 
                 // SuportedField list
-                List<ImportedField> supportedFieldDict = new List<ImportedField>();
-                foreach (int objectTypeId in objectTypeDict.Keys)
+                supportedFieldDict = new List<ImportedField>();
+                //foreach (int objectTypeId in objectTypeDict.Keys)
+                foreach (var objectType in objectTypeDict)
                 {
-                    var manager = domainDataSet.DomainElementManager(objectTypeId);
+                    var manager = domainDataSet.DomainElementManager(objectType.ObjTypeId);
                     var manager1 = domainDataSet.FieldManager;
                     // Get list suported fields for a particular objectTypeId. 
                     IEnumerable<IField> supportedFields = manager.SupportedFields().Cast<IField>();
                     supportedFieldDict.AddRange(supportedFields.Select(x => new ImportedField() {
                         Id = x.Id,
-                        ObjTypeId = objectTypeId,
+                        ObjTypeId = objectType.ObjTypeId,
                         Name = x.Name,
                         Label = x.Label,
                         Notes = x.Notes,
@@ -44,22 +49,10 @@ namespace GeometryReader
                         DataTypeId = (int)x.FieldDataType,
                         FieldTypeId = 1,    // not result field
                     }));
-
-                    //var supportedResultFields = manager.SupportedResultFields().Cast<IField>();;
-                    //supportedFieldDict.AddRange(supportedResultFields.Select(x => new ImportedField()
-                    //{
-                    //    Id = x.Id,
-                    //    ObjTypeId = objectTypeId,
-                    //    Name = x.Name,
-                    //    Label = x.Label,
-                    //    Notes = x.Notes,
-                    //    Category = x.Category,
-                    //    DataTypeId = (int)x.FieldDataType,
-                    //    FieldTypeId = 2,    // result field
-                    //}));
                 }
-                ImportRepo.InsertToInfraField(supportedFieldDict);
+                //ImportRepo.InsertToInfraField(supportedFieldDict);
             }
+            return new ImportedBaseOutputLists() { InfraObjTypeList = objectTypeDict, ImportedFieldList = supportedFieldDict };
         }
 
         public int ImportData(string fileName)

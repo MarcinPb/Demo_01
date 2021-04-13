@@ -34,6 +34,30 @@ namespace Database.DataRepository
                 cnn.Execute(sql, dict.Select(x => new { ObjTypeId = x.Key, Name = x.Value }));
             }
         }
+
+        public static void InsertToInfraObjType(List<InfraObjType> list)
+        {
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    DELETE FROM dbo.tbInfraObjType;
+                ";
+                cnn.Execute(sql);
+
+                sql = $@"
+                    INSERT INTO dbo.tbInfraObjType (
+                        ObjTypeId,  Name
+                    ) VALUES (
+                        @ObjTypeId, @Name
+                    );
+                ";
+                cnn.Execute(sql, list);
+            }
+        }
+
+
         public static void InsertToInfraField(List<ImportedField> list)
         {
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
@@ -42,8 +66,8 @@ namespace Database.DataRepository
 
                 sql = $@"
                     DELETE FROM dbo.tbInfraFieldTemp;
-                    DELETE FROM dbo.tbInfraObjTypeField;
                     DELETE FROM dbo.tbInfraField;
+                    --DELETE FROM dbo.tbInfraObjTypeField;
                     DELETE FROM dbo.tbInfraCategory;
                 ";
                 cnn.Execute(sql);

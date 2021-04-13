@@ -57,6 +57,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Database\DataModel\DataModel.csproj">
+      <Project>{4AAE4024-22D4-4917-879F-587C9DA6A387}</Project>
+      <Name>DataModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Database\DataRepository\DataRepository.csproj">
+      <Project>{46f523d5-6c02-448a-9037-d4e1d133f978}</Project>
+      <Name>DataRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GeometryReader\GeometryReader.csproj">
       <Project>{ed714e90-41b7-4d83-a0bc-3f04b2e7348b}</Project>
       <Name>GeometryReader</Name>

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Database.DataRepository;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace GeometryReader.Test
@@ -11,8 +12,16 @@ namespace GeometryReader.Test
         [TestMethod]
         public void ReadBaseTest()
         {
-            new Importer().ImportBase(_sqliteFile);
+            //new Importer().ImportBase(_sqliteFile);
+
+            var importer = new Importer();
+            var importedBaseOutputLists = importer.ImportBase(_sqliteFile);
+            ImportRepo.InsertToInfraObjType(importedBaseOutputLists.InfraObjTypeList);
+            ImportRepo.InsertToInfraField(importedBaseOutputLists.ImportedFieldList);
         }
+
+
+
         [TestMethod]
         public void ReadDataTest()
         {
