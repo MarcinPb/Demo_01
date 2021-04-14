@@ -152,7 +152,7 @@ namespace Database.DataRepository
             }
         }
 
-        public static void InsertToInfraZone(IDictionary<int, string> dict)
+        public static void InsertToInfraZone(List<InfraZone> list)
         {
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
             {
@@ -170,7 +170,7 @@ namespace Database.DataRepository
                         @ZoneId, @Name
                     );
                 ";
-                cnn.Execute(sql, dict.Select(x => new { ZoneId = x.Key, Name = x.Value }));
+                cnn.Execute(sql, list);
             }
         }
 
@@ -309,6 +309,62 @@ namespace Database.DataRepository
         }
 
 
+        public static ImportedDataOutputLists GetInfraDataLists()
+        {
+            List<InfraObj> infraObjList;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    SELECT * FROM dbo.tbInfraObj;
+                ";
+                infraObjList = cnn.Query<InfraObj>(sql).ToList();
+            }
+
+            List<InfraValue> infraValueList;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    SELECT * FROM dbo.tbInfraValue;
+                ";
+                infraValueList = cnn.Query<InfraValue>(sql).ToList();
+            }
+
+            List<InfraGeometry> infraGeometryList;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    SELECT * FROM dbo.tbInfraGeometry;
+                ";
+                infraGeometryList = cnn.Query<InfraGeometry>(sql).ToList();
+            }
+
+            List<InfraZone> zoneDict;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    SELECT * FROM dbo.tbInfraZone;
+                ";
+                zoneDict = cnn.Query<InfraZone>(sql).ToList();
+            }
+
+            ImportedDataOutputLists importedDataOutputLists = new ImportedDataOutputLists
+            {
+                InfraObjList = infraObjList,
+                InfraValueList = infraValueList,
+                InfraGeometryList = infraGeometryList,
+                ZoneDict = zoneDict
+            };
+
+            return importedDataOutputLists;
+        }
 
         private static string GetConnectionString(string name = "WaterInfra_5_ConnStr")
         {

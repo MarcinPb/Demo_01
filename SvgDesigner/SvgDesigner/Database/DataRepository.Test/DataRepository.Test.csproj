@@ -38,8 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="UnitTest2.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="InfraRepoTest.cs" />
+    <Compile Include="MainRepoTest2.cs" />
+    <Compile Include="MainRepoTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

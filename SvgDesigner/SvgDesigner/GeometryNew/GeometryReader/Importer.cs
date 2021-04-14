@@ -68,7 +68,7 @@ namespace GeometryReader
 
                 // Zone list
                 IdahoDomainDataSet idahoDomainDataSet = (IdahoDomainDataSet)domainDataSet;
-                IDictionary<int, string> zoneDict = idahoDomainDataSet.ZoneElementManager.Elements().Cast<ModelingElementBase>().ToDictionary(x => x.Id, x => x.Label);
+                List<InfraZone> zoneDict = idahoDomainDataSet.ZoneElementManager.Elements().Cast<ModelingElementBase>().Select(x => new InfraZone {ZoneId= x.Id, Name = x.Label }).ToList();
 
 
                 // InfraObj list

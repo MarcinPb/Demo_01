@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Database.DataRepository.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class MainRepoTest1
     {
         [TestMethod]
         public void TestMethod1()

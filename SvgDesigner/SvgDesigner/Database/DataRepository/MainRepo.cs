@@ -94,11 +94,6 @@ namespace Database.DataRepository
             { 
                 ObjId = x.ID,
                 ObjTypeId = (int)x.ObjectType,
-                Name = x.Label,
-                Description = "",
-                IsActive = x.IsActive,
-                Xx = x.Geometry[0].X,
-                Yy = x.Geometry[0].Y,
             })
             //.Take(10)
             .ToList();

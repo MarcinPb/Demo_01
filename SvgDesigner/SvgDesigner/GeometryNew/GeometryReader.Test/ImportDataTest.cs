@@ -13,7 +13,7 @@ namespace GeometryReader.Test
         private readonly string _sqliteFile = @"K:\temp\sandbox\Nowy model testowy\testOPC.wtg.sqlite";
 
         [TestMethod]
-        public void ReadBaseTest()
+        public void ImportInfraBaseTest()
         {
             //new Importer().ImportBase(_sqliteFile);
 
@@ -26,7 +26,7 @@ namespace GeometryReader.Test
 
 
         [TestMethod]
-        public void ReadDataTest()
+        public void ImportInfraDataTest()
         {
             ImportedDataInputLists importedDataInputLists = new ImportedDataInputLists()
             {

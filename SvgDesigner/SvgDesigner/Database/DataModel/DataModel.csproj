@@ -47,6 +47,7 @@
     <Compile Include="ImportedField.cs" />
     <Compile Include="InfraConn.cs" />
     <Compile Include="InfraGeometry.cs" />
+    <Compile Include="InfraZone.cs" />
     <Compile Include="InfraObjType.cs" />
     <Compile Include="InfraValue.cs" />
     <Compile Include="InfraField.cs" />
