@@ -16,29 +16,24 @@ namespace GeometryReader.Test
     [TestClass]
     public class UnitTest1
     {
+        private string _sqliteFile = @"K:\temp\sandbox\Nowy model testowy\testOPC.wtg.sqlite";  //@"K:\temp\sandbox\Nowy model testowy\_archiw\2019-11-19\testOPC.wtg.sqlite";
+        private string _binFile = @"K:\temp\sandbox\Nowy model testowy\WgData.bin";
+
+
         [TestMethod]
         public void TestMethod1()
         {
             List<DomainObjectData> domainObjects;
-            using (var dataSetProvider = new DomainDataSetProxy(@"K:\temp\sandbox\Nowy model testowy\testOPC.wtg.sqlite"))
-            //using (var dataSetProvider = new DomainDataSetProxy(@"K:\temp\sandbox\Nowy model testowy\_archiw\2019-11-19\testOPC.wtg.sqlite"))
+            using (var dataSetProvider = new DomainDataSetProxy(_sqliteFile))
             {
                 domainObjects = GetWgObjects(dataSetProvider);
             }
 
-            //var idahoDomainDataSet = (IdahoDomainDataSet)this.DomainDataSet;
-            //var zones = idahoDomainDataSet.ZoneElementManager.Elements().Cast<Haestad.Domain.ModelingObjects.ModelingElementBase>().ToDictionary(x => x.Id, x => x);
-
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(@"K:\temp\sandbox\Nowy model testowy\MyFile.bin", FileMode.Create, FileAccess.Write, FileShare.None);
+            Stream stream = new FileStream(_sqliteFile, FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(stream, domainObjects);
             stream.Close();
-
-            //Dictionary<ObjectTypes, List<DomainObjectData>> domainGrouppedObjects = domainObjects
-            //    .GroupBy(x => x.ObjectType)
-            //    .ToDictionary(x => x.Key, x => x.ToList());
         }
-
 
         [TestMethod]
         public void TestMethod3()
@@ -46,8 +41,7 @@ namespace GeometryReader.Test
             Dictionary<int, string> zoneDict;
             Dictionary<int, string> objTypeDict;
             List<DomainObjectData> domainObjects;
-            using (var dataSetProvider = new DomainDataSetProxy(@"K:\temp\sandbox\Nowy model testowy\testOPC.wtg.sqlite"))
-            //using (var dataSetProvider = new DomainDataSetProxy(@"K:\temp\sandbox\Nowy model testowy\_archiw\2019-11-19\testOPC.wtg.sqlite"))
+            using (var dataSetProvider = new DomainDataSetProxy(_sqliteFile))
             {
                 var reader = new GenericObjectReader(dataSetProvider);
 
@@ -63,7 +57,7 @@ namespace GeometryReader.Test
             };
 
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(@"K:\temp\sandbox\Nowy model testowy\WgData.bin", FileMode.Create, FileAccess.Write, FileShare.None);
+            Stream stream = new FileStream(_binFile, FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(stream, waterGemsData);
             stream.Close();
 
@@ -102,7 +96,7 @@ namespace GeometryReader.Test
         public void TestMethod4()
         {
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(@"K:\temp\sandbox\Nowy model testowy\WgData.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
+            Stream stream = new FileStream(_binFile, FileMode.Open, FileAccess.Read, FileShare.Read);
             WaterGemsData domainObjects = (WaterGemsData)formatter.Deserialize(stream);
             stream.Close();
 
@@ -117,8 +111,7 @@ namespace GeometryReader.Test
             Dictionary<int, string> zoneDict;
             Dictionary<int, string> objTypeDict;
             List<DomainObjectData> domainObjects;
-            using (var dataSetProvider = new DomainDataSetProxy(@"K:\temp\sandbox\Nowy model testowy\testOPC.wtg.sqlite"))
-            //using (var dataSetProvider = new DomainDataSetProxy(@"K:\temp\sandbox\Nowy model testowy\_archiw\2019-11-19\testOPC.wtg.sqlite"))
+            using (var dataSetProvider = new DomainDataSetProxy(_sqliteFile))
             {
                 var reader = new GenericObjectReader(dataSetProvider);
 
@@ -134,7 +127,7 @@ namespace GeometryReader.Test
             };
 
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(@"K:\temp\sandbox\Nowy model testowy\WgData.bin", FileMode.Create, FileAccess.Write, FileShare.None);
+            Stream stream = new FileStream(_binFile, FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(stream, waterGemsData);
             stream.Close();
 
