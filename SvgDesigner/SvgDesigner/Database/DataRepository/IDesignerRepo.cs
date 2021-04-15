@@ -13,6 +13,7 @@ namespace Database.DataRepository
         List<DomainObjectData> GetJunctionList();
         List<DomainObjectData> GetPipeList();
         List<DomainObjectData> GetCustomerNodeList();
-
+        Point2D GetPointBottomRight();
+        Point2D GetPointTopLeft();
     }
 }

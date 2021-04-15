@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Database.DataRepository
 {
-    public class DesignerBinFileRepo
+    public class DesignerBinFileRepo : IDesignerRepo
     {
         const string binFile = "Files\\Wg\\MyFile.bin";
 
@@ -23,32 +23,32 @@ namespace Database.DataRepository
         private static readonly Dictionary<ObjectTypes, List<DomainObjectData>> _domainGrouppedObjects = GetWgObjectTypeList();
 
 
-        public static DomainObjectData GetItem(int id)
+        public DomainObjectData GetItem(int id)
         {
-            return _domainObjectDataList.FirstOrDefault(x => x.ID==id);
+            return _domainObjectDataList.FirstOrDefault(x => x.ID == id);
         }
 
-        public static List<DomainObjectData> GetJunctionList()
+        public List<DomainObjectData> GetJunctionList()
         {
             return _domainGrouppedObjects[ObjectTypes.Junction];
         }
-        public static List<DomainObjectData> GetPipeList()
+        public List<DomainObjectData> GetPipeList()
         {
             return _domainGrouppedObjects[ObjectTypes.Pipe];
         }
-        public static List<DomainObjectData> GetCustomerNodeList()
+        public List<DomainObjectData> GetCustomerNodeList()
         {
             return _domainGrouppedObjects[ObjectTypes.CustomerNode];
         }
 
-        public static Point2D GetPointTopLeft()
+        public Point2D GetPointTopLeft()
         {
             var junctionList = GetJunctionList();
             var xMin = junctionList.Min(x => x.Geometry[0].X);
             var yMin = junctionList.Min(x => x.Geometry[0].Y);
             return new Point2D(xMin, yMin);
         }
-        public static Point2D GetPointBottomRight()
+        public Point2D GetPointBottomRight()
         {
             var junctionList = GetJunctionList();
             var xMax = junctionList.Max(x => x.Geometry[0].X);
