@@ -10,14 +10,14 @@ namespace Database.DataRepository.Test
         [TestMethod]
         public void TestMethod1()
         {
-            var pipeList = MainRepo.GetPipeList();
+            var pipeList = DesignerBinFileRepo.GetPipeList();
         }
 
         [TestMethod]
         public void TestMethod2()
         {
-            var topLeft = MainRepo.GetPointTopLeft();
-            var bottomRight = MainRepo.GetPointBottomRight();
+            var topLeft = DesignerBinFileRepo.GetPointTopLeft();
+            var bottomRight = DesignerBinFileRepo.GetPointBottomRight();
         }
     }
 }

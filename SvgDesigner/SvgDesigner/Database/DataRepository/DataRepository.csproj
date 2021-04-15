@@ -42,9 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesignerInfraRepo.cs" />
+    <Compile Include="IDesignerRepo.cs" />
     <Compile Include="InfraData.cs" />
     <Compile Include="InfraRepo.cs" />
-    <Compile Include="MainRepo.cs" />
+    <Compile Include="DesignerBinFileRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

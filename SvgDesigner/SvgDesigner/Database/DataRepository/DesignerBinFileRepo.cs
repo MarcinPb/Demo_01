@@ -15,10 +15,13 @@ using System.Threading.Tasks;
 
 namespace Database.DataRepository
 {
-    public class MainRepo
+    public class DesignerBinFileRepo
     {
+        const string binFile = "Files\\Wg\\MyFile.bin";
+
         private static readonly List<DomainObjectData> _domainObjectDataList = GetDomainObjectDataList();
         private static readonly Dictionary<ObjectTypes, List<DomainObjectData>> _domainGrouppedObjects = GetWgObjectTypeList();
+
 
         public static DomainObjectData GetItem(int id)
         {
@@ -38,7 +41,6 @@ namespace Database.DataRepository
             return _domainGrouppedObjects[ObjectTypes.CustomerNode];
         }
 
-
         public static Point2D GetPointTopLeft()
         {
             var junctionList = GetJunctionList();
@@ -46,7 +48,6 @@ namespace Database.DataRepository
             var yMin = junctionList.Min(x => x.Geometry[0].Y);
             return new Point2D(xMin, yMin);
         }
-
         public static Point2D GetPointBottomRight()
         {
             var junctionList = GetJunctionList();
@@ -59,13 +60,12 @@ namespace Database.DataRepository
         private static List<DomainObjectData> GetDomainObjectDataList()
         {
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream("Files\\Wg\\MyFile.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
+            Stream stream = new FileStream(binFile, FileMode.Open, FileAccess.Read, FileShare.Read);
             List<DomainObjectData> domainObjects = (List<DomainObjectData>)formatter.Deserialize(stream);
             stream.Close();
 
             return domainObjects;
         }
-
         private static Dictionary<ObjectTypes, List<DomainObjectData>> GetWgObjectTypeList()
         {
             Dictionary<ObjectTypes, List<DomainObjectData>> domainGrouppedObjects = _domainObjectDataList

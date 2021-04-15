@@ -89,13 +89,13 @@ namespace WpfApplication1.Ui.Designer
             CanvasWidth = svgWidth + 2 * margin;
             CanvasHeight = svgHeight + 2 * margin;
 
-            var pointTopLeft = MainRepo.GetPointTopLeft();
-            var pointBottomRight = MainRepo.GetPointBottomRight();
+            var pointTopLeft = DesignerBinFileRepo.GetPointTopLeft();
+            var pointBottomRight = DesignerBinFileRepo.GetPointBottomRight();
             var xFactor = svgWidth / (pointBottomRight.X - pointTopLeft.X);
             var yFactor = svgHeight / (pointBottomRight.Y - pointTopLeft.Y);
 
 
-            var pipeList = MainRepo.GetPipeList();
+            var pipeList = DesignerBinFileRepo.GetPipeList();
             pipeList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
             //var linkMyList = pipeList.Select(o => new LinkMy
             //{
@@ -149,7 +149,8 @@ namespace WpfApplication1.Ui.Designer
                     .ToList()
                     ;
 
-            var junctionList = MainRepo.GetJunctionList();
+            var junctionList = DesignerBinFileRepo.GetJunctionList();
+ 
             //junctionList.ForEach(p => { p.Geometry[0].X = (p.Geometry[0].X - pointTopLeft.X) * xFactor + margin; p.Geometry[0].Y = (pointBottomRight.Y - p.Geometry[0].Y) * yFactor + margin; });
             junctionList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
             var objMyList = junctionList.Select(j => new ObjMy
@@ -163,7 +164,8 @@ namespace WpfApplication1.Ui.Designer
                 TypeId = 2
             });
 
-            var customerNodeList = MainRepo.GetCustomerNodeList();
+            var customerNodeList = DesignerBinFileRepo.GetCustomerNodeList();
+
             //customerNodeList.ForEach(p => { p.Geometry[0].X = (p.Geometry[0].X - pointTopLeft.X) * xFactor + margin; p.Geometry[0].Y = (pointBottomRight.Y - p.Geometry[0].Y) * yFactor + margin; });
             customerNodeList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
             var cnShpList = customerNodeList.Select(p => new CnShp

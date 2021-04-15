@@ -46,7 +46,7 @@ namespace WpfApplication1.Ui.Designer
         protected DomainObjectData _model;
         public ItemViewModel(int id)
         {
-            _model = MainRepo.GetItem(id);
+            _model = DesignerBinFileRepo.GetItem(id);
 
             Id = _model.ID;
             Name = _model.Label;
