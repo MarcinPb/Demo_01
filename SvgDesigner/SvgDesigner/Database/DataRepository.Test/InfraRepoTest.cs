@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Database.DataModel;
 using Database.DataRepository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -7,13 +8,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Database.DataRepository.Test
 {
     [TestClass]
-    public class UnitTest2
+    public class InfraRepoTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GetInfraDataTest()
         {
-            ImportedDataOutputLists importedDataOutputLists = ImportRepo.GetInfraDataLists();
+            InfraData infraData1 = InfraRepo.GetInfraData();
+            InfraData infraData2 = InfraRepo.GetInfraData();
         }
-
     }
 }

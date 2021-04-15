@@ -9,16 +9,16 @@ namespace Database.DataRepository.Test
     [TestClass]
     public class MainRepoTest2
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-            MainRepo.ImportInfraToDatabase();
-        }
+        //[TestMethod]
+        //public void TestMethod1()
+        //{
+        //    MainRepo.ImportInfraToDatabase();
+        //}
 
-        [TestMethod]
-        public void TestMethod2()
-        {
-            List<InfraField> list = MainRepo.GetInfraFieldList();
-        }
+        //[TestMethod]
+        //public void TestMethod2()
+        //{
+        //    List<InfraField> list = MainRepo.GetInfraFieldList();
+        //}
     }
 }

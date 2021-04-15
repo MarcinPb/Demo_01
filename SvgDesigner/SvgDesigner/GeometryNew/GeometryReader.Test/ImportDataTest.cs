@@ -19,8 +19,8 @@ namespace GeometryReader.Test
 
             var importer = new Importer();
             var importedBaseOutputLists = importer.ImportBase(_sqliteFile);
-            ImportRepo.InsertToInfraObjType(importedBaseOutputLists.InfraObjTypeList);
-            ImportRepo.InsertToInfraField(importedBaseOutputLists.ImportedFieldList);
+            InfraRepo.InsertToInfraObjType(importedBaseOutputLists.InfraObjTypeList);
+            InfraRepo.InsertToInfraField(importedBaseOutputLists.ImportedFieldList);
         }
 
 
@@ -28,21 +28,22 @@ namespace GeometryReader.Test
         [TestMethod]
         public void ImportInfraDataTest()
         {
-            ImportedDataInputLists importedDataInputLists = new ImportedDataInputLists()
-            {
-                InfraObjTypeList = ImportRepo.GetObjTypeList().ToList(),
-                InfraObjTypeFieldList = ImportRepo.GetObjTypeFieldList().ToList(),
-                InfraFieldList = ImportRepo.GetFieldList(),
-            };
+            //InfraConstantDataLists importedDataInputLists = new InfraConstantDataLists()
+            //{
+            //    InfraObjTypeList = InfraRepo.GetObjTypeList().ToList(),
+            //    InfraObjTypeFieldList = InfraRepo.GetObjTypeFieldList().ToList(),
+            //    InfraFieldList = InfraRepo.GetFieldList(),
+            //};
+            InfraConstantDataLists importedDataInputLists = InfraRepo.GetInfraConstantData();
 
             var importer = new Importer();
             importer.ProgressChanged += OnProgressChanged;
-            ImportedDataOutputLists importedDataOutputLists = importer.ImportData(_sqliteFile, importedDataInputLists);
+            InfraChangeableDataLists importedDataOutputLists = importer.ImportData(_sqliteFile, importedDataInputLists);
 
-            ImportRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);
-            ImportRepo.InsertToInfraObj(importedDataOutputLists.InfraObjList);
-            ImportRepo.InsertToInfraValue(importedDataOutputLists.InfraValueList);
-            ImportRepo.InsertToInfraGeometry(importedDataOutputLists.InfraGeometryList);
+            InfraRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);
+            InfraRepo.InsertToInfraObj(importedDataOutputLists.InfraObjList);
+            InfraRepo.InsertToInfraValue(importedDataOutputLists.InfraValueList);
+            InfraRepo.InsertToInfraGeometry(importedDataOutputLists.InfraGeometryList);
         }
 
         private void OnProgressChanged(object sender, ProgressEventArgs e)

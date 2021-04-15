@@ -11,29 +11,10 @@ using System.Threading.Tasks;
 
 namespace Database.DataRepository
 {
-    public class ImportRepo
+    public class InfraRepo
     {
-        public static void InsertToInfraObjType(IDictionary<int, string> dict)
-        {
-            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-            {
-                string sql;
 
-                sql = $@"
-                    DELETE FROM dbo.tbInfraObjType;
-                ";
-                cnn.Execute(sql);
-
-                sql = $@"
-                    INSERT INTO dbo.tbInfraObjType (
-                        ObjTypeId,  Name
-                    ) VALUES (
-                        @ObjTypeId, @Name
-                    );
-                ";
-                cnn.Execute(sql, dict.Select(x => new { ObjTypeId = x.Key, Name = x.Value }));
-            }
-        }
+        #region Fill constant data: tbInfraObjType, tbInfraObjTypeField, tbInfraField, tbInfraCategory, tbInfraUnitCorrection, (tbInfraFieldTemp) 
 
         public static void InsertToInfraObjType(List<InfraObjType> list)
         {
@@ -57,7 +38,6 @@ namespace Database.DataRepository
             }
         }
 
-
         public static void InsertToInfraField(List<ImportedField> list)
         {
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
@@ -69,6 +49,7 @@ namespace Database.DataRepository
                     DELETE FROM dbo.tbInfraField;
                     --DELETE FROM dbo.tbInfraObjTypeField;
                     DELETE FROM dbo.tbInfraCategory;
+                    DELETE FROM dbo.tbInfraUnitCorrection;
                 ";
                 cnn.Execute(sql);
 
@@ -142,15 +123,30 @@ namespace Database.DataRepository
                 ";
                 cnn.Execute(sql);
 
-                //sql = $@"    
-                //";
-                //cnn.Execute(sql);
-
-                //sql = $@"    
-                //";
-                //cnn.Execute(sql);
+                sql = $@" 
+                    INSERT INTO [dbo].[tbInfraUnitCorrection](
+                        [UnitCorrectionId]
+                       ,[Value]
+                       ,[Description]
+                    ) VALUES (
+                        1
+                       ,3.28084
+                       ,N'FootToMeter'
+                    );
+                    
+                    UPDATE [dbo].[tbInfraField] SET 
+                        [UnitCorrectionId] = 1
+                    WHERE [FieldId] IN (
+                        -334626530, 586, 588, 690, 192086302
+                    );
+                ";
+                cnn.Execute(sql);
             }
         }
+
+        #endregion
+
+        #region Fill changeable data: tbInfraObj, tbInfraValue, tbInfraGeometry, tbInfraZone 
 
         public static void InsertToInfraZone(List<InfraZone> list)
         {
@@ -210,60 +206,6 @@ namespace Database.DataRepository
             }
         }
 
-
-
-
-
-
-
-
-        public static IEnumerable<InfraObjType> GetObjTypeList()
-        {
-            IEnumerable<InfraObjType> list;
-
-            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-            {
-                string sql;
-
-                sql = $@"
-                    SELECT * FROM dbo.tbInfraObjType;
-                ";
-                list = cnn.Query<InfraObjType>(sql);
-            }
-            return list;
-        }
-
-        public static IEnumerable<InfraObjTypeField> GetObjTypeFieldList()
-        {
-            IEnumerable<InfraObjTypeField> list;
-            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-            {
-                string sql;
-
-                sql = $@"
-                    SELECT * FROM dbo.tbInfraObjTypeField;
-                ";
-                list = cnn.Query<InfraObjTypeField>(sql);
-            }
-
-            return list;
-        }
-        public static List<InfraField> GetFieldList()
-        {
-            List<InfraField> list;
-            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-            {
-                string sql;
-
-                sql = $@"
-                    SELECT * FROM dbo.tbInfraField;
-                ";
-                list = cnn.Query<InfraField>(sql).ToList();
-            }
-
-            return list;
-        }
-
         public static void InsertToInfraGeometry(List<InfraGeometry> infraGeometryList)
         {
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
@@ -308,8 +250,95 @@ namespace Database.DataRepository
             }
         }
 
+        #endregion
 
-        public static ImportedDataOutputLists GetInfraDataLists()
+
+        #region Get all data 
+
+        public static IEnumerable<InfraObjType> GetObjTypeList()
+        {
+            IEnumerable<InfraObjType> list;
+
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    SELECT * FROM dbo.tbInfraObjType;
+                ";
+                list = cnn.Query<InfraObjType>(sql);
+            }
+            return list;
+        }
+
+        public static IEnumerable<InfraObjTypeField> GetObjTypeFieldList()
+        {
+            IEnumerable<InfraObjTypeField> list;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    SELECT * FROM dbo.tbInfraObjTypeField;
+                ";
+                list = cnn.Query<InfraObjTypeField>(sql);
+            }
+
+            return list;
+        }
+
+        public static List<InfraField> GetFieldList()
+        {
+            List<InfraField> list;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    SELECT * FROM dbo.tbInfraField;
+                ";
+                list = cnn.Query<InfraField>(sql).ToList();
+            }
+
+            return list;
+        }
+
+        public static InfraConstantDataLists GetInfraConstantData()
+        {
+            List<InfraObjType> infraObjTypeList;
+            List<InfraObjTypeField> infraObjTypeFieldList;
+            List<InfraField> infraFieldList;
+            List<InfraUnitCorrection> infraUnitCorrectionList;
+
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"SELECT * FROM dbo.tbInfraObjType;";
+                infraObjTypeList = cnn.Query<InfraObjType>(sql).ToList();
+
+                sql = $@"SELECT * FROM dbo.tbInfraObjTypeField;";
+                infraObjTypeFieldList = cnn.Query<InfraObjTypeField>(sql).ToList();
+
+                sql = $@"SELECT * FROM dbo.tbInfraField;";
+                infraFieldList = cnn.Query<InfraField>(sql).ToList();
+
+                sql = $@"SELECT * FROM dbo.tbInfraUnitCorrection;";
+                infraUnitCorrectionList = cnn.Query<InfraUnitCorrection>(sql).ToList();
+            }
+
+            InfraConstantDataLists result = new InfraConstantDataLists
+            {
+                InfraObjTypeList = infraObjTypeList,
+                InfraObjTypeFieldList = infraObjTypeFieldList,
+                InfraFieldList = infraFieldList,
+                InfraUnitCorrectionList = infraUnitCorrectionList
+            };
+
+            return result;
+        }
+
+        public static InfraChangeableDataLists GetInfraChangableData()
         {
             List<InfraObj> infraObjList;
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
@@ -355,7 +384,7 @@ namespace Database.DataRepository
                 zoneDict = cnn.Query<InfraZone>(sql).ToList();
             }
 
-            ImportedDataOutputLists importedDataOutputLists = new ImportedDataOutputLists
+            InfraChangeableDataLists importedDataOutputLists = new InfraChangeableDataLists
             {
                 InfraObjList = infraObjList,
                 InfraValueList = infraValueList,
@@ -365,6 +394,24 @@ namespace Database.DataRepository
 
             return importedDataOutputLists;
         }
+
+        private static InfraData _infraData;
+
+        public static InfraData GetInfraData()
+        {
+            if (_infraData == null)
+            {
+                InfraData infraData = new InfraData();
+                infraData.InfraConstantData = GetInfraConstantData();
+                infraData.InfraChangeableData = GetInfraChangableData();
+                infraData.Recalculate();
+
+                _infraData = infraData;
+            }
+            return _infraData;
+        }
+
+        #endregion
 
         private static string GetConnectionString(string name = "WaterInfra_5_ConnStr")
         {

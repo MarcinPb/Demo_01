@@ -74,7 +74,7 @@ namespace Database.DataRepository
         }
 
 
-
+        /*
         #region Database WaterInfra_5
         private static string GetConnectionString(string name = "DapperDB")
         {
@@ -265,6 +265,6 @@ namespace Database.DataRepository
 
         #endregion
 
-
+        */
     }
 }

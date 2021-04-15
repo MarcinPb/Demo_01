@@ -38,7 +38,8 @@ namespace GeometryReader
                     var manager1 = domainDataSet.FieldManager;
                     // Get list suported fields for a particular objectTypeId. 
                     IEnumerable<IField> supportedFields = manager.SupportedFields().Cast<IField>();
-                    supportedFieldDict.AddRange(supportedFields.Select(x => new ImportedField() {
+                    supportedFieldDict.AddRange(supportedFields.Select(x => new ImportedField()
+                    {
                         Id = x.Id,
                         ObjTypeId = objectType.ObjTypeId,
                         Name = x.Name,
@@ -55,7 +56,7 @@ namespace GeometryReader
             return new ImportedBaseOutputLists() { InfraObjTypeList = objectTypeDict, ImportedFieldList = supportedFieldDict };
         }
 
-        public ImportedDataOutputLists ImportData(string fileName, ImportedDataInputLists importedDataInputLists)
+        public InfraChangeableDataLists ImportData(string fileName, InfraConstantDataLists importedDataInputLists)
         {
             using (DomainDataSetProxy domainDataSetProxy = new DomainDataSetProxy(fileName))
             {
@@ -68,7 +69,7 @@ namespace GeometryReader
 
                 // Zone list
                 IdahoDomainDataSet idahoDomainDataSet = (IdahoDomainDataSet)domainDataSet;
-                List<InfraZone> zoneDict = idahoDomainDataSet.ZoneElementManager.Elements().Cast<ModelingElementBase>().Select(x => new InfraZone {ZoneId= x.Id, Name = x.Label }).ToList();
+                List<InfraZone> zoneDict = idahoDomainDataSet.ZoneElementManager.Elements().Cast<ModelingElementBase>().Select(x => new InfraZone { ZoneId = x.Id, Name = x.Label }).ToList();
 
 
                 // InfraObj list
@@ -101,7 +102,7 @@ namespace GeometryReader
                         var fieldList = infraFieldList.Where(x => infraObjTypeFieldList.Where(y => y.ObjTypeId == objType.ObjTypeId).Any(y => x.FieldId == y.FieldId));
                         foreach (var field in fieldList)
                         {
-                            var supportedField = supportedFields.FirstOrDefault(x => x.Id==field.FieldId);
+                            var supportedField = supportedFields.FirstOrDefault(x => x.Id == field.FieldId);
                             var infraValue = new InfraValue
                             {
                                 ValueId = infraValueList.Count + 1,
@@ -151,7 +152,7 @@ namespace GeometryReader
                 OnInnerProgressChanged(1);
                 OnProgressChanged(1, $"Successfully imported {infraObjList.Count} objects, {infraValueList.Count} fields, {infraGeometryList.Count} geometries and {zoneDict.Count} zones.");
 
-                ImportedDataOutputLists importedDataOutputLists = new ImportedDataOutputLists
+                InfraChangeableDataLists importedDataOutputLists = new InfraChangeableDataLists
                 {
                     InfraObjList = infraObjList,
                     InfraValueList = infraValueList,

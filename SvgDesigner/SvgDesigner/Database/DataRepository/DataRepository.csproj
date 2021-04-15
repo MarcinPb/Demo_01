@@ -42,7 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImportRepo.cs" />
+    <Compile Include="InfraData.cs" />
+    <Compile Include="InfraRepo.cs" />
     <Compile Include="MainRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
