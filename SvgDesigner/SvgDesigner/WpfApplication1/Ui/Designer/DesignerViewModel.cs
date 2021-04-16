@@ -89,14 +89,15 @@ namespace WpfApplication1.Ui.Designer
             CanvasWidth = svgWidth + 2 * margin;
             CanvasHeight = svgHeight + 2 * margin;
 
-            var pointTopLeft = new DesignerBinFileRepo().GetPointTopLeft();
-            var pointBottomRight = new DesignerBinFileRepo().GetPointBottomRight();
+            var pointTopLeft = new DesignerInfraRepo().GetPointTopLeft();
+            var pointBottomRight = new DesignerInfraRepo().GetPointBottomRight();
             var xFactor = svgWidth / (pointBottomRight.X - pointTopLeft.X);
             var yFactor = svgHeight / (pointBottomRight.Y - pointTopLeft.Y);
 
 
             //var pipeList = DesignerBinFileRepo.GetPipeList();
-            var pipeList = new DesignerBinFileRepo().GetPipeList();
+            //var pipeList = new DesignerBinFileRepo().GetPipeList();
+            var pipeList = new DesignerInfraRepo().GetPipeList();
 
             pipeList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
             var linkList = pipeList
@@ -138,7 +139,7 @@ namespace WpfApplication1.Ui.Designer
                     .ToList()
                     ;
 
-            var junctionList = new DesignerBinFileRepo().GetJunctionList();
+            var junctionList = new DesignerInfraRepo().GetJunctionList();
  
             //junctionList.ForEach(p => { p.Geometry[0].X = (p.Geometry[0].X - pointTopLeft.X) * xFactor + margin; p.Geometry[0].Y = (pointBottomRight.Y - p.Geometry[0].Y) * yFactor + margin; });
             junctionList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
@@ -154,8 +155,8 @@ namespace WpfApplication1.Ui.Designer
             });
 
             //var customerNodeList = DesignerBinFileRepo.GetCustomerNodeList();
-            var customerNodeList = new DesignerBinFileRepo().GetCustomerNodeList();
-            //var customerNodeList = new DesignerInfraRepo().GetCustomerNodeList();
+            //var customerNodeList_1 = new DesignerBinFileRepo().GetCustomerNodeList();
+            var customerNodeList = new DesignerInfraRepo().GetCustomerNodeList();
 
             //customerNodeList.ForEach(p => { p.Geometry[0].X = (p.Geometry[0].X - pointTopLeft.X) * xFactor + margin; p.Geometry[0].Y = (pointBottomRight.Y - p.Geometry[0].Y) * yFactor + margin; });
             customerNodeList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
@@ -178,15 +179,13 @@ namespace WpfApplication1.Ui.Designer
 
             var custNodeLineList = customerNodeList.Select(p => new CnLineShp
             {
-                //Id = o.ID,
-                //Name = o.Label,
                 X = p.Geometry[0].X,
                 Y = p.Geometry[0].Y,
 
-                //X2 = o.Geometry.Last().X - o.Geometry[0].X,
-                //Y2 = o.Geometry.Last().Y - o.Geometry[0].Y,
-                X2 = junctionList.FirstOrDefault(x => x.Label == (string)p.Fields["Demand_AssociatedElement"]).Geometry[0].X - p.Geometry[0].X,
-                Y2 = junctionList.FirstOrDefault(x => x.Label == (string)p.Fields["Demand_AssociatedElement"]).Geometry[0].Y - p.Geometry[0].Y,
+                //X2 = junctionList.FirstOrDefault(x => x.Label == (string)p.Fields["Demand_AssociatedElement"]).Geometry[0].X - p.Geometry[0].X,
+                //Y2 = junctionList.FirstOrDefault(x => x.Label == (string)p.Fields["Demand_AssociatedElement"]).Geometry[0].Y - p.Geometry[0].Y,
+                X2 = junctionList.FirstOrDefault(x => x.ID == (int)p.Fields["Demand_AssociatedElement"]).Geometry[0].X - p.Geometry[0].X,
+                Y2 = junctionList.FirstOrDefault(x => x.ID == (int)p.Fields["Demand_AssociatedElement"]).Geometry[0].Y - p.Geometry[0].Y,
 
                 Path = new List<Point2D>(),
                 TypeId = 0,

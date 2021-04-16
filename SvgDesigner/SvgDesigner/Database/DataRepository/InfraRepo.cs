@@ -253,55 +253,55 @@ namespace Database.DataRepository
         #endregion
 
 
-        #region Get all data 
+        #region Get data: GetInfraConstantData(), GetInfraData()
 
-        public static IEnumerable<InfraObjType> GetObjTypeList()
-        {
-            IEnumerable<InfraObjType> list;
+        //public static IEnumerable<InfraObjType> GetObjTypeList()
+        //{
+        //    IEnumerable<InfraObjType> list;
 
-            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-            {
-                string sql;
+        //    using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+        //    {
+        //        string sql;
 
-                sql = $@"
-                    SELECT * FROM dbo.tbInfraObjType;
-                ";
-                list = cnn.Query<InfraObjType>(sql);
-            }
-            return list;
-        }
+        //        sql = $@"
+        //            SELECT * FROM dbo.tbInfraObjType;
+        //        ";
+        //        list = cnn.Query<InfraObjType>(sql);
+        //    }
+        //    return list;
+        //}
 
-        public static IEnumerable<InfraObjTypeField> GetObjTypeFieldList()
-        {
-            IEnumerable<InfraObjTypeField> list;
-            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-            {
-                string sql;
+        //public static IEnumerable<InfraObjTypeField> GetObjTypeFieldList()
+        //{
+        //    IEnumerable<InfraObjTypeField> list;
+        //    using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+        //    {
+        //        string sql;
 
-                sql = $@"
-                    SELECT * FROM dbo.tbInfraObjTypeField;
-                ";
-                list = cnn.Query<InfraObjTypeField>(sql);
-            }
+        //        sql = $@"
+        //            SELECT * FROM dbo.tbInfraObjTypeField;
+        //        ";
+        //        list = cnn.Query<InfraObjTypeField>(sql);
+        //    }
 
-            return list;
-        }
+        //    return list;
+        //}
 
-        public static List<InfraField> GetFieldList()
-        {
-            List<InfraField> list;
-            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-            {
-                string sql;
+        //public static List<InfraField> GetFieldList()
+        //{
+        //    List<InfraField> list;
+        //    using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+        //    {
+        //        string sql;
 
-                sql = $@"
-                    SELECT * FROM dbo.tbInfraField;
-                ";
-                list = cnn.Query<InfraField>(sql).ToList();
-            }
+        //        sql = $@"
+        //            SELECT * FROM dbo.tbInfraField;
+        //        ";
+        //        list = cnn.Query<InfraField>(sql).ToList();
+        //    }
 
-            return list;
-        }
+        //    return list;
+        //}
 
         public static InfraConstantDataLists GetInfraConstantData()
         {
@@ -338,7 +338,7 @@ namespace Database.DataRepository
             return result;
         }
 
-        public static InfraChangeableDataLists GetInfraChangableData()
+        private static InfraChangeableDataLists GetInfraChangableData()
         {
             List<InfraObj> infraObjList;
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
@@ -417,5 +417,6 @@ namespace Database.DataRepository
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
+
     }
 }
