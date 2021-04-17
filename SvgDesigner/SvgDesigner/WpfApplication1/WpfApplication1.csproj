@@ -81,6 +81,7 @@
     <Compile Include="Controls\FilteredDataGridCtrl.cs" />
     <Compile Include="Controls\UiHelper.cs" />
     <Compile Include="Controls\TextHeaderToBooleanConverter.cs" />
+    <Compile Include="Repo\DesignerRepo.cs" />
     <Compile Include="ShapeModel\CnShp.cs" />
     <Compile Include="ShapeModel\CnLineShp.cs" />
     <Compile Include="Ui\Designer\DesignerViewModel.cs" />
@@ -179,6 +180,7 @@
     <Content Include="Files\Wg\MyFile.bin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="_Diagrams\ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -47,74 +47,73 @@ namespace Database.DataRepository
 
         private static List<DomainObjectData> GetDomainObjectDataList()
         {
-            //List<DomainObjectData> domainObjects = new List<DomainObjectData>();
-
             InfraData infraData = InfraRepo.GetInfraData();
-            //var valueWithTypeList = infraData.InfraChangeableData.InfraObjList
-            //    .Join(
-            //        infraData.InfraChangeableData.InfraValueList,
-            //        l => l.ObjId,
-            //        r => r.ObjId,
-            //        (l, r) => new { l.ObjTypeId, InfraValue = r }
-            //    );
 
-            var infraValueLabelList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == 2).ToList();         // Label
-            //var infraValueXxList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == 192086302).ToList();    // X
-            //var infraValueYyList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == -334626530).ToList();   // Y
-            var infraValueAssociatedList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == 735).ToList();  // Demand_AssociatedElement
+            var infraValueLabelList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == 2).ToList();                 // Label
+            var infraValueIsActiveList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == 612).ToList();            // HMIActiveTopologyIsActive
+            var infraValueZoneIdList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == 614).ToList();              // Physical_Zone
+            var infraValueAssociatedList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == 735).ToList();          // Demand_AssociatedElement (for Customer Meter)
+            var infraValueTargerList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == 1002).ToList();             // Scada_TargetElement (for SCADA Element)
 
-            var infraValueGeometryList = infraData.InfraChangeableData.InfraValueList                                           // Geometry
+            var infraValueGeometryList = infraData.InfraChangeableData.InfraValueList                                                   // Geometry
                 .Join(
                     infraData.InfraChangeableData.InfraGeometryList,
                     l => l.ValueId,
                     r => r.ValueId,
                     (l, r) => new { l.ObjId, r.OrderNo, r.Xp, r.Yp }
                 )
-                .ToList();         
+                .ToList();
 
             var domainObjects = infraData.InfraChangeableData.InfraObjList
                 .Join(
                     infraValueLabelList,
                     l => l.ObjId,
                     r => r.ObjId,
-                    (l, r) => new { ObjTypeId = l.ObjTypeId, ObjId = l.ObjId, Label = r.StringValue }
+                    (l, r) => new { l.ObjTypeId, l.ObjId, Label = r.StringValue }
                 )
-                //.Join(
-                //    infraValueXxList,
-                //    l => l.ObjId,
-                //    r => r.ObjId,
-                //    (l, r) => new { ObjTypeId = l.ObjTypeId, ObjId = l.ObjId, Label = l.Label, X = r.FloatValue }
-                //)
-                //.Join(
-                //    infraValueYyList,
-                //    l => l.ObjId,
-                //    r => r.ObjId,
-                //    (l, r) => new { ObjTypeId = l.ObjTypeId, ObjId = l.ObjId, Label = l.Label,X = l.X, Y = r.FloatValue }
-                //)
+                .Join(
+                    infraValueIsActiveList,
+                    l => l.ObjId,
+                    r => r.ObjId,
+                    (l, r) => new { l.ObjTypeId, l.ObjId, l.Label, IsActive = r.BooleanValue }
+                )
+                .GroupJoin(
+                    infraValueZoneIdList,
+                    l => l.ObjId,
+                    r => r.ObjId,
+                    (f, bs) => new { f.ObjTypeId, f.ObjId, f.Label, f.IsActive, ZoneId = bs?.SingleOrDefault()?.IntValue }
+                )
                 .GroupJoin(
                     infraValueAssociatedList,
                     l => l.ObjId,
                     r => r.ObjId,
-                    //(f, bs) => new { ObjTypeId = f.ObjTypeId, ObjId = f.ObjId, Label = f.Label, X = f.X, Y = f.Y, AssociatedObjId = bs?.SingleOrDefault()?.IntValue }
-                    (f, bs) => new { ObjTypeId = f.ObjTypeId, ObjId = f.ObjId, Label = f.Label, AssociatedObjId = bs?.SingleOrDefault()?.IntValue }
+                    (f, bs) => new { f.ObjTypeId, f.ObjId, f.Label, f.IsActive, f.ZoneId, AssociatedId = bs?.SingleOrDefault()?.IntValue }
                 )
-                //.Join(
-                //    infraValueAssociatedList,
-                //    l => l.ObjId,
-                //    r => r.ObjId,
-                //    (l, r) => new { ObjTypeId = l.ObjTypeId, ObjId = l.ObjId, Label = l.Label, X = l.X, Y = l.Y, AssociatedObjId = r.IntValue }
-                //)
+                .GroupJoin(
+                    infraValueTargerList,
+                    l => l.ObjId,
+                    r => r.ObjId,
+                    (f, bs) => new { f.ObjTypeId, f.ObjId, f.Label, f.IsActive, f.ZoneId, f.AssociatedId, TargetId = bs?.SingleOrDefault()?.IntValue }
+                )
                 .Select(x => new DomainObjectData()
                 {
                     ID = x.ObjId,
-                    ObjectType = (ObjectTypes)x.ObjTypeId,
+                    ObjTypeId = x.ObjTypeId,
                     Label = x.Label,
-                    Geometry = infraValueGeometryList.Where(g => g.ObjId == x.ObjId).OrderBy(g => g.OrderNo).Select(g => new Point2D((double)g.Xp, (double)g.Yp)).ToList(),
-                    Fields = GetFieldDict(x.AssociatedObjId),
-                })
-                .ToList()
-                ;
+                    IsActive = (bool)x.IsActive,
+                    ZoneId = x.ZoneId,
+                    AssociatedId = x.AssociatedId,
+                    TargetId = x.TargetId,
 
+                    Geometry = infraValueGeometryList.Where(g => g.ObjId == x.ObjId).OrderBy(g => g.OrderNo).Select(g => new Point2D((double)g.Xp, (double)g.Yp)).ToList(),
+                                 
+                    ObjectType = (ObjectTypes)x.ObjTypeId,
+                    Zone = x.ZoneId.ToString(),
+                    Fields = GetFieldDict(x.AssociatedId),
+                })
+                .ToList();
+
+            domainObjects.ForEach(x => { x.Xp = x.Geometry[0].X; x.Yp = x.Geometry[0].Y; });
             return domainObjects;
         }
 

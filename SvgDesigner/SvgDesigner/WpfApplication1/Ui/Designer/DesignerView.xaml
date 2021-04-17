@@ -105,20 +105,17 @@
                         <Image Source="..\..\Resources\PointerHS.png"  />
                     </Button>
                     <Separator/>
-                    <!--<Button Name="CmdMoveHorizontally" ToolTip="Move Horizontally" Command="{Binding MoveCommand}">
-                        <Image Source="..\..\Resources\DeleteHS.png"  />
-                    </Button>-->
-                    <Button Name="MoveFirst" ToolTip="Move First" Command="{Binding AddCommand}"  >
+                    <Button Name="MoveFirst" ToolTip="Move First" Command="{Binding MoveCommand}"  >
                         <Image Source="..\..\Resources\DataContainer_MoveFirstHS.png"  />
                     </Button>
-                    <Button Name="MovePrevious" ToolTip="Move Previous" Command="{Binding AddCommand}"  >
+                    <Button Name="MovePrevious" ToolTip="Move Previous" Command="{Binding MoveCommand}"  >
                         <Image Source="..\..\Resources\DataContainer_MovePreviousHS.png"  />
                     </Button>
                     <xctk:DateTimePicker Grid.Row="1" Grid.Column="4" Margin="7 0 0 0" Value="{Binding StartDate}" Format="Custom" FormatString="dd-MM-yyyy HH:mm" />
-                    <Button Name="MoveNext" ToolTip="Move Next" Command="{Binding AddCommand}"  >
+                    <Button Name="MoveNext" ToolTip="Move Next" Command="{Binding MoveCommand}"  >
                         <Image Source="..\..\Resources\DataContainer_MoveNextHS.png"  />
                     </Button>
-                    <Button Name="MoveLast" ToolTip="Move Last" Command="{Binding AddCommand}"  >
+                    <Button Name="MoveLast" ToolTip="Move Last" Command="{Binding MoveCommand}"  >
                         <Image Source="..\..\Resources\DataContainer_MoveLastHS.png"  />
                     </Button>
                 </ToolBar>
@@ -168,7 +165,7 @@
                                         <Ellipse Fill="Transparent" StrokeThickness="0.25" Width="{Binding Width}" Height="{Binding Height}" Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
                                     </DataTemplate>
                                     <DataTemplate DataType="{x:Type shapeModel:CnShp}">
-                                        <Rectangle Fill="LimeGreen" StrokeThickness="0.05" Width="{Binding Width}" Height="{Binding Height}" Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
+                                        <Rectangle Fill="LimeGreen" StrokeThickness="0.05" Opacity="0.5"  Width="{Binding Width}" Height="{Binding Height}" Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
                                     </DataTemplate>
                                     <DataTemplate DataType="{x:Type shapeModel:CnLineShp}">
                                          <!--<Line Fill="Transparent" StrokeThickness="0.02" X1="{Binding X1}" Y1="{Binding Y1}" X2="{Binding X2}" Y2="{Binding Y2}" Stroke="Black" />-->

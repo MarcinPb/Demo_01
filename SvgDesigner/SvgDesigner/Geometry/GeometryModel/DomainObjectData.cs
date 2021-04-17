@@ -21,5 +21,13 @@ namespace GeometryModel
         {
             return $"{Label} ({ID})";
         }
+
+        public int ObjTypeId { get; set; }
+        public double Xp { get; set; }
+        public double Yp { get; set; }
+        public int? ZoneId { get; set; }
+        public int? AssociatedId { get; set; }
+        public int? TargetId { get; set; }
+
     }
 }
