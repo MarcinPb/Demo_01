@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WpfApplication1.ShapeModel
 {
-    public class CnLineShp : Shp
+    public class ConnectionShp : Shp
     {
         //public uint ConnTypeId { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace WpfApplication1.ShapeModel
 {
-    public class ObjMy : Shp
+    public class EllipseShp : Shp
     {
         public double Width { get; set; }
         public double Height { get; set; }

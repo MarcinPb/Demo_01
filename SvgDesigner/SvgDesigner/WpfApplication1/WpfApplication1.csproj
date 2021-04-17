@@ -81,12 +81,13 @@
     <Compile Include="Controls\FilteredDataGridCtrl.cs" />
     <Compile Include="Controls\UiHelper.cs" />
     <Compile Include="Controls\TextHeaderToBooleanConverter.cs" />
+    <Compile Include="Model\DesignerObj.cs" />
     <Compile Include="Repo\DesignerRepo.cs" />
-    <Compile Include="ShapeModel\CnShp.cs" />
-    <Compile Include="ShapeModel\CnLineShp.cs" />
+    <Compile Include="ShapeModel\RectangleShp.cs" />
+    <Compile Include="ShapeModel\ConnectionShp.cs" />
     <Compile Include="Ui\Designer\DesignerViewModel.cs" />
-    <Compile Include="ShapeModel\LinkMy.cs" />
-    <Compile Include="ShapeModel\ObjMy.cs" />
+    <Compile Include="ShapeModel\LineShp.cs" />
+    <Compile Include="ShapeModel\EllipseShp.cs" />
     <Compile Include="ShapeModel\Shp.cs" />
     <Compile Include="Ui\Designer\DesignerView.xaml.cs">
       <DependentUpon>DesignerView.xaml</DependentUpon>

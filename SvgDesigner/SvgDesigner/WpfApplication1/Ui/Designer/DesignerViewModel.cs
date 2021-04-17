@@ -31,7 +31,7 @@ namespace WpfApplication1.Ui.Designer
         }
         private void OnAddExecute()
         {
-            ObjList.Add(new ObjMy() { Id = 9, X = 210, Y = 30, Width = 10, Height = 10, TypeId = 2 });
+            ObjList.Add(new EllipseShp() { Id = 9, X = 210, Y = 30, Width = 10, Height = 10, TypeId = 2 });
         }
 
         private ICommand _moveCommand;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApplication1.ShapeModel
 {
-    public class CnShp : Shp
+    public class RectangleShp : Shp
     {
         public double Width { get; set; }
         public double Height { get; set; }

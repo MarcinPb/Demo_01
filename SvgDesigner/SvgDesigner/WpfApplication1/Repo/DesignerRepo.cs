@@ -46,7 +46,7 @@ namespace WpfApplication1.Repo
                     (l, r) => new { l, r }
                 )
                 .Where(x => x.l.Id == x.r.Id)
-                .Select(o => new LinkMy
+                .Select(o => new LineShp
                 {
                     Id = o.l.Id,
                     Name = o.l.Name,
@@ -65,7 +65,7 @@ namespace WpfApplication1.Repo
 
             var junctionList = new DesignerRepo().GetJunctionList();
             junctionList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
-            var objMyList = junctionList.Select(j => new ObjMy
+            var objMyList = junctionList.Select(j => new EllipseShp
             {
                 Id = j.ID,
                 Name = j.Label,
@@ -81,7 +81,7 @@ namespace WpfApplication1.Repo
 
             var customerNodeList = new DesignerRepo().GetCustomerNodeList();
             customerNodeList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
-            var cnShpList = customerNodeList.Select(p => new CnShp
+            var cnShpList = customerNodeList.Select(p => new RectangleShp
             {
                 Id = p.ID,
                 X = p.Geometry[0].X - dotR,
@@ -94,7 +94,7 @@ namespace WpfApplication1.Repo
 
 
 
-            var custNodeLineList = customerNodeList.Select(p => new CnLineShp
+            var custNodeLineList = customerNodeList.Select(p => new ConnectionShp
             {
                 X = p.Geometry[0].X,
                 Y = p.Geometry[0].Y,

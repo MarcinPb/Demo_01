@@ -104,15 +104,15 @@ namespace WpfApplication1
 
         private void OnShpReceived(Shp shp)
         {
-            if (shp is LinkMy)
+            if (shp is LineShp)
             {
                 PropertyGridViewModel = new Ui.Designer.Pipe.EditedViewModel(shp.Id);
             }
-            else if (shp is ObjMy)
+            else if (shp is EllipseShp)
             {
                 PropertyGridViewModel = new Ui.Designer.Junction.EditedViewModel(shp.Id);
             }
-            else if (shp is CnShp)
+            else if (shp is RectangleShp)
             {
                 PropertyGridViewModel = new Ui.Designer.CustomerNode.EditedViewModel(shp.Id);
             }
