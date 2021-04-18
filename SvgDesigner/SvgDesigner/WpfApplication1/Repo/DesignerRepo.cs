@@ -11,17 +11,17 @@ namespace WpfApplication1.Repo
 {
     public class DesignerRepo
     {
-        public List<Shp> GetShpList(double svgWidth, double svgHeight, double margin)
+        public List<Shp> GetShpList(double svgWidth, double svgHeight, double margin, int? zoneId = null)
         {
             const double dotR = 0.2;
 
-            var pointTopLeft = new DesignerRepo().GetPointTopLeft();
-            var pointBottomRight = new DesignerRepo().GetPointBottomRight();
+            var pointTopLeft = GetPointTopLeft();
+            var pointBottomRight = GetPointBottomRight();
             var xFactor = svgWidth / (pointBottomRight.X - pointTopLeft.X);
             var yFactor = svgHeight / (pointBottomRight.Y - pointTopLeft.Y);
 
 
-            var pipeList = new DesignerRepo().GetPipeList();
+            var pipeList = GetPipeList();
             pipeList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
             var linkList = pipeList
                 .SelectMany(x => x.Geometry, (p, c) => new
@@ -63,7 +63,7 @@ namespace WpfApplication1.Repo
 
 
 
-            var junctionList = new DesignerRepo().GetJunctionList();
+            var junctionList = GetJunctionList();
             junctionList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
             var objMyList = junctionList.Select(j => new EllipseShp
             {
@@ -79,7 +79,7 @@ namespace WpfApplication1.Repo
 
 
 
-            var customerNodeList = new DesignerRepo().GetCustomerNodeList();
+            var customerNodeList = GetCustomerNodeList();
             customerNodeList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
             var cnShpList = customerNodeList.Select(p => new RectangleShp
             {

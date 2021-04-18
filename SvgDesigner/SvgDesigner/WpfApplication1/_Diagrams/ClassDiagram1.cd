@@ -1,43 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="WpfApplication1.ShapeModel.ConnectionShp">
-    <Position X="2.75" Y="8.25" Width="1.5" />
+    <Position X="7" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\ShapeModel\ConnectionShp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WpfApplication1.ShapeModel.RectangleShp">
-    <Position X="0.75" Y="8.25" Width="1.5" />
+    <Position X="3" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\ShapeModel\RectangleShp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WpfApplication1.ShapeModel.LineShp">
-    <Position X="6.75" Y="8.25" Width="1.5" />
+    <Position X="5" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\ShapeModel\LineShp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WpfApplication1.ShapeModel.EllipseShp">
-    <Position X="4.75" Y="8.25" Width="1.5" />
+    <Position X="1" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\ShapeModel\EllipseShp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WpfApplication1.ShapeModel.Shp">
-    <Position X="3.75" Y="4.75" Width="2" />
+    <Position X="3.75" Y="3.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAEAAAAAAQAAAAAAAAgAAAAAAAAYAA=</HashCode>
       <FileName>Model\ShapeModel\Shp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GeometryModel.DomainObjectData">
-    <Position X="3.75" Y="0.5" Width="2" />
+    <Position X="6.25" Y="3.5" Width="2" />
     <TypeIdentifier />
+  </Class>
+  <Class Name="WpfApplication1.Model.DesignerObj">
+    <Position X="1.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>YAAAAAACEAAAAAAAEAQAAAAAAAAAQAAAAAAEAAABgAA=</HashCode>
+      <FileName>Model\DesignerObj.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
