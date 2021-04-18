@@ -102,7 +102,6 @@ namespace WpfApplication1.Repo
                 X2 = junctionList.FirstOrDefault(x => x.ID == p.AssociatedId).Geometry[0].X - p.Geometry[0].X,
                 Y2 = junctionList.FirstOrDefault(x => x.ID == p.AssociatedId).Geometry[0].Y - p.Geometry[0].Y,
 
-                Path = new List<Point2D>(),
                 TypeId = 0,
             }).ToList();
 

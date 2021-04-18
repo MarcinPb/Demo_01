@@ -157,14 +157,14 @@
                                     </Style>
                                 </ItemsControl.ItemContainerStyle>
                                 <ItemsControl.Resources>
-                                    <DataTemplate DataType="{x:Type shapeModel:LineShp}">
-                                        <Line Fill="Transparent" StrokeThickness="0.25" X1="0" Y1="0" X2="{Binding X2}" Y2="{Binding Y2}" Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
-                                    </DataTemplate>
                                     <DataTemplate DataType="{x:Type shapeModel:EllipseShp}">
                                         <Ellipse Fill="Transparent" StrokeThickness="0.25" Width="{Binding Width}" Height="{Binding Height}" Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
                                     </DataTemplate>
                                     <DataTemplate DataType="{x:Type shapeModel:RectangleShp}">
                                         <Rectangle Fill="LimeGreen" StrokeThickness="0.05" Opacity="0.5"  Width="{Binding Width}" Height="{Binding Height}" Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
+                                    </DataTemplate>
+                                    <DataTemplate DataType="{x:Type shapeModel:LineShp}">
+                                        <Line Fill="Transparent" StrokeThickness="0.25" X1="0" Y1="0" X2="{Binding X2}" Y2="{Binding Y2}" Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
                                     </DataTemplate>
                                     <DataTemplate DataType="{x:Type shapeModel:ConnectionShp}">
                                         <Line Fill="Transparent" StrokeThickness="0.02" X1="0" Y1="0" X2="{Binding X2}" Y2="{Binding Y2}" Stroke="Black" />

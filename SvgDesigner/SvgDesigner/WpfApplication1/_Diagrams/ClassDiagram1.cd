@@ -1,38 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="WpfApplication1.ShapeModel.CnLineShp">
+  <Class Name="WpfApplication1.ShapeModel.ConnectionShp">
     <Position X="2.75" Y="8.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAIAAAADAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ShapeModel\CnLineShp.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\ShapeModel\ConnectionShp.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WpfApplication1.ShapeModel.CnShp">
+  <Class Name="WpfApplication1.ShapeModel.RectangleShp">
     <Position X="0.75" Y="8.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAAAAAAADAEAAAIABAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ShapeModel\CnShp.cs</FileName>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\ShapeModel\RectangleShp.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WpfApplication1.ShapeModel.LinkMy">
+  <Class Name="WpfApplication1.ShapeModel.LineShp">
     <Position X="6.75" Y="8.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAIAAAADAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ShapeModel\LinkMy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\ShapeModel\LineShp.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WpfApplication1.ShapeModel.ObjMy">
+  <Class Name="WpfApplication1.ShapeModel.EllipseShp">
     <Position X="4.75" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ShapeModel\ObjMy.cs</FileName>
+      <FileName>Model\ShapeModel\EllipseShp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WpfApplication1.ShapeModel.Shp">
     <Position X="3.75" Y="4.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAEAAAAAAQAAAAAAAAgAAAAAAAAYAA=</HashCode>
-      <FileName>ShapeModel\Shp.cs</FileName>
+      <FileName>Model\ShapeModel\Shp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GeometryModel.DomainObjectData">

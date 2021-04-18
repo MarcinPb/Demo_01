@@ -4,7 +4,7 @@ using WpfApplication1.Utility;
 
 namespace WpfApplication1.ShapeModel
 {
-    public class Shp : DomainObjectData
+    public class Shp 
     {
         public Shp() { }
         public Shp(DomainObjectData domainObjectData) 

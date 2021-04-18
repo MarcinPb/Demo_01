@@ -83,12 +83,12 @@
     <Compile Include="Controls\TextHeaderToBooleanConverter.cs" />
     <Compile Include="Model\DesignerObj.cs" />
     <Compile Include="Repo\DesignerRepo.cs" />
-    <Compile Include="ShapeModel\RectangleShp.cs" />
-    <Compile Include="ShapeModel\ConnectionShp.cs" />
+    <Compile Include="Model\ShapeModel\RectangleShp.cs" />
+    <Compile Include="Model\ShapeModel\ConnectionShp.cs" />
     <Compile Include="Ui\Designer\DesignerViewModel.cs" />
-    <Compile Include="ShapeModel\LineShp.cs" />
-    <Compile Include="ShapeModel\EllipseShp.cs" />
-    <Compile Include="ShapeModel\Shp.cs" />
+    <Compile Include="Model\ShapeModel\LineShp.cs" />
+    <Compile Include="Model\ShapeModel\EllipseShp.cs" />
+    <Compile Include="Model\ShapeModel\Shp.cs" />
     <Compile Include="Ui\Designer\DesignerView.xaml.cs">
       <DependentUpon>DesignerView.xaml</DependentUpon>
     </Compile>

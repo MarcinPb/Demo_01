@@ -9,8 +9,5 @@ namespace WpfApplication1.ShapeModel
 
         public double X2 { get; set; }
         public double Y2 { get; set; }
-
-        public List<Point2D> Path { get; set; }
-
     }
 }
