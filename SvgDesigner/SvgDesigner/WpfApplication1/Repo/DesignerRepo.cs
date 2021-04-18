@@ -11,6 +11,9 @@ namespace WpfApplication1.Repo
 {
     public class DesignerRepo
     {
+        private static readonly List<DesignerObj> _designerObjList = GetDesignerObjList();
+
+
         public List<Shp> GetShpList(double svgWidth, double svgHeight, double margin, int? zoneId = null)
         {
             const double dotR = 0.2;
@@ -117,19 +120,71 @@ namespace WpfApplication1.Repo
             return result;
         }
 
-        private static readonly List<DesignerObj> _domainObjectDataList = GetDomainObjectDataList();
+        internal DesignerObj GetItem(int objId)
+        {
+            var item = _designerObjList.FirstOrDefault(x => x.ObjId == objId);
+            item.Fields = GetObjFieldValueList(objId);
+
+            return item;
+        }
+
+        public Dictionary<string, object> GetObjFieldValueList(int objId)
+        {
+            InfraData infraData = InfraRepo.GetInfraData();
+
+            var infraFieldList = infraData.InfraConstantData.InfraFieldList;
+            var infraValueList = infraData.InfraChangeableData.InfraValueList.Where(f => f.ObjId == objId);
+
+            Dictionary<string, object> dict = infraFieldList
+                .Join(
+                    infraValueList,
+                    l => l.FieldId,
+                    r => r.FieldId,
+                    (l, r) => new { Key = l.Name, Value = GetFieldValue(l, r) }
+                    )
+                .ToDictionary(x => x.Key, x => (object)x.Value);
+            return dict;
+        }
+
+        private object GetFieldValue(InfraField infraField, InfraValue infraValue)
+        {
+            object result = null; 
+            switch (infraField.DataTypeId)
+            {
+                case 1:
+                    result = infraValue.IntValue;
+                    break;
+                case 2:
+                    result = infraValue.FloatValue;
+                    break;
+                case 3:
+                case 4:
+                    result = infraValue.StringValue;
+                    break;
+                case 5:
+                    result = infraValue.DateTimeValue;
+                    break;
+                case 6:
+                    result = infraValue.BooleanValue;
+                    break;
+                default:
+                    result = null;
+                    break;
+            }
+            return result;
+        }
 
         private List<DesignerObj> GetJunctionList()
         {
-            return _domainObjectDataList.Where(f => f.ObjTypeId != 69 && f.ObjTypeId != 73).ToList();
+            return _designerObjList.Where(f => f.ObjTypeId != 69 && f.ObjTypeId != 73).ToList();
         }
         private List<DesignerObj> GetPipeList()
         {
-            return _domainObjectDataList.Where(f => f.ObjTypeId == 69).ToList();
+            return _designerObjList.Where(f => f.ObjTypeId == 69).ToList();
         }
         private List<DesignerObj> GetCustomerNodeList()
         {
-            return _domainObjectDataList.Where(f => f.ObjTypeId == 73).ToList();
+            return _designerObjList.Where(f => f.ObjTypeId == 73).ToList();
         }
 
         private Point2D GetPointTopLeft()
@@ -147,7 +202,7 @@ namespace WpfApplication1.Repo
             return new Point2D(xMax, yMax);
         }
 
-        private static List<DesignerObj> GetDomainObjectDataList()
+        private static List<DesignerObj> GetDesignerObjList()
         {
             InfraData infraData = InfraRepo.GetInfraData();
 

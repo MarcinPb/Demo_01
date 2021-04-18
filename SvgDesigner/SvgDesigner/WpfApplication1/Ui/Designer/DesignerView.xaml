@@ -165,6 +165,9 @@
                                     </DataTemplate>
                                     <DataTemplate DataType="{x:Type shapeModel:LineShp}">
                                         <Line Fill="Transparent" StrokeThickness="0.25" X1="0" Y1="0" X2="{Binding X2}" Y2="{Binding Y2}" Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
+                                        <!--
+                                        <Path Fill="Transparent" StrokeThickness="0.25" Data=""  Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
+                                        -->
                                     </DataTemplate>
                                     <DataTemplate DataType="{x:Type shapeModel:ConnectionShp}">
                                         <Line Fill="Transparent" StrokeThickness="0.02" X1="0" Y1="0" X2="{Binding X2}" Y2="{Binding Y2}" Stroke="Black" />

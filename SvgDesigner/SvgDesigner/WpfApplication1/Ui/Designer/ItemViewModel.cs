@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApplication1.Repo;
 using WpfApplication1.Utility;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
@@ -46,13 +47,12 @@ namespace WpfApplication1.Ui.Designer
         protected DesignerObj _model;
         public ItemViewModel(int id)
         {
-            //_model = new DesignerInfraRepo().GetItem(id);
+            _model = new DesignerRepo().GetItem(id);
 
-            //Id = _model.ID;
-            //Name = _model.Label;
-
-            //IsActive = _model.IsActive;
-            //Zone = _model.Zone;
+            Id = _model.ObjId;
+            Name = _model.Label;
+            IsActive = _model.IsActive;
+            Zone = _model.ZoneId.ToString();
         }
 
 
