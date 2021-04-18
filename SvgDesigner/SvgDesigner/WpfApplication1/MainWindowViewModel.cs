@@ -1,6 +1,5 @@
 ﻿using Database.DataModel;
 using Database.DataRepository;
-using GeometryModel;
 using GeometryReader;
 using System;
 using System.Linq;

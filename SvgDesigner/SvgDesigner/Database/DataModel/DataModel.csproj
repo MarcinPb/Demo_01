@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesignerObj.cs" />
     <Compile Include="ImportedBaseOutputLists.cs" />
     <Compile Include="InfraConn.cs" />
     <Compile Include="InfraConstantDataLists.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="InfraField.cs" />
     <Compile Include="InfraObj.cs" />
     <Compile Include="InfraObjTypeField.cs" />
+    <Compile Include="Point2D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

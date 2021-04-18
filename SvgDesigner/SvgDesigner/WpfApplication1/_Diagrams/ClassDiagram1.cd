@@ -35,16 +35,5 @@
       <FileName>Model\ShapeModel\Shp.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GeometryModel.DomainObjectData">
-    <Position X="6.25" Y="3.5" Width="2" />
-    <TypeIdentifier />
-  </Class>
-  <Class Name="WpfApplication1.Model.DesignerObj">
-    <Position X="1.75" Y="3.5" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>YAAAAAACEAAAAAAAEAQAAAAAAAAAQAAAAAAEAAABgAA=</HashCode>
-      <FileName>Model\DesignerObj.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

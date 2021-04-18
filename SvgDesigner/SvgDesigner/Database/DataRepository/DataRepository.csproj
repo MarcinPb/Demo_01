@@ -42,18 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DesignerInfraRepo.cs" />
     <Compile Include="IDesignerRepo.cs" />
     <Compile Include="InfraData.cs" />
     <Compile Include="InfraRepo.cs" />
-    <Compile Include="DesignerBinFileRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Geometry\GeometryModel\GeometryModel.csproj">
-      <Project>{4f166da1-aa06-4b20-9173-67f6c307e275}</Project>
-      <Name>GeometryModel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataModel\DataModel.csproj">
       <Project>{4aae4024-22d4-4917-879f-587c9da6a387}</Project>
       <Name>DataModel</Name>

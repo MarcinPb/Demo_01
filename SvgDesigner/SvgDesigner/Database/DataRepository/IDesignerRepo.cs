@@ -1,4 +1,4 @@
-﻿using GeometryModel;
+﻿using Database.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +9,10 @@ namespace Database.DataRepository
 {
     public interface IDesignerRepo
     {
-        DomainObjectData GetItem(int id);
-        List<DomainObjectData> GetJunctionList();
-        List<DomainObjectData> GetPipeList();
-        List<DomainObjectData> GetCustomerNodeList();
+        DesignerObj GetItem(int id);
+        List<DesignerObj> GetJunctionList();
+        List<DesignerObj> GetPipeList();
+        List<DesignerObj> GetCustomerNodeList();
         Point2D GetPointBottomRight();
         Point2D GetPointTopLeft();
     }

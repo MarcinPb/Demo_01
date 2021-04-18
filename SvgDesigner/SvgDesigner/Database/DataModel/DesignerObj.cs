@@ -1,11 +1,10 @@
-﻿using GeometryModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApplication1.Model
+namespace Database.DataModel
 {
     public class DesignerObj
     {
@@ -19,5 +18,9 @@ namespace WpfApplication1.Model
         public int? TargetId { get; set; }
         public double Xp { get; set; }
         public double Yp { get; set; }
+
+
+        public Dictionary<string, object> Fields { get; set; }
+
     }
 }

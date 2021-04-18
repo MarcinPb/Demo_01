@@ -1,5 +1,5 @@
-﻿using Database.DataRepository;
-using GeometryModel;
+﻿using Database.DataModel;
+using Database.DataRepository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -81,7 +81,6 @@
     <Compile Include="Controls\FilteredDataGridCtrl.cs" />
     <Compile Include="Controls\UiHelper.cs" />
     <Compile Include="Controls\TextHeaderToBooleanConverter.cs" />
-    <Compile Include="Model\DesignerObj.cs" />
     <Compile Include="Repo\DesignerRepo.cs" />
     <Compile Include="Model\ShapeModel\RectangleShp.cs" />
     <Compile Include="Model\ShapeModel\ConnectionShp.cs" />
@@ -206,10 +205,6 @@
     <ProjectReference Include="..\GeometryNew\GeometryReader\GeometryReader.csproj">
       <Project>{ed714e90-41b7-4d83-a0bc-3f04b2e7348b}</Project>
       <Name>GeometryReader</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Geometry\GeometryModel\GeometryModel.csproj">
-      <Project>{4f166da1-aa06-4b20-9173-67f6c307e275}</Project>
-      <Name>GeometryModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

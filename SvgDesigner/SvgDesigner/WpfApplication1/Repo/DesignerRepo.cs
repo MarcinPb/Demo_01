@@ -1,5 +1,5 @@
-﻿using Database.DataRepository;
-using GeometryModel;
+﻿using Database.DataModel;
+using Database.DataRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +26,7 @@ namespace WpfApplication1.Repo
             var linkList = pipeList
                 .SelectMany(x => x.Geometry, (p, c) => new
                 {
-                    Id = p.ID,
+                    Id = p.ObjId,
                     Name = p.Label,
                     X = c.X,
                     Y = c.Y,
@@ -67,7 +67,7 @@ namespace WpfApplication1.Repo
             junctionList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
             var objMyList = junctionList.Select(j => new EllipseShp
             {
-                Id = j.ID,
+                Id = j.ObjId,
                 Name = j.Label,
                 X = j.Geometry[0].X - dotR,
                 Y = j.Geometry[0].Y - dotR,
@@ -83,7 +83,7 @@ namespace WpfApplication1.Repo
             customerNodeList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
             var cnShpList = customerNodeList.Select(p => new RectangleShp
             {
-                Id = p.ID,
+                Id = p.ObjId,
                 X = p.Geometry[0].X - dotR,
                 Y = p.Geometry[0].Y - dotR,
                 Width = 2 * dotR,
@@ -99,8 +99,8 @@ namespace WpfApplication1.Repo
                 X = p.Geometry[0].X,
                 Y = p.Geometry[0].Y,
 
-                X2 = junctionList.FirstOrDefault(x => x.ID == p.AssociatedId).Geometry[0].X - p.Geometry[0].X,
-                Y2 = junctionList.FirstOrDefault(x => x.ID == p.AssociatedId).Geometry[0].Y - p.Geometry[0].Y,
+                X2 = junctionList.FirstOrDefault(x => x.ObjId == p.AssociatedId).Geometry[0].X - p.Geometry[0].X,
+                Y2 = junctionList.FirstOrDefault(x => x.ObjId == p.AssociatedId).Geometry[0].Y - p.Geometry[0].Y,
 
                 TypeId = 0,
             }).ToList();
@@ -117,17 +117,17 @@ namespace WpfApplication1.Repo
             return result;
         }
 
-        private static readonly List<DomainObjectData> _domainObjectDataList = GetDomainObjectDataList();
+        private static readonly List<DesignerObj> _domainObjectDataList = GetDomainObjectDataList();
 
-        private List<DomainObjectData> GetJunctionList()
+        private List<DesignerObj> GetJunctionList()
         {
             return _domainObjectDataList.Where(f => f.ObjTypeId != 69 && f.ObjTypeId != 73).ToList();
         }
-        private List<DomainObjectData> GetPipeList()
+        private List<DesignerObj> GetPipeList()
         {
             return _domainObjectDataList.Where(f => f.ObjTypeId == 69).ToList();
         }
-        private List<DomainObjectData> GetCustomerNodeList()
+        private List<DesignerObj> GetCustomerNodeList()
         {
             return _domainObjectDataList.Where(f => f.ObjTypeId == 73).ToList();
         }
@@ -147,7 +147,7 @@ namespace WpfApplication1.Repo
             return new Point2D(xMax, yMax);
         }
 
-        private static List<DomainObjectData> GetDomainObjectDataList()
+        private static List<DesignerObj> GetDomainObjectDataList()
         {
             InfraData infraData = InfraRepo.GetInfraData();
 
@@ -197,9 +197,9 @@ namespace WpfApplication1.Repo
                     r => r.ObjId,
                     (f, bs) => new { f.ObjTypeId, f.ObjId, f.Label, f.IsActive, f.ZoneId, f.AssociatedId, TargetId = bs?.SingleOrDefault()?.IntValue }
                 )
-                .Select(x => new DomainObjectData()
+                .Select(x => new DesignerObj()
                 {
-                    ID = x.ObjId,
+                    ObjId = x.ObjId,
                     ObjTypeId = x.ObjTypeId,
                     Label = x.Label,
                     IsActive = (bool)x.IsActive,

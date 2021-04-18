@@ -1,5 +1,5 @@
-﻿using Database.DataRepository;
-using GeometryModel;
+﻿using Database.DataModel;
+using Database.DataRepository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,16 +43,16 @@ namespace WpfApplication1.Ui.Designer
         //[ItemsSource(typeof(FontSizeItemsSource))]
         public string Zone { get; set; }
 
-        protected DomainObjectData _model;
+        protected DesignerObj _model;
         public ItemViewModel(int id)
         {
-            _model = new DesignerInfraRepo().GetItem(id);
+            //_model = new DesignerInfraRepo().GetItem(id);
 
-            Id = _model.ID;
-            Name = _model.Label;
+            //Id = _model.ID;
+            //Name = _model.Label;
 
-            IsActive = _model.IsActive;
-            Zone = _model.Zone;
+            //IsActive = _model.IsActive;
+            //Zone = _model.Zone;
         }
 
 
