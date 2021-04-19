@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IDesignerRepo.cs" />
     <Compile Include="InfraData.cs" />
     <Compile Include="InfraRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

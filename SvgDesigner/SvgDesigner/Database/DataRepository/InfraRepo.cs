@@ -253,55 +253,22 @@ namespace Database.DataRepository
         #endregion
 
 
-        #region Get data: GetInfraConstantData(), GetInfraData()
+        #region Get data: GetInfraData()
 
-        //public static IEnumerable<InfraObjType> GetObjTypeList()
-        //{
-        //    IEnumerable<InfraObjType> list;
+        private static InfraData _infraData;
+        public static InfraData GetInfraData()
+        {
+            if (_infraData == null)
+            {
+                InfraData infraData = new InfraData();
+                infraData.InfraConstantData = GetInfraConstantData();
+                infraData.InfraChangeableData = GetInfraChangableData();
+                infraData.Recalculate();
 
-        //    using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-        //    {
-        //        string sql;
-
-        //        sql = $@"
-        //            SELECT * FROM dbo.tbInfraObjType;
-        //        ";
-        //        list = cnn.Query<InfraObjType>(sql);
-        //    }
-        //    return list;
-        //}
-
-        //public static IEnumerable<InfraObjTypeField> GetObjTypeFieldList()
-        //{
-        //    IEnumerable<InfraObjTypeField> list;
-        //    using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-        //    {
-        //        string sql;
-
-        //        sql = $@"
-        //            SELECT * FROM dbo.tbInfraObjTypeField;
-        //        ";
-        //        list = cnn.Query<InfraObjTypeField>(sql);
-        //    }
-
-        //    return list;
-        //}
-
-        //public static List<InfraField> GetFieldList()
-        //{
-        //    List<InfraField> list;
-        //    using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-        //    {
-        //        string sql;
-
-        //        sql = $@"
-        //            SELECT * FROM dbo.tbInfraField;
-        //        ";
-        //        list = cnn.Query<InfraField>(sql).ToList();
-        //    }
-
-        //    return list;
-        //}
+                _infraData = infraData;
+            }
+            return _infraData;
+        }
 
         public static InfraConstantDataLists GetInfraConstantData()
         {
@@ -393,22 +360,6 @@ namespace Database.DataRepository
             };
 
             return importedDataOutputLists;
-        }
-
-        private static InfraData _infraData;
-
-        public static InfraData GetInfraData()
-        {
-            if (_infraData == null)
-            {
-                InfraData infraData = new InfraData();
-                infraData.InfraConstantData = GetInfraConstantData();
-                infraData.InfraChangeableData = GetInfraChangableData();
-                infraData.Recalculate();
-
-                _infraData = infraData;
-            }
-            return _infraData;
         }
 
         #endregion

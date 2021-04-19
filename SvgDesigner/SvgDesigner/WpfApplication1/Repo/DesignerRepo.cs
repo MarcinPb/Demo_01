@@ -28,45 +28,6 @@ namespace WpfApplication1.Repo
 
             var pipeList = GetPipeList();
             pipeList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
-            var linkList = pipeList
-                .SelectMany(x => x.Geometry, (p, c) => new
-                {
-                    Id = p.ObjId,
-                    Name = p.Label,
-                    X = c.X,
-                    Y = c.Y,
-                })
-                .Select((g, idx) => new
-                {
-                    Id = g.Id,
-                    Name = g.Name,
-                    X = g.X,
-                    Y = g.Y,
-                    Idx = idx
-                });
-            var linkMyList = linkList.Join(
-                    linkList,
-                    l => l.Idx,
-                    r => r.Idx + 1,
-                    (l, r) => new { l, r }
-                )
-                .Where(x => x.l.Id == x.r.Id)
-                .Select(o => new LineShp
-                {
-                    Id = o.l.Id,
-                    Name = o.l.Name,
-                    X = o.l.X,
-                    Y = o.l.Y,
-
-                    X2 = o.r.X - o.l.X,
-                    Y2 = o.r.Y - o.l.Y,
-
-                    TypeId = 6,
-                })
-                .ToList();
-
-            //var pipeList2 = GetPipeList();
-            //pipeList2.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
             var pathList = pipeList
                 .Select(o => new PathShp
                 {
@@ -79,14 +40,6 @@ namespace WpfApplication1.Repo
                     TypeId = 6,
                 })
                 .ToList();
-
-
-
-
-
-
-
-
 
             var junctionList = GetJunctionList();
             junctionList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
@@ -101,9 +54,6 @@ namespace WpfApplication1.Repo
                 TypeId = 2
             }).ToList();
 
-
-
-
             var customerNodeList = GetCustomerNodeList();
             customerNodeList.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
             var cnShpList = customerNodeList.Select(p => new RectangleShp
@@ -117,8 +67,6 @@ namespace WpfApplication1.Repo
                 TypeId = 7
             }).ToList();
 
-
-
             var custNodeLineList = customerNodeList.Select(p => new ConnectionShp
             {
                 X = p.Geometry[0].X,
@@ -131,10 +79,7 @@ namespace WpfApplication1.Repo
             }).ToList();
 
 
-
-
             var result = custNodeLineList.Select(cl => (Shp)cl)
-                //.Union(linkMyList.Select(l => (Shp)l))
                 .Union(pathList.Select(l => (Shp)l))
                 .Union(objMyList.Select(o => (Shp)o))
                 .Union(cnShpList.Select(c => (Shp)c))

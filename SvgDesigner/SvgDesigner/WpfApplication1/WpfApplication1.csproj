@@ -179,7 +179,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="Files\Wg\MyFile.bin">
+    <Content Include="_Files\Wg\MyFile.bin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="_Diagrams\ClassDiagram1.cd" />
