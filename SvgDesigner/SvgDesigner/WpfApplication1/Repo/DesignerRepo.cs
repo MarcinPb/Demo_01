@@ -112,7 +112,6 @@ namespace WpfApplication1.Repo
             PathGeometry myPathGeometry = new PathGeometry();
             myPathGeometry.Figures = myPathFigureCollection;
 
-
             return myPathGeometry;
         }
 
