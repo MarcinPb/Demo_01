@@ -71,8 +71,14 @@ namespace WpfApplication1.Ui.Designer
 
             }
 
-            var objPosition = ObjList.FirstOrDefault(x => x.Id == id);
 
+            var objToRemove = ObjList.FirstOrDefault(x => x.Id==100000);
+            if (objToRemove != null)
+            {
+                ObjList.Remove(objToRemove);
+            }
+
+            var objPosition = ObjList.FirstOrDefault(x => x.Id == id);
             ObjList.Add(new PushPinShp() { Id = 100000, X = objPosition.X + position.X, Y = objPosition.Y + position.Y, TypeId = 2 });
 
             SelectedItem = id;
