@@ -9,8 +9,13 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
+             xmlns:converters="clr-namespace:WpfApplication1.Converters"
              >
     <UserControl.Resources>
+
+        <converters:PointsToPathConverter x:Key="PointsToPathConverter"/>
+
+
         <Style TargetType="Shape" x:Key="MouseIsOverShapeData">
             <!--<Setter Property="Stroke" Value="Blue"/>-->
             <Style.Triggers>
@@ -163,11 +168,11 @@
                                     <DataTemplate DataType="{x:Type shapeModel:RectangleShp}">
                                         <Rectangle Fill="LimeGreen" StrokeThickness="0.05" Opacity="0.5"  Width="{Binding Width}" Height="{Binding Height}" Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
                                     </DataTemplate>
-                                    <DataTemplate DataType="{x:Type shapeModel:LineShp}">
-                                        <Line Fill="Transparent" StrokeThickness="0.25" X1="0" Y1="0" X2="{Binding X2}" Y2="{Binding Y2}" Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
+                                    <DataTemplate DataType="{x:Type shapeModel:PathShp}">
                                         <!--
-                                        <Path Fill="Transparent" StrokeThickness="0.25" Data=""  Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
+                                        <Line Fill="Transparent" StrokeThickness="0.25" X1="0" Y1="0" X2="{Binding X2}" Y2="{Binding Y2}" Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
                                         -->
+                                        <Path Fill="Transparent" StrokeThickness="0.25" Data="{Binding Geometry}"  Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
                                     </DataTemplate>
                                     <DataTemplate DataType="{x:Type shapeModel:ConnectionShp}">
                                         <Line Fill="Transparent" StrokeThickness="0.02" X1="0" Y1="0" X2="{Binding X2}" Y2="{Binding Y2}" Stroke="Black" />

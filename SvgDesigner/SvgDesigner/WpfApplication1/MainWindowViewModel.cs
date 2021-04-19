@@ -103,7 +103,7 @@ namespace WpfApplication1
 
         private void OnShpReceived(Shp shp)
         {
-            if (shp is LineShp)
+            if (shp is PathShp)
             {
                 PropertyGridViewModel = new Ui.Designer.Pipe.EditedViewModel(shp.Id);
             }

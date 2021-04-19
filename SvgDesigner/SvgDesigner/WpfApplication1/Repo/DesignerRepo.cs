@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
 using WpfApplication1.ShapeModel;
 
 namespace WpfApplication1.Repo
@@ -63,6 +65,26 @@ namespace WpfApplication1.Repo
                 })
                 .ToList();
 
+            //var pipeList2 = GetPipeList();
+            //pipeList2.ForEach(t => t.Geometry.ForEach(p => { p.X = (p.X - pointTopLeft.X) * xFactor + margin; p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin; }));
+            var pathList = pipeList
+                .Select(o => new PathShp
+                {
+                    Id = o.ObjId,
+                    Name = o.Label,
+                    X = o.Geometry[0].X,
+                    Y = o.Geometry[0].Y,
+
+                    Geometry = GetPathGeometry(o),  
+                    TypeId = 6,
+                })
+                .ToList();
+
+
+
+
+
+
 
 
 
@@ -112,12 +134,41 @@ namespace WpfApplication1.Repo
 
 
             var result = custNodeLineList.Select(cl => (Shp)cl)
-                .Union(linkMyList.Select(l => (Shp)l))
+                //.Union(linkMyList.Select(l => (Shp)l))
+                .Union(pathList.Select(l => (Shp)l))
                 .Union(objMyList.Select(o => (Shp)o))
                 .Union(cnShpList.Select(c => (Shp)c))
                 .ToList();
 
             return result;
+        }
+
+        private PathGeometry GetPathGeometry(DesignerObj designerObj)
+        {
+            PathFigure myPathFigure = new PathFigure();
+            myPathFigure.StartPoint = new Point(0, 0);
+
+
+            PathSegmentCollection myPathSegmentCollection = new PathSegmentCollection();
+            var geometryListWithoutFirst = designerObj.Geometry.Where(f => f != designerObj.Geometry[0]);
+            foreach(var pt in geometryListWithoutFirst)
+            {
+                LineSegment myLineSegment = new LineSegment();
+                myLineSegment.Point = new Point(pt.X - designerObj.Geometry[0].X, pt.Y - designerObj.Geometry[0].Y);
+
+                myPathSegmentCollection.Add(myLineSegment);
+            }
+
+            myPathFigure.Segments = myPathSegmentCollection;
+
+            PathFigureCollection myPathFigureCollection = new PathFigureCollection();
+            myPathFigureCollection.Add(myPathFigure);
+
+            PathGeometry myPathGeometry = new PathGeometry();
+            myPathGeometry.Figures = myPathFigureCollection;
+
+
+            return myPathGeometry;
         }
 
         internal DesignerObj GetItem(int objId)

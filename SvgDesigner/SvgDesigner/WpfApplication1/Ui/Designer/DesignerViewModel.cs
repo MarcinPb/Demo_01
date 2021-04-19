@@ -56,6 +56,11 @@ namespace WpfApplication1.Ui.Designer
                 var line = (Line)e.Device.Target;
                 id = Convert.ToInt32(((Line)e.Device.Target).Tag);
             }
+            if (e.Device.Target is Path)
+            {
+                var path = (Path)e.Device.Target;
+                id = Convert.ToInt32(((Path)e.Device.Target).Tag);
+            }
             if (e.Device.Target is Ellipse)
             {
                 id = Convert.ToInt32(((Ellipse)e.Device.Target).Tag);

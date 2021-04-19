@@ -63,10 +63,10 @@ namespace WpfApplication1.Ui.Designer.Pipe
         {
             Path = _model.Geometry.ToList();
 
-            HMITopologyStartNodeLabel = (string)_model.Fields["HMITopologyStartNodeLabel"];
-            HMITopologyStopNodeLabel = (string)_model.Fields["HMITopologyStopNodeLabel"];
+            //HMITopologyStartNodeLabel = (string)_model.Fields["HMITopologyStartNodeLabel"];
+            //HMITopologyStopNodeLabel = (string)_model.Fields["HMITopologyStopNodeLabel"];
             Physical_IsUserDefinedLength = (bool)_model.Fields["Physical_IsUserDefinedLength"];
-            PipeStatus = (int)_model.Fields["PipeStatus"];
+            PipeStatus = (int)(_model.Fields["PipeStatus"] ?? 0);
             Physical_PipeMaterial = (string)_model.Fields["Physical_PipeMaterial"];
             Physical_InstallationYear = (int)_model.Fields["Physical_InstallationYear"];
             HMIGeometryScaledLength = (double)_model.Fields["HMIGeometryScaledLength"];

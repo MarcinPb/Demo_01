@@ -3,9 +3,8 @@ using System.Windows.Media;
 
 namespace WpfApplication1.ShapeModel
 {
-    public class LineShp : Shp
+    public class PathShp : Shp
     {
-        public double X2 { get; set; }
-        public double Y2 { get; set; }
+       public PathGeometry Geometry { get; set; }
     }
 }
