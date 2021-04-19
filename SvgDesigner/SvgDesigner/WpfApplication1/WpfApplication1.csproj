@@ -82,6 +82,7 @@
     <Compile Include="Controls\UiHelper.cs" />
     <Compile Include="Controls\TextHeaderToBooleanConverter.cs" />
     <Compile Include="Converters\PointsToPathConverter.cs" />
+    <Compile Include="Model\ShapeModel\PushPinShp.cs" />
     <Compile Include="Model\ShapeModel\PathShp.cs" />
     <Compile Include="Repo\DesignerRepo.cs" />
     <Compile Include="Model\ShapeModel\RectangleShp.cs" />

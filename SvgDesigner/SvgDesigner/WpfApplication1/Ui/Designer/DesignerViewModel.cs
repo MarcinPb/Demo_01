@@ -31,7 +31,7 @@ namespace WpfApplication1.Ui.Designer
         }
         private void OnAddExecute()
         {
-            ObjList.Add(new EllipseShp() { Id = 9, X = 210, Y = 30, Width = 10, Height = 10, TypeId = 2 });
+            ObjList.Add(new PushPinShp() { Id = 100000, X = 210, Y = 30, TypeId = 2 });
         }
 
         private ICommand _moveCommand;
@@ -56,20 +56,25 @@ namespace WpfApplication1.Ui.Designer
                 var line = (Line)e.Device.Target;
                 id = Convert.ToInt32(((Line)e.Device.Target).Tag);
             }
-            if (e.Device.Target is Path)
+            else if (e.Device.Target is Path)
             {
                 var path = (Path)e.Device.Target;
                 id = Convert.ToInt32(((Path)e.Device.Target).Tag);
             }
-            if (e.Device.Target is Ellipse)
+            else if (e.Device.Target is Ellipse)
             {
                 id = Convert.ToInt32(((Ellipse)e.Device.Target).Tag);
             }
-            if (e.Device.Target is Rectangle)
+            else if (e.Device.Target is Rectangle)
             {
                 id = Convert.ToInt32(((Rectangle)e.Device.Target).Tag);
 
             }
+
+            var objPosition = ObjList.FirstOrDefault(x => x.Id == id);
+
+            ObjList.Add(new PushPinShp() { Id = 100000, X = objPosition.X + position.X, Y = objPosition.Y + position.Y, TypeId = 2 });
+
             SelectedItem = id;
             var shp = ObjList.FirstOrDefault(x => x.Id == id);
             Messenger.Default.Send(shp);
@@ -89,7 +94,7 @@ namespace WpfApplication1.Ui.Designer
             CanvasHeight = svgHeight + 2 * margin;
 
 
-            var list = new DesignerRepo().GetShpList(svgWidth, svgHeight, margin);
+            var list = new DesignerRepo(6773).GetShpList(svgWidth, svgHeight, margin);
             ObjList = new ObservableCollection<Shp>(list);
         }
 

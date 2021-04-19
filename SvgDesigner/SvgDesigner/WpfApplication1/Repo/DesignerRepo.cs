@@ -13,10 +13,16 @@ namespace WpfApplication1.Repo
 {
     public class DesignerRepo
     {
-        private static readonly List<DesignerObj> _designerObjList = GetDesignerObjList();
+        private readonly List<DesignerObj> _designerObjList;
 
 
-        public List<Shp> GetShpList(double svgWidth, double svgHeight, double margin, int? zoneId = null)
+        public DesignerRepo(int? zoneId = null) 
+        {
+            _designerObjList = GetDesignerObjList(zoneId);
+        }
+
+
+        public List<Shp> GetShpList(double svgWidth, double svgHeight, double margin)
         {
             const double dotR = 0.2;
 
@@ -88,6 +94,15 @@ namespace WpfApplication1.Repo
             return result;
         }
 
+
+        internal DesignerObj GetItem(int objId)
+        {
+            var item = _designerObjList.FirstOrDefault(x => x.ObjId == objId);
+            item.Fields = GetObjFieldValueList(objId);
+
+            return item;
+        }
+
         private PathGeometry GetPathGeometry(DesignerObj designerObj)
         {
             PathFigure myPathFigure = new PathFigure();
@@ -114,16 +129,7 @@ namespace WpfApplication1.Repo
 
             return myPathGeometry;
         }
-
-        internal DesignerObj GetItem(int objId)
-        {
-            var item = _designerObjList.FirstOrDefault(x => x.ObjId == objId);
-            item.Fields = GetObjFieldValueList(objId);
-
-            return item;
-        }
-
-        public Dictionary<string, object> GetObjFieldValueList(int objId)
+        private Dictionary<string, object> GetObjFieldValueList(int objId)
         {
             InfraData infraData = InfraRepo.GetInfraData();
 
@@ -197,7 +203,7 @@ namespace WpfApplication1.Repo
             return new Point2D(xMax, yMax);
         }
 
-        private static List<DesignerObj> GetDesignerObjList()
+        private static List<DesignerObj> GetDesignerObjList(int? zoneId = null)
         {
             InfraData infraData = InfraRepo.GetInfraData();
 
@@ -260,6 +266,13 @@ namespace WpfApplication1.Repo
                     Geometry = infraValueGeometryList.Where(g => g.ObjId == x.ObjId).OrderBy(g => g.OrderNo).Select(g => new Point2D((double)g.Xp, (double)g.Yp)).ToList(),
                 })
                 .ToList();
+
+            if (zoneId != null)
+            {
+                var junctionList = domainObjects.Where(x => x.ObjTypeId != 23 && x.ObjTypeId != 73 && x.ZoneId == zoneId);
+                var customerMeterList = domainObjects.Where(x => x.ObjTypeId == 73 && junctionList.Any(y => y.ObjId == x.AssociatedId));
+                domainObjects = junctionList.Union(customerMeterList).ToList();
+            }
 
             domainObjects.ForEach(x => { x.Xp = x.Geometry[0].X; x.Yp = x.Geometry[0].Y; });
             return domainObjects;

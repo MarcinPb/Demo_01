@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="WpfApplication1.ShapeModel.ConnectionShp">
+  <Class Name="WpfApplication1.ShapeModel.PushPinShp">
     <Position X="7" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Model\ShapeModel\ConnectionShp.cs</FileName>
+      <FileName>Model\ShapeModel\PushPinShp.cs</FileName>
+      <NewMemberFileName>Model\ShapeModel\ConnectionShp.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WpfApplication1.ShapeModel.RectangleShp">

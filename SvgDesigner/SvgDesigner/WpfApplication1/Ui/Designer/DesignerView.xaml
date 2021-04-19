@@ -169,10 +169,13 @@
                                         <Rectangle Fill="LimeGreen" StrokeThickness="0.05" Opacity="0.5"  Width="{Binding Width}" Height="{Binding Height}" Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
                                     </DataTemplate>
                                     <DataTemplate DataType="{x:Type shapeModel:PathShp}">
-                                        <Path Fill="Transparent" StrokeThickness="0.25" Data="{Binding Geometry}"  Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
+                                        <Path StrokeThickness="0.25" Data="{Binding Geometry}"  Style="{StaticResource MouseIsOverShapeData}" ToolTip="{Binding Id}" Tag="{Binding Id}" />
                                     </DataTemplate>
                                     <DataTemplate DataType="{x:Type shapeModel:ConnectionShp}">
                                         <Line Fill="Transparent" StrokeThickness="0.02" X1="0" Y1="0" X2="{Binding X2}" Y2="{Binding Y2}" Stroke="Black" />
+                                    </DataTemplate>
+                                    <DataTemplate DataType="{x:Type shapeModel:PushPinShp}">
+                                        <Line Fill="Transparent" StrokeThickness="1" X1="0" Y1="0" X2="{Binding X2}" Y2="{Binding Y2}" Stroke="Red" />
                                     </DataTemplate>
                                 </ItemsControl.Resources>
                             </ItemsControl>
