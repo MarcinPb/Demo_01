@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Threading;
 using WpfApplication1.Model;
 using WpfApplication1.Model.ShapeModel;
-using WpfApplication1.Ui.Designer;
+using WpfApplication1.Ui.PropertyGrid;
 using WpfApplication1.Utility;
 
 namespace WpfApplication1
@@ -19,8 +19,8 @@ namespace WpfApplication1
 
         public DesignerViewModel DesignerViewModel { get; set; }
 
-        private Ui.Designer.EditedViewModel _propertyGridViewModel;
-        public Ui.Designer.EditedViewModel PropertyGridViewModel
+        private Ui.PropertyGrid.EditedViewModel _propertyGridViewModel;
+        public Ui.PropertyGrid.EditedViewModel PropertyGridViewModel
         {
             get { return _propertyGridViewModel; }
             set { _propertyGridViewModel = value; RaisePropertyChanged(nameof(PropertyGridViewModel)); }
@@ -61,7 +61,7 @@ namespace WpfApplication1
             ImportDataCmd = new RelayCommand<object>(ImportDataCmdExecute);
 
             DesignerViewModel = new DesignerViewModel();
-            PropertyGridViewModel = new Ui.Designer.EditedViewModel();
+            PropertyGridViewModel = new Ui.PropertyGrid.EditedViewModel();
 
             Messenger.Default.Register<Shp>(this, OnShpReceived);
         }
@@ -106,15 +106,15 @@ namespace WpfApplication1
         {
             if (shp is PathShp)
             {
-                PropertyGridViewModel = new Ui.Designer.Pipe.EditedViewModel(shp.Id);
+                PropertyGridViewModel = new Ui.PropertyGrid.Pipe.EditedViewModel(shp.Id);
             }
             else if (shp is EllipseShp)
             {
-                PropertyGridViewModel = new Ui.Designer.Junction.EditedViewModel(shp.Id);
+                PropertyGridViewModel = new Ui.PropertyGrid.Junction.EditedViewModel(shp.Id);
             }
             else if (shp is RectangleShp)
             {
-                PropertyGridViewModel = new Ui.Designer.CustomerNode.EditedViewModel(shp.Id);
+                PropertyGridViewModel = new Ui.PropertyGrid.CustomerNode.EditedViewModel(shp.Id);
             }
         }
     }

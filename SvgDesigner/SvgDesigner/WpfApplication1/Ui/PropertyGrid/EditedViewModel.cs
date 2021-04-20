@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Shapes;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.Designer
+namespace WpfApplication1.Ui.PropertyGrid
 {
     public class EditedViewModel : ViewModelBase
     {

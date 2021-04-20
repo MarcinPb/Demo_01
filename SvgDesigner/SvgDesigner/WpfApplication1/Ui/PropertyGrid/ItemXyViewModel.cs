@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.Designer
+namespace WpfApplication1.Ui.PropertyGrid
 {
-    public class ItemXyViewModel : Ui.Designer.ItemViewModel
+    public class ItemXyViewModel : Ui.PropertyGrid.ItemViewModel
     {
         private double _x;
         [Category("<Geometry>")]

@@ -87,34 +87,34 @@
     <Compile Include="Repo\DesignerRepo.cs" />
     <Compile Include="Model\ShapeModel\RectangleShp.cs" />
     <Compile Include="Model\ShapeModel\ConnectionShp.cs" />
-    <Compile Include="Ui\Designer\DesignerViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\DesignerViewModel.cs" />
     <Compile Include="Model\ShapeModel\LineShp.cs" />
     <Compile Include="Model\ShapeModel\EllipseShp.cs" />
     <Compile Include="Model\Shp.cs" />
-    <Compile Include="Ui\Designer\DesignerView.xaml.cs">
+    <Compile Include="Ui\PropertyGrid\DesignerView.xaml.cs">
       <DependentUpon>DesignerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ui\Designer\EditedView.xaml.cs">
+    <Compile Include="Ui\PropertyGrid\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ui\Designer\EditedViewModel.cs" />
-    <Compile Include="Ui\Designer\CustomerNode\EditedView.xaml.cs">
+    <Compile Include="Ui\PropertyGrid\EditedViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\CustomerNode\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ui\Designer\CustomerNode\EditedViewModel.cs" />
-    <Compile Include="Ui\Designer\CustomerNode\ItemViewModel.cs" />
-    <Compile Include="Ui\Designer\ItemViewModel.cs" />
-    <Compile Include="Ui\Designer\ItemXyViewModel.cs" />
-    <Compile Include="Ui\Designer\Pipe\EditedView.xaml.cs">
+    <Compile Include="Ui\PropertyGrid\CustomerNode\EditedViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\CustomerNode\ItemViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\ItemViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\ItemXyViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\Pipe\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ui\Designer\Pipe\EditedViewModel.cs" />
-    <Compile Include="Ui\Designer\Pipe\ItemViewModel.cs" />
-    <Compile Include="Ui\Designer\Junction\EditedView.xaml.cs">
+    <Compile Include="Ui\PropertyGrid\Pipe\EditedViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\Pipe\ItemViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\Junction\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ui\Designer\Junction\EditedViewModel.cs" />
-    <Compile Include="Ui\Designer\Junction\ItemViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\Junction\EditedViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\Junction\ItemViewModel.cs" />
     <Compile Include="Utility\EventCommandExecuter.cs" />
     <Compile Include="Utility\Messenger.cs" />
     <Compile Include="Utility\SelectingItemAttachedProperty.cs" />
@@ -136,23 +136,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Ui\Designer\DesignerView.xaml">
+    <Page Include="Ui\PropertyGrid\DesignerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ui\Designer\CustomerNode\EditedView.xaml">
+    <Page Include="Ui\PropertyGrid\CustomerNode\EditedView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Ui\Designer\EditedView.xaml">
+    <Page Include="Ui\PropertyGrid\EditedView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Ui\Designer\Pipe\EditedView.xaml">
+    <Page Include="Ui\PropertyGrid\Pipe\EditedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ui\Designer\Junction\EditedView.xaml">
+    <Page Include="Ui\PropertyGrid\Junction\EditedView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

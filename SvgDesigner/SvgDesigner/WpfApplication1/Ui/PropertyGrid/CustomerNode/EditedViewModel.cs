@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shapes;
+using WpfApplication1.Model.ShapeModel;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.Designer.Junction
+namespace WpfApplication1.Ui.PropertyGrid.CustomerNode
 {
-    public class EditedViewModel : Ui.Designer.EditedViewModel
+    public class EditedViewModel : PropertyGrid.EditedViewModel
     {
         private ItemViewModel _model;
         public ItemViewModel ItemViewModel

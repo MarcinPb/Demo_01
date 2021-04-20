@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.Designer.Junction
+namespace WpfApplication1.Ui.PropertyGrid.Junction
 {
-    public class ItemViewModel : Ui.Designer.ItemXyViewModel
+    public class ItemViewModel : Ui.PropertyGrid.ItemXyViewModel
     {
 
 

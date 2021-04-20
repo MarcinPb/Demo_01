@@ -8,7 +8,7 @@ using WpfApplication1.Repo;
 using WpfApplication1.Model.ShapeModel;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.Designer
+namespace WpfApplication1.Ui.PropertyGrid
 {
     public class DesignerViewModel : ViewModelBase
     {

@@ -11,7 +11,7 @@ using WpfApplication1.Repo;
 using WpfApplication1.Utility;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace WpfApplication1.Ui.Designer
+namespace WpfApplication1.Ui.PropertyGrid
 {
     public class ItemViewModel : ViewModelBase
     {

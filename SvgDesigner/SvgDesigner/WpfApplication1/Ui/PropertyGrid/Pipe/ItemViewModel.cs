@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using WpfApplication1.Utility;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace WpfApplication1.Ui.Designer.Pipe
+namespace WpfApplication1.Ui.PropertyGrid.Pipe
 {
-    public class ItemViewModel : Ui.Designer.ItemViewModel
+    public class ItemViewModel : Ui.PropertyGrid.ItemViewModel
     {
         private List<Point2D> _path;
         [Category("<Geometry>")]

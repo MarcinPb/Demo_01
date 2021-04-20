@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.Designer.CustomerNode
+namespace WpfApplication1.Ui.PropertyGrid.CustomerNode
 {
-    public class ItemViewModel : Ui.Designer.ItemXyViewModel
+    public class ItemViewModel : Ui.PropertyGrid.ItemXyViewModel
     {
         [Category("Demand")]
         [DisplayName("Associated Element")]

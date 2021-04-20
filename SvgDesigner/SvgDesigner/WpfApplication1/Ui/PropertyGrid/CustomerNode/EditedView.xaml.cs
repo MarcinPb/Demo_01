@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApplication1.Ui.Designer.Junction
+namespace WpfApplication1.Ui.PropertyGrid.CustomerNode
 {
     /// <summary>
     /// Interaction logic for EditedView.xaml
