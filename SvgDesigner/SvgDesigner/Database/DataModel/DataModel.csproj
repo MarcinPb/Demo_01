@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DesignerObj.cs" />
     <Compile Include="ImportedBaseOutputLists.cs" />
     <Compile Include="InfraConn.cs" />
     <Compile Include="InfraConstantDataLists.cs" />

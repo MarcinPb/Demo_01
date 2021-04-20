@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Media;
 using WpfApplication1.Model;
 using WpfApplication1.Model.ShapeModel;
+using WpfApplication1.Ui.Designer.Model;
 
 namespace WpfApplication1.Repo
 {

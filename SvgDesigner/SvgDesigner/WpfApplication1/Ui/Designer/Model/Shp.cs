@@ -1,5 +1,5 @@
-﻿using Database.DataModel;
-using System.Linq;
+﻿using System.Linq;
+using WpfApplication1.Ui.Designer.Model;
 using WpfApplication1.Utility;
 
 namespace WpfApplication1.Model

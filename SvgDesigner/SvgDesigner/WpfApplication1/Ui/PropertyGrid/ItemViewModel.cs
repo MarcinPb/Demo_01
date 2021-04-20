@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApplication1.Repo;
+using WpfApplication1.Ui.Designer.Model;
 using WpfApplication1.Utility;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
