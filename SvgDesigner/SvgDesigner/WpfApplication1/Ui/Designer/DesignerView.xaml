@@ -3,9 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfApplication1.Ui.Designer"
              xmlns:utility="clr-namespace:WpfApplication1.Utility"
-             xmlns:shapeModel="clr-namespace:WpfApplication1.ShapeModel" 
+             xmlns:shapeModel="clr-namespace:WpfApplication1.Model.ShapeModel" 
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
@@ -65,38 +64,6 @@
                 </MultiDataTrigger>
             </Style.Triggers>
         </Style>
-        <!--
-        <Style x:Key="MouseEnterRect">
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="Mouse.MouseEnter">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="StrokeThickness" To="3" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-                <EventTrigger RoutedEvent="Mouse.MouseLeave">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="StrokeThickness" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-            </Style.Triggers>
-        </Style>
-        <Style TargetType="Rectangle" x:Key="MouseIsOverRect">
-            <Setter Property="Stroke" Value="Blue"></Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Stroke" Value="Red" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        -->
     </UserControl.Resources>
     <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="1">
         <Grid>
@@ -143,9 +110,6 @@
                             <ItemsControl ItemsSource="{Binding ObjList}" >
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <!--
-                                        <Canvas Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}" Name="Layer" ClipToBounds="True" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="AliceBlue">
-                                        -->
                                         <Canvas Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}" Name="Layer" ClipToBounds="True" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" >
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="MouseLeftButtonDown">

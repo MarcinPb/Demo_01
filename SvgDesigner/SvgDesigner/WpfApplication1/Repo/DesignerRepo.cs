@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using WpfApplication1.ShapeModel;
+using WpfApplication1.Model;
+using WpfApplication1.Model.ShapeModel;
 
 namespace WpfApplication1.Repo
 {

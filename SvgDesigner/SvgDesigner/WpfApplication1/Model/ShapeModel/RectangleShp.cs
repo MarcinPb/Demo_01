@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApplication1.ShapeModel
+namespace WpfApplication1.Model.ShapeModel
 {
     public class RectangleShp : Shp
     {

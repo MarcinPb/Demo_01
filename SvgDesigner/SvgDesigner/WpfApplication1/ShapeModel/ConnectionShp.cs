@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Media;
+using WpfApplication1.Model;
 
-namespace WpfApplication1.Model.ShapeModel
+namespace WpfApplication1.ShapeModel
 {
-    public class LineShp : Shp
+    public class ConnectionShp : Shp
     {
         public double X2 { get; set; }
         public double Y2 { get; set; }

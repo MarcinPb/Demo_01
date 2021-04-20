@@ -2,12 +2,12 @@
 using System.Linq;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.ShapeModel
+namespace WpfApplication1.Model
 {
-    public class Shp 
+    public class Shp
     {
         public Shp() { }
-        public Shp(DesignerObj domainObjectData) 
+        public Shp(DesignerObj domainObjectData)
         {
             Id = domainObjectData.ObjId;
             X = domainObjectData.Geometry.First().X;

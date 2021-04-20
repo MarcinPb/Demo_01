@@ -90,7 +90,7 @@
     <Compile Include="Ui\Designer\DesignerViewModel.cs" />
     <Compile Include="Model\ShapeModel\LineShp.cs" />
     <Compile Include="Model\ShapeModel\EllipseShp.cs" />
-    <Compile Include="Model\ShapeModel\Shp.cs" />
+    <Compile Include="Model\Shp.cs" />
     <Compile Include="Ui\Designer\DesignerView.xaml.cs">
       <DependentUpon>DesignerView.xaml</DependentUpon>
     </Compile>

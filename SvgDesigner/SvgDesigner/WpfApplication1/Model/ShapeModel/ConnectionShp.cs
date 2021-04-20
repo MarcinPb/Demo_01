@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using WpfApplication1.Model;
 
-namespace WpfApplication1.ShapeModel
+namespace WpfApplication1.Model.ShapeModel
 {
     public class ConnectionShp : Shp
     {

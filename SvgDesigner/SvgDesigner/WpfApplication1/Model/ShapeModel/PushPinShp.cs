@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WpfApplication1.ShapeModel
+namespace WpfApplication1.Model.ShapeModel
 {
     public class PushPinShp : Shp
     {
