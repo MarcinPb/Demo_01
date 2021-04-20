@@ -87,11 +87,11 @@
     <Compile Include="Repo\DesignerRepo.cs" />
     <Compile Include="Model\ShapeModel\RectangleShp.cs" />
     <Compile Include="Model\ShapeModel\ConnectionShp.cs" />
-    <Compile Include="Ui\PropertyGrid\DesignerViewModel.cs" />
+    <Compile Include="Ui\Designer\DesignerViewModel.cs" />
     <Compile Include="Model\ShapeModel\LineShp.cs" />
     <Compile Include="Model\ShapeModel\EllipseShp.cs" />
     <Compile Include="Model\Shp.cs" />
-    <Compile Include="Ui\PropertyGrid\DesignerView.xaml.cs">
+    <Compile Include="Ui\Designer\DesignerView.xaml.cs">
       <DependentUpon>DesignerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\PropertyGrid\EditedView.xaml.cs">
@@ -136,7 +136,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Ui\PropertyGrid\DesignerView.xaml">
+    <Page Include="Ui\Designer\DesignerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
