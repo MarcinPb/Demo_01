@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApplication1.Ui.Designer.Model;
 
-namespace WpfApplication1.Model.ShapeModel
+namespace WpfApplication1.Ui.Designer.Model.ShapeModel
 {
     public class RectangleShp : Shp
     {

@@ -7,18 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using WpfApplication1.Model;
-using WpfApplication1.Model.ShapeModel;
 using WpfApplication1.Ui.Designer.Model;
+using WpfApplication1.Ui.Designer.Model.ShapeModel;
 
-namespace WpfApplication1.Repo
+namespace WpfApplication1.Ui.Designer.Repo
 {
     public class DesignerRepo
     {
         private readonly List<DesignerObj> _designerObjList;
 
 
-        public DesignerRepo(int? zoneId = null) 
+        public DesignerRepo(int? zoneId = null)
         {
             _designerObjList = GetDesignerObjList(zoneId);
         }
@@ -44,7 +43,7 @@ namespace WpfApplication1.Repo
                     X = o.Geometry[0].X,
                     Y = o.Geometry[0].Y,
 
-                    Geometry = GetPathGeometry(o),  
+                    Geometry = GetPathGeometry(o),
                     TypeId = 6,
                 })
                 .ToList();
@@ -113,7 +112,7 @@ namespace WpfApplication1.Repo
 
             PathSegmentCollection myPathSegmentCollection = new PathSegmentCollection();
             var geometryListWithoutFirst = designerObj.Geometry.Where(f => f != designerObj.Geometry[0]);
-            foreach(var pt in geometryListWithoutFirst)
+            foreach (var pt in geometryListWithoutFirst)
             {
                 LineSegment myLineSegment = new LineSegment();
                 myLineSegment.Point = new Point(pt.X - designerObj.Geometry[0].X, pt.Y - designerObj.Geometry[0].Y);
@@ -145,13 +144,13 @@ namespace WpfApplication1.Repo
                     r => r.FieldId,
                     (l, r) => new { Key = l.Name, Value = GetFieldValue(l, r) }
                     )
-                .ToDictionary(x => x.Key, x => (object)x.Value);
+                .ToDictionary(x => x.Key, x => x.Value);
             return dict;
         }
 
         private object GetFieldValue(InfraField infraField, InfraValue infraValue)
         {
-            object result = null; 
+            object result = null;
             switch (infraField.DataTypeId)
             {
                 case 1:

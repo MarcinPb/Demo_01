@@ -3,9 +3,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Shapes;
-using WpfApplication1.Model;
-using WpfApplication1.Repo;
-using WpfApplication1.Model.ShapeModel;
+using WpfApplication1.Ui.Designer.Model;
+using WpfApplication1.Ui.Designer.Model.ShapeModel;
+using WpfApplication1.Ui.Designer.Repo;
 using WpfApplication1.Utility;
 
 namespace WpfApplication1.Ui.Designer

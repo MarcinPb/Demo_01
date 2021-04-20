@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shapes;
-using WpfApplication1.Model.ShapeModel;
 using WpfApplication1.Utility;
 
 namespace WpfApplication1.Ui.PropertyGrid.CustomerNode

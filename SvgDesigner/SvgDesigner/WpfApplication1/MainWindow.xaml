@@ -5,7 +5,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:WpfApplication1"
         xmlns:utility="clr-namespace:WpfApplication1.Utility"
-        xmlns:shapeModel="clr-namespace:WpfApplication1.Model.ShapeModel" 
         xmlns:uiDesigner="clr-namespace:WpfApplication1.Ui.Designer" 
         xmlns:uiPropertyGrid="clr-namespace:WpfApplication1.Ui.PropertyGrid" 
         xmlns:uiDesignerPipe="clr-namespace:WpfApplication1.Ui.PropertyGrid.Pipe" 

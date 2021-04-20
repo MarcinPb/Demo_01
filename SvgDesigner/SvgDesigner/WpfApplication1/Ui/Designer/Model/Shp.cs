@@ -1,8 +1,7 @@
 ﻿using System.Linq;
-using WpfApplication1.Ui.Designer.Model;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Model
+namespace WpfApplication1.Ui.Designer.Model
 {
     public class Shp
     {

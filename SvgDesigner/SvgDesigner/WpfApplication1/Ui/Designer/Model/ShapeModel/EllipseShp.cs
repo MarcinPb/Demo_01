@@ -1,4 +1,6 @@
-﻿namespace WpfApplication1.Model.ShapeModel
+﻿using WpfApplication1.Ui.Designer.Model;
+
+namespace WpfApplication1.Ui.Designer.Model.ShapeModel
 {
     public class EllipseShp : Shp
     {

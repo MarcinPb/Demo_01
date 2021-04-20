@@ -84,7 +84,7 @@
     <Compile Include="Ui\Designer\Model\DesignerObj.cs" />
     <Compile Include="Ui\Designer\Model\ShapeModel\PushPinShp.cs" />
     <Compile Include="Ui\Designer\Model\ShapeModel\PathShp.cs" />
-    <Compile Include="Repo\DesignerRepo.cs" />
+    <Compile Include="Ui\Designer\Repo\DesignerRepo.cs" />
     <Compile Include="Ui\Designer\Model\ShapeModel\RectangleShp.cs" />
     <Compile Include="Ui\Designer\Model\ShapeModel\ConnectionShp.cs" />
     <Compile Include="Ui\Designer\DesignerViewModel.cs" />
