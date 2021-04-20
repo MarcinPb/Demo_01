@@ -50,7 +50,13 @@ namespace WpfApplication1.Ui.Designer
             //_model = new DesignerRepo().GetItem(objId);
             InfraData infraData = InfraRepo.GetInfraData();
 
-            var valueId = infraData.InfraChangeableData.InfraValueList.FirstOrDefault(f => f.ObjId == objId).ValueId;   // Geometry
+            var geometry = infraData.InfraChangeableData.InfraValueList.Where(f => f.ObjId == objId).Join(
+                    infraData.InfraChangeableData.InfraGeometryList,
+                    l => l.ValueId,
+                    r => r.ValueId,
+                    (l, r) => new Point2D(r.Xp, r.Yp)
+                )
+                .ToList();
 
             _model = new DesignerObj()
             {
@@ -59,9 +65,8 @@ namespace WpfApplication1.Ui.Designer
                 IsActive = infraData.InfraChangeableData.InfraValueList.FirstOrDefault(f => f.ObjId == objId && f.FieldId == 612).BooleanValue ?? false,
                 ZoneId = infraData.InfraChangeableData.InfraValueList.FirstOrDefault(f => f.ObjId == objId && f.FieldId == 614)?.IntValue,
 
-
                 Fields = GetObjFieldValueList(objId),
-                Geometry = infraData.InfraChangeableData.InfraGeometryList.Where(f => f.ValueId == valueId).Select(x => new Point2D(x.Xp, x.Yp)).ToList(),
+                Geometry = geometry,
             };
 
             Id = _model.ObjId;

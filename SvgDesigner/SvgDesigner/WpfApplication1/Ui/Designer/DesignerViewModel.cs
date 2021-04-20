@@ -45,52 +45,55 @@ namespace WpfApplication1.Ui.Designer
             if (obj != null) obj.X += 20;
         }
 
-        public RelayCommand<object> OnMouseDoubleClickCmd { get; }
+        public RelayCommand<object> MouseLeftButtonDownCmd { get; }
+        private int id;
         private void OnMouseDoubleClickCmdExecute(object obj)
         {
-            int id = 0;
-            MouseEventArgs e = (MouseEventArgs)obj;
-            var position = e.GetPosition(e.Device.Target);
-            if (e.Device.Target is Line)
+            MouseButtonEventArgs e = (MouseButtonEventArgs)obj;
+            if (e.ClickCount == 1)
             {
-                var line = (Line)e.Device.Target;
-                id = Convert.ToInt32(((Line)e.Device.Target).Tag);
-            }
-            else if (e.Device.Target is Path)
-            {
-                var path = (Path)e.Device.Target;
-                id = Convert.ToInt32(((Path)e.Device.Target).Tag);
-            }
-            else if (e.Device.Target is Ellipse)
-            {
-                id = Convert.ToInt32(((Ellipse)e.Device.Target).Tag);
-            }
-            else if (e.Device.Target is Rectangle)
-            {
-                id = Convert.ToInt32(((Rectangle)e.Device.Target).Tag);
+                id = 0;
+                if (e.Device.Target is Line)
+                {
+                    id = Convert.ToInt32(((Line)e.Device.Target).Tag);
+                }
+                else if (e.Device.Target is Path)
+                {
+                    id = Convert.ToInt32(((Path)e.Device.Target).Tag);
+                }
+                else if (e.Device.Target is Ellipse)
+                {
+                    id = Convert.ToInt32(((Ellipse)e.Device.Target).Tag);
+                }
+                else if (e.Device.Target is Rectangle)
+                {
+                    id = Convert.ToInt32(((Rectangle)e.Device.Target).Tag);
 
+                }
+                SelectedItem = id;
+                var shp = ObjList.FirstOrDefault(x => x.Id == id);
+                Messenger.Default.Send(shp);
             }
+            else if (e.ClickCount == 2)
+            { 
+                var position = e.GetPosition(e.Device.Target);
+            
+                var objToRemove = ObjList.FirstOrDefault(x => x.Id==100000);
+                if (objToRemove != null)
+                {
+                    ObjList.Remove(objToRemove);
+                }
 
-
-            var objToRemove = ObjList.FirstOrDefault(x => x.Id==100000);
-            if (objToRemove != null)
-            {
-                ObjList.Remove(objToRemove);
+                var objPosition = ObjList.FirstOrDefault(x => x.Id == id);
+                ObjList.Add(new PushPinShp() { Id = 100000, X = objPosition.X + position.X, Y = objPosition.Y + position.Y, TypeId = 2 });          
             }
-
-            var objPosition = ObjList.FirstOrDefault(x => x.Id == id);
-            ObjList.Add(new PushPinShp() { Id = 100000, X = objPosition.X + position.X, Y = objPosition.Y + position.Y, TypeId = 2 });
-
-            SelectedItem = id;
-            var shp = ObjList.FirstOrDefault(x => x.Id == id);
-            Messenger.Default.Send(shp);
         }
 
         public DesignerViewModel()
         {
             StartDate = Convert.ToDateTime("2021-03-09 11:30");
 
-            OnMouseDoubleClickCmd = new RelayCommand<object>(OnMouseDoubleClickCmdExecute);
+            MouseLeftButtonDownCmd = new RelayCommand<object>(OnMouseDoubleClickCmdExecute);
 
             double svgWidth = 800;
             double svgHeight = 800;

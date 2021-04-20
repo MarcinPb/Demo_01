@@ -149,7 +149,7 @@
                                         <Canvas Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}" Name="Layer" ClipToBounds="True" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" >
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="MouseLeftButtonDown">
-                                                    <utility:EventCommandExecuter  Command="{Binding Path=OnMouseDoubleClickCmd, Mode=OneTime}" />
+                                                    <utility:EventCommandExecuter  Command="{Binding Path=MouseLeftButtonDownCmd, Mode=OneTime}" />
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
                                         </Canvas>

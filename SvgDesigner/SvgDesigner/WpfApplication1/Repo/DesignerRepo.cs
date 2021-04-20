@@ -84,8 +84,8 @@ namespace WpfApplication1.Repo
                 TypeId = 0,
             }).ToList();
 
-
-            var result = custNodeLineList.Select(cl => (Shp)cl)
+            var result = custNodeLineList
+                .Select(cl => (Shp)cl)
                 .Union(pathList.Select(l => (Shp)l))
                 .Union(objMyList.Select(o => (Shp)o))
                 .Union(cnShpList.Select(c => (Shp)c))
