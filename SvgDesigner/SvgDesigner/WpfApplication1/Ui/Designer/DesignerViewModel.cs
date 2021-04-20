@@ -8,7 +8,7 @@ using WpfApplication1.Repo;
 using WpfApplication1.Model.ShapeModel;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.PropertyGrid
+namespace WpfApplication1.Ui.Designer
 {
     public class DesignerViewModel : ViewModelBase
     {
@@ -76,17 +76,17 @@ namespace WpfApplication1.Ui.PropertyGrid
                 Messenger.Default.Send(shp);
             }
             else if (e.ClickCount == 2)
-            { 
+            {
                 var position = e.GetPosition(e.Device.Target);
-            
-                var objToRemove = ObjList.FirstOrDefault(x => x.Id==100000);
+
+                var objToRemove = ObjList.FirstOrDefault(x => x.Id == 100000);
                 if (objToRemove != null)
                 {
                     ObjList.Remove(objToRemove);
                 }
 
                 var objPosition = ObjList.FirstOrDefault(x => x.Id == id);
-                ObjList.Add(new PushPinShp() { Id = 100000, X = objPosition.X + position.X, Y = objPosition.Y + position.Y, TypeId = 2 });          
+                ObjList.Add(new PushPinShp() { Id = 100000, X = objPosition.X + position.X, Y = objPosition.Y + position.Y, TypeId = 2 });
             }
         }
 

@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Threading;
 using WpfApplication1.Model;
 using WpfApplication1.Model.ShapeModel;
-using WpfApplication1.Ui.PropertyGrid;
+using WpfApplication1.Ui.Designer;
 using WpfApplication1.Utility;
 
 namespace WpfApplication1

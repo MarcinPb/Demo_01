@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:WpfApplication1"
         xmlns:utility="clr-namespace:WpfApplication1.Utility"
         xmlns:shapeModel="clr-namespace:WpfApplication1.Model.ShapeModel" 
-        xmlns:uiDesigner="clr-namespace:WpfApplication1.Ui.PropertyGrid" 
+        xmlns:uiDesigner="clr-namespace:WpfApplication1.Ui.Designer" 
+        xmlns:uiPropertyGrid="clr-namespace:WpfApplication1.Ui.PropertyGrid" 
         xmlns:uiDesignerPipe="clr-namespace:WpfApplication1.Ui.PropertyGrid.Pipe" 
         xmlns:uiDesignerJunction="clr-namespace:WpfApplication1.Ui.PropertyGrid.Junction" 
         xmlns:uiDesignerCustNode="clr-namespace:WpfApplication1.Ui.PropertyGrid.CustomerNode" 
@@ -25,8 +26,8 @@
         <DataTemplate DataType="{x:Type uiDesigner:DesignerViewModel}">
             <uiDesigner:DesignerView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type uiDesigner:EditedViewModel}">
-            <uiDesigner:EditedView />
+        <DataTemplate DataType="{x:Type uiPropertyGrid:EditedViewModel}">
+            <uiPropertyGrid:EditedView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type uiDesignerPipe:EditedViewModel}">
             <uiDesignerPipe:EditedView />

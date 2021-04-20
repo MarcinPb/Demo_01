@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApplication1.Ui.PropertyGrid
+namespace WpfApplication1.Ui.Designer
 {
     /// <summary>
     /// Interaction logic for DesignerView.xaml

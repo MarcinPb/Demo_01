@@ -81,7 +81,6 @@
     <Compile Include="Controls\FilteredDataGridCtrl.cs" />
     <Compile Include="Controls\UiHelper.cs" />
     <Compile Include="Controls\TextHeaderToBooleanConverter.cs" />
-    <Compile Include="Converters\PointsToPathConverter.cs" />
     <Compile Include="Model\ShapeModel\PushPinShp.cs" />
     <Compile Include="Model\ShapeModel\PathShp.cs" />
     <Compile Include="Repo\DesignerRepo.cs" />
@@ -213,7 +212,9 @@
   <ItemGroup>
     <Resource Include="Controls\filter.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Converters\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\DeleteHS.png" />
     <Resource Include="Resources\PointerHS.png" />
