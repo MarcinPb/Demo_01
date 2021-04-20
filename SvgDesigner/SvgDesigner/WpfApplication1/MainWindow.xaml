@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WpfApplication1"
         xmlns:utility="clr-namespace:WpfApplication1.Utility"
         xmlns:uiDesigner="clr-namespace:WpfApplication1.Ui.Designer" 
+        xmlns:uiDesignerWithPropreryGrid="clr-namespace:WpfApplication1.Ui.DesignerWithPropreryGrid" 
         xmlns:uiPropertyGrid="clr-namespace:WpfApplication1.Ui.PropertyGrid" 
         xmlns:uiDesignerPipe="clr-namespace:WpfApplication1.Ui.PropertyGrid.Pipe" 
         xmlns:uiDesignerJunction="clr-namespace:WpfApplication1.Ui.PropertyGrid.Junction" 
@@ -22,21 +23,6 @@
         <local:MainWindowViewModel/>
     </Window.DataContext>
     <Window.Resources>
-        <DataTemplate DataType="{x:Type uiDesigner:DesignerViewModel}">
-            <uiDesigner:DesignerView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type uiPropertyGrid:EditedViewModel}">
-            <uiPropertyGrid:EditedView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type uiDesignerPipe:EditedViewModel}">
-            <uiDesignerPipe:EditedView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type uiDesignerJunction:EditedViewModel}">
-            <uiDesignerJunction:EditedView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type uiDesignerCustNode:EditedViewModel}">
-            <uiDesignerCustNode:EditedView />
-        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -53,51 +39,17 @@
                 <MenuItem Header="Exit"/>
             </MenuItem>
             <MenuItem Header="Data">
-                <MenuItem Header="Data" />
-                <MenuItem Header="Import" Command="{Binding ImportDataCmd}"/>
+                <MenuItem Header="Import Changeable Data" Command="{Binding ImportDataCmd}"/>
+                <Separator/>
+                <MenuItem Header="Designer - 1 - Przybków"  Command="{Binding OpenDesignerCmd}"/>
+                <MenuItem Header="Designer - 2 - Stare Miasto"  Command="{Binding OpenDesignerNextCmd}"/>
             </MenuItem>
         </Menu>
 
-        <Grid Grid.Row="1" Margin="10">
-
-            <xcad:DockingManager x:Name="_dockingManager"                          
-                           AllowMixedOrientation="True"
-                           BorderBrush="Black"
-                           BorderThickness="0"
-                           >
-                <xcad:DockingManager.DocumentHeaderTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <!--<Image Source="{Binding IconSource}" Margin="0,0,4,0" />-->
-                            <TextBlock Text="{Binding Title}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </xcad:DockingManager.DocumentHeaderTemplate>
-                
-                <xcad:LayoutRoot x:Name="_layoutRoot">
-                    <xcad:LayoutPanel Orientation="Horizontal">
-
-                        <xcad:LayoutDocumentPaneGroup >
-                            <xcad:LayoutDocumentPane >
-                                <xcad:LayoutDocument ContentId="document1" Title="Map" >
-                                    <ContentControl Content="{Binding DesignerViewModel}" />
-                                </xcad:LayoutDocument>
-                            </xcad:LayoutDocumentPane>
-                        </xcad:LayoutDocumentPaneGroup >
-                        
-                        <xcad:LayoutAnchorablePaneGroup DockWidth="300">
-                            <xcad:LayoutAnchorablePane>
-                                <xcad:LayoutAnchorable ContentId="alarms" Title="Properties" CanClose="False">
-                                    <ContentControl Content="{Binding PropertyGridViewModel}" />
-                                </xcad:LayoutAnchorable>
-                            </xcad:LayoutAnchorablePane>
-                        </xcad:LayoutAnchorablePaneGroup>
-                    </xcad:LayoutPanel>
-
-                </xcad:LayoutRoot>
-            </xcad:DockingManager>
-
-        </Grid>
+        <TabControl Grid.Row="1" Margin="10">
+            <TabItem Header="Designer">
+            </TabItem>
+        </TabControl>
 
         <StatusBar Grid.Row="2">
             <StatusBarItem >

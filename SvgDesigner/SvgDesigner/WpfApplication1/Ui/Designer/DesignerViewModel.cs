@@ -90,7 +90,7 @@ namespace WpfApplication1.Ui.Designer
             }
         }
 
-        public DesignerViewModel()
+        public DesignerViewModel(int? zoneId = null)
         {
             StartDate = Convert.ToDateTime("2021-03-09 11:30");
 
@@ -103,8 +103,7 @@ namespace WpfApplication1.Ui.Designer
             CanvasWidth = svgWidth + 2 * margin;
             CanvasHeight = svgHeight + 2 * margin;
 
-
-            var list = new DesignerRepo(6773).GetShpList(svgWidth, svgHeight, margin);
+            var list = new DesignerRepo(zoneId).GetShpList(svgWidth, svgHeight, margin);
             ObjList = new ObservableCollection<Shp>(list);
         }
 

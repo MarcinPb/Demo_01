@@ -9,23 +9,28 @@ using System.Windows.Threading;
 using WpfApplication1.Ui.Designer;
 using WpfApplication1.Ui.Designer.Model;
 using WpfApplication1.Ui.Designer.Model.ShapeModel;
+using WpfApplication1.Ui.DesignerWithPropreryGrid;
 using WpfApplication1.Utility;
 
 namespace WpfApplication1
 {
     public class MainWindowViewModel : ViewModelBase
     {
+
+        //public DesignerViewModel DesignerViewModel { get; set; }
+
+        //private Ui.PropertyGrid.EditedViewModel _propertyGridViewModel;
+        //public Ui.PropertyGrid.EditedViewModel PropertyGridViewModel
+        //{
+        //    get { return _propertyGridViewModel; }
+        //    set { _propertyGridViewModel = value; RaisePropertyChanged(nameof(PropertyGridViewModel)); }
+        //}
+
+
+
+        #region ImportChangeableData
+
         private readonly string _sqliteFile = @"K:\temp\sandbox\Nowy model testowy\testOPC.wtg.sqlite";
-
-        public DesignerViewModel DesignerViewModel { get; set; }
-
-        private Ui.PropertyGrid.EditedViewModel _propertyGridViewModel;
-        public Ui.PropertyGrid.EditedViewModel PropertyGridViewModel
-        {
-            get { return _propertyGridViewModel; }
-            set { _propertyGridViewModel = value; RaisePropertyChanged(nameof(PropertyGridViewModel)); }
-        }
-
 
         private double _progressPercent;
         public double ProgressPercent
@@ -52,28 +57,10 @@ namespace WpfApplication1
             set { _innerProgressMessage = value; RaisePropertyChanged(nameof(InnerProgressMessage)); }
         }
 
-
-
         public RelayCommand<object> ImportDataCmd { get; }
-
-        public MainWindowViewModel()
-        {
-            ImportDataCmd = new RelayCommand<object>(ImportDataCmdExecute);
-
-            DesignerViewModel = new DesignerViewModel();
-            PropertyGridViewModel = new Ui.PropertyGrid.EditedViewModel();
-
-            Messenger.Default.Register<Shp>(this, OnShpReceived);
-        }
 
         private async void ImportDataCmdExecute(object obj)
         {
-            //InfraConstantDataLists infraConstantDataLists = new InfraConstantDataLists()
-            //{
-            //    InfraObjTypeList = InfraRepo.GetObjTypeList().ToList(),
-            //    InfraObjTypeFieldList = InfraRepo.GetObjTypeFieldList().ToList(),
-            //    InfraFieldList = InfraRepo.GetFieldList(),
-            //};
             InfraConstantDataLists infraConstantDataLists = InfraRepo.GetInfraConstantData();
 
             var importer = new Importer();
@@ -91,31 +78,83 @@ namespace WpfApplication1
 
         private void OnInnerProgressChanged(object sender, GeometryReader.ProgressEventArgs e)
         {
-            InnerProgressPercent = e.ProgressRatio; 
-            InnerProgressMessage = e.Message; 
+            InnerProgressPercent = e.ProgressRatio;
+            InnerProgressMessage = e.Message;
         }
 
         private void OnProgressChanged(object sender, GeometryReader.ProgressEventArgs e)
         {
-            ProgressPercent = e.ProgressRatio; 
-            ProgressMessage = e.Message; 
+            ProgressPercent = e.ProgressRatio;
+            ProgressMessage = e.Message;
         }
 
+        #endregion
 
-        private void OnShpReceived(Shp shp)
+
+        #region Open Designer
+
+        public RelayCommand OpenDesignerCmd { get; }
+        private void OpenRowCmdExecute()
         {
-            if (shp is PathShp)
-            {
-                PropertyGridViewModel = new Ui.PropertyGrid.Pipe.EditedViewModel(shp.Id);
-            }
-            else if (shp is EllipseShp)
-            {
-                PropertyGridViewModel = new Ui.PropertyGrid.Junction.EditedViewModel(shp.Id);
-            }
-            else if (shp is RectangleShp)
-            {
-                PropertyGridViewModel = new Ui.PropertyGrid.CustomerNode.EditedViewModel(shp.Id);
-            }
+
+            var editedViewModel = new EditedViewModel(6773);
+            var result = DialogUtility.ShowModal(editedViewModel);
+            //editedViewModel.Dispose();
         }
+        public bool OpenRowCmdCanExecute()
+        {
+            return true;
+        }
+
+        public RelayCommand OpenDesignerNextCmd { get; }
+        private void OpenRowNextCmdExecute()
+        {
+            var editedViewModel = new EditedViewModel(6774);
+            var result = DialogUtility.ShowModal(editedViewModel);
+            //editedViewModel.Dispose();
+        }
+        public bool OpenRowNextCmdCanExecute()
+        {
+            return true;
+        }
+
+        #endregion
+
+
+        public MainWindowViewModel()
+        {
+            ImportDataCmd = new RelayCommand<object>(ImportDataCmdExecute);
+            OpenDesignerCmd = new RelayCommand(OpenRowCmdExecute, OpenRowCmdCanExecute);
+            OpenDesignerNextCmd = new RelayCommand(OpenRowNextCmdExecute, OpenRowNextCmdCanExecute);
+
+            //DesignerViewModel = new DesignerViewModel();
+            //PropertyGridViewModel = new Ui.PropertyGrid.EditedViewModel();
+
+            //Messenger.Default.Register<Shp>(this, OnShpReceived);
+        }
+
+
+
+
+
+
+
+
+
+        //private void OnShpReceived(Shp shp)
+        //{
+        //    if (shp is PathShp)
+        //    {
+        //        PropertyGridViewModel = new Ui.PropertyGrid.Pipe.EditedViewModel(shp.Id);
+        //    }
+        //    else if (shp is EllipseShp)
+        //    {
+        //        PropertyGridViewModel = new Ui.PropertyGrid.Junction.EditedViewModel(shp.Id);
+        //    }
+        //    else if (shp is RectangleShp)
+        //    {
+        //        PropertyGridViewModel = new Ui.PropertyGrid.CustomerNode.EditedViewModel(shp.Id);
+        //    }
+        //}
     }
 }

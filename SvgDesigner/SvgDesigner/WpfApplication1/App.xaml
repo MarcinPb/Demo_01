@@ -4,9 +4,11 @@
     xmlns:local="clr-namespace:WpfApplication1"
     xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
     x:Class="WpfApplication1.App" StartupUri="MainWindow.xaml" 
+    xmlns:uiDesignerWithPropreryGrid="clr-namespace:WpfApplication1.Ui.DesignerWithPropreryGrid" 
     >
     <Application.Resources>
-
-
+        <DataTemplate DataType="{x:Type uiDesignerWithPropreryGrid:EditedViewModel}">
+            <uiDesignerWithPropreryGrid:EditedView />
+        </DataTemplate>
     </Application.Resources>
 </Application>
