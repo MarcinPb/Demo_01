@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using WpfApplication1.Ui.Designer;
 using WpfApplication1.Ui.Designer.Model;
 using WpfApplication1.Ui.Designer.Model.ShapeModel;
+using WpfApplication1.Ui.Designer.Repo;
 using WpfApplication1.Ui.DesignerWithPropreryGrid;
 using WpfApplication1.Utility;
 
@@ -126,6 +127,10 @@ namespace WpfApplication1
             ImportDataCmd = new RelayCommand<object>(ImportDataCmdExecute);
             OpenDesignerCmd = new RelayCommand(OpenRowCmdExecute, OpenRowCmdCanExecute);
             OpenDesignerNextCmd = new RelayCommand(OpenRowNextCmdExecute, OpenRowNextCmdCanExecute);
+
+            var shpObjList = ShpRepo.ShpObjList;
+
+
 
             //DesignerViewModel = new DesignerViewModel();
             //PropertyGridViewModel = new Ui.PropertyGrid.EditedViewModel();

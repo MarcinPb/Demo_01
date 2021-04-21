@@ -98,6 +98,8 @@
     <Compile Include="Ui\Designer\DesignerView.xaml.cs">
       <DependentUpon>DesignerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ui\Designer\Repo\DesignerRepoTwo.cs" />
+    <Compile Include="Ui\Designer\Repo\ShpRepo.cs" />
     <Compile Include="Ui\PropertyGrid\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>

@@ -42,9 +42,9 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
         #endregion
 
 
-        public EditedViewModel(int? zoneID = null)
+        public EditedViewModel(int? zoneId = null)
         {
-            DesignerViewModel = new DesignerViewModel(zoneID);
+            DesignerViewModel = new DesignerViewModel(zoneId);
             PropertyGridViewModel = new Ui.PropertyGrid.EditedViewModel();
 
             Messenger.Default.Register<Shp>(this, OnShpReceived);

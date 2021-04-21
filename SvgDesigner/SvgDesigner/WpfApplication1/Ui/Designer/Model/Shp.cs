@@ -23,6 +23,7 @@ namespace WpfApplication1.Ui.Designer.Model
 
         public double X { get; set; }
         public double Y { get; set; }
+        public int? ZoneId { get; set; }
 
         public override string ToString()
         {
