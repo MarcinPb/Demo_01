@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImportedBaseOutputLists.cs" />
-    <Compile Include="InfraConn.cs" />
     <Compile Include="InfraConstantDataLists.cs" />
     <Compile Include="InfraChangeableDataLists.cs" />
     <Compile Include="ImportedField.cs" />

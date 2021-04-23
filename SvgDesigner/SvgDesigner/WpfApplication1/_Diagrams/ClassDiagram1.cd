@@ -29,16 +29,54 @@
       <FileName>Model\ShapeModel\EllipseShp.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WpfApplication1.ShapeModel.Shp">
-    <Position X="3.75" Y="4" Width="2" />
+  <Class Name="WpfApplication1.Ui.Designer.Model.Shp">
+    <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAEAAAAAAQAAAAAAAAgAAAAAAAAYAA=</HashCode>
-      <FileName>Model\ShapeModel\Shp.cs</FileName>
+      <HashCode>AAACAAACAAAAAAAEAAAAAAQAAAAAAAAgAAAAAAAAYAA=</HashCode>
+      <FileName>Ui\Designer\Model\Shp.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Database.DataModel.DesignerObj">
-    <Position X="1" Y="4" Width="1.5" />
-    <TypeIdentifier />
+  <Class Name="WpfApplication1.Ui.Designer.Model.ShapeModel.ConnectionShp">
+    <Position X="7" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ui\Designer\Model\ShapeModel\ConnectionShp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfApplication1.Ui.Designer.Model.ShapeModel.EllipseShp">
+    <Position X="1.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ui\Designer\Model\ShapeModel\EllipseShp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfApplication1.Ui.Designer.Model.ShapeModel.LineShp">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ui\Designer\Model\ShapeModel\LineShp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfApplication1.Ui.Designer.Model.ShapeModel.PathShp">
+    <Position X="8.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Ui\Designer\Model\ShapeModel\PathShp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfApplication1.Ui.Designer.Model.ShapeModel.PushPinShp">
+    <Position X="10.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ui\Designer\Model\ShapeModel\PushPinShp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfApplication1.Ui.Designer.Model.ShapeModel.RectangleShp">
+    <Position X="3.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ui\Designer\Model\ShapeModel\RectangleShp.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
