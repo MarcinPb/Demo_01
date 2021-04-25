@@ -15,6 +15,7 @@
         xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock" 
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
+             
         >
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type uiDesigner:DesignerViewModel}">
@@ -34,58 +35,13 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition />
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <Grid Grid.Row="1" Margin="10">
-
-            <xcad:DockingManager x:Name="_dockingManager"                          
-                           AllowMixedOrientation="True"
-                           BorderBrush="Black"
-                           BorderThickness="0"
-                           >
-                <xcad:DockingManager.DocumentHeaderTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Title}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </xcad:DockingManager.DocumentHeaderTemplate>
-
-                <xcad:LayoutRoot x:Name="_layoutRoot">
-                    <xcad:LayoutPanel Orientation="Horizontal">
-
-                        <xcad:LayoutDocumentPaneGroup >
-                            <xcad:LayoutDocumentPane >
-                                <xcad:LayoutDocument ContentId="document1" Title="Map" >
-                                    <ContentControl Content="{Binding DesignerViewModel}" />
-                                </xcad:LayoutDocument>
-                            </xcad:LayoutDocumentPane>
-                        </xcad:LayoutDocumentPaneGroup >
-
-                        <xcad:LayoutAnchorablePaneGroup DockWidth="300">
-                            <xcad:LayoutAnchorablePane>
-                                <xcad:LayoutAnchorable ContentId="alarms" Title="Properties" CanClose="False">
-                                    <ContentControl Content="{Binding PropertyGridViewModel}" />
-                                </xcad:LayoutAnchorable>
-                            </xcad:LayoutAnchorablePane>
-                        </xcad:LayoutAnchorablePaneGroup>
-                    </xcad:LayoutPanel>
-
-                </xcad:LayoutRoot>
-            </xcad:DockingManager>
-
-        </Grid>
-
-        <StatusBar Grid.Row="2">
-            <StatusBarItem >
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Progress: "/>
-                </StackPanel>
-            </StatusBarItem>
-        </StatusBar>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ContentControl Grid.Column="0" Content="{Binding DesignerViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Margin="5 0 5 0"/>
+        <ContentControl Grid.Column="2"  Content="{Binding PropertyGridViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
     </Grid>
 </UserControl>

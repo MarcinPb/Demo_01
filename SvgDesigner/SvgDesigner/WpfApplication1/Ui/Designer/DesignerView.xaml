@@ -106,7 +106,7 @@
                             <ItemsControl ItemsSource="{Binding ObjList}" >
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <Canvas Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}" Name="Layer" ClipToBounds="True" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" >
+                                        <Canvas Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}" Name="Layer" ClipToBounds="True" Background="AliceBlue" >
                                         <!--<Canvas Name="Layer" ClipToBounds="True" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" >-->
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="MouseLeftButtonDown">

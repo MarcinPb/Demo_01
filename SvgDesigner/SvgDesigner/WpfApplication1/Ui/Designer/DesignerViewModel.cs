@@ -97,7 +97,7 @@ namespace WpfApplication1.Ui.Designer
             MouseLeftButtonDownCmd = new RelayCommand<object>(OnMouseDoubleClickCmdExecute);
 
             double svgWidth = 800;
-            double svgHeight = 800;
+            double svgHeight = 600;
             double margin = 20;
 
             CanvasWidth = svgWidth + 2 * margin;
