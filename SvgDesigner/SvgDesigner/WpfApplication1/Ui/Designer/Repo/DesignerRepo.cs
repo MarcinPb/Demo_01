@@ -136,19 +136,19 @@ namespace WpfApplication1.Ui.Designer.Repo
             return _designerObjList.Where(f => f.ObjTypeId == 73).ToList();
         }
 
-        private Point2D GetPointTopLeft()
+        private Point GetPointTopLeft()
         {
             var junctionList = GetJunctionList();
             var xMin = junctionList.Min(x => x.Geometry[0].X);
             var yMin = junctionList.Min(x => x.Geometry[0].Y);
-            return new Point2D(xMin, yMin);
+            return new Point(xMin, yMin);
         }
-        private Point2D GetPointBottomRight()
+        private Point GetPointBottomRight()
         {
             var junctionList = GetJunctionList();
             var xMax = junctionList.Max(x => x.Geometry[0].X);
             var yMax = junctionList.Max(x => x.Geometry[0].Y);
-            return new Point2D(xMax, yMax);
+            return new Point(xMax, yMax);
         }
 
         private static List<DesignerObj> GetDesignerObjList(int? zoneId = null)
@@ -211,7 +211,7 @@ namespace WpfApplication1.Ui.Designer.Repo
                     AssociatedId = x.AssociatedId,
                     TargetId = x.TargetId,
 
-                    Geometry = infraValueGeometryList.Where(g => g.ObjId == x.ObjId).OrderBy(g => g.OrderNo).Select(g => new Point2D((double)g.Xp, (double)g.Yp)).ToList(),
+                    Geometry = infraValueGeometryList.Where(g => g.ObjId == x.ObjId).OrderBy(g => g.OrderNo).Select(g => new Point((double)g.Xp, (double)g.Yp)).ToList(),
                 })
                 .ToList();
 

@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="Ui\DesignerWithPropreryGrid\EditedViewModel.cs" />
     <Compile Include="Ui\Designer\Model\DesignerObj.cs" />
+    <Compile Include="Ui\Designer\Model\Point2D.cs" />
     <Compile Include="Ui\Designer\Model\ShapeModel\PushPinShp.cs" />
     <Compile Include="Ui\Designer\Model\ShapeModel\PathShp.cs" />
     <Compile Include="Ui\Designer\Repo\DesignerRepo.cs" />

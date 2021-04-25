@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WpfApplication1.Ui.Designer.Model;
 
 namespace WpfApplication1.Ui.Designer.Repo
@@ -82,9 +83,27 @@ namespace WpfApplication1.Ui.Designer.Repo
                     AssociatedId = x.AssociatedId,
                     TargetId = x.TargetId,
 
-                    Geometry = infraValueGeometryList.Where(g => g.ObjId == x.ObjId).OrderBy(g => g.OrderNo).Select(g => new Point2D((double)g.Xp, (double)g.Yp)).ToList(),
+                    Geometry = infraValueGeometryList.Where(g => g.ObjId == x.ObjId).OrderBy(g => g.OrderNo).Select(g => new Point((double)g.Xp, (double)g.Yp)).ToList(),
                 })
                 .ToList();
+
+            // Set up ZoneId for CustomerMeters and ScadaElements
+            //var domainObjects2 = domainObjects.GroupJoin(
+            //    domainObjects,
+            //    l => l.AssociatedId,
+            //    r => r.ObjId,
+            //    (l, r) => new 
+            //    )
+            //domainObjects.ForEach(cm => cm.ZoneId = domainObjects.FirstOrDefault(j => cm.AssociatedId == j.ObjId)?.ZoneId);
+            foreach (var cm in domainObjects.Where(f => f.ObjTypeId == 73))
+            {
+                var attachedObj = domainObjects.FirstOrDefault(j => cm.AssociatedId == j.ObjId);
+                if (attachedObj != null)
+                {
+                    cm.ZoneId = attachedObj.ZoneId;
+                }            
+            }
+
 
             domainObjects.ForEach(x => { x.Xp = x.Geometry[0].X; x.Yp = x.Geometry[0].Y; });
             return domainObjects;

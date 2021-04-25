@@ -15,7 +15,6 @@
         xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock" 
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Width="1200" Height="700"        
         >
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type uiDesigner:DesignerViewModel}">

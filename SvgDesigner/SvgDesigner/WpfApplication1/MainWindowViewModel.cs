@@ -17,6 +17,7 @@ namespace WpfApplication1
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        public EditedViewModel DesignerViewModel { get; set; }
 
         //public DesignerViewModel DesignerViewModel { get; set; }
 
@@ -97,7 +98,6 @@ namespace WpfApplication1
         public RelayCommand OpenDesignerCmd { get; }
         private void OpenRowCmdExecute()
         {
-
             var editedViewModel = new EditedViewModel(6773);
             var result = DialogUtility.ShowModal(editedViewModel);
             //editedViewModel.Dispose();
@@ -128,8 +128,10 @@ namespace WpfApplication1
             OpenDesignerCmd = new RelayCommand(OpenRowCmdExecute, OpenRowCmdCanExecute);
             OpenDesignerNextCmd = new RelayCommand(OpenRowNextCmdExecute, OpenRowNextCmdCanExecute);
 
-            var shpObjList = ShpRepo.ShpObjList;
+            // Singleton run before opening designer first time. It takes more or less 5 sek.
+            var designerObjList1 = DesignerRepoTwo.DesignerObjList;
 
+            DesignerViewModel = new EditedViewModel(6773);
 
 
             //DesignerViewModel = new DesignerViewModel();

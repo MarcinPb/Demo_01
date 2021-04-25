@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WpfApplication1.Utility;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
@@ -13,10 +14,10 @@ namespace WpfApplication1.Ui.PropertyGrid.Pipe
 {
     public class ItemViewModel : Ui.PropertyGrid.ItemViewModel
     {
-        private List<Point2D> _path;
+        private List<Point> _path;
         [Category("<Geometry>")]
         [DisplayName("Geometry")]
-        public List<Point2D> Path
+        public List<Point> Path
         {
             get { return _path; }
             set { _path = value; RaisePropertyChanged("Path"); }

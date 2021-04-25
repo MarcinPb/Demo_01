@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace WpfApplication1.Ui.Designer.Model
 {
@@ -12,7 +13,7 @@ namespace WpfApplication1.Ui.Designer.Model
         public int ObjId { get; set; }
         public int ObjTypeId { get; set; }
         public string Label { get; set; }
-        public List<Point2D> Geometry { get; set; }
+        public List<Point> Geometry { get; set; }
         public bool IsActive { get; set; }
         public int? ZoneId { get; set; }
         public int? AssociatedId { get; set; }

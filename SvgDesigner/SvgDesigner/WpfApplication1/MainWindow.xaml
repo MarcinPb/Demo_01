@@ -48,6 +48,7 @@
 
         <TabControl Grid.Row="1" Margin="10">
             <TabItem Header="Designer">
+                <ContentControl Content="{Binding DesignerViewModel}" />
             </TabItem>
         </TabControl>
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using WpfApplication1.Ui.Designer.Model;
 using WpfApplication1.Utility;
 
@@ -50,7 +51,7 @@ namespace WpfApplication1.Ui.PropertyGrid
                     infraData.InfraChangeableData.InfraGeometryList,
                     l => l.ValueId,
                     r => r.ValueId,
-                    (l, r) => new Point2D(r.Xp, r.Yp)
+                    (l, r) => new Point(r.Xp, r.Yp)
                 )
                 .ToList();
 

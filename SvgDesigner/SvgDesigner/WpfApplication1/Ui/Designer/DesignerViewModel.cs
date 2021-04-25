@@ -103,8 +103,8 @@ namespace WpfApplication1.Ui.Designer
             CanvasWidth = svgWidth + 2 * margin;
             CanvasHeight = svgHeight + 2 * margin;
 
-            //var list = new DesignerRepo(zoneId).GetShpList(svgWidth, svgHeight, margin);
-            var list = ShpRepo.ShpObjList.Where(f => f.ZoneId == zoneId).ToList();
+            //var list = ShpRepo.ShpObjList.Where(f => f.ZoneId == zoneId).ToList();
+            var list = ShpRepo.GetShpList(svgWidth, svgHeight, margin, (int)zoneId) ;
 
             ObjList = new ObservableCollection<Shp>(list);
         }
