@@ -75,12 +75,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="800*"/>
+            <ColumnDefinition Width="760*"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="860*"/>
         </Grid.ColumnDefinitions>
 
-        <TabControl Grid.Column="0"  Margin="0 0 5 0" TabStripPlacement="Bottom">
+        <TabControl Grid.Column="0"  Margin="0 0 5 0" TabStripPlacement="Bottom" >
             <TabItem Header="Start" >
                 <!-- <view:StartView /> -->
                 <ContentControl Content="{Binding StartViewModel}" />
@@ -110,10 +110,10 @@
                 <ContentControl Content="{Binding IntermittentSupplyViewModel}" />
             </TabItem>
         </TabControl>
-        
-        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" Width="5" Background="LightGray" />
 
-        <TabControl Grid.Column="2" Margin="5 0 0 0" TabStripPlacement="Bottom">
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="5" Background="LightGray" />
+
+        <TabControl Grid.Column="2" Margin="5 0 0 0" TabStripPlacement="Bottom" >
             <TabItem Header="Water Balance m3day" >
                 <view:WaterBalanceDayView/>
             </TabItem>

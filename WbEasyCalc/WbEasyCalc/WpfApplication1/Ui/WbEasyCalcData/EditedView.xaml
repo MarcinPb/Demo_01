@@ -7,7 +7,6 @@
              xmlns:converters="clr-namespace:WpfApplication1.Converters" 
              xmlns:excel="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel"
              xmlns:waterConsumption="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.WaterConsumption"
-             MinHeight="700"
              >
     <UserControl.Resources>
         <converters:FloatConverter x:Key="FloatConverter" />

@@ -7,12 +7,14 @@
         mc:Ignorable="d"
         Title="DialogWindow" 
         
-        SizeToContent="WidthAndHeight"  
         Loaded="Window_Loaded" 
         WindowStyle="ThreeDBorderWindow"
         Closed="DialogWindow_OnClosed"
+        
+        Height="800" Width="1700"
         >
         <!--
+        SizeToContent="WidthAndHeight"  
         ResizeMode="NoResize"
         Closing="DialogWindow_OnClosing"
         -->
@@ -21,7 +23,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Margin="0 10 0 0" Grid.Row="0" BorderThickness="1" BorderBrush="Gray" >
+        <Border Grid.Row="0" BorderThickness="1" BorderBrush="Gray" >
             <ContentControl Content="{Binding}" />
         </Border>
         <StackPanel Grid.Row="1" Orientation="Horizontal"  HorizontalAlignment="Right" >
