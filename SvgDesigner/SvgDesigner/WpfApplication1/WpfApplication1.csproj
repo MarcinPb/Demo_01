@@ -233,9 +233,7 @@
   <ItemGroup>
     <Resource Include="Controls\filter.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\DeleteHS.png" />
     <Resource Include="Resources\PointerHS.png" />
