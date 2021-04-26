@@ -98,9 +98,7 @@ namespace WpfApplication1
         public RelayCommand OpenDesignerCmd { get; }
         private void OpenRowCmdExecute()
         {
-            var editedViewModel = new EditedViewModel(6773);
-            var result = DialogUtility.ShowModal(editedViewModel);
-            //editedViewModel.Dispose();
+            OpenRowNextCmdExecute(6773);
         }
         public bool OpenRowCmdCanExecute()
         {
@@ -110,13 +108,24 @@ namespace WpfApplication1
         public RelayCommand OpenDesignerNextCmd { get; }
         private void OpenRowNextCmdExecute()
         {
-            var editedViewModel = new EditedViewModel(6774);
-            var result = DialogUtility.ShowModal(editedViewModel);
-            //editedViewModel.Dispose();
+            OpenRowNextCmdExecute(6774);
         }
         public bool OpenRowNextCmdCanExecute()
         {
             return true;
+        }
+
+        private Shp _pushPinPoint;
+        private void OpenRowNextCmdExecute(int zoneId)
+        {
+            var editedViewModel = new EditedViewModel(zoneId, _pushPinPoint);
+            var result = DialogUtility.ShowModal(editedViewModel);
+            if (result == true)
+            {
+                _pushPinPoint = editedViewModel.PushPin;
+                MessageBox.Show($"Water consumption location: X={_pushPinPoint.X}, Y={_pushPinPoint.Y}", "Info", MessageBoxButton.OK, MessageBoxImage.Information);         
+            }
+            //editedViewModel.Dispose();
         }
 
         #endregion
@@ -132,36 +141,6 @@ namespace WpfApplication1
             var designerObjList1 = DesignerRepoTwo.DesignerObjList;
 
             DesignerViewModel = new EditedViewModel(6773);
-
-
-            //DesignerViewModel = new DesignerViewModel();
-            //PropertyGridViewModel = new Ui.PropertyGrid.EditedViewModel();
-
-            //Messenger.Default.Register<Shp>(this, OnShpReceived);
         }
-
-
-
-
-
-
-
-
-
-        //private void OnShpReceived(Shp shp)
-        //{
-        //    if (shp is PathShp)
-        //    {
-        //        PropertyGridViewModel = new Ui.PropertyGrid.Pipe.EditedViewModel(shp.Id);
-        //    }
-        //    else if (shp is EllipseShp)
-        //    {
-        //        PropertyGridViewModel = new Ui.PropertyGrid.Junction.EditedViewModel(shp.Id);
-        //    }
-        //    else if (shp is RectangleShp)
-        //    {
-        //        PropertyGridViewModel = new Ui.PropertyGrid.CustomerNode.EditedViewModel(shp.Id);
-        //    }
-        //}
     }
 }

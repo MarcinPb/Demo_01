@@ -15,6 +15,8 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
 {
     public class EditedViewModel : ViewModelBase, IDialogViewModel
     {
+        public Shp PushPin { get; set; }
+
         public DesignerViewModel DesignerViewModel { get; set; }
 
         private Ui.PropertyGrid.EditedViewModel _propertyGridViewModel;
@@ -30,8 +32,11 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
 
         public bool Save()
         {
-            //DataModel.WbEasyCalcData model = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.SaveItem(ItemViewModel.Model);
-            //Messenger.Default.Send<DataModel.WbEasyCalcData>(model);
+            if (PushPin == null)
+            {
+                MessageBox.Show("You can not save water consumption without its location.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
             return true;
         }
 
@@ -42,9 +47,9 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
         #endregion
 
 
-        public EditedViewModel(int? zoneId = null)
+        public EditedViewModel(int? zoneId = null, Shp locationPoint = null)
         {
-            DesignerViewModel = new DesignerViewModel(zoneId);
+            DesignerViewModel = new DesignerViewModel(zoneId, locationPoint);
             PropertyGridViewModel = new Ui.PropertyGrid.EditedViewModel();
 
             Messenger.Default.Register<Shp>(this, OnShpReceived);
@@ -63,6 +68,10 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
             else if (shp is RectangleShp)
             {
                 PropertyGridViewModel = new Ui.PropertyGrid.CustomerNode.EditedViewModel(shp.Id);
+            }
+            else if (shp is PushPinShp)
+            {
+                PushPin = shp;
             }
         }
     }

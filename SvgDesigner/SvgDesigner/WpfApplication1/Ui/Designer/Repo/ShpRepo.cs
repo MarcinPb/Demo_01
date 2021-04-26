@@ -24,12 +24,14 @@ namespace WpfApplication1.Ui.Designer.Repo
         {
             const double dotR = 0.2;
 
-            var designerObjList = DesignerRepoTwo.DesignerObjList.Where(f => f.ZoneId == zoneId);
+            var designerObjList = DesignerRepoTwo.DesignerObjList.Where(f => f.ZoneId == zoneId).Select(x => (DesignerObj)x.Clone()).ToList();
 
             var pointTopLeft = GetPointTopLeft(designerObjList);
             var pointBottomRight = GetPointBottomRight(designerObjList);
             var xFactor = svgWidth / (pointBottomRight.X - pointTopLeft.X);
             var yFactor = svgHeight / (pointBottomRight.Y - pointTopLeft.Y);
+
+            int designerObjQty = designerObjList.Count;
 
             foreach (var o in designerObjList)
             {

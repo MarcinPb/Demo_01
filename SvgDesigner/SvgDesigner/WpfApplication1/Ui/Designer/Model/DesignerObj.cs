@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace WpfApplication1.Ui.Designer.Model
 {
-    public class DesignerObj
+    public class DesignerObj : ICloneable
     {
         public int ObjId { get; set; }
         public int ObjTypeId { get; set; }
@@ -24,5 +24,23 @@ namespace WpfApplication1.Ui.Designer.Model
 
         public Dictionary<string, object> Fields { get; set; }
 
+        public object Clone()
+        {
+            return new DesignerObj
+            {
+                ObjId = ObjId,
+                ObjTypeId = ObjTypeId,
+                Label = Label,
+                Geometry = Geometry.Select(x => new Point(x.X, x.Y)).ToList(),
+                IsActive = IsActive,
+                ZoneId = ZoneId,
+                AssociatedId = AssociatedId,
+                TargetId = TargetId,
+                Xp = Xp,
+                Yp = Yp,
+
+                Fields = null,
+            };
+        }
     }
 }

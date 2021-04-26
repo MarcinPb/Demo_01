@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shapes;
 using WpfApplication1.Ui.Designer.Model;
@@ -24,27 +25,7 @@ namespace WpfApplication1.Ui.Designer
             get => _selectedItem;
             set { _selectedItem = value; RaisePropertyChanged(nameof(SelectedItem)); }
         }
-
-        private ICommand _addCommand;
-        public ICommand AddCommand
-        {
-            get { return _addCommand ?? (_addCommand = new RelayCommand(OnAddExecute, () => true)); }
-        }
-        private void OnAddExecute()
-        {
-            ObjList.Add(new PushPinShp() { Id = 100000, X = 210, Y = 30, TypeId = 2 });
-        }
-
-        private ICommand _moveCommand;
-        public ICommand MoveCommand
-        {
-            get { return _moveCommand ?? (_moveCommand = new RelayCommand(OnMoveExecute, () => true)); }
-        }
-        private void OnMoveExecute()
-        {
-            var obj = ObjList.LastOrDefault();
-            if (obj != null) obj.X += 20;
-        }
+        public Shp PushPin { get; set; }
 
         public RelayCommand<object> MouseLeftButtonDownCmd { get; }
         private int id;
@@ -69,7 +50,6 @@ namespace WpfApplication1.Ui.Designer
                 else if (e.Device.Target is Rectangle)
                 {
                     id = Convert.ToInt32(((Rectangle)e.Device.Target).Tag);
-
                 }
                 SelectedItem = id;
                 var shp = ObjList.FirstOrDefault(x => x.Id == id);
@@ -79,6 +59,7 @@ namespace WpfApplication1.Ui.Designer
             {
                 var position = e.GetPosition(e.Device.Target);
 
+                // Remove form collection.
                 var objToRemove = ObjList.FirstOrDefault(x => x.Id == 100000);
                 if (objToRemove != null)
                 {
@@ -86,11 +67,14 @@ namespace WpfApplication1.Ui.Designer
                 }
 
                 var objPosition = ObjList.FirstOrDefault(x => x.Id == id);
-                ObjList.Add(new PushPinShp() { Id = 100000, X = objPosition.X + position.X, Y = objPosition.Y + position.Y, TypeId = 2 });
+                PushPin = new PushPinShp() { Id = 100000, X = objPosition.X + position.X, Y = objPosition.Y + position.Y, TypeId = 2 };
+                ObjList.Add(PushPin);
+
+                Messenger.Default.Send(PushPin);
             }
         }
 
-        public DesignerViewModel(int? zoneId = null)
+        public DesignerViewModel(int? zoneId = null, Shp locationPoint = null)
         {
             StartDate = Convert.ToDateTime("2021-03-09 11:30");
 
@@ -103,11 +87,42 @@ namespace WpfApplication1.Ui.Designer
             CanvasWidth = svgWidth + 2 * margin;
             CanvasHeight = svgHeight + 2 * margin;
 
-            //var list = ShpRepo.ShpObjList.Where(f => f.ZoneId == zoneId).ToList();
             var list = ShpRepo.GetShpList(svgWidth, svgHeight, margin, (int)zoneId) ;
 
             ObjList = new ObservableCollection<Shp>(list);
+
+            if (locationPoint != null)
+            {
+                //PushPin = new PushPinShp() { Id = 100000, X = locationPoint.Value.X, Y = locationPoint.Value.Y, TypeId = 2, ZoneId = zoneId};
+                PushPin = locationPoint;
+                ObjList.Add(PushPin);
+            }
         }
 
+
+        #region Waste
+
+        //private ICommand _addCommand;
+        //public ICommand AddCommand
+        //{
+        //    get { return _addCommand ?? (_addCommand = new RelayCommand(OnAddExecute, () => true)); }
+        //}
+        //private void OnAddExecute()
+        //{
+        //    ObjList.Add(new PushPinShp() { Id = 100000, X = 210, Y = 30, TypeId = 2 });
+        //}
+
+        //private ICommand _moveCommand;
+        //public ICommand MoveCommand
+        //{
+        //    get { return _moveCommand ?? (_moveCommand = new RelayCommand(OnMoveExecute, () => true)); }
+        //}
+        //private void OnMoveExecute()
+        //{
+        //    var obj = ObjList.LastOrDefault();
+        //    if (obj != null) obj.X += 20;
+        //}
+
+        #endregion
     }
 }
