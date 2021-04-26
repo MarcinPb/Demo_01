@@ -35,11 +35,7 @@ namespace WpfApplication1.Ui.Designer
             if (e.ClickCount == 1)
             {
                 id = 0;
-                if (e.Device.Target is Line)
-                {
-                    id = Convert.ToInt32(((Line)e.Device.Target).Tag);
-                }
-                else if (e.Device.Target is Path)
+                if (e.Device.Target is Path)
                 {
                     id = Convert.ToInt32(((Path)e.Device.Target).Tag);
                 }
@@ -51,23 +47,26 @@ namespace WpfApplication1.Ui.Designer
                 {
                     id = Convert.ToInt32(((Rectangle)e.Device.Target).Tag);
                 }
+                else 
+                {
+                    return;
+                }
                 SelectedItem = id;
                 var shp = ObjList.FirstOrDefault(x => x.Id == id);
                 Messenger.Default.Send(shp);
             }
             else if (e.ClickCount == 2)
             {
-                var position = e.GetPosition(e.Device.Target);
 
                 // Remove form collection.
                 var objToRemove = ObjList.FirstOrDefault(x => x.Id == 100000);
-                if (objToRemove != null)
-                {
+                if (objToRemove != null) {
                     ObjList.Remove(objToRemove);
                 }
-
+                    
                 var objPosition = ObjList.FirstOrDefault(x => x.Id == id);
-                PushPin = new PushPinShp() { Id = 100000, X = objPosition.X + position.X, Y = objPosition.Y + position.Y, TypeId = 2 };
+                var mousePosition = e.GetPosition(e.Device.Target);
+                PushPin = new PushPinShp() { Id = 100000, X = objPosition.X + mousePosition.X, Y = objPosition.Y + mousePosition.Y, TypeId = 2 };
                 ObjList.Add(PushPin);
 
                 Messenger.Default.Send(PushPin);
