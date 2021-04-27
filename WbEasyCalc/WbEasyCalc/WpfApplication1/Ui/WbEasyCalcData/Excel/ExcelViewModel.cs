@@ -44,6 +44,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
             set { _waterBalanceYearViewModel = value; RaisePropertyChanged(nameof(WaterBalanceYearViewModel)); }
         }
         public Pis.ViewModel PisViewModel { get; set; }
+        public MatrixOne.ViewModel MatrixOneViewModel { get; set; }
 
 
         //public EasyCalcModel Model { get; set; }
@@ -64,6 +65,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
             WaterBalancePeriod = WaterBalancePeriodViewModel.Model,
             WaterBalanceYear = WaterBalanceYearViewModel.Model,
             Pis = PisViewModel.Model,
+            MatrixOne = MatrixOneViewModel.Model,
         };
 
         public ExcelViewModel(EasyCalcModel model)
@@ -85,6 +87,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
             WaterBalancePeriodViewModel = new ViewModel(model.WaterBalancePeriod);
             WaterBalanceYearViewModel = new ViewModel(model.WaterBalanceYear);
             PisViewModel = new Pis.ViewModel(model.Pis);
+            MatrixOneViewModel = new MatrixOne.ViewModel(model.MatrixOne);
 
             BaseSheetViewModelCalculate();
         }
@@ -113,7 +116,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
                 WaterBalanceDayViewModel == null ||
                 WaterBalancePeriodViewModel == null ||
                 WaterBalanceYearViewModel == null ||
-                PisViewModel == null
+                PisViewModel == null ||
+                MatrixOneViewModel == null
                 )
             {
                 return;
@@ -137,6 +141,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
             WaterBalancePeriodViewModel.Refreash(easyCalcModel.WaterBalancePeriod);
             WaterBalanceYearViewModel.Refreash(easyCalcModel.WaterBalanceYear);
             PisViewModel.Refreash(easyCalcModel.Pis);
+            MatrixOneViewModel.Refreash(easyCalcModel.MatrixOne);
         }
     }
 }

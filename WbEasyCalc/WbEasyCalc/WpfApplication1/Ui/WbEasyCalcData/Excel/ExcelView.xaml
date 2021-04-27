@@ -20,6 +20,7 @@
              xmlns:excelSysInput="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.SysInput"        
              xmlns:excelUnauthCons="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.UnauthCons"        
              xmlns:excelUnbCons="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.UnbCons"        
+             xmlns:excelMatrixOne="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOne"        
              >
     <!--   
              xmlns:excelWaterBalance="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.WaterBalance"        
@@ -67,6 +68,9 @@
         -->
         <DataTemplate DataType="{x:Type excelPis:ViewModel}">
             <excelPis:View />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type excelMatrixOne:ViewModel}">
+            <excelMatrixOne:View />
         </DataTemplate>
 
     </UserControl.Resources>
@@ -128,6 +132,9 @@
             </TabItem>
             <TabItem Header="PIs">
                 <ContentControl Content="{Binding PisViewModel}" />
+            </TabItem>
+            <TabItem Header="Matrix (1)">
+                <ContentControl Content="{Binding MatrixOneViewModel}" />
             </TabItem>
         </TabControl>
     </Grid>
