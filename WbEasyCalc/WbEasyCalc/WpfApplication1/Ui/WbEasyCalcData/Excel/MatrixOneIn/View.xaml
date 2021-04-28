@@ -70,7 +70,7 @@
                 </Label>
 
                 <Label Grid.Row="4" Grid.Column="1" Content="A1"  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=MatOneIn_C11, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextRightPaddingStyle}" Background="DarkOliveGreen"/>
+                <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=C11, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextRightPaddingStyle}" Background="DarkOliveGreen"/>
                 <Label Grid.Row="4" Grid.Column="3" Content=""  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
                 <Label Grid.Row="4" Grid.Column="4" Content="&lt; 25"  Style="{StaticResource LabelTitle2Style}" Background="DarkOliveGreen"/>
                 <Label Grid.Row="4" Grid.Column="5" Content="&lt; 40"  Style="{StaticResource LabelTitle3Style}" Background="DarkOliveGreen"/>

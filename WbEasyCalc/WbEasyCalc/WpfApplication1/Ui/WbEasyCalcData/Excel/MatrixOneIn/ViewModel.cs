@@ -11,382 +11,382 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
 {
     public class ViewModel : BaseSheetViewModel
     {
-        private double _matOneIn_C11;
-        public double MatOneIn_C11
+        private double _c11;
+        public double C11
         {
-            get => _matOneIn_C11;
-            set { _matOneIn_C11 = value; RaisePropertyChanged(nameof(MatOneIn_C11)); Calculate(); }
+            get => _c11;
+            set { _c11 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_C12;
-        public double MatOneIn_C12
+        private double _c12;
+        public double C12
         {
-            get => _matOneIn_C12;
-            set { _matOneIn_C12 = value; RaisePropertyChanged(); }
+            get => _c12;
+            set { _c12 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_C13;
-        public double MatOneIn_C13
+        private double _c13;
+        public double C13
         {
-            get => _matOneIn_C13;
-            set { _matOneIn_C13 = value; RaisePropertyChanged(); }
+            get => _c13;
+            set { _c13 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_C14;
-        public double MatOneIn_C14
+        private double _c14;
+        public double C14
         {
-            get => _matOneIn_C14;
-            set { _matOneIn_C14 = value; RaisePropertyChanged(); }
+            get => _c14;
+            set { _c14 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_C21;
-        public double MatOneIn_C21
+        private double _c21;
+        public double C21
         {
-            get => _matOneIn_C21;
-            set { _matOneIn_C21 = value; RaisePropertyChanged(); }
+            get => _c21;
+            set { _c21 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_C22;
-        public double MatOneIn_C22
+        private double _c22;
+        public double C22
         {
-            get => _matOneIn_C22;
-            set { _matOneIn_C22 = value; RaisePropertyChanged(); }
+            get => _c22;
+            set { _c22 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_C23;
-        public double MatOneIn_C23
+        private double _c23;
+        public double C23
         {
-            get => _matOneIn_C23;
-            set { _matOneIn_C23 = value; RaisePropertyChanged(); }
+            get => _c23;
+            set { _c23 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_C24;
-        public double MatOneIn_C24
+        private double _c24;
+        public double C24
         {
-            get => _matOneIn_C24;
-            set { _matOneIn_C24 = value; RaisePropertyChanged(); }
-        }
-
-
-        private double _matOneIn_D21;
-        public double MatOneIn_D21
-        {
-            get => _matOneIn_D21;
-            set { _matOneIn_D21 = value; RaisePropertyChanged(); }
-        }
-        private double _matOneIn_D22;
-        public double MatOneIn_D22
-        {
-            get => _matOneIn_D22;
-            set { _matOneIn_D22 = value; RaisePropertyChanged(); }
-        }
-        private double _matOneIn_D23;
-        public double MatOneIn_D23
-        {
-            get => _matOneIn_D23;
-            set { _matOneIn_D23 = value; RaisePropertyChanged(); }
-        }
-        private double _matOneIn_D24;
-        public double MatOneIn_D24
-        {
-            get => _matOneIn_D24;
-            set { _matOneIn_D24 = value; RaisePropertyChanged(); }
+            get => _c24;
+            set { _c24 = value; RaisePropertyChanged(); Calculate(); }
         }
 
 
-        private double _matOneIn_E11;
-        public double MatOneIn_E11
+        private double _d21;
+        public double D21
         {
-            get => _matOneIn_E11;
-            set { _matOneIn_E11 = value; RaisePropertyChanged(); }
+            get => _d21;
+            set { _d21 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_E12;
-        public double MatOneIn_E12
+        private double _d22;
+        public double D22
         {
-            get => _matOneIn_E12;
-            set { _matOneIn_E12 = value; RaisePropertyChanged(); }
+            get => _d22;
+            set { _d22 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_E13;
-        public double MatOneIn_E13
+        private double _d23;
+        public double D23
         {
-            get => _matOneIn_E13;
-            set { _matOneIn_E13 = value; RaisePropertyChanged(); }
+            get => _d23;
+            set { _d23 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_E14;
-        public double MatOneIn_E14
+        private double _d24;
+        public double D24
         {
-            get => _matOneIn_E14;
-            set { _matOneIn_E14 = value; RaisePropertyChanged(); }
+            get => _d24;
+            set { _d24 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_E21;
-        public double MatOneIn_E21
+
+
+        private double _e11;
+        public double E11
         {
-            get => _matOneIn_E21;
-            set { _matOneIn_E21 = value; RaisePropertyChanged(); }
+            get => _e11;
+            set { _e11 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_E22;
-        public double MatOneIn_E22
+        private double _e12;
+        public double E12
         {
-            get => _matOneIn_E22;
-            set { _matOneIn_E22 = value; RaisePropertyChanged(); }
+            get => _e12;
+            set { _e12 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_E23;
-        public double MatOneIn_E23
+        private double _e13;
+        public double E13
         {
-            get => _matOneIn_E23;
-            set { _matOneIn_E23 = value; RaisePropertyChanged(); }
+            get => _e13;
+            set { _e13 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_E24;
-        public double MatOneIn_E24
+        private double _e14;
+        public double E14
         {
-            get => _matOneIn_E24;
-            set { _matOneIn_E24 = value; RaisePropertyChanged(); }
+            get => _e14;
+            set { _e14 = value; RaisePropertyChanged(); Calculate(); }
+        }
+        private double _e21;
+        public double E21
+        {
+            get => _e21;
+            set { _e21 = value; RaisePropertyChanged(); Calculate(); }
+        }
+        private double _e22;
+        public double E22
+        {
+            get => _e22;
+            set { _e22 = value; RaisePropertyChanged(); Calculate(); }
+        }
+        private double _e23;
+        public double E23
+        {
+            get => _e23;
+            set { _e23 = value; RaisePropertyChanged(); Calculate(); }
+        }
+        private double _e24;
+        public double E24
+        {
+            get => _e24;
+            set { _e24 = value; RaisePropertyChanged(); Calculate(); }
         }
 
 
 
-        private double _matOneIn_F11;
-        public double MatOneIn_F11
+        private double _f11;
+        public double F11
         {
-            get => _matOneIn_F11;
-            set { _matOneIn_F11 = value; RaisePropertyChanged(); }
+            get => _f11;
+            set { _f11 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_F12;
-        public double MatOneIn_F12
+        private double _f12;
+        public double F12
         {
-            get => _matOneIn_F12;
-            set { _matOneIn_F12 = value; RaisePropertyChanged(); }
+            get => _f12;
+            set { _f12 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_F13;
-        public double MatOneIn_F13
+        private double _f13;
+        public double F13
         {
-            get => _matOneIn_F13;
-            set { _matOneIn_F13 = value; RaisePropertyChanged(); }
+            get => _f13;
+            set { _f13 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_F14;
-        public double MatOneIn_F14
+        private double _f14;
+        public double F14
         {
-            get => _matOneIn_F14;
-            set { _matOneIn_F14 = value; RaisePropertyChanged(); }
+            get => _f14;
+            set { _f14 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_F21;
-        public double MatOneIn_F21
+        private double _f21;
+        public double F21
         {
-            get => _matOneIn_F21;
-            set { _matOneIn_F21 = value; RaisePropertyChanged(); }
+            get => _f21;
+            set { _f21 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_F22;
-        public double MatOneIn_F22
+        private double _f22;
+        public double F22
         {
-            get => _matOneIn_F22;
-            set { _matOneIn_F22 = value; RaisePropertyChanged(); }
+            get => _f22;
+            set { _f22 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_F23;
-        public double MatOneIn_F23
+        private double _f23;
+        public double F23
         {
-            get => _matOneIn_F23;
-            set { _matOneIn_F23 = value; RaisePropertyChanged(); }
+            get => _f23;
+            set { _f23 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_F24;
-        public double MatOneIn_F24
+        private double _f24;
+        public double F24
         {
-            get => _matOneIn_F24;
-            set { _matOneIn_F24 = value; RaisePropertyChanged(); }
-        }
-
-
-        private double _matOneIn_G11;
-        public double MatOneIn_G11
-        {
-            get => _matOneIn_G11;
-            set { _matOneIn_G11 = value; RaisePropertyChanged(); }
-        }
-        private double _matOneIn_G12;
-        public double MatOneIn_G12
-        {
-            get => _matOneIn_G12;
-            set { _matOneIn_G12 = value; RaisePropertyChanged(); }
-        }
-        private double _matOneIn_G13;
-        public double MatOneIn_G13
-        {
-            get => _matOneIn_G13;
-            set { _matOneIn_G13 = value; RaisePropertyChanged(); }
-        }
-        private double _matOneIn_G14;
-        public double MatOneIn_G14
-        {
-            get => _matOneIn_G14;
-            set { _matOneIn_G14 = value; RaisePropertyChanged(); }
-        }
-        private double _matOneIn_G21;
-        public double MatOneIn_G21
-        {
-            get => _matOneIn_G21;
-            set { _matOneIn_G21 = value; RaisePropertyChanged(); }
-        }
-        private double _matOneIn_G22;
-        public double MatOneIn_G22
-        {
-            get => _matOneIn_G22;
-            set { _matOneIn_G22 = value; RaisePropertyChanged(); }
-        }
-        private double _matOneIn_G23;
-        public double MatOneIn_G23
-        {
-            get => _matOneIn_G23;
-            set { _matOneIn_G23 = value; RaisePropertyChanged(); }
-        }
-        private double _matOneIn_G24;
-        public double MatOneIn_G24
-        {
-            get => _matOneIn_G24;
-            set { _matOneIn_G24 = value; RaisePropertyChanged(); }
+            get => _f24;
+            set { _f24 = value; RaisePropertyChanged(); Calculate(); }
         }
 
 
-        private double _matOneIn_H11;
-        public double MatOneIn_H11
+        private double _g11;
+        public double G11
         {
-            get => _matOneIn_H11;
-            set { _matOneIn_H11 = value; RaisePropertyChanged(); }
+            get => _g11;
+            set { _g11 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_H12;
-        public double MatOneIn_H12
+        private double _g12;
+        public double G12
         {
-            get => _matOneIn_H12;
-            set { _matOneIn_H12 = value; RaisePropertyChanged(); }
+            get => _g12;
+            set { _g12 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_H13;
-        public double MatOneIn_H13
+        private double _g13;
+        public double G13
         {
-            get => _matOneIn_H13;
-            set { _matOneIn_H13 = value; RaisePropertyChanged(); }
+            get => _g13;
+            set { _g13 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_H14;
-        public double MatOneIn_H14
+        private double _g14;
+        public double G14
         {
-            get => _matOneIn_H14;
-            set { _matOneIn_H14 = value; RaisePropertyChanged(); }
+            get => _g14;
+            set { _g14 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_H21;
-        public double MatOneIn_H21
+        private double _g21;
+        public double G21
         {
-            get => _matOneIn_H21;
-            set { _matOneIn_H21 = value; RaisePropertyChanged(); }
+            get => _g21;
+            set { _g21 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_H22;
-        public double MatOneIn_H22
+        private double _g22;
+        public double G22
         {
-            get => _matOneIn_H22;
-            set { _matOneIn_H22 = value; RaisePropertyChanged(); }
+            get => _g22;
+            set { _g22 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_H23;
-        public double MatOneIn_H23
+        private double _g23;
+        public double G23
         {
-            get => _matOneIn_H23;
-            set { _matOneIn_H23 = value; RaisePropertyChanged(); }
+            get => _g23;
+            set { _g23 = value; RaisePropertyChanged(); Calculate(); }
         }
-        private double _matOneIn_H24;
-        public double MatOneIn_H24
+        private double _g24;
+        public double G24
         {
-            get => _matOneIn_H24;
-            set { _matOneIn_H24 = value; RaisePropertyChanged(); }
+            get => _g24;
+            set { _g24 = value; RaisePropertyChanged(); Calculate(); }
+        }
+
+
+        private double _h11;
+        public double H11
+        {
+            get => _h11;
+            set { _h11 = value; RaisePropertyChanged(); Calculate(); }
+        }
+        private double _h12;
+        public double H12
+        {
+            get => _h12;
+            set { _h12 = value; RaisePropertyChanged(); Calculate(); }
+        }
+        private double _h13;
+        public double H13
+        {
+            get => _h13;
+            set { _h13 = value; RaisePropertyChanged(); Calculate(); }
+        }
+        private double _h14;
+        public double H14
+        {
+            get => _h14;
+            set { _h14 = value; RaisePropertyChanged(); Calculate(); }
+        }
+        private double _h21;
+        public double H21
+        {
+            get => _h21;
+            set { _h21 = value; RaisePropertyChanged(); Calculate(); }
+        }
+        private double _h22;
+        public double H22
+        {
+            get => _h22;
+            set { _h22 = value; RaisePropertyChanged(); Calculate(); }
+        }
+        private double _h23;
+        public double H23
+        {
+            get => _h23;
+            set { _h23 = value; RaisePropertyChanged(); Calculate(); }
+        }
+        private double _h24;
+        public double H24
+        {
+            get => _h24;
+            set { _h24 = value; RaisePropertyChanged(); Calculate(); }
         }
 
 
         public MatrixOneInModel Model => new MatrixOneInModel()
         {
-            MatOneIn_C11 = MatOneIn_C11,
-            MatOneIn_C12 = MatOneIn_C12,
-            MatOneIn_C13 = MatOneIn_C13,
-            MatOneIn_C14 = MatOneIn_C14,
-            MatOneIn_C21 = MatOneIn_C21,
-            MatOneIn_C22 = MatOneIn_C22,
-            MatOneIn_C23 = MatOneIn_C23,
-            MatOneIn_C24 = MatOneIn_C24,
+            C11 = C11,
+            C12 = C12,
+            C13 = C13,
+            C14 = C14,
+            C21 = C21,
+            C22 = C22,
+            C23 = C23,
+            C24 = C24,
 
-            MatOneIn_D21 = MatOneIn_D21,
-            MatOneIn_D22 = MatOneIn_D22,
-            MatOneIn_D23 = MatOneIn_D23,
-            MatOneIn_D24 = MatOneIn_D24,
+            D21 = D21,
+            D22 = D22,
+            D23 = D23,
+            D24 = D24,
 
-            MatOneIn_E11 = MatOneIn_E11,
-            MatOneIn_E12 = MatOneIn_E12,
-            MatOneIn_E13 = MatOneIn_E13,
-            MatOneIn_E14 = MatOneIn_E14,
-            MatOneIn_E21 = MatOneIn_E21,
-            MatOneIn_E22 = MatOneIn_E22,
-            MatOneIn_E23 = MatOneIn_E23,
-            MatOneIn_E24 = MatOneIn_E24,
+            E11 = E11,
+            E12 = E12,
+            E13 = E13,
+            E14 = E14,
+            E21 = E21,
+            E22 = E22,
+            E23 = E23,
+            E24 = E24,
 
-            MatOneIn_F11 = MatOneIn_F11,
-            MatOneIn_F12 = MatOneIn_F12,
-            MatOneIn_F13 = MatOneIn_F13,
-            MatOneIn_F14 = MatOneIn_F14,
-            MatOneIn_F21 = MatOneIn_F21,
-            MatOneIn_F22 = MatOneIn_F22,
-            MatOneIn_F23 = MatOneIn_F23,
-            MatOneIn_F24 = MatOneIn_F24,
+            F11 = F11,
+            F12 = F12,
+            F13 = F13,
+            F14 = F14,
+            F21 = F21,
+            F22 = F22,
+            F23 = F23,
+            F24 = F24,
 
-            MatOneIn_G11 = MatOneIn_G11,
-            MatOneIn_G12 = MatOneIn_G12,
-            MatOneIn_G13 = MatOneIn_G13,
-            MatOneIn_G14 = MatOneIn_G14,
-            MatOneIn_G21 = MatOneIn_G21,
-            MatOneIn_G22 = MatOneIn_G22,
-            MatOneIn_G23 = MatOneIn_G23,
-            MatOneIn_G24 = MatOneIn_G24,
+            G11 = G11,
+            G12 = G12,
+            G13 = G13,
+            G14 = G14,
+            G21 = G21,
+            G22 = G22,
+            G23 = G23,
+            G24 = G24,
 
-            MatOneIn_H11 = MatOneIn_H11,
-            MatOneIn_H12 = MatOneIn_H12,
-            MatOneIn_H13 = MatOneIn_H13,
-            MatOneIn_H14 = MatOneIn_H14,
-            MatOneIn_H21 = MatOneIn_H21,
-            MatOneIn_H22 = MatOneIn_H22,
-            MatOneIn_H23 = MatOneIn_H23,
-            MatOneIn_H24 = MatOneIn_H24,
+            H11 = H11,
+            H12 = H12,
+            H13 = H13,
+            H14 = H14,
+            H21 = H21,
+            H22 = H22,
+            H23 = H23,
+            H24 = H24,
         };
 
         public void Refreash(MatrixOneInModel model)
         {
-            MatOneIn_C11 = model.MatOneIn_C11;
-            MatOneIn_C12 = model.MatOneIn_C12;
-            MatOneIn_C13 = model.MatOneIn_C13;
-            MatOneIn_C14 = model.MatOneIn_C14;
-            MatOneIn_C21 = model.MatOneIn_C21;
-            MatOneIn_C22 = model.MatOneIn_C22;
-            MatOneIn_C23 = model.MatOneIn_C23;
-            MatOneIn_C24 = model.MatOneIn_C24;                                       
-            MatOneIn_D21 = model.MatOneIn_D21;
-            MatOneIn_D22 = model.MatOneIn_D22;
-            MatOneIn_D23 = model.MatOneIn_D23;
-            MatOneIn_D24 = model.MatOneIn_D24;                                       
-            MatOneIn_E11 = model.MatOneIn_E11;
-            MatOneIn_E12 = model.MatOneIn_E12;
-            MatOneIn_E13 = model.MatOneIn_E13;
-            MatOneIn_E14 = model.MatOneIn_E14;
-            MatOneIn_E21 = model.MatOneIn_E21;
-            MatOneIn_E22 = model.MatOneIn_E22;
-            MatOneIn_E23 = model.MatOneIn_E23;
-            MatOneIn_E24 = model.MatOneIn_E24;                                       
-            MatOneIn_F11 = model.MatOneIn_F11;
-            MatOneIn_F12 = model.MatOneIn_F12;
-            MatOneIn_F13 = model.MatOneIn_F13;
-            MatOneIn_F14 = model.MatOneIn_F14;
-            MatOneIn_F21 = model.MatOneIn_F21;
-            MatOneIn_F22 = model.MatOneIn_F22;
-            MatOneIn_F23 = model.MatOneIn_F23;
-            MatOneIn_F24 = model.MatOneIn_F24;                                       
-            MatOneIn_G11 = model.MatOneIn_G11;
-            MatOneIn_G12 = model.MatOneIn_G12;
-            MatOneIn_G13 = model.MatOneIn_G13;
-            MatOneIn_G14 = model.MatOneIn_G14;
-            MatOneIn_G21 = model.MatOneIn_G21;
-            MatOneIn_G22 = model.MatOneIn_G22;
-            MatOneIn_G23 = model.MatOneIn_G23;
-            MatOneIn_G24 = model.MatOneIn_G24;                                      
-            MatOneIn_H11 = model.MatOneIn_H11;
-            MatOneIn_H12 = model.MatOneIn_H12;
-            MatOneIn_H13 = model.MatOneIn_H13;
-            MatOneIn_H14 = model.MatOneIn_H14;
-            MatOneIn_H21 = model.MatOneIn_H21;
-            MatOneIn_H22 = model.MatOneIn_H22;
-            MatOneIn_H23 = model.MatOneIn_H23;
-            MatOneIn_H24 = model.MatOneIn_H24;
+            C11 = model.C11;
+            C12 = model.C12;
+            C13 = model.C13;
+            C14 = model.C14;
+            C21 = model.C21;
+            C22 = model.C22;
+            C23 = model.C23;
+            C24 = model.C24;                                       
+            D21 = model.D21;
+            D22 = model.D22;
+            D23 = model.D23;
+            D24 = model.D24;                                       
+            E11 = model.E11;
+            E12 = model.E12;
+            E13 = model.E13;
+            E14 = model.E14;
+            E21 = model.E21;
+            E22 = model.E22;
+            E23 = model.E23;
+            E24 = model.E24;                                       
+            F11 = model.F11;
+            F12 = model.F12;
+            F13 = model.F13;
+            F14 = model.F14;
+            F21 = model.F21;
+            F22 = model.F22;
+            F23 = model.F23;
+            F24 = model.F24;                                       
+            G11 = model.G11;
+            G12 = model.G12;
+            G13 = model.G13;
+            G14 = model.G14;
+            G21 = model.G21;
+            G22 = model.G22;
+            G23 = model.G23;
+            G24 = model.G24;                                      
+            H11 = model.H11;
+            H12 = model.H12;
+            H13 = model.H13;
+            H14 = model.H14;
+            H21 = model.H21;
+            H22 = model.H22;
+            H23 = model.H23;
+            H24 = model.H24;
         }
 
         public ViewModel(MatrixOneInModel model)
@@ -394,7 +394,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
             if (model == null) return;
 
             // Input
-            MatOneIn_C11 = model.MatOneIn_C11;
+            C11 = model.C11;
         }
     }
 }

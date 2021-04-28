@@ -806,7 +806,7 @@ namespace WbEasyCalcRepository
 
             data.MatOneInSheet = new MatOneInSheet
             {
-                C11 = easyCalcModel.MatrixOneIn.MatOneIn_C11,
+                C11 = easyCalcModel.MatrixOneIn.C11,
             };
             data.MatOneOutSheet = new MatOneOutSheet(data);
 
