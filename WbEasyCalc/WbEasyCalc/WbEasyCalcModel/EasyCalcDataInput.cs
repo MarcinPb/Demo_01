@@ -196,6 +196,9 @@ namespace WbEasyCalcModel
         public double Interm_Hour_H10 { get; set; }
         public double Interm_ErrorMarg_H26 { get; set; }
 
+        public double MatOneIn_C11 { get; set; }
+
+
 
         public object Clone()
         {
@@ -376,6 +379,8 @@ namespace WbEasyCalcModel
                 Interm_Hour_H8 = Interm_Hour_H8,
                 Interm_Hour_H9 = Interm_Hour_H9,
                 Interm_Hour_H10 = Interm_Hour_H10,
+
+                MatOneIn_C11 = MatOneIn_C11,
 
             };
         }

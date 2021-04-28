@@ -20,6 +20,7 @@ namespace WbEasyCalcRepository
                 WaterBalanceYear = GetWaterBalanceModel(easyCalcSheetData.WaterBalanceYearSheet),
 
                 Pis = GetPisModel(easyCalcSheetData.PiSheet),
+                MatOneOut = GetMatOneOutModel(easyCalcSheetData.MatOneOutSheet),
 
                 SysInput_ErrorMarg_F72 = easyCalcSheetData.SystemInputSheet.ErrorMargin_F72,
                 SysInput_Min_D75 = easyCalcSheetData.SystemInputSheet.Min_D75,
@@ -341,6 +342,19 @@ namespace WbEasyCalcRepository
 
             data.PiSheet = new PiSheet(data);
 
+
+
+
+            data.MatOneInSheet = new MatOneInSheet
+            {
+                C11 = easyCalcDataInput.MatOneIn_C11,
+            };
+
+            data.MatOneOutSheet = new MatOneOutSheet(data);
+
+
+
+
             return data;
         }
 
@@ -452,6 +466,14 @@ namespace WbEasyCalcRepository
             };
             return model;
         }
+        private static MatrixOneOutModel GetMatOneOutModel(MatOneOutSheet sheet)
+        {
+            MatrixOneOutModel model = new MatrixOneOutModel
+            {
+                MatOneOut_C11 = sheet.C11,
+            };
+            return model;
+        }
 
 
 
@@ -551,6 +573,7 @@ namespace WbEasyCalcRepository
             easyCalcModel.FinancDataModel.FinancData_K35 = model.FinancData_K35;
 
             easyCalcModel.Pis = GetPisModel(easyCalcSheetData.PiSheet);
+            easyCalcModel.MatrixOneOut = GetMatOneOutModel(easyCalcSheetData.MatOneOutSheet);
         }
 
         private static EasyCalcSheet CalcSheetData(EasyCalcModel easyCalcModel)
@@ -780,6 +803,12 @@ namespace WbEasyCalcRepository
             data.WaterBalanceYearSheet = new WaterBalanceYearSheet(data);
 
             data.PiSheet = new PiSheet(data);
+
+            data.MatOneInSheet = new MatOneInSheet
+            {
+                C11 = easyCalcModel.MatrixOneIn.MatOneIn_C11,
+            };
+            data.MatOneOutSheet = new MatOneOutSheet(data);
 
             return data;
         }

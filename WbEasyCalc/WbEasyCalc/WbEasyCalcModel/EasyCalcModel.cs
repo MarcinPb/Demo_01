@@ -22,7 +22,8 @@ namespace WbEasyCalcModel
         public WaterBalanceModel WaterBalancePeriod { get; set; } = new WaterBalanceModel();
         public WaterBalanceModel WaterBalanceYear { get; set; } = new WaterBalanceModel();
         public PisModel Pis { get; set; } = new PisModel();
-        public MatrixOneModel MatrixOne { get; set; } = new MatrixOneModel();
+        public MatrixOneInModel MatrixOneIn { get; set; } = new MatrixOneInModel();
+        public MatrixOneOutModel MatrixOneOut { get; set; } = new MatrixOneOutModel();
 
 
         public object Clone()
@@ -43,7 +44,8 @@ namespace WbEasyCalcModel
                 WaterBalancePeriod = (WaterBalanceModel)WaterBalancePeriod.Clone(),
                 WaterBalanceYear = (WaterBalanceModel)WaterBalanceYear.Clone(),
                 Pis = (PisModel)Pis.Clone(),
-                MatrixOne = (MatrixOneModel)MatrixOne.Clone(),
+                MatrixOneIn = (MatrixOneInModel)MatrixOneIn.Clone(),
+                MatrixOneOut = (MatrixOneOutModel)MatrixOneOut.Clone(),
             };
         }
     }

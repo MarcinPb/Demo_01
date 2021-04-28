@@ -20,7 +20,8 @@
              xmlns:excelSysInput="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.SysInput"        
              xmlns:excelUnauthCons="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.UnauthCons"        
              xmlns:excelUnbCons="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.UnbCons"        
-             xmlns:excelMatrixOne="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOne"        
+             xmlns:excelMatrixOneIn="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn"        
+             xmlns:excelMatrixOneOut="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneOut"        
              >
     <!--   
              xmlns:excelWaterBalance="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.WaterBalance"        
@@ -69,8 +70,11 @@
         <DataTemplate DataType="{x:Type excelPis:ViewModel}">
             <excelPis:View />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type excelMatrixOne:ViewModel}">
-            <excelMatrixOne:View />
+        <DataTemplate DataType="{x:Type excelMatrixOneOut:ViewModel}">
+            <excelMatrixOneOut:View />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type excelMatrixOneIn:ViewModel}">
+            <excelMatrixOneIn:View />
         </DataTemplate>
 
     </UserControl.Resources>
@@ -130,11 +134,14 @@
             <TabItem Header="Financial Data" >
                 <ContentControl Content="{Binding FinancialDataViewModel}" />
             </TabItem>
+            <TabItem Header="Matrix (1 In)">
+                <ContentControl Content="{Binding MatrixOneInViewModel}" />
+            </TabItem>
+            <TabItem Header="Matrix (1 Out)">
+                <ContentControl Content="{Binding MatrixOneOutViewModel}" />
+            </TabItem>
             <TabItem Header="PIs">
                 <ContentControl Content="{Binding PisViewModel}" />
-            </TabItem>
-            <TabItem Header="Matrix (1)">
-                <ContentControl Content="{Binding MatrixOneViewModel}" />
             </TabItem>
         </TabControl>
     </Grid>

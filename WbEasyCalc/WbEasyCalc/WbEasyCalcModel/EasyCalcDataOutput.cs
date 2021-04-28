@@ -9,7 +9,7 @@ namespace WbEasyCalcModel
         public WaterBalanceModel WaterBalancePeriod { get; set; } 
         public WaterBalanceModel WaterBalanceYear { get; set; }  
         public PisModel Pis { get; set; }  
-
+        public MatrixOneOutModel MatOneOut { get; set; }  
 
 
 
@@ -195,6 +195,7 @@ namespace WbEasyCalcModel
                 FinancData_K22 = FinancData_K22,
                 FinancData_K31 = FinancData_K31,
                 FinancData_K35 = FinancData_K35,
+
 
             };
         }
