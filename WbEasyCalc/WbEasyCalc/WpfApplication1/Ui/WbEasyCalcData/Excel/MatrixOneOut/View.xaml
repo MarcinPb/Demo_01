@@ -62,98 +62,97 @@
                 <Label Grid.Row="3" Grid.Column="6" Content="40 m" Style="{StaticResource LabelSpanTitleLightStyle}" />
                 <Label Grid.Row="3" Grid.Column="7" Content="50 m" Style="{StaticResource LabelSpanTitleLightStyle}" />
 
-                <Label Grid.Row="4" Grid.Column="0" Grid.RowSpan="5" Content="Standard" Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen" Padding="0">
+                <Label Grid.Row="4" Grid.Column="0" Grid.RowSpan="5" Content="Standard" Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen">
                     <Label.LayoutTransform>
                         <RotateTransform Angle="-90" />
                     </Label.LayoutTransform>
                 </Label>
 
-                <Label Grid.Row="4" Grid.Column="1" Content="A1"  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="4" Grid.Column="2" Content="{Binding C11}"  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="4" Grid.Column="3" Content=""  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="4" Grid.Column="4" Content="&lt; 25"  Style="{StaticResource LabelTitle2Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="4" Grid.Column="5" Content="&lt; 40"  Style="{StaticResource LabelTitle3Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="4" Grid.Column="6" Content="&lt; 50"  Style="{StaticResource LabelTitle4Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="4" Grid.Column="7" Content="&lt; 60"  Style="{StaticResource LabelTitle4Style}" Background="DarkOliveGreen"/>
+                <Label Grid.Row="4" Grid.Column="1" Content="A1"  Style="{StaticResource LabelMatrixDarkGreenStyle}"/>
+                <Label Grid.Row="4" Grid.Column="2" Content="{Binding C11}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="4" Grid.Column="3" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="4" Grid.Column="4" Content="{Binding E11}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="4" Grid.Column="5" Content="{Binding F11}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="4" Grid.Column="6" Content="{Binding G11}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="4" Grid.Column="7" Content="{Binding H11}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
 
-                <Label Grid.Row="5" Grid.Column="1" Content="A2"  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="5" Grid.Column="2" Content="1.5 - 2"  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="5" Grid.Column="3" Content=""  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="5" Grid.Column="4" Content="25-50"  Style="{StaticResource LabelTitle2Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="5" Grid.Column="5" Content="40-75"  Style="{StaticResource LabelTitle3Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="5" Grid.Column="6" Content="50-100"  Style="{StaticResource LabelTitle4Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="5" Grid.Column="7" Content="60-125"  Style="{StaticResource LabelTitle4Style}" Background="DarkOliveGreen"/>
+                <Label Grid.Row="5" Grid.Column="1" Content="A2"  Style="{StaticResource LabelMatrixDarkGreenStyle}"/>
+                <Label Grid.Row="5" Grid.Column="2" Content="{Binding C12}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="5" Grid.Column="3" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="5" Grid.Column="4" Content="{Binding E12}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="5" Grid.Column="5" Content="{Binding F12}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="5" Grid.Column="6" Content="{Binding G12}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="5" Grid.Column="7" Content="{Binding H12}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
 
-                <Label Grid.Row="6" Grid.Column="1" Content="B"  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="6" Grid.Column="2" Content="A1"  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="6" Grid.Column="3" Content=""  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="6" Grid.Column="4" Content="A1"  Style="{StaticResource LabelTitle2Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="6" Grid.Column="5" Content="A1"  Style="{StaticResource LabelTitle3Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="6" Grid.Column="6" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="6" Grid.Column="7" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkOliveGreen"/>
+                <Label Grid.Row="6" Grid.Column="1" Content="B"  Style="{StaticResource LabelMatrixDarkGreenStyle}"/>
+                <Label Grid.Row="6" Grid.Column="2" Content="{Binding C13}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="6" Grid.Column="3" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="6" Grid.Column="4" Content="{Binding E13}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="6" Grid.Column="5" Content="{Binding F13}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="6" Grid.Column="6" Content="{Binding G13}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="6" Grid.Column="7" Content="{Binding H13}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
 
-                <Label Grid.Row="7" Grid.Column="1" Content="C"  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="7" Grid.Column="2" Content="A1"  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="7" Grid.Column="3" Content=""  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="7" Grid.Column="4" Content="A1"  Style="{StaticResource LabelTitle2Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="7" Grid.Column="5" Content="A1"  Style="{StaticResource LabelTitle3Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="7" Grid.Column="6" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="7" Grid.Column="7" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkOliveGreen"/>
+                <Label Grid.Row="7" Grid.Column="1" Content="C"  Style="{StaticResource LabelMatrixDarkGreenStyle}"/>
+                <Label Grid.Row="7" Grid.Column="2" Content="{Binding C14}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="7" Grid.Column="3" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="7" Grid.Column="4" Content="{Binding E14}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="7" Grid.Column="5" Content="{Binding F14}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="7" Grid.Column="6" Content="{Binding G14}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="7" Grid.Column="7" Content="{Binding H14}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
 
-                <Label Grid.Row="8" Grid.Column="1" Content="D"  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="8" Grid.Column="2" Content="A1"  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="8" Grid.Column="3" Content=""  Style="{StaticResource LabelTitle1Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="8" Grid.Column="4" Content="A1"  Style="{StaticResource LabelTitle2Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="8" Grid.Column="5" Content="A1"  Style="{StaticResource LabelTitle3Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="8" Grid.Column="6" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkOliveGreen"/>
-                <Label Grid.Row="8" Grid.Column="7" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkOliveGreen"/>
+                <Label Grid.Row="8" Grid.Column="1" Content="D"  Style="{StaticResource LabelMatrixDarkGreenStyle}"/>
+                <Label Grid.Row="8" Grid.Column="2" Content="{Binding C15}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="8" Grid.Column="3" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="8" Grid.Column="4" Content="{Binding E15}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="8" Grid.Column="5" Content="{Binding F15}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="8" Grid.Column="6" Content="{Binding G15}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
+                <Label Grid.Row="8" Grid.Column="7" Content="{Binding H15}"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
 
-                <Label Grid.Row="9" Grid.Column="0" Grid.RowSpan="5" Style="{StaticResource LabelTitle1Style}" Content="Low and Middle Income&#xD;&#xA;            Countries"  Background="DarkSeaGreen" Margin="-70 0 -70 0" >
+                <Label Grid.Row="9" Grid.Column="0" Grid.RowSpan="5" Style="{StaticResource LabelMatrixLightGreenStyle}" Content="Low and Middle Income&#xD;&#xA;            Countries"  Background="DarkSeaGreen" Margin="-70 0 -70 0" >
                     <Label.LayoutTransform>
                         <RotateTransform Angle="-90" />
                     </Label.LayoutTransform>
                 </Label>
 
+                <Label Grid.Row="9" Grid.Column="1" Content="A1"  Style="{StaticResource LabelMatrixLightGreenStyle}"/>
+                <Label Grid.Row="9" Grid.Column="2" Content="{Binding C21}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="9" Grid.Column="3" Content="{Binding D21}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="9" Grid.Column="4" Content="{Binding E21}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="9" Grid.Column="5" Content="{Binding F21}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="9" Grid.Column="6" Content="{Binding G21}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="9" Grid.Column="7" Content="{Binding H21}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
 
-                <Label Grid.Row="9" Grid.Column="1" Content="A1"  Style="{StaticResource LabelTitle1Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="9" Grid.Column="2" Content="A1"  Style="{StaticResource LabelTitle1Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="9" Grid.Column="3" Content=""  Style="{StaticResource LabelTitle1Style}" Background=  "DarkSeaGreen"/>
-                <Label Grid.Row="9" Grid.Column="4" Content="A1"  Style="{StaticResource LabelTitle2Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="9" Grid.Column="5" Content="A1"  Style="{StaticResource LabelTitle3Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="9" Grid.Column="6" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="9" Grid.Column="7" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkSeaGreen"/>
+                <Label Grid.Row="10" Grid.Column="1" Content="A2"  Style="{StaticResource LabelMatrixLightGreenStyle}"/>
+                <Label Grid.Row="10" Grid.Column="2" Content="{Binding C22}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="10" Grid.Column="3" Content="{Binding D22}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="10" Grid.Column="4" Content="{Binding E22}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="10" Grid.Column="5" Content="{Binding F22}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="10" Grid.Column="6" Content="{Binding G22}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="10" Grid.Column="7" Content="{Binding H22}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
 
-                <Label Grid.Row="10" Grid.Column="1" Content="A2"  Style="{StaticResource LabelTitle1Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="10" Grid.Column="2" Content="A1"  Style="{StaticResource LabelTitle1Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="10" Grid.Column="3" Content=""  Style="{StaticResource LabelTitle1Style}" Background=  "DarkSeaGreen"/>
-                <Label Grid.Row="10" Grid.Column="4" Content="A1"  Style="{StaticResource LabelTitle2Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="10" Grid.Column="5" Content="A1"  Style="{StaticResource LabelTitle3Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="10" Grid.Column="6" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="10" Grid.Column="7" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkSeaGreen"/>
+                <Label Grid.Row="11" Grid.Column="1" Content="B"  Style="{StaticResource LabelMatrixLightGreenStyle}"/>
+                <Label Grid.Row="11" Grid.Column="2" Content="{Binding C23}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="11" Grid.Column="3" Content="{Binding D23}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="11" Grid.Column="4" Content="{Binding E23}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="11" Grid.Column="5" Content="{Binding F23}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="11" Grid.Column="6" Content="{Binding G23}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="11" Grid.Column="7" Content="{Binding H23}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
 
-                <Label Grid.Row="11" Grid.Column="1" Content="B"  Style="{StaticResource LabelTitle1Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="11" Grid.Column="2" Content="A1"  Style="{StaticResource LabelTitle1Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="11" Grid.Column="3" Content=""  Style="{StaticResource LabelTitle1Style}" Background=  "DarkSeaGreen"/>
-                <Label Grid.Row="11" Grid.Column="4" Content="A1"  Style="{StaticResource LabelTitle2Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="11" Grid.Column="5" Content="A1"  Style="{StaticResource LabelTitle3Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="11" Grid.Column="6" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="11" Grid.Column="7" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkSeaGreen"/>
+                <Label Grid.Row="12" Grid.Column="1" Content="C"  Style="{StaticResource LabelMatrixLightGreenStyle}"/>
+                <Label Grid.Row="12" Grid.Column="2" Content="{Binding C24}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="12" Grid.Column="3" Content="{Binding D24}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="12" Grid.Column="4" Content="{Binding E24}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="12" Grid.Column="5" Content="{Binding F24}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="12" Grid.Column="6" Content="{Binding G24}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="12" Grid.Column="7" Content="{Binding H24}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
 
-                <Label Grid.Row="12" Grid.Column="1" Content="C"  Style="{StaticResource LabelTitle1Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="12" Grid.Column="2" Content="A1"  Style="{StaticResource LabelTitle1Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="12" Grid.Column="3" Content=""  Style="{StaticResource LabelTitle1Style}" Background=  "DarkSeaGreen"/>
-                <Label Grid.Row="12" Grid.Column="4" Content="A1"  Style="{StaticResource LabelTitle2Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="12" Grid.Column="5" Content="A1"  Style="{StaticResource LabelTitle3Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="12" Grid.Column="6" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="12" Grid.Column="7" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkSeaGreen"/>
-
-                <Label Grid.Row="13" Grid.Column="1" Content="D"  Style="{StaticResource LabelTitle1Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="13" Grid.Column="2" Content="A1"  Style="{StaticResource LabelTitle1Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="13" Grid.Column="3" Content=""  Style="{StaticResource LabelTitle1Style}" Background=  "DarkSeaGreen"/>
-                <Label Grid.Row="13" Grid.Column="4" Content="A1"  Style="{StaticResource LabelTitle2Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="13" Grid.Column="5" Content="A1"  Style="{StaticResource LabelTitle3Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="13" Grid.Column="6" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkSeaGreen"/>
-                <Label Grid.Row="13" Grid.Column="7" Content="A1"  Style="{StaticResource LabelTitle4Style}" Background="DarkSeaGreen"/>
+                <Label Grid.Row="13" Grid.Column="1" Content="D"  Style="{StaticResource LabelMatrixLightGreenStyle}"/>
+                <Label Grid.Row="13" Grid.Column="2" Content="{Binding C25}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="13" Grid.Column="3" Content="{Binding D25}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="13" Grid.Column="4" Content="{Binding E25}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="13" Grid.Column="5" Content="{Binding F25}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="13" Grid.Column="6" Content="{Binding G25}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                <Label Grid.Row="13" Grid.Column="7" Content="{Binding H25}"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
 
             </Grid>
 

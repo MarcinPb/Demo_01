@@ -345,11 +345,11 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
             C21 = model.C21;
             C22 = model.C22;
             C23 = model.C23;
-            C24 = model.C24;                                       
+            C24 = model.C24;
             D21 = model.D21;
             D22 = model.D22;
             D23 = model.D23;
-            D24 = model.D24;                                       
+            D24 = model.D24;
             E11 = model.E11;
             E12 = model.E12;
             E13 = model.E13;
@@ -357,7 +357,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
             E21 = model.E21;
             E22 = model.E22;
             E23 = model.E23;
-            E24 = model.E24;                                       
+            E24 = model.E24;
             F11 = model.F11;
             F12 = model.F12;
             F13 = model.F13;
@@ -365,7 +365,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
             F21 = model.F21;
             F22 = model.F22;
             F23 = model.F23;
-            F24 = model.F24;                                       
+            F24 = model.F24;
             G11 = model.G11;
             G12 = model.G12;
             G13 = model.G13;
@@ -373,7 +373,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
             G21 = model.G21;
             G22 = model.G22;
             G23 = model.G23;
-            G24 = model.G24;                                      
+            G24 = model.G24;
             H11 = model.H11;
             H12 = model.H12;
             H13 = model.H13;

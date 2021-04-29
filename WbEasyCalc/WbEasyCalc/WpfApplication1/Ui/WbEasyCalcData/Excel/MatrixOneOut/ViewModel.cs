@@ -401,6 +401,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneOut
             G12 = G12,
             G13 = G13,
             G14 = G14,
+            G15 = G15,
             G21 = G21,
             G22 = G22,
             G23 = G23,
