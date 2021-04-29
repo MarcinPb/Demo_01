@@ -966,7 +966,7 @@ namespace WbEasyCalcRepository
                 H22 = easyCalcModel.MatrixOneIn.H22,
                 H23 = easyCalcModel.MatrixOneIn.H23,
                 H24 = easyCalcModel.MatrixOneIn.H24,
-                H25 = easyCalcModel.MatrixOneIn.H25,
+                //H25 = easyCalcModel.MatrixOneIn.H25,
             };
             data.MatOneOutSheet = new MatOneOutSheet(data);
 

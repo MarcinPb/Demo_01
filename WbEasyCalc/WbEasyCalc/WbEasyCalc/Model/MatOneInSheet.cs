@@ -46,6 +46,6 @@
         public double H22 { get; set; }
         public double H23 { get; set; }
         public double H24 { get; set; }
-        public double H25 { get; set; }
+        //public double H25 { get; set; }
     }
 }
