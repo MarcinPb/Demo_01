@@ -298,12 +298,10 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
             C22 = C22,
             C23 = C23,
             C24 = C24,
-
             D21 = D21,
             D22 = D22,
             D23 = D23,
             D24 = D24,
-
             E11 = E11,
             E12 = E12,
             E13 = E13,
@@ -312,7 +310,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
             E22 = E22,
             E23 = E23,
             E24 = E24,
-
             F11 = F11,
             F12 = F12,
             F13 = F13,
@@ -321,7 +318,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
             F22 = F22,
             F23 = F23,
             F24 = F24,
-
             G11 = G11,
             G12 = G12,
             G13 = G13,
@@ -330,7 +326,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
             G22 = G22,
             G23 = G23,
             G24 = G24,
-
             H11 = H11,
             H12 = H12,
             H13 = H13,
@@ -395,6 +390,49 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
 
             // Input
             C11 = model.C11;
+            C12 = model.C12;
+            C13 = model.C13;
+            C14 = model.C14;
+            C21 = model.C21;
+            C22 = model.C22;
+            C23 = model.C23;
+            C24 = model.C24;
+            D21 = model.D21;
+            D22 = model.D22;
+            D23 = model.D23;
+            D24 = model.D24;
+            E11 = model.E11;
+            E12 = model.E12;
+            E13 = model.E13;
+            E14 = model.E14;
+            E21 = model.E21;
+            E22 = model.E22;
+            E23 = model.E23;
+            E24 = model.E24;
+            F11 = model.F11;
+            F12 = model.F12;
+            F13 = model.F13;
+            F14 = model.F14;
+            F21 = model.F21;
+            F22 = model.F22;
+            F23 = model.F23;
+            F24 = model.F24;
+            G11 = model.G11;
+            G12 = model.G12;
+            G13 = model.G13;
+            G14 = model.G14;
+            G21 = model.G21;
+            G22 = model.G22;
+            G23 = model.G23;
+            G24 = model.G24;
+            H11 = model.H11;
+            H12 = model.H12;
+            H13 = model.H13;
+            H14 = model.H14;
+            H21 = model.H21;
+            H22 = model.H22;
+            H23 = model.H23;
+            H24 = model.H24;
         }
     }
 }

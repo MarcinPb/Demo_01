@@ -223,4 +223,56 @@
 
 
 
+    <Style x:Key ="LabelMatrixDarkGreenStyle" TargetType="Label" >
+        <Setter Property = "BorderThickness" Value = "1" />
+        <Setter Property = "BorderBrush" Value = "White" />
+        
+        <Setter Property = "Foreground" Value = "White"/>
+        <Setter Property = "FontWeight" Value = "Bold"/>
+        <Setter Property = "VerticalContentAlignment" Value = "Center"/>
+        <Setter Property = "HorizontalContentAlignment" Value = "Center"/>
+        <Setter Property = "Padding" Value = "3 0"/>
+        <Setter Property = "Background" Value = "DarkOliveGreen"/>
+    </Style>
+    <Style x:Key ="LabelMatrixLightGreenStyle" TargetType="Label" >
+        <Setter Property = "BorderThickness" Value = "1" />
+        <Setter Property = "BorderBrush" Value = "White" />
+
+        <Setter Property = "Foreground" Value = "Black"/>
+        <Setter Property = "FontWeight" Value = "Bold"/>
+        <Setter Property = "VerticalContentAlignment" Value = "Center"/>
+        <Setter Property = "HorizontalContentAlignment" Value = "Center"/>
+        <Setter Property = "Padding" Value = "3 0"/>
+        <Setter Property = "Background" Value = "DarkSeaGreen"/>
+    </Style>
+    
+    
+    
+    <Style x:Key ="TextMatrixDarkGreenStyle" TargetType="TextBox" >
+        <Setter Property = "BorderThickness" Value = "1" />
+        <Setter Property = "BorderBrush" Value = "White" />
+        
+        <Setter Property = "Foreground" Value = "White"/>
+        <Setter Property = "FontWeight" Value = "Bold"/>
+        <Setter Property = "VerticalContentAlignment" Value = "Center"/>
+        <Setter Property = "HorizontalContentAlignment" Value = "Center"/>
+        <Setter Property = "Padding" Value = "3 0"/>
+        <Setter Property = "Background" Value = "DarkOliveGreen"/>
+    </Style>
+    
+    <Style x:Key ="TextMatrixLightGreenStyle" TargetType="TextBox" >
+        <Setter Property = "BorderThickness" Value = "1" />
+        <Setter Property = "BorderBrush" Value = "White" />
+        
+        <Setter Property = "Foreground" Value = "Black"/>
+        <Setter Property = "FontWeight" Value = "Bold"/>
+        <Setter Property = "VerticalContentAlignment" Value = "Center"/>
+        <Setter Property = "HorizontalContentAlignment" Value = "Center"/>
+        <Setter Property = "Padding" Value = "3 0"/>
+        <Setter Property = "Background" Value = "DarkSeaGreen"/>
+    </Style>
+
+
+
+
 </ResourceDictionary>
