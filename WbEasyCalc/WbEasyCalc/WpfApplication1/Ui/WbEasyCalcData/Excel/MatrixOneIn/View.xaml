@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converters="clr-namespace:WpfApplication1.Converters" 
+             xmlns:local="clr-namespace:WpfApplication1" 
              mc:Ignorable="d" 
              >
 
@@ -16,6 +17,7 @@
         <converters:FloatConverter x:Key="FloatConverter" />
         <converters:PercentageConverter  x:Key="PercentageConverter" />
         <converters:BooleanFlagSwitchConverter  x:Key="NegConverter" />
+        <converters:EnumBooleanConverter  x:Key="EnumBooleanConverter" />
     </UserControl.Resources>
     <Grid >
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  Padding="10" Background="LightBlue">
@@ -57,8 +59,12 @@
                     <Label Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" Content="ILI" Style="{StaticResource LabelSpanTitleLightStyle}" />
                     <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="5" Content="Liters/connection/day" Style="{StaticResource LabelSpanTitleLightStyle}" />
 
-                    <Label Grid.Row="3" Grid.Column="3" Content="10 m" Style="{StaticResource LabelSpanTitleLightStyle}" />
-                    <Label Grid.Row="3" Grid.Column="4" Content="20 m" Style="{StaticResource LabelSpanTitleLightStyle}" />
+                    <Border Grid.Row="3" Grid.Column="3" BorderThickness="1" BorderBrush="White" Background="SteelBlue">
+                        <RadioButton  GroupName="Matrix1" Content=" 10 m " IsChecked="{Binding SelectedOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={x:Static local:RadioOptions.Opt01}}" Style="{StaticResource RadioButtonListBlueStyle}" />
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="4" BorderThickness="1" BorderBrush="White" Background="SteelBlue">
+                        <RadioButton  GroupName="Matrix1" Content=" 20 m " IsChecked="{Binding SelectedOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={x:Static local:RadioOptions.Opt02}}" Style="{StaticResource RadioButtonListBlueStyle}" />
+                    </Border>
                     <Label Grid.Row="3" Grid.Column="5" Content="30 m" Style="{StaticResource LabelSpanTitleLightStyle}" />
                     <Label Grid.Row="3" Grid.Column="6" Content="40 m" Style="{StaticResource LabelSpanTitleLightStyle}" />
                     <Label Grid.Row="3" Grid.Column="7" Content="50 m" Style="{StaticResource LabelSpanTitleLightStyle}" />

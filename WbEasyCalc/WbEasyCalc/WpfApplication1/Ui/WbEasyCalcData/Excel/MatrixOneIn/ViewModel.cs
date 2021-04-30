@@ -9,8 +9,21 @@ using WpfApplication1.Utility;
 
 namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
 {
-    public class ViewModel : BaseSheetViewModel
+    public partial class ViewModel : BaseSheetViewModel
     {
+
+
+        private RadioOptions _selectedOption;
+        public RadioOptions SelectedOption
+        {
+            get => _selectedOption;
+            set { _selectedOption = value; RaisePropertyChanged(); Calculate(); }
+        }
+
+
+
+
+
         private double _c11;
         public double C11
         {
@@ -290,6 +303,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
 
         public MatrixOneInModel Model => new MatrixOneInModel()
         {
+            //SelectedOption = SelectedOption,
+
             C11 = C11,
             C12 = C12,
             C13 = C13,
@@ -387,6 +402,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
         public ViewModel(MatrixOneInModel model)
         {
             if (model == null) return;
+
+            SelectedOption = RadioOptions.Opt02;
 
             // Input
             C11 = model.C11;

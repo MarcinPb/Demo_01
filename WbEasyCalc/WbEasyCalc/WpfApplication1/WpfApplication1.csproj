@@ -105,6 +105,7 @@
     <Compile Include="Controls\UiHelper.cs" />
     <Compile Include="Controls\TextHeaderToBooleanConverter.cs" />
     <Compile Include="Converters\BooleanFlagSwitchConverter.cs" />
+    <Compile Include="Converters\EnumBooleanConverter.cs" />
     <Compile Include="Converters\FloatConverter.cs" />
     <Compile Include="Converters\PercentageConverter.cs" />
     <Compile Include="Map\IMapItem.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Ui\WaterConsumptionReport\EditedViewModel.cs" />
     <Compile Include="Ui\WaterConsumptionReport\ItemViewModel.cs" />
     <Compile Include="Ui\WbEasyCalcData\Excel\BaseSheetViewModel.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneIn\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>

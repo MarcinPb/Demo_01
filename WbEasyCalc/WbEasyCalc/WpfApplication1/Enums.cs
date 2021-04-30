@@ -1,0 +1,4 @@
+﻿namespace WpfApplication1
+{
+    public enum RadioOptions { Opt01, Opt02 }
+}

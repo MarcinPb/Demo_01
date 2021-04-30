@@ -310,6 +310,52 @@ namespace DataRepository.WbEasyCalcData
         public string FinancData_K31 { get; set; }
         public string FinancData_K35 { get; set; }
 
+        public double MatrixOneIn_C11 { get; set; }
+        public double MatrixOneIn_C12 { get; set; }
+        public double MatrixOneIn_C13 { get; set; }
+        public double MatrixOneIn_C14 { get; set; }
+        public double MatrixOneIn_C21 { get; set; }
+        public double MatrixOneIn_C22 { get; set; }
+        public double MatrixOneIn_C23 { get; set; }
+        public double MatrixOneIn_C24 { get; set; }
+        public double MatrixOneIn_D21 { get; set; }
+        public double MatrixOneIn_D22 { get; set; }
+        public double MatrixOneIn_D23 { get; set; }
+        public double MatrixOneIn_D24 { get; set; }
+        public double MatrixOneIn_E11 { get; set; }
+        public double MatrixOneIn_E12 { get; set; }
+        public double MatrixOneIn_E13 { get; set; }
+        public double MatrixOneIn_E14 { get; set; }
+        public double MatrixOneIn_E21 { get; set; }
+        public double MatrixOneIn_E22 { get; set; }
+        public double MatrixOneIn_E23 { get; set; }
+        public double MatrixOneIn_E24 { get; set; }
+        public double MatrixOneIn_F11 { get; set; }
+        public double MatrixOneIn_F12 { get; set; }
+        public double MatrixOneIn_F13 { get; set; }
+        public double MatrixOneIn_F14 { get; set; }
+        public double MatrixOneIn_F21 { get; set; }
+        public double MatrixOneIn_F22 { get; set; }
+        public double MatrixOneIn_F23 { get; set; }
+        public double MatrixOneIn_F24 { get; set; }
+        public double MatrixOneIn_G11 { get; set; }
+        public double MatrixOneIn_G12 { get; set; }
+        public double MatrixOneIn_G13 { get; set; }
+        public double MatrixOneIn_G14 { get; set; }
+        public double MatrixOneIn_G21 { get; set; }
+        public double MatrixOneIn_G22 { get; set; }
+        public double MatrixOneIn_G23 { get; set; }
+        public double MatrixOneIn_G24 { get; set; }
+        public double MatrixOneIn_H11 { get; set; }
+        public double MatrixOneIn_H12 { get; set; }
+        public double MatrixOneIn_H13 { get; set; }
+        public double MatrixOneIn_H14 { get; set; }
+        public double MatrixOneIn_H21 { get; set; }
+        public double MatrixOneIn_H22 { get; set; }
+        public double MatrixOneIn_H23 { get; set; }
+        public double MatrixOneIn_H24 { get; set; }
+
+
         public double Pis_F9 { get; set; }
         public double Pis_H9 { get; set; }
         public double Pis_J9 { get; set; }
@@ -633,6 +679,54 @@ namespace DataRepository.WbEasyCalcData
                         FinancData_G8 = FinancData_G8,
                         FinancData_D26 = FinancData_D26,
                         FinancData_G35 = FinancData_G35,
+                    },
+
+                    MatrixOneIn = new MatrixOneInModel
+                    {
+                        C11 = MatrixOneIn_C11,
+                        C12 = MatrixOneIn_C12,
+                        C13 = MatrixOneIn_C13,
+                        C14 = MatrixOneIn_C14,
+                        C21 = MatrixOneIn_C21,
+                        C22 = MatrixOneIn_C22,
+                        C23 = MatrixOneIn_C23,
+                        C24 = MatrixOneIn_C24,
+                        D21 = MatrixOneIn_D21,
+                        D22 = MatrixOneIn_D22,
+                        D23 = MatrixOneIn_D23,
+                        D24 = MatrixOneIn_D24,
+                        E11 = MatrixOneIn_E11,
+                        E12 = MatrixOneIn_E12,
+                        E13 = MatrixOneIn_E13,
+                        E14 = MatrixOneIn_E14,
+                        E21 = MatrixOneIn_E21,
+                        E22 = MatrixOneIn_E22,
+                        E23 = MatrixOneIn_E23,
+                        E24 = MatrixOneIn_E24,
+                        F11 = MatrixOneIn_F11,
+                        F12 = MatrixOneIn_F12,
+                        F13 = MatrixOneIn_F13,
+                        F14 = MatrixOneIn_F14,
+                        F21 = MatrixOneIn_F21,
+                        F22 = MatrixOneIn_F22,
+                        F23 = MatrixOneIn_F23,
+                        F24 = MatrixOneIn_F24,
+                        G11 = MatrixOneIn_G11,
+                        G12 = MatrixOneIn_G12,
+                        G13 = MatrixOneIn_G13,
+                        G14 = MatrixOneIn_G14,
+                        G21 = MatrixOneIn_G21,
+                        G22 = MatrixOneIn_G22,
+                        G23 = MatrixOneIn_G23,
+                        G24 = MatrixOneIn_G24,
+                        H11 = MatrixOneIn_H11,
+                        H12 = MatrixOneIn_H12,
+                        H13 = MatrixOneIn_H13,
+                        H14 = MatrixOneIn_H14,
+                        H21 = MatrixOneIn_H21,
+                        H22 = MatrixOneIn_H22,
+                        H23 = MatrixOneIn_H23,
+                        H24 = MatrixOneIn_H24,
                     },
 
                     WaterBalanceDay = new WaterBalanceModel(),
