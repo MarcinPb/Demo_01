@@ -148,14 +148,54 @@ namespace WbEasyCalcRepository.Model
         public string Pis_N27 => GetPis_N27();
         private string GetPis_N27()
         {
-            string result;
+            string result = string.Empty;
 
-            if (Pis_F25 == 0) { result = string.Empty; }
-            else if (Pis_F25 <= 1.5) { result = "A1"; }
-            else if (Pis_F25 <= 2) { result = "A2"; }
-            else if (Pis_F25 <= 4) { result = "B"; }
-            else if (Pis_F25 <= 8) { result = "C"; }
-            else { result = "D"; }
+            if (Pis_F25 == 0) { return result; }
+
+            //else if (Pis_F25 <= 1.5) { result = "A1"; }
+            //else if (Pis_F25 <= 2) { result = "A2"; }
+            //else if (Pis_F25 <= 4) { result = "B"; }
+            //else if (Pis_F25 <= 8) { result = "C"; }
+            if (_data.MatOneInSheet.SelectedOption == 1)
+            {
+                     if (Pis_F25 <= _data.MatOneInSheet.C11) { result = "A1"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.C12) { result = "A2"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.C13) { result = "B"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.C14) { result = "C"; }
+                else { result = "D"; }
+            }
+            if (_data.MatOneInSheet.SelectedOption == 3)
+            { 
+                     if (Pis_F25 <= _data.MatOneInSheet.E11) { result = "A1"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.E12) { result = "A2"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.E13) { result = "B"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.E14) { result = "C"; }
+                else { result = "D"; }
+            }
+            if (_data.MatOneInSheet.SelectedOption == 4)
+            { 
+                     if (Pis_F25 <= _data.MatOneInSheet.F11) { result = "A1"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.F12) { result = "A2"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.F13) { result = "B"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.F14) { result = "C"; }
+                else { result = "D"; }
+            }
+            if (_data.MatOneInSheet.SelectedOption == 5)
+            { 
+                     if (Pis_F25 <= _data.MatOneInSheet.G11) { result = "A1"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.G12) { result = "A2"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.G13) { result = "B"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.G14) { result = "C"; }
+                else { result = "D"; }
+            }
+            if (_data.MatOneInSheet.SelectedOption == 6)
+            { 
+                     if (Pis_F25 <= _data.MatOneInSheet.H11) { result = "A1"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.H12) { result = "A2"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.H13) { result = "B"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.H14) { result = "C"; }
+                else { result = "D"; }
+            }
 
             return result;
         }
@@ -163,14 +203,62 @@ namespace WbEasyCalcRepository.Model
         public string Pis_P27 => GetPis_P27();
         private string GetPis_P27()
         {
-            string result;
+            string result = string.Empty;
 
-            if (Pis_F25 == 0) { result = string.Empty; }
-            else if (Pis_F25 <= 2) { result = "A1"; }
-            else if (Pis_F25 <= 4) { result = "A2"; }
-            else if (Pis_F25 <= 8) { result = "B"; }
-            else if (Pis_F25 <= 16) { result = "C"; }
-            else { result = "D"; }
+            if (Pis_F25 == 0) { return result; }
+
+            //else if (Pis_F25 <= 1.5) { result = "A1"; }
+            //else if (Pis_F25 <= 2) { result = "A2"; }
+            //else if (Pis_F25 <= 4) { result = "B"; }
+            //else if (Pis_F25 <= 8) { result = "C"; }
+            if (_data.MatOneInSheet.SelectedOption == 1)
+            {
+                if (Pis_F25 <= _data.MatOneInSheet.C21) { result = "A1"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.C22) { result = "A2"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.C23) { result = "B"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.C24) { result = "C"; }
+                else { result = "D"; }
+            }
+            if (_data.MatOneInSheet.SelectedOption == 2)
+            {
+                if (Pis_F25 <= _data.MatOneInSheet.D21) { result = "A1"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.D22) { result = "A2"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.D23) { result = "B"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.D24) { result = "C"; }
+                else { result = "D"; }
+            }
+            if (_data.MatOneInSheet.SelectedOption == 3)
+            {
+                if (Pis_F25 <= _data.MatOneInSheet.E21) { result = "A1"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.E22) { result = "A2"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.E23) { result = "B"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.E24) { result = "C"; }
+                else { result = "D"; }
+            }
+            if (_data.MatOneInSheet.SelectedOption == 4)
+            {
+                if (Pis_F25 <= _data.MatOneInSheet.F21) { result = "A1"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.F22) { result = "A2"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.F23) { result = "B"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.F24) { result = "C"; }
+                else { result = "D"; }
+            }
+            if (_data.MatOneInSheet.SelectedOption == 5)
+            {
+                if (Pis_F25 <= _data.MatOneInSheet.G21) { result = "A1"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.G22) { result = "A2"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.G23) { result = "B"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.G24) { result = "C"; }
+                else { result = "D"; }
+            }
+            if (_data.MatOneInSheet.SelectedOption == 6)
+            {
+                if (Pis_F25 <= _data.MatOneInSheet.H21) { result = "A1"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.H22) { result = "A2"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.H23) { result = "B"; }
+                else if (Pis_F25 <= _data.MatOneInSheet.H24) { result = "C"; }
+                else { result = "D"; }
+            }
 
             return result;
         }

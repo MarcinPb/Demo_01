@@ -117,6 +117,9 @@
             <TabItem Header="Intermittent Supply" >
                 <ContentControl Content="{Binding IntermittentSupplyViewModel}" />
             </TabItem>
+            <TabItem Header="Matrix1 Settings">
+                <ContentControl Content="{Binding MatrixOneInViewModel}" />
+            </TabItem>
         </TabControl>
 
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="5" Background="LightGray" />
@@ -134,14 +137,11 @@
             <TabItem Header="Financial Data" >
                 <ContentControl Content="{Binding FinancialDataViewModel}" />
             </TabItem>
-            <TabItem Header="Matrix (1 In)">
-                <ContentControl Content="{Binding MatrixOneInViewModel}" />
-            </TabItem>
-            <TabItem Header="Matrix (1 Out)">
-                <ContentControl Content="{Binding MatrixOneOutViewModel}" />
-            </TabItem>
             <TabItem Header="PIs">
                 <ContentControl Content="{Binding PisViewModel}" />
+            </TabItem>
+            <TabItem Header="Matrix1">
+                <ContentControl Content="{Binding MatrixOneOutViewModel}" />
             </TabItem>
         </TabControl>
     </Grid>
