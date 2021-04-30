@@ -56,20 +56,26 @@
                     <Label Grid.Row="0" Grid.ColumnSpan="8" Content="Physical Loss Assesment Matrix" Style="{StaticResource LabelSpanTitleDarkStyle}" />
 
                     <Label Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Content="Technical Performance Category" Style="{StaticResource LabelSpanTitleLightStyle}" />
-                    <Label Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" Content="ILI" Style="{StaticResource LabelSpanTitleLightStyle}" />
+                    <Border Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" BorderThickness="1" BorderBrush="White" Background="SteelBlue">
+                        <RadioButton  GroupName="Matrix1" Content="ILI" IsChecked="{Binding SelectedOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={x:Static local:RadioOptions.Opt01}}" Style="{StaticResource RadioButtonListBlueStyle}" />
+                    </Border>
                     <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="5" Content="Liters/connection/day" Style="{StaticResource LabelSpanTitleLightStyle}" />
 
                     <Border Grid.Row="3" Grid.Column="3" BorderThickness="1" BorderBrush="White" Background="SteelBlue">
-                        <RadioButton  GroupName="Matrix1" Content=" 10 m " IsChecked="{Binding SelectedOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={x:Static local:RadioOptions.Opt01}}" Style="{StaticResource RadioButtonListBlueStyle}" />
+                        <RadioButton  GroupName="Matrix1" Content=" 10 m " IsChecked="{Binding SelectedOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={x:Static local:RadioOptions.Opt02}}" Style="{StaticResource RadioButtonListBlueStyle}" />
                     </Border>
                     <Border Grid.Row="3" Grid.Column="4" BorderThickness="1" BorderBrush="White" Background="SteelBlue">
-                        <RadioButton  GroupName="Matrix1" Content=" 20 m " IsChecked="{Binding SelectedOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={x:Static local:RadioOptions.Opt02}}" Style="{StaticResource RadioButtonListBlueStyle}" />
+                        <RadioButton  GroupName="Matrix1" Content=" 20 m " IsChecked="{Binding SelectedOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={x:Static local:RadioOptions.Opt03}}" Style="{StaticResource RadioButtonListBlueStyle}" />
                     </Border>
-                    <Label Grid.Row="3" Grid.Column="5" Content="30 m" Style="{StaticResource LabelSpanTitleLightStyle}" />
-                    <Label Grid.Row="3" Grid.Column="6" Content="40 m" Style="{StaticResource LabelSpanTitleLightStyle}" />
-                    <Label Grid.Row="3" Grid.Column="7" Content="50 m" Style="{StaticResource LabelSpanTitleLightStyle}" />
-
-
+                    <Border Grid.Row="3" Grid.Column="5" BorderThickness="1" BorderBrush="White" Background="SteelBlue">
+                        <RadioButton  GroupName="Matrix1" Content=" 30 m " IsChecked="{Binding SelectedOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={x:Static local:RadioOptions.Opt04}}" Style="{StaticResource RadioButtonListBlueStyle}" />
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="6" BorderThickness="1" BorderBrush="White" Background="SteelBlue">
+                        <RadioButton  GroupName="Matrix1" Content=" 40 m " IsChecked="{Binding SelectedOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={x:Static local:RadioOptions.Opt05}}" Style="{StaticResource RadioButtonListBlueStyle}" />
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="7" BorderThickness="1" BorderBrush="White" Background="SteelBlue">
+                        <RadioButton  GroupName="Matrix1" Content=" 50 m " IsChecked="{Binding SelectedOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={x:Static local:RadioOptions.Opt06}}" Style="{StaticResource RadioButtonListBlueStyle}" />
+                    </Border>
 
 
 
