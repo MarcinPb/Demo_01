@@ -2,6 +2,7 @@
 {
     public class MatOneInSheet
     {
+        public int SelectedOption { get; set; }
         public double C11 { get; set; }
         public double C12 { get; set; }
         public double C13 { get; set; }

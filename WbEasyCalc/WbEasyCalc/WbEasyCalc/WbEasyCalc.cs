@@ -345,6 +345,8 @@ namespace WbEasyCalcRepository
 
             data.MatOneInSheet = new MatOneInSheet
             {
+                SelectedOption = easyCalcDataInput.MatOneIn_SelectedOption,
+
                 C11 = easyCalcDataInput.MatOneIn_C11,
                 C12 = easyCalcDataInput.MatOneIn_C12,
                 C13 = easyCalcDataInput.MatOneIn_C13,
@@ -912,6 +914,8 @@ namespace WbEasyCalcRepository
 
             data.MatOneInSheet = new MatOneInSheet
             {
+                SelectedOption = easyCalcModel.MatrixOneIn.SelectedOption,
+
                 C11 = easyCalcModel.MatrixOneIn.C11,
                 C12 = easyCalcModel.MatrixOneIn.C12,
                 C13 = easyCalcModel.MatrixOneIn.C13,

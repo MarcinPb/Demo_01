@@ -8,6 +8,8 @@ namespace WbEasyCalcModel.WbEasyCalc
 {
     public class MatrixOneInModel : ICloneable
     {
+        public int SelectedOption { get; set; }
+
         public double C11 { get; set; }
         public double C12 { get; set; }
         public double C13 { get; set; }
@@ -57,12 +59,13 @@ namespace WbEasyCalcModel.WbEasyCalc
         public double H22 { get; set; }
         public double H23 { get; set; }
         public double H24 { get; set; }
-        //public double H25 { get; set; }
-
+        
         public object Clone()
         {
             return new MatrixOneInModel()
             {
+                SelectedOption = SelectedOption,
+
                 C11 = C11,
                 C12 = C12,
                 C13 = C13,

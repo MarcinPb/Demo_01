@@ -226,6 +226,7 @@ namespace DataRepository.WbEasyCalcData
                 p.Add("@FinancData_D26", model.EasyCalcModel.FinancDataModel.FinancData_D26);
                 p.Add("@FinancData_G35", model.EasyCalcModel.FinancDataModel.FinancData_G35);
 
+                p.Add("@MatrixOneIn_SelectedOption", model.EasyCalcModel.MatrixOneIn.SelectedOption);
                 p.Add("@MatrixOneIn_C11", model.EasyCalcModel.MatrixOneIn.C11);
                 p.Add("@MatrixOneIn_C12", model.EasyCalcModel.MatrixOneIn.C12);
                 p.Add("@MatrixOneIn_C13", model.EasyCalcModel.MatrixOneIn.C13);

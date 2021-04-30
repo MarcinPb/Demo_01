@@ -196,6 +196,7 @@ namespace WbEasyCalcModel
         public double Interm_Hour_H10 { get; set; }
         public double Interm_ErrorMarg_H26 { get; set; }
 
+        public int MatOneIn_SelectedOption { get; set; }
         public double MatOneIn_C11 { get; set; }
         public double MatOneIn_C12 { get; set; }
         public double MatOneIn_C13 { get; set; }
@@ -433,6 +434,9 @@ namespace WbEasyCalcModel
                 Interm_Hour_H8 = Interm_Hour_H8,
                 Interm_Hour_H9 = Interm_Hour_H9,
                 Interm_Hour_H10 = Interm_Hour_H10,
+
+
+                MatOneIn_SelectedOption = MatOneIn_SelectedOption,
 
                 MatOneIn_C11 = MatOneIn_C11,
                 MatOneIn_C12 = MatOneIn_C12,

@@ -310,6 +310,8 @@ namespace DataRepository.WbEasyCalcData
         public string FinancData_K31 { get; set; }
         public string FinancData_K35 { get; set; }
 
+
+        public int MatrixOneIn_SelectedOption { get; set; }
         public double MatrixOneIn_C11 { get; set; }
         public double MatrixOneIn_C12 { get; set; }
         public double MatrixOneIn_C13 { get; set; }
@@ -683,6 +685,7 @@ namespace DataRepository.WbEasyCalcData
 
                     MatrixOneIn = new MatrixOneInModel
                     {
+                        SelectedOption = MatrixOneIn_SelectedOption,
                         C11 = MatrixOneIn_C11,
                         C12 = MatrixOneIn_C12,
                         C13 = MatrixOneIn_C13,

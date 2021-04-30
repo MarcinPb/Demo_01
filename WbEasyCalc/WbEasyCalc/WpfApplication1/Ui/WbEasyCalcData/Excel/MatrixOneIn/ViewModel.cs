@@ -22,8 +22,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
 
 
 
-
-
         private double _c11;
         public double C11
         {
@@ -303,7 +301,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
 
         public MatrixOneInModel Model => new MatrixOneInModel()
         {
-            //SelectedOption = SelectedOption,
+            SelectedOption = (int)SelectedOption,
 
             C11 = C11,
             C12 = C12,
@@ -403,9 +401,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
         {
             if (model == null) return;
 
-            SelectedOption = RadioOptions.Opt02;
-
             // Input
+            SelectedOption = (RadioOptions)model.SelectedOption;
             C11 = model.C11;
             C12 = model.C12;
             C13 = model.C13;
