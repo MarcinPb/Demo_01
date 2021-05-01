@@ -48,6 +48,7 @@
     <Compile Include="MainRepo.cs" />
     <Compile Include="IBaseItemRepository.cs" />
     <Compile Include="IMainRepo.cs" />
+    <Compile Include="Options\ItemRepository.cs" />
     <Compile Include="WaterConsumption\IListRepository.cs" />
     <Compile Include="WaterConsumption\ListRepository.cs" />
     <Compile Include="WaterConsumption\ListRepositoryTemp.cs" />

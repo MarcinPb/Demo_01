@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using DataModel;
-using DataRepository;
+﻿using DataModel;
 using GlobalRepository;
 using WpfApplication1.Utility;
-//using WpfApplication1.Ui.WbEasyCalcData;
 using NLog;
-using WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap;
 
 namespace WpfApplication1
 {
@@ -22,8 +12,6 @@ namespace WpfApplication1
 
         public Ui.WbEasyCalcData.ListViewModel WbEasyCalcDataViewModel { get; set; }
         public Ui.WaterConsumptionReport.EditedViewModel WaterConsumptionReportViewModel { get; set; }
-        public Ui.Configuration.EditedViewModel ConfigurationViewModel { get; set; }
-
 
         public RelayCommand OptionsCmd { get; set; }
         private void OptionsCmdExecute()

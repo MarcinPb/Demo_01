@@ -11,6 +11,8 @@ namespace DataRepository
 {
     public interface IMainRepo
     {
+        Options.ItemRepository Option { get; }
+
         WbEasyCalcData.IListRepository WbEasyCalcDataListRepository { get; }
         WaterConsumption.IListRepository WaterConsumptionListRepository { get; }
         WaterConsumption.IListRepository WaterConsumptionListRepositoryTemp { get; set; }

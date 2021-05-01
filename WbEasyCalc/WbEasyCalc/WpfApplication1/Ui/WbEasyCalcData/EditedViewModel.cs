@@ -116,11 +116,21 @@ namespace WpfApplication1.Ui.WbEasyCalcData
         public EditedViewModel(int id)
         {
 
-            ItemViewModel = new ItemViewModel(GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetItem(id));
+            var model = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetItem(id);
+
+            if (id == 0)
+            {
+                model.EasyCalcModel.MatrixOneIn.SelectedOption = 1;
+                model.EasyCalcModel.MatrixOneIn.C11 = 333;
+            }
+
+            ItemViewModel = new ItemViewModel(model);
 
             YearList = GlobalConfig.DataRepository.YearList;
             MonthList = GlobalConfig.DataRepository.MonthList;
             ZoneItemList = GlobalConfig.DataRepository.ZoneList;
+
+
 
             J6_List = new List<IdNamePair> { 
                 new IdNamePair(){ Id=1, Name="1"},

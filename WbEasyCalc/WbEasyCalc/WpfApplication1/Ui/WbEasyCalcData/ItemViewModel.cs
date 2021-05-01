@@ -210,19 +210,19 @@ namespace WpfApplication1.Ui.WbEasyCalcData
 
             EasyCalcViewModel = new ExcelViewModel(model.EasyCalcModel);
 
-            if (model.WbEasyCalcDataId != 0)
+            if (model.WbEasyCalcDataId == 0)
+            {
+                ZoneId = GlobalConfig.DataRepository.ZoneList.First().ZoneId;
+                YearNo = DateTime.Now.Year;
+                MonthNo = DateTime.Now.Month;
+            }
+            else
             {
                 ZoneId = model.ZoneId;
                 YearNo = model.YearNo;
                 MonthNo = model.MonthNo;
                 // It has to be here because two lines above trigger CalculateDaysNumber() method and change value of Start_PeriodDays_M21.
                 EasyCalcViewModel.StartViewModel.Start_PeriodDays_M21 = model.EasyCalcModel.StartModel.Start_PeriodDays_M21;
-            }
-            else
-            {
-                ZoneId = GlobalConfig.DataRepository.ZoneList.First().ZoneId;
-                YearNo = DateTime.Now.Year;
-                MonthNo = DateTime.Now.Month;
             }
 
             WaterConsumptionListViewModel = new Ui.WbEasyCalcData.WaterConsumption.ListViewModel(Id);

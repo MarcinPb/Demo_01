@@ -25,6 +25,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
         public IntermittentSupply.ViewModel IntermittentSupplyViewModel { get; set; }
         public FinancialData.ViewModel FinancialDataViewModel { get; set; }
 
+
+
         private ViewModel _waterBalanceDayViewModel;
         public ViewModel WaterBalanceDayViewModel
         {
@@ -43,6 +45,9 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
             get => _waterBalanceYearViewModel;
             set { _waterBalanceYearViewModel = value; RaisePropertyChanged(nameof(WaterBalanceYearViewModel)); }
         }
+
+
+
         public Pis.ViewModel PisViewModel { get; set; }
         public MatrixOneIn.ViewModel MatrixOneInViewModel { get; set; }
         public MatrixOneOut.ViewModel MatrixOneOutViewModel { get; set; }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using DataModel;
+using DataRepository.Options;
 using DataRepository.WaterConsumption;
 using DataRepository.WbEasyCalcData;
 
@@ -16,6 +17,8 @@ namespace DataRepository
     {
         private readonly string _cnnString;
 
+        public ItemRepository Option { get; private set; }
+
         public WbEasyCalcData.IListRepository WbEasyCalcDataListRepository { get; private set; }
         public WaterConsumption.IListRepository WaterConsumptionListRepository { get; private set; }
         public WaterConsumption.IListRepository WaterConsumptionListRepositoryTemp { get; set; }
@@ -23,8 +26,12 @@ namespace DataRepository
         public MainRepo(string cnnString)
         {
             _cnnString = cnnString;
+
+            Option = new ItemRepository(_cnnString);
+
             WbEasyCalcDataListRepository = new WbEasyCalcData.ListRepository(_cnnString);
             WaterConsumptionListRepository = new WaterConsumption.ListRepository(_cnnString);
+
         }
 
         private List<ZoneItem> _zoneList;
