@@ -121,13 +121,13 @@
     <Compile Include="Ui\WaterConsumptionReport\ItemViewModel.cs" />
     <Compile Include="Ui\WbEasyCalcData\Excel\BaseSheetViewModel.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneIn\MatrixTwoView.xaml.cs">
+    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixIn\MatrixTwoView.xaml.cs">
       <DependentUpon>MatrixTwoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneIn\MatrixOneView.xaml.cs">
+    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixIn\MatrixOneView.xaml.cs">
       <DependentUpon>MatrixOneView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneIn\ViewModel.cs" />
+    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixIn\ViewModel.cs" />
     <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneOut\MatrixTwoView.xaml.cs">
       <DependentUpon>MatrixTwoView.xaml</DependentUpon>
     </Compile>
@@ -252,11 +252,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Ui\WbEasyCalcData\Excel\MatrixOneIn\MatrixTwoView.xaml">
+    <Page Include="Ui\WbEasyCalcData\Excel\MatrixIn\MatrixTwoView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Ui\WbEasyCalcData\Excel\MatrixOneIn\MatrixOneView.xaml">
+    <Page Include="Ui\WbEasyCalcData\Excel\MatrixIn\MatrixOneView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

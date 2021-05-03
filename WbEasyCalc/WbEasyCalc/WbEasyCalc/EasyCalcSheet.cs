@@ -19,7 +19,7 @@ namespace WbEasyCalcRepository
         public WaterBalanceYearSheet WaterBalanceYearSheet { get; set; }
         public PiSheet PiSheet { get; set; }
 
-        public MatOneInSheet MatOneInSheet { get; set; }
-        public MatOneOutSheet MatOneOutSheet { get; set; }
+        public MatrixInSheet MatOneInSheet { get; set; }
+        public MatrixOutSheet MatOneOutSheet { get; set; }
     }
 }

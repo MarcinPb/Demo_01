@@ -2,11 +2,11 @@
 
 namespace WbEasyCalcRepository.Model
 {
-    public class MatOneOutSheet
+    public class MatrixOutSheet
     {
         private readonly EasyCalcSheet _data;
 
-        public MatOneOutSheet(EasyCalcSheet data)
+        public MatrixOutSheet(EasyCalcSheet data)
         {
             _data = data;
         }

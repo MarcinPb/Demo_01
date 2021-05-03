@@ -343,7 +343,7 @@ namespace WbEasyCalcRepository
 
 
 
-            data.MatOneInSheet = new MatOneInSheet
+            data.MatOneInSheet = new MatrixInSheet
             {
                 SelectedOption = easyCalcDataInput.MatOneIn_SelectedOption,
 
@@ -404,7 +404,7 @@ namespace WbEasyCalcRepository
                 //H25 = easyCalcDataInput.MatOneIn_H25,
             };
 
-            data.MatOneOutSheet = new MatOneOutSheet(data);
+            data.MatOneOutSheet = new MatrixOutSheet(data);
             //data.MatTwoOutSheet = new MatOneOutSheet(data);
 
 
@@ -521,7 +521,7 @@ namespace WbEasyCalcRepository
             };
             return model;
         }
-        private static MatrixOneOutModel GetMatOneOutModel(MatOneOutSheet sheet)
+        private static MatrixOneOutModel GetMatOneOutModel(MatrixOutSheet sheet)
         {
             MatrixOneOutModel model = new MatrixOneOutModel
             {
@@ -913,7 +913,7 @@ namespace WbEasyCalcRepository
 
             data.PiSheet = new PiSheet(data);
 
-            data.MatOneInSheet = new MatOneInSheet
+            data.MatOneInSheet = new MatrixInSheet
             {
                 SelectedOption = easyCalcModel.MatrixOneIn.SelectedOption,
 
@@ -973,7 +973,7 @@ namespace WbEasyCalcRepository
                 H24 = easyCalcModel.MatrixOneIn.H24,
                 //H25 = easyCalcModel.MatrixOneIn.H25,
             };
-            data.MatOneOutSheet = new MatOneOutSheet(data);
+            data.MatOneOutSheet = new MatrixOutSheet(data);
 
             return data;
         }

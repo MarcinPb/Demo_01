@@ -53,8 +53,8 @@
     <Compile Include="Calculation\UnbilledConsumptionCalc.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Model\FinancialDataSheet.cs" />
-    <Compile Include="Model\MatOneOutSheet.cs" />
-    <Compile Include="Model\MatOneInSheet.cs" />
+    <Compile Include="Model\MatrixOutSheet.cs" />
+    <Compile Include="Model\MatrixInSheet.cs" />
     <Compile Include="Model\WaterBalanceYearSheet.cs" />
     <Compile Include="Model\WaterBalanceDaySheet.cs" />
     <Compile Include="WbEasyCalc.cs" />

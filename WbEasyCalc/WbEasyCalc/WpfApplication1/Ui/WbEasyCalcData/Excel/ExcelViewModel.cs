@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WbEasyCalcModel;
 using WbEasyCalcModel.WbEasyCalc;
 using WbEasyCalcRepository;
-using WpfApplication1.Ui.WbEasyCalcData.Excel.WaterBalance;
+//using WpfApplication1.Ui.WbEasyCalcData.Excel.WaterBalance;
 using WpfApplication1.Utility;
 
 namespace WpfApplication1.Ui.WbEasyCalcData.Excel
@@ -27,20 +27,20 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
 
 
 
-        private ViewModel _waterBalanceDayViewModel;
-        public ViewModel WaterBalanceDayViewModel
+        private WaterBalance.ViewModel _waterBalanceDayViewModel;
+        public WaterBalance.ViewModel WaterBalanceDayViewModel
         {
             get => _waterBalanceDayViewModel;
             set { _waterBalanceDayViewModel = value; RaisePropertyChanged(nameof(WaterBalanceDayViewModel)); }
         }
-        private ViewModel _waterBalancePeriodViewModel;
-        public ViewModel WaterBalancePeriodViewModel
+        private WaterBalance.ViewModel _waterBalancePeriodViewModel;
+        public WaterBalance.ViewModel WaterBalancePeriodViewModel
         {
             get => _waterBalancePeriodViewModel;
             set { _waterBalancePeriodViewModel = value; RaisePropertyChanged(nameof(WaterBalancePeriodViewModel)); }
         }
-        private ViewModel _waterBalanceYearViewModel;
-        public ViewModel WaterBalanceYearViewModel
+        private WaterBalance.ViewModel _waterBalanceYearViewModel;
+        public WaterBalance.ViewModel WaterBalanceYearViewModel
         {
             get => _waterBalanceYearViewModel;
             set { _waterBalanceYearViewModel = value; RaisePropertyChanged(nameof(WaterBalanceYearViewModel)); }
@@ -49,8 +49,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
 
 
         public Pis.ViewModel PisViewModel { get; set; }
-        public MatrixOneIn.ViewModel MatrixOneInViewModel { get; set; }
-        public MatrixOneIn.ViewModel MatrixTwoInViewModel { get; set; }
+        public MatrixIn.ViewModel MatrixOneInViewModel { get; set; }
+        public MatrixIn.ViewModel MatrixTwoInViewModel { get; set; }
         public MatrixOneOut.ViewModel MatrixOneOutViewModel { get; set; }
         public MatrixOneOut.ViewModel MatrixTwoOutViewModel { get; set; }
 
@@ -93,12 +93,12 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
             PressureViewModel = new Pressure.ViewModel(model.PressureModel);
             IntermittentSupplyViewModel = new IntermittentSupply.ViewModel(model.IntermModel);
             FinancialDataViewModel = new FinancialData.ViewModel(model.FinancDataModel);
-            WaterBalanceDayViewModel = new ViewModel(model.WaterBalanceDay);
-            WaterBalancePeriodViewModel = new ViewModel(model.WaterBalancePeriod);
-            WaterBalanceYearViewModel = new ViewModel(model.WaterBalanceYear);
+            WaterBalanceDayViewModel = new WaterBalance.ViewModel(model.WaterBalanceDay);
+            WaterBalancePeriodViewModel = new WaterBalance.ViewModel(model.WaterBalancePeriod);
+            WaterBalanceYearViewModel = new WaterBalance.ViewModel(model.WaterBalanceYear);
             PisViewModel = new Pis.ViewModel(model.Pis);
-            MatrixOneInViewModel = new MatrixOneIn.ViewModel(model.MatrixOneIn);
-            MatrixTwoInViewModel = new MatrixOneIn.ViewModel(model.MatrixTwoIn);
+            MatrixOneInViewModel = new MatrixIn.ViewModel(model.MatrixOneIn);
+            MatrixTwoInViewModel = new MatrixIn.ViewModel(model.MatrixTwoIn);
             MatrixOneOutViewModel = new MatrixOneOut.ViewModel(model.MatrixOneOut);
             MatrixTwoOutViewModel = new MatrixOneOut.ViewModel(model.MatrixTwoOut);
 

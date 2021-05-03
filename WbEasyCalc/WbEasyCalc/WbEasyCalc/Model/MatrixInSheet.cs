@@ -1,6 +1,6 @@
 ﻿namespace WbEasyCalcRepository.Model
 {
-    public class MatOneInSheet
+    public class MatrixInSheet
     {
         public int SelectedOption { get; set; }
         public double C11 { get; set; }
