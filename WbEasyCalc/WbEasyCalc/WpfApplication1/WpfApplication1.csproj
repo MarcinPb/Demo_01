@@ -128,13 +128,13 @@
       <DependentUpon>MatrixOneView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\WbEasyCalcData\Excel\MatrixIn\ViewModel.cs" />
-    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneOut\MatrixTwoView.xaml.cs">
+    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOut\MatrixTwoView.xaml.cs">
       <DependentUpon>MatrixTwoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneOut\MatrixOneView.xaml.cs">
+    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOut\MatrixOneView.xaml.cs">
       <DependentUpon>MatrixOneView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneOut\ViewModel.cs" />
+    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOut\ViewModel.cs" />
     <Compile Include="Ui\WbEasyCalcData\ItemViewModel.cs" />
     <Compile Include="Ui\WbEasyCalcData\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
@@ -260,11 +260,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Ui\WbEasyCalcData\Excel\MatrixOneOut\MatrixTwoView.xaml">
+    <Page Include="Ui\WbEasyCalcData\Excel\MatrixOut\MatrixTwoView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Ui\WbEasyCalcData\Excel\MatrixOneOut\MatrixOneView.xaml">
+    <Page Include="Ui\WbEasyCalcData\Excel\MatrixOut\MatrixOneView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

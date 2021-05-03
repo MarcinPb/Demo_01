@@ -20,8 +20,8 @@
              xmlns:excelSysInput="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.SysInput"        
              xmlns:excelUnauthCons="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.UnauthCons"        
              xmlns:excelUnbCons="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.UnbCons"        
-             xmlns:excelMatrixOneIn="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn"        
-             xmlns:excelMatrixOneOut="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneOut"        
+             xmlns:excelMatrixOneIn="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixIn"        
+             xmlns:excelMatrixOneOut="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOut"        
              >
     <!--   
              xmlns:excelWaterBalance="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.WaterBalance"        

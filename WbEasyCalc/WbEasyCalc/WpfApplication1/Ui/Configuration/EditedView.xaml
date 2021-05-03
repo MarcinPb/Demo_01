@@ -11,7 +11,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:excelFinancialData="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.FinancialData"                   
              
-             xmlns:view="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn"
+             xmlns:view="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixIn"
              >
     <UserControl.Resources>
         <converters:FloatConverter x:Key="FloatConverter" />

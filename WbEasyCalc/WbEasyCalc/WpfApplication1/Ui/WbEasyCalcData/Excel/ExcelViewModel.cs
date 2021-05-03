@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WbEasyCalcModel;
 using WbEasyCalcModel.WbEasyCalc;
 using WbEasyCalcRepository;
+using WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOut;
 //using WpfApplication1.Ui.WbEasyCalcData.Excel.WaterBalance;
 using WpfApplication1.Utility;
 
@@ -51,8 +52,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
         public Pis.ViewModel PisViewModel { get; set; }
         public MatrixIn.ViewModel MatrixOneInViewModel { get; set; }
         public MatrixIn.ViewModel MatrixTwoInViewModel { get; set; }
-        public MatrixOneOut.ViewModel MatrixOneOutViewModel { get; set; }
-        public MatrixOneOut.ViewModel MatrixTwoOutViewModel { get; set; }
+        public ViewModel MatrixOneOutViewModel { get; set; }
+        public ViewModel MatrixTwoOutViewModel { get; set; }
 
 
         //public EasyCalcModel Model { get; set; }
@@ -99,8 +100,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel
             PisViewModel = new Pis.ViewModel(model.Pis);
             MatrixOneInViewModel = new MatrixIn.ViewModel(model.MatrixOneIn);
             MatrixTwoInViewModel = new MatrixIn.ViewModel(model.MatrixTwoIn);
-            MatrixOneOutViewModel = new MatrixOneOut.ViewModel(model.MatrixOneOut);
-            MatrixTwoOutViewModel = new MatrixOneOut.ViewModel(model.MatrixTwoOut);
+            MatrixOneOutViewModel = new MatrixOut.ViewModel(model.MatrixOneOut);
+            MatrixTwoOutViewModel = new MatrixOut.ViewModel(model.MatrixTwoOut);
 
             BaseSheetViewModelCalculate();
         }
