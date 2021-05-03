@@ -10,7 +10,8 @@
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" 
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:excelFinancialData="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.FinancialData"                   
-             xmlns:excelMatrixOneIn="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn"                   
+             
+             xmlns:view="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn"
              >
     <UserControl.Resources>
         <converters:FloatConverter x:Key="FloatConverter" />
@@ -20,9 +21,11 @@
         <DataTemplate DataType="{x:Type excelFinancialData:ViewModel}">
             <excelFinancialData:View />
         </DataTemplate>
+        <!--
         <DataTemplate DataType="{x:Type excelMatrixOneIn:ViewModel}">
             <excelMatrixOneIn:View />
         </DataTemplate>
+        -->
 
     </UserControl.Resources>
     <Grid>
@@ -57,11 +60,14 @@
         </Grid>
 
         <TabControl Grid.Row="1"  Margin="7 7 0 7" >
-            <TabItem Header="FinancialData">
+            <TabItem Header="Financial Data">
                 <ContentControl Content="{Binding FinancialDataViewModel}" />
             </TabItem>
-            <TabItem Header="Matrix1">
-                <ContentControl Content="{Binding MatrixOneInViewModel}" />
+            <TabItem Header="Matrix 1">
+                <view:MatrixOneView  DataContext="{Binding MatrixOneInViewModel}"/>
+            </TabItem>
+            <TabItem Header="Matrix 2">
+                <view:MatrixTwoView  DataContext="{Binding MatrixTwoInViewModel}"/>
             </TabItem>
         </TabControl>
     </Grid>

@@ -70,12 +70,14 @@
         <DataTemplate DataType="{x:Type excelPis:ViewModel}">
             <excelPis:View />
         </DataTemplate>
+        <!--
         <DataTemplate DataType="{x:Type excelMatrixOneOut:ViewModel}">
             <excelMatrixOneOut:View />
         </DataTemplate>
         <DataTemplate DataType="{x:Type excelMatrixOneIn:ViewModel}">
-            <excelMatrixOneIn:View />
+            <excelMatrixOneIn:MatrixOneView />
         </DataTemplate>
+        -->
 
     </UserControl.Resources>
     <Grid Margin="10">
@@ -90,7 +92,6 @@
 
         <TabControl Grid.Column="0"  Margin="0 0 5 0" TabStripPlacement="Bottom" >
             <TabItem Header="Start" >
-                <!-- <view:StartView /> -->
                 <ContentControl Content="{Binding StartViewModel}" />
             </TabItem>
             <TabItem Header="Sys.Input" >
@@ -117,8 +118,12 @@
             <TabItem Header="Intermittent Supply" >
                 <ContentControl Content="{Binding IntermittentSupplyViewModel}" />
             </TabItem>
-            <TabItem Header="Matrix1 Settings">
-                <ContentControl Content="{Binding MatrixOneInViewModel}" />
+            <TabItem Header="Matrix 1 Settings">
+                <excelMatrixOneIn:MatrixOneView  DataContext="{Binding MatrixOneInViewModel}"/>
+                <!--<ContentControl Content="{Binding MatrixOneInViewModel}" />-->
+            </TabItem>
+            <TabItem Header="Matrix 2 Settings">
+                <excelMatrixOneIn:MatrixTwoView  DataContext="{Binding MatrixTwoInViewModel}"/>
             </TabItem>
         </TabControl>
 
@@ -140,8 +145,13 @@
             <TabItem Header="PIs">
                 <ContentControl Content="{Binding PisViewModel}" />
             </TabItem>
-            <TabItem Header="Matrix1">
-                <ContentControl Content="{Binding MatrixOneOutViewModel}" />
+            <TabItem Header="Matrix 1">
+                <!--<ContentControl Content="{Binding MatrixOneOutViewModel}" />-->
+                <excelMatrixOneOut:MatrixOneView  DataContext="{Binding MatrixOneOutViewModel}"/>
+            </TabItem>
+            <TabItem Header="Matrix 2">
+                <!--<ContentControl Content="{Binding MatrixOneOutViewModel}" />-->
+                <excelMatrixOneOut:MatrixTwoView  DataContext="{Binding MatrixTwoOutViewModel}"/>
             </TabItem>
         </TabControl>
     </Grid>

@@ -114,7 +114,6 @@
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\Configuration\EditedViewModel.cs" />
-    <Compile Include="Ui\Configuration\ItemViewModel.cs" />
     <Compile Include="Ui\WaterConsumptionReport\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
@@ -122,12 +121,18 @@
     <Compile Include="Ui\WaterConsumptionReport\ItemViewModel.cs" />
     <Compile Include="Ui\WbEasyCalcData\Excel\BaseSheetViewModel.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneIn\View.xaml.cs">
-      <DependentUpon>View.xaml</DependentUpon>
+    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneIn\MatrixTwoView.xaml.cs">
+      <DependentUpon>MatrixTwoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneIn\MatrixOneView.xaml.cs">
+      <DependentUpon>MatrixOneView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneIn\ViewModel.cs" />
-    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneOut\View.xaml.cs">
-      <DependentUpon>View.xaml</DependentUpon>
+    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneOut\MatrixTwoView.xaml.cs">
+      <DependentUpon>MatrixTwoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneOut\MatrixOneView.xaml.cs">
+      <DependentUpon>MatrixOneView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\WbEasyCalcData\Excel\MatrixOneOut\ViewModel.cs" />
     <Compile Include="Ui\WbEasyCalcData\ItemViewModel.cs" />
@@ -247,11 +252,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Ui\WbEasyCalcData\Excel\MatrixOneIn\View.xaml">
+    <Page Include="Ui\WbEasyCalcData\Excel\MatrixOneIn\MatrixTwoView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Ui\WbEasyCalcData\Excel\MatrixOneOut\View.xaml">
+    <Page Include="Ui\WbEasyCalcData\Excel\MatrixOneIn\MatrixOneView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\WbEasyCalcData\Excel\MatrixOneOut\MatrixTwoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\WbEasyCalcData\Excel\MatrixOneOut\MatrixOneView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

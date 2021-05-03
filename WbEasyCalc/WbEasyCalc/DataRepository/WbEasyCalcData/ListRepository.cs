@@ -272,6 +272,44 @@ namespace DataRepository.WbEasyCalcData
                 p.Add("@MatrixOneIn_H23", model.EasyCalcModel.MatrixOneIn.H23);
                 p.Add("@MatrixOneIn_H24", model.EasyCalcModel.MatrixOneIn.H24);
 
+                p.Add("@MatrixTwoIn_SelectedOption", model.EasyCalcModel.MatrixTwoIn.SelectedOption);
+                p.Add("@MatrixTwoIn_D21", model.EasyCalcModel.MatrixTwoIn.D21);
+                p.Add("@MatrixTwoIn_D22", model.EasyCalcModel.MatrixTwoIn.D22);
+                p.Add("@MatrixTwoIn_D23", model.EasyCalcModel.MatrixTwoIn.D23);
+                p.Add("@MatrixTwoIn_D24", model.EasyCalcModel.MatrixTwoIn.D24);                                          
+                p.Add("@MatrixTwoIn_E11", model.EasyCalcModel.MatrixTwoIn.E11);
+                p.Add("@MatrixTwoIn_E12", model.EasyCalcModel.MatrixTwoIn.E12);
+                p.Add("@MatrixTwoIn_E13", model.EasyCalcModel.MatrixTwoIn.E13);
+                p.Add("@MatrixTwoIn_E14", model.EasyCalcModel.MatrixTwoIn.E14);
+                p.Add("@MatrixTwoIn_E21", model.EasyCalcModel.MatrixTwoIn.E21);
+                p.Add("@MatrixTwoIn_E22", model.EasyCalcModel.MatrixTwoIn.E22);
+                p.Add("@MatrixTwoIn_E23", model.EasyCalcModel.MatrixTwoIn.E23);
+                p.Add("@MatrixTwoIn_E24", model.EasyCalcModel.MatrixTwoIn.E24);                                          
+                p.Add("@MatrixTwoIn_F11", model.EasyCalcModel.MatrixTwoIn.F11);
+                p.Add("@MatrixTwoIn_F12", model.EasyCalcModel.MatrixTwoIn.F12);
+                p.Add("@MatrixTwoIn_F13", model.EasyCalcModel.MatrixTwoIn.F13);
+                p.Add("@MatrixTwoIn_F14", model.EasyCalcModel.MatrixTwoIn.F14);
+                p.Add("@MatrixTwoIn_F21", model.EasyCalcModel.MatrixTwoIn.F21);
+                p.Add("@MatrixTwoIn_F22", model.EasyCalcModel.MatrixTwoIn.F22);
+                p.Add("@MatrixTwoIn_F23", model.EasyCalcModel.MatrixTwoIn.F23);
+                p.Add("@MatrixTwoIn_F24", model.EasyCalcModel.MatrixTwoIn.F24);                                         
+                p.Add("@MatrixTwoIn_G11", model.EasyCalcModel.MatrixTwoIn.G11);
+                p.Add("@MatrixTwoIn_G12", model.EasyCalcModel.MatrixTwoIn.G12);
+                p.Add("@MatrixTwoIn_G13", model.EasyCalcModel.MatrixTwoIn.G13);
+                p.Add("@MatrixTwoIn_G14", model.EasyCalcModel.MatrixTwoIn.G14);
+                p.Add("@MatrixTwoIn_G21", model.EasyCalcModel.MatrixTwoIn.G21);
+                p.Add("@MatrixTwoIn_G22", model.EasyCalcModel.MatrixTwoIn.G22);
+                p.Add("@MatrixTwoIn_G23", model.EasyCalcModel.MatrixTwoIn.G23);
+                p.Add("@MatrixTwoIn_G24", model.EasyCalcModel.MatrixTwoIn.G24);                                           
+                p.Add("@MatrixTwoIn_H11", model.EasyCalcModel.MatrixTwoIn.H11);
+                p.Add("@MatrixTwoIn_H12", model.EasyCalcModel.MatrixTwoIn.H12);
+                p.Add("@MatrixTwoIn_H13", model.EasyCalcModel.MatrixTwoIn.H13);
+                p.Add("@MatrixTwoIn_H14", model.EasyCalcModel.MatrixTwoIn.H14);
+                p.Add("@MatrixTwoIn_H21", model.EasyCalcModel.MatrixTwoIn.H21);
+                p.Add("@MatrixTwoIn_H22", model.EasyCalcModel.MatrixTwoIn.H22);
+                p.Add("@MatrixTwoIn_H23", model.EasyCalcModel.MatrixTwoIn.H23);
+                p.Add("@MatrixTwoIn_H24", model.EasyCalcModel.MatrixTwoIn.H24);
+
                 // output
                 p.Add("@SystemInputVolume_B19", model.EasyCalcModel.WaterBalancePeriod.SystemInputVolume_B19);
                 p.Add("@SystemInputVolumeErrorMargin_B21", model.EasyCalcModel.WaterBalancePeriod.SystemInputVolumeErrorMargin_B21);

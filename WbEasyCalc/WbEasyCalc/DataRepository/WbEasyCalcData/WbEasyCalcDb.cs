@@ -357,6 +357,52 @@ namespace DataRepository.WbEasyCalcData
         public double MatrixOneIn_H23 { get; set; }
         public double MatrixOneIn_H24 { get; set; }
 
+        public int MatrixTwoIn_SelectedOption { get; set; }
+        public double MatrixTwoIn_C11 { get; set; }
+        public double MatrixTwoIn_C12 { get; set; }
+        public double MatrixTwoIn_C13 { get; set; }
+        public double MatrixTwoIn_C14 { get; set; }
+        public double MatrixTwoIn_C21 { get; set; }
+        public double MatrixTwoIn_C22 { get; set; }
+        public double MatrixTwoIn_C23 { get; set; }
+        public double MatrixTwoIn_C24 { get; set; }
+        public double MatrixTwoIn_D21 { get; set; }
+        public double MatrixTwoIn_D22 { get; set; }
+        public double MatrixTwoIn_D23 { get; set; }
+        public double MatrixTwoIn_D24 { get; set; }
+        public double MatrixTwoIn_E11 { get; set; }
+        public double MatrixTwoIn_E12 { get; set; }
+        public double MatrixTwoIn_E13 { get; set; }
+        public double MatrixTwoIn_E14 { get; set; }
+        public double MatrixTwoIn_E21 { get; set; }
+        public double MatrixTwoIn_E22 { get; set; }
+        public double MatrixTwoIn_E23 { get; set; }
+        public double MatrixTwoIn_E24 { get; set; }
+        public double MatrixTwoIn_F11 { get; set; }
+        public double MatrixTwoIn_F12 { get; set; }
+        public double MatrixTwoIn_F13 { get; set; }
+        public double MatrixTwoIn_F14 { get; set; }
+        public double MatrixTwoIn_F21 { get; set; }
+        public double MatrixTwoIn_F22 { get; set; }
+        public double MatrixTwoIn_F23 { get; set; }
+        public double MatrixTwoIn_F24 { get; set; }
+        public double MatrixTwoIn_G11 { get; set; }
+        public double MatrixTwoIn_G12 { get; set; }
+        public double MatrixTwoIn_G13 { get; set; }
+        public double MatrixTwoIn_G14 { get; set; }
+        public double MatrixTwoIn_G21 { get; set; }
+        public double MatrixTwoIn_G22 { get; set; }
+        public double MatrixTwoIn_G23 { get; set; }
+        public double MatrixTwoIn_G24 { get; set; }
+        public double MatrixTwoIn_H11 { get; set; }
+        public double MatrixTwoIn_H12 { get; set; }
+        public double MatrixTwoIn_H13 { get; set; }
+        public double MatrixTwoIn_H14 { get; set; }
+        public double MatrixTwoIn_H21 { get; set; }
+        public double MatrixTwoIn_H22 { get; set; }
+        public double MatrixTwoIn_H23 { get; set; }
+        public double MatrixTwoIn_H24 { get; set; }
+
 
         public double Pis_F9 { get; set; }
         public double Pis_H9 { get; set; }
@@ -730,6 +776,55 @@ namespace DataRepository.WbEasyCalcData
                         H22 = MatrixOneIn_H22,
                         H23 = MatrixOneIn_H23,
                         H24 = MatrixOneIn_H24,
+                    },
+
+                    MatrixTwoIn = new MatrixOneInModel
+                    {
+                        SelectedOption = MatrixTwoIn_SelectedOption,
+                        C11 = MatrixTwoIn_C11,
+                        C12 = MatrixTwoIn_C12,
+                        C13 = MatrixTwoIn_C13,
+                        C14 = MatrixTwoIn_C14,
+                        C21 = MatrixTwoIn_C21,
+                        C22 = MatrixTwoIn_C22,
+                        C23 = MatrixTwoIn_C23,
+                        C24 = MatrixTwoIn_C24,
+                        D21 = MatrixTwoIn_D21,
+                        D22 = MatrixTwoIn_D22,
+                        D23 = MatrixTwoIn_D23,
+                        D24 = MatrixTwoIn_D24,
+                        E11 = MatrixTwoIn_E11,
+                        E12 = MatrixTwoIn_E12,
+                        E13 = MatrixTwoIn_E13,
+                        E14 = MatrixTwoIn_E14,
+                        E21 = MatrixTwoIn_E21,
+                        E22 = MatrixTwoIn_E22,
+                        E23 = MatrixTwoIn_E23,
+                        E24 = MatrixTwoIn_E24,
+                        F11 = MatrixTwoIn_F11,
+                        F12 = MatrixTwoIn_F12,
+                        F13 = MatrixTwoIn_F13,
+                        F14 = MatrixTwoIn_F14,
+                        F21 = MatrixTwoIn_F21,
+                        F22 = MatrixTwoIn_F22,
+                        F23 = MatrixTwoIn_F23,
+                        F24 = MatrixTwoIn_F24,
+                        G11 = MatrixTwoIn_G11,
+                        G12 = MatrixTwoIn_G12,
+                        G13 = MatrixTwoIn_G13,
+                        G14 = MatrixTwoIn_G14,
+                        G21 = MatrixTwoIn_G21,
+                        G22 = MatrixTwoIn_G22,
+                        G23 = MatrixTwoIn_G23,
+                        G24 = MatrixTwoIn_G24,
+                        H11 = MatrixTwoIn_H11,
+                        H12 = MatrixTwoIn_H12,
+                        H13 = MatrixTwoIn_H13,
+                        H14 = MatrixTwoIn_H14,
+                        H21 = MatrixTwoIn_H21,
+                        H22 = MatrixTwoIn_H22,
+                        H23 = MatrixTwoIn_H23,
+                        H24 = MatrixTwoIn_H24,
                     },
 
                     WaterBalanceDay = new WaterBalanceModel(),

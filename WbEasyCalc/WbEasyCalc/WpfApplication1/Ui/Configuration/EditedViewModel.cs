@@ -32,6 +32,7 @@ namespace WpfApplication1.Ui.Configuration
             { 
                 FinancDataModel = FinancialDataViewModel.Model,
                 MatrixOneInModel = MatrixOneInViewModel.Model, 
+                MatrixTwoInModel = MatrixTwoInViewModel.Model, 
             });
             return true;
         }
@@ -44,12 +45,14 @@ namespace WpfApplication1.Ui.Configuration
 
         public WbEasyCalcData.Excel.FinancialData.ViewModel FinancialDataViewModel { get; set; }
         public WbEasyCalcData.Excel.MatrixOneIn.ViewModel MatrixOneInViewModel { get; set; }
+        public WbEasyCalcData.Excel.MatrixOneIn.ViewModel MatrixTwoInViewModel { get; set; }
 
         public EditedViewModel()
         {
             var model = GlobalConfig.DataRepository.Option.GetItem(0);
             FinancialDataViewModel = new WbEasyCalcData.Excel.FinancialData.ViewModel(model.FinancDataModel);
             MatrixOneInViewModel = new WbEasyCalcData.Excel.MatrixOneIn.ViewModel(model.MatrixOneInModel);
+            MatrixTwoInViewModel = new WbEasyCalcData.Excel.MatrixOneIn.ViewModel(model.MatrixTwoInModel);
         }
     }
 }

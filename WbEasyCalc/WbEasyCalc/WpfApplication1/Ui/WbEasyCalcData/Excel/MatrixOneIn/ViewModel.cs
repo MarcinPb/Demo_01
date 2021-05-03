@@ -9,7 +9,7 @@ using WpfApplication1.Utility;
 
 namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneIn
 {
-    public partial class ViewModel : BaseSheetViewModel
+    public class ViewModel : BaseSheetViewModel
     {
 
 

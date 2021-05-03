@@ -18,9 +18,9 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOneOut
     /// <summary>
     /// Interaction logic for View.xaml
     /// </summary>
-    public partial class View : UserControl
+    public partial class MatrixOneView : UserControl
     {
-        public View()
+        public MatrixOneView()
         {
             InitializeComponent();
         }

@@ -405,6 +405,7 @@ namespace WbEasyCalcRepository
             };
 
             data.MatOneOutSheet = new MatOneOutSheet(data);
+            data.MatTwoOutSheet = new MatOneOutSheet(data);
 
 
 
