@@ -261,6 +261,7 @@
     
     
     
+    <!--
     <Style x:Key ="TextMatrixDarkGreenStyle" TargetType="TextBox" >
         <Setter Property = "BorderThickness" Value = "1" />
         <Setter Property = "BorderBrush" Value = "White" />
@@ -284,7 +285,36 @@
         <Setter Property = "Padding" Value = "3 0"/>
         <Setter Property = "Background" Value = "DarkSeaGreen"/>
     </Style>
+    -->
 
+    <Style x:Key ="TextMatrixBaseStyle">
+        <Setter Property = "Control.BorderThickness" Value = "1" />
+        <Setter Property = "Control.BorderBrush" Value = "White" />
+        
+        <Setter Property = "Control.FontWeight" Value = "Bold"/>
+        <Setter Property = "Control.VerticalContentAlignment" Value = "Center"/>
+        <Setter Property = "Control.HorizontalContentAlignment" Value = "Center"/>
+        <Setter Property = "Control.Padding" Value = "3 0"/>
+    </Style>
+    <Style x:Key ="TextMatrixDarkGreenStyle" BasedOn="{StaticResource TextMatrixBaseStyle}" >
+        <Setter Property = "Control.Foreground" Value = "White"/>
+        <Setter Property = "Control.Background" Value = "DarkOliveGreen"/>
+    </Style>
+    <Style x:Key ="TextMatrixLightGreenStyle" BasedOn="{StaticResource TextMatrixBaseStyle}" >
+        <Setter Property = "Control.Foreground" Value = "Black"/>
+        <Setter Property = "Control.Background" Value = "DarkSeaGreen"/>
+    </Style>
+    
+    
+    
+    <Style x:Key ="TextMatrixDarkBrownStyle" BasedOn="{StaticResource TextMatrixBaseStyle}" >
+        <Setter Property = "Control.Foreground" Value = "White"/>
+        <Setter Property = "Control.Background" Value = "SaddleBrown"/>
+    </Style>
+    <Style x:Key ="TextMatrixLightBrownStyle" BasedOn="{StaticResource TextMatrixBaseStyle}" >
+        <Setter Property = "Control.Foreground" Value = "Black"/>
+        <Setter Property = "Control.Background" Value = "Wheat"/>
+    </Style>
 
 
 

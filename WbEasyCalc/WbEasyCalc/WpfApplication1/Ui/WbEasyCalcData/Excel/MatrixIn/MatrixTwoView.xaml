@@ -22,19 +22,19 @@
     <Grid >
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  Padding="10" Background="LightBlue">
             <Border >
-                <Grid >
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="10"/>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
+                        
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
-
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
@@ -76,92 +76,92 @@
 
 
 
-                    <Label Grid.Row="4" Grid.Column="0" Grid.RowSpan="5" Content="Standard" Style="{StaticResource LabelMatrixDarkGreenStyle}" >
+                    <Label Grid.Row="4" Grid.Column="0" Grid.RowSpan="5" Content="Standard" Style="{StaticResource TextMatrixDarkBrownStyle}" >
                         <Label.LayoutTransform>
                             <RotateTransform Angle="-90" />
                         </Label.LayoutTransform>
                     </Label>
 
-                    <Label   Grid.Row="4" Grid.Column="1" Content="A1"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-                    <Label   Grid.Row="4" Grid.Column="3" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="4" Grid.Column="4" Text="{Binding Path=E11, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="4" Grid.Column="5" Text="{Binding Path=F11, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="4" Grid.Column="6" Text="{Binding Path=G11, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="4" Grid.Column="7" Text="{Binding Path=H11, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
+                    <Label   Grid.Row="4" Grid.Column="1" Content="A1"  Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <Label   Grid.Row="4" Grid.Column="3" Content=""  Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="4" Grid.Column="4" Text="{Binding Path=E11, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="4" Grid.Column="5" Text="{Binding Path=F11, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="4" Grid.Column="6" Text="{Binding Path=G11, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="4" Grid.Column="7" Text="{Binding Path=H11, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
 
-                    <Label   Grid.Row="5" Grid.Column="1" Content="A2"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-                    <Label   Grid.Row="5" Grid.Column="3" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="5" Grid.Column="4" Text="{Binding Path=E12, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="5" Grid.Column="5" Text="{Binding Path=F12, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="5" Grid.Column="6" Text="{Binding Path=G12, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="5" Grid.Column="7" Text="{Binding Path=H12, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
+                    <Label   Grid.Row="5" Grid.Column="1" Content="A2"  Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <Label   Grid.Row="5" Grid.Column="3" Content=""  Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="5" Grid.Column="4" Text="{Binding Path=E12, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="5" Grid.Column="5" Text="{Binding Path=F12, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="5" Grid.Column="6" Text="{Binding Path=G12, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="5" Grid.Column="7" Text="{Binding Path=H12, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
 
-                    <Label   Grid.Row="6" Grid.Column="1" Content="B"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-                    <Label   Grid.Row="6" Grid.Column="3" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding Path=E13, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="6" Grid.Column="5" Text="{Binding Path=F13, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="6" Grid.Column="6" Text="{Binding Path=G13, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="6" Grid.Column="7" Text="{Binding Path=H13, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
+                    <Label   Grid.Row="6" Grid.Column="1" Content="B"  Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <Label   Grid.Row="6" Grid.Column="3" Content=""  Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding Path=E13, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="6" Grid.Column="5" Text="{Binding Path=F13, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="6" Grid.Column="6" Text="{Binding Path=G13, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="6" Grid.Column="7" Text="{Binding Path=H13, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
 
-                    <Label   Grid.Row="7" Grid.Column="1" Content="C"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-                    <Label   Grid.Row="7" Grid.Column="3" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding Path=E14, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="7" Grid.Column="5" Text="{Binding Path=F14, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="7" Grid.Column="6" Text="{Binding Path=G14, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
-                    <TextBox Grid.Row="7" Grid.Column="7" Text="{Binding Path=H14, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkGreenStyle}" />
+                    <Label   Grid.Row="7" Grid.Column="1" Content="C"  Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <Label   Grid.Row="7" Grid.Column="3" Content=""  Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding Path=E14, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="7" Grid.Column="5" Text="{Binding Path=F14, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="7" Grid.Column="6" Text="{Binding Path=G14, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <TextBox Grid.Row="7" Grid.Column="7" Text="{Binding Path=H14, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixDarkBrownStyle}" />
 
-                    <Label   Grid.Row="8" Grid.Column="1" Content="D"  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-                    <Label   Grid.Row="8" Grid.Column="3" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-                    <Label   Grid.Row="8" Grid.Column="4" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-                    <Label   Grid.Row="8" Grid.Column="5" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-                    <Label   Grid.Row="8" Grid.Column="6" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-                    <Label   Grid.Row="8" Grid.Column="7" Content=""  Style="{StaticResource LabelMatrixDarkGreenStyle}" />
-
-
+                    <Label   Grid.Row="8" Grid.Column="1" Content="D"  Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <Label   Grid.Row="8" Grid.Column="3" Content=""  Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <Label   Grid.Row="8" Grid.Column="4" Content=""  Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <Label   Grid.Row="8" Grid.Column="5" Content=""  Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <Label   Grid.Row="8" Grid.Column="6" Content=""  Style="{StaticResource TextMatrixDarkBrownStyle}" />
+                    <Label   Grid.Row="8" Grid.Column="7" Content=""  Style="{StaticResource TextMatrixDarkBrownStyle}" />
 
 
 
-                    <Label Grid.Row="9" Grid.Column="0" Grid.RowSpan="5" Style="{StaticResource LabelMatrixLightGreenStyle}" Content="Low and Middle Income&#xD;&#xA;            Countries"  Background="DarkSeaGreen" Margin="-70 0 -70 0" >
+
+
+                    <Label Grid.Row="9" Grid.Column="0" Grid.RowSpan="5" Style="{StaticResource TextMatrixLightBrownStyle}" Content="Low and Middle Income&#xD;&#xA;            Countries"   Margin="-70 0 -70 0" >
                         <Label.LayoutTransform>
                             <RotateTransform Angle="-90" />
                         </Label.LayoutTransform>
                     </Label>
 
 
-                    <Label   Grid.Row="9" Grid.Column="1" Content="A1"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="9" Grid.Column="3" Text="{Binding Path=D21, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="9" Grid.Column="4" Text="{Binding Path=E21, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="9" Grid.Column="5" Text="{Binding Path=F21, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="9" Grid.Column="6" Text="{Binding Path=G21, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="9" Grid.Column="7" Text="{Binding Path=H21, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
+                    <Label   Grid.Row="9" Grid.Column="1" Content="A1"  Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="9" Grid.Column="3" Text="{Binding Path=D21, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="9" Grid.Column="4" Text="{Binding Path=E21, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="9" Grid.Column="5" Text="{Binding Path=F21, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="9" Grid.Column="6" Text="{Binding Path=G21, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="9" Grid.Column="7" Text="{Binding Path=H21, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
 
-                    <Label   Grid.Row="10" Grid.Column="1" Content="A2"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="10" Grid.Column="3" Text="{Binding Path=D22, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="10" Grid.Column="4" Text="{Binding Path=E22, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="10" Grid.Column="5" Text="{Binding Path=F22, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="10" Grid.Column="6" Text="{Binding Path=G22, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="10" Grid.Column="7" Text="{Binding Path=H22, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
+                    <Label   Grid.Row="10" Grid.Column="1" Content="A2"  Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="10" Grid.Column="3" Text="{Binding Path=D22, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="10" Grid.Column="4" Text="{Binding Path=E22, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="10" Grid.Column="5" Text="{Binding Path=F22, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="10" Grid.Column="6" Text="{Binding Path=G22, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="10" Grid.Column="7" Text="{Binding Path=H22, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
 
-                    <Label   Grid.Row="11" Grid.Column="1" Content="B"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="11" Grid.Column="3" Text="{Binding Path=D23, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="11" Grid.Column="4" Text="{Binding Path=E23, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="11" Grid.Column="5" Text="{Binding Path=F23, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="11" Grid.Column="6" Text="{Binding Path=G23, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="11" Grid.Column="7" Text="{Binding Path=H23, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
+                    <Label   Grid.Row="11" Grid.Column="1" Content="B"  Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="11" Grid.Column="3" Text="{Binding Path=D23, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="11" Grid.Column="4" Text="{Binding Path=E23, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="11" Grid.Column="5" Text="{Binding Path=F23, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="11" Grid.Column="6" Text="{Binding Path=G23, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="11" Grid.Column="7" Text="{Binding Path=H23, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
 
-                    <Label   Grid.Row="12" Grid.Column="1" Content="C"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="12" Grid.Column="3" Text="{Binding Path=D24, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="12" Grid.Column="4" Text="{Binding Path=E24, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="12" Grid.Column="5" Text="{Binding Path=F24, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="12" Grid.Column="6" Text="{Binding Path=G24, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
-                    <TextBox Grid.Row="12" Grid.Column="7" Text="{Binding Path=H24, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
+                    <Label   Grid.Row="12" Grid.Column="1" Content="C"  Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="12" Grid.Column="3" Text="{Binding Path=D24, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="12" Grid.Column="4" Text="{Binding Path=E24, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="12" Grid.Column="5" Text="{Binding Path=F24, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="12" Grid.Column="6" Text="{Binding Path=G24, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <TextBox Grid.Row="12" Grid.Column="7" Text="{Binding Path=H24, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightBrownStyle}" />
 
-                    <Label   Grid.Row="13" Grid.Column="1" Content="D"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
-                    <Label   Grid.Row="13" Grid.Column="3" Content=""  Style="{StaticResource LabelMatrixLightGreenStyle}" />
-                    <Label   Grid.Row="13" Grid.Column="4" Content=""  Style="{StaticResource LabelMatrixLightGreenStyle}" />
-                    <Label   Grid.Row="13" Grid.Column="5" Content=""  Style="{StaticResource LabelMatrixLightGreenStyle}" />
-                    <Label   Grid.Row="13" Grid.Column="6" Content=""  Style="{StaticResource LabelMatrixLightGreenStyle}" />
-                    <Label   Grid.Row="13" Grid.Column="7" Content=""  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                    <Label   Grid.Row="13" Grid.Column="1" Content="D"  Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <Label   Grid.Row="13" Grid.Column="3" Content=""  Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <Label   Grid.Row="13" Grid.Column="4" Content=""  Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <Label   Grid.Row="13" Grid.Column="5" Content=""  Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <Label   Grid.Row="13" Grid.Column="6" Content=""  Style="{StaticResource TextMatrixLightBrownStyle}" />
+                    <Label   Grid.Row="13" Grid.Column="7" Content=""  Style="{StaticResource TextMatrixLightBrownStyle}" />
 
                 </Grid>
             </Border>

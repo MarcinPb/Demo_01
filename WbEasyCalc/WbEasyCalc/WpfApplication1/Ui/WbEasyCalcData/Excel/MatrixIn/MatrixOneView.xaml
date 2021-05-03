@@ -160,7 +160,7 @@
                     <TextBox Grid.Row="11" Grid.Column="6" Text="{Binding Path=G23, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
                     <TextBox Grid.Row="11" Grid.Column="7" Text="{Binding Path=H23, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
 
-                    <Label   Grid.Row="12" Grid.Column="1" Content="C"  Style="{StaticResource LabelMatrixLightGreenStyle}" />
+                    <Label   Grid.Row="12" Grid.Column="1" Content="C"  Style="{StaticResource TextMatrixLightGreenStyle}" />
                     <TextBox Grid.Row="12" Grid.Column="2" Text="{Binding Path=C24, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
                     <TextBox Grid.Row="12" Grid.Column="3" Text="{Binding Path=D24, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
                     <TextBox Grid.Row="12" Grid.Column="4" Text="{Binding Path=E24, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextMatrixLightGreenStyle}" />
