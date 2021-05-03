@@ -21,5 +21,7 @@ namespace WbEasyCalcRepository
 
         public MatrixInSheet MatOneInSheet { get; set; }
         public MatrixOutSheet MatOneOutSheet { get; set; }
+        public MatrixInSheet MatTwoInSheet { get; set; }
+        public MatrixOutSheet MatTwoOutSheet { get; set; }
     }
 }

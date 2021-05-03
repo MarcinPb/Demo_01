@@ -21,6 +21,7 @@ namespace WbEasyCalcRepository
 
                 Pis = GetPisModel(easyCalcSheetData.PiSheet),
                 MatOneOut = GetMatOneOutModel(easyCalcSheetData.MatOneOutSheet),
+                MatTwoOut = GetMatOneOutModel(easyCalcSheetData.MatTwoOutSheet),
 
                 SysInput_ErrorMarg_F72 = easyCalcSheetData.SystemInputSheet.ErrorMargin_F72,
                 SysInput_Min_D75 = easyCalcSheetData.SystemInputSheet.Min_D75,
@@ -404,7 +405,7 @@ namespace WbEasyCalcRepository
                 //H25 = easyCalcDataInput.MatOneIn_H25,
             };
 
-            data.MatOneOutSheet = new MatrixOutSheet(data);
+            data.MatOneOutSheet = new MatrixOutSheet(data.MatOneInSheet);
             //data.MatTwoOutSheet = new MatOneOutSheet(data);
 
 
@@ -683,6 +684,7 @@ namespace WbEasyCalcRepository
 
             easyCalcModel.Pis = GetPisModel(easyCalcSheetData.PiSheet);
             easyCalcModel.MatrixOneOut = GetMatOneOutModel(easyCalcSheetData.MatOneOutSheet);
+            easyCalcModel.MatrixTwoOut = GetMatOneOutModel(easyCalcSheetData.MatTwoOutSheet);
         }
 
         private static EasyCalcSheet CalcSheetData(EasyCalcModel easyCalcModel)
@@ -973,7 +975,69 @@ namespace WbEasyCalcRepository
                 H24 = easyCalcModel.MatrixOneIn.H24,
                 //H25 = easyCalcModel.MatrixOneIn.H25,
             };
-            data.MatOneOutSheet = new MatrixOutSheet(data);
+            data.MatOneOutSheet = new MatrixOutSheet(data.MatOneInSheet);
+
+            data.MatTwoInSheet = new MatrixInSheet
+            {
+                SelectedOption = easyCalcModel.MatrixTwoIn.SelectedOption,
+
+                C11 = easyCalcModel.MatrixTwoIn.C11,
+                C12 = easyCalcModel.MatrixTwoIn.C12,
+                C13 = easyCalcModel.MatrixTwoIn.C13,
+                C14 = easyCalcModel.MatrixTwoIn.C14,
+                //C15 = easyCalcModel.MatrixTwoIn.C15,
+                C21 = easyCalcModel.MatrixTwoIn.C21,
+                C22 = easyCalcModel.MatrixTwoIn.C22,
+                C23 = easyCalcModel.MatrixTwoIn.C23,
+                C24 = easyCalcModel.MatrixTwoIn.C24,
+                //C25 = easyCalcModel.MatrixTwoIn.C25,
+                D21 = easyCalcModel.MatrixTwoIn.D21,
+                D22 = easyCalcModel.MatrixTwoIn.D22,
+                D23 = easyCalcModel.MatrixTwoIn.D23,
+                D24 = easyCalcModel.MatrixTwoIn.D24,
+                //D25 = easyCalcModel.MatrixTwoIn.D25,
+                E11 = easyCalcModel.MatrixTwoIn.E11,
+                E12 = easyCalcModel.MatrixTwoIn.E12,
+                E13 = easyCalcModel.MatrixTwoIn.E13,
+                E14 = easyCalcModel.MatrixTwoIn.E14,
+                //E15 = easyCalcModel.MatrixTwoIn.E15,
+                E21 = easyCalcModel.MatrixTwoIn.E21,
+                E22 = easyCalcModel.MatrixTwoIn.E22,
+                E23 = easyCalcModel.MatrixTwoIn.E23,
+                E24 = easyCalcModel.MatrixTwoIn.E24,
+                //E25 = easyCalcModel.MatrixTwoIn.E25,
+                F11 = easyCalcModel.MatrixTwoIn.F11,
+                F12 = easyCalcModel.MatrixTwoIn.F12,
+                F13 = easyCalcModel.MatrixTwoIn.F13,
+                F14 = easyCalcModel.MatrixTwoIn.F14,
+                //F15 = easyCalcModel.MatrixTwoIn.F15,
+                F21 = easyCalcModel.MatrixTwoIn.F21,
+                F22 = easyCalcModel.MatrixTwoIn.F22,
+                F23 = easyCalcModel.MatrixTwoIn.F23,
+                F24 = easyCalcModel.MatrixTwoIn.F24,
+                //F25 = easyCalcModel.MatrixTwoIn.F25,
+                G11 = easyCalcModel.MatrixTwoIn.G11,
+                G12 = easyCalcModel.MatrixTwoIn.G12,
+                G13 = easyCalcModel.MatrixTwoIn.G13,
+                G14 = easyCalcModel.MatrixTwoIn.G14,
+                //G15 = easyCalcModel.MatrixTwoIn.G15,
+                G21 = easyCalcModel.MatrixTwoIn.G21,
+                G22 = easyCalcModel.MatrixTwoIn.G22,
+                G23 = easyCalcModel.MatrixTwoIn.G23,
+                G24 = easyCalcModel.MatrixTwoIn.G24,
+                //G25 = easyCalcModel.MatrixTwoIn.G25,
+                H11 = easyCalcModel.MatrixTwoIn.H11,
+                H12 = easyCalcModel.MatrixTwoIn.H12,
+                H13 = easyCalcModel.MatrixTwoIn.H13,
+                H14 = easyCalcModel.MatrixTwoIn.H14,
+                //H15 = easyCalcModel.MatrixTwoIn.H15,
+                H21 = easyCalcModel.MatrixTwoIn.H21,
+                H22 = easyCalcModel.MatrixTwoIn.H22,
+                H23 = easyCalcModel.MatrixTwoIn.H23,
+                H24 = easyCalcModel.MatrixTwoIn.H24,
+                //H25 = easyCalcModel.MatrixTwoIn.H25,
+            };
+            data.MatTwoOutSheet = new MatrixOutSheet(data.MatTwoInSheet);
 
             return data;
         }

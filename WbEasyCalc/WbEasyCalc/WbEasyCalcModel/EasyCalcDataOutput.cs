@@ -10,6 +10,7 @@ namespace WbEasyCalcModel
         public WaterBalanceModel WaterBalanceYear { get; set; }  
         public PisModel Pis { get; set; }  
         public MatrixOutModel MatOneOut { get; set; }  
+        public MatrixOutModel MatTwoOut { get; set; }  
 
 
 
