@@ -10,7 +10,7 @@ namespace DataModel
     public class Option
     {
         public FinancDataModel FinancDataModel { get; set; }
-        public MatrixOneInModel MatrixOneInModel { get; set; }
-        public MatrixOneInModel MatrixTwoInModel { get; set; }
+        public MatrixInModel MatrixOneInModel { get; set; }
+        public MatrixInModel MatrixTwoInModel { get; set; }
     }
 }

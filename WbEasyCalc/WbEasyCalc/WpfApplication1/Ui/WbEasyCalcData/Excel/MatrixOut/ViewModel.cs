@@ -360,7 +360,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOut
 
 
 
-        public MatrixOneOutModel Model => new MatrixOneOutModel()
+        public MatrixOutModel Model => new MatrixOutModel()
         {
             C11 = C11,
             C12 = C12,
@@ -419,7 +419,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOut
             H25 = H25,
         };
 
-        internal void Refreash(MatrixOneOutModel model)
+        internal void Refreash(MatrixOutModel model)
         {
             C11 = model.C11;
             C12 = model.C12;
@@ -478,7 +478,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOut
             H25 = model.H25;
         }
 
-        public ViewModel(MatrixOneOutModel model)
+        public ViewModel(MatrixOutModel model)
         {
             if (model == null) return;
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WbEasyCalcModel.WbEasyCalc
 {
-    public class MatrixOneInModel : ICloneable
+    public class MatrixInModel : ICloneable
     {
         public int SelectedOption { get; set; }
 
@@ -62,7 +62,7 @@ namespace WbEasyCalcModel.WbEasyCalc
         
         public object Clone()
         {
-            return new MatrixOneInModel()
+            return new MatrixInModel()
             {
                 SelectedOption = SelectedOption,
 

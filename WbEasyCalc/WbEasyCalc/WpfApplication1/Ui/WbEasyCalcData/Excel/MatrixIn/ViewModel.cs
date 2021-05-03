@@ -299,7 +299,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixIn
         }
 
 
-        public MatrixOneInModel Model => new MatrixOneInModel()
+        public MatrixInModel Model => new MatrixInModel()
         {
             SelectedOption = (int)SelectedOption,
 
@@ -349,7 +349,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixIn
             H24 = H24,
         };
 
-        public void Refreash(MatrixOneInModel model)
+        public void Refreash(MatrixInModel model)
         {
             C11 = model.C11;
             C12 = model.C12;
@@ -397,7 +397,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixIn
             H24 = model.H24;
         }
 
-        public ViewModel(MatrixOneInModel model)
+        public ViewModel(MatrixInModel model)
         {
             if (model == null) return;
 

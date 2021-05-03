@@ -729,7 +729,7 @@ namespace DataRepository.WbEasyCalcData
                         FinancData_G35 = FinancData_G35,
                     },
 
-                    MatrixOneIn = new MatrixOneInModel
+                    MatrixOneIn = new MatrixInModel
                     {
                         SelectedOption = MatrixOneIn_SelectedOption,
                         C11 = MatrixOneIn_C11,
@@ -778,7 +778,7 @@ namespace DataRepository.WbEasyCalcData
                         H24 = MatrixOneIn_H24,
                     },
 
-                    MatrixTwoIn = new MatrixOneInModel
+                    MatrixTwoIn = new MatrixInModel
                     {
                         SelectedOption = MatrixTwoIn_SelectedOption,
                         C11 = MatrixTwoIn_C11,

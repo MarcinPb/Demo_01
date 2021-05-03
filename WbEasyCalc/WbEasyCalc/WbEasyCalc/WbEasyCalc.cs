@@ -521,9 +521,9 @@ namespace WbEasyCalcRepository
             };
             return model;
         }
-        private static MatrixOneOutModel GetMatOneOutModel(MatrixOutSheet sheet)
+        private static MatrixOutModel GetMatOneOutModel(MatrixOutSheet sheet)
         {
-            MatrixOneOutModel model = new MatrixOneOutModel
+            MatrixOutModel model = new MatrixOutModel
             {
                 C11 = sheet.C11,
                 C12 = sheet.C12,
