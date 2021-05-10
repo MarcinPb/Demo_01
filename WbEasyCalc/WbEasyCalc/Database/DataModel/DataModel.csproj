@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1CB5B95D-8662-475C-A11C-1B3C138FE649}</ProjectGuid>
+    <ProjectGuid>{84E205EB-B5E5-4E14-8F6B-BD3284D48E73}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GlobalRepository</RootNamespace>
-    <AssemblyName>GlobalRepository</AssemblyName>
+    <RootNamespace>DataModel</RootNamespace>
+    <AssemblyName>DataModel</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,7 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,40 +41,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalConfig.cs" />
-    <Compile Include="WasteBin\GlobalRepository.cs" />
-    <Compile Include="WasteBin\IGlobalRepository.cs" />
-    <Compile Include="IOpcServer.cs" />
-    <Compile Include="IWbEasyCalcExcel.cs" />
-    <Compile Include="OpcServer.cs" />
+    <Compile Include="ConfigMatrix.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Option.cs" />
+    <Compile Include="WaterConsumptionCategoryStatusExcel.cs" />
+    <Compile Include="IdNamePair.cs" />
+    <Compile Include="WaterConsumption.cs" />
+    <Compile Include="WbEasyCalcData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WbEasyCalcExcel.cs" />
+    <Compile Include="ZoneItem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Database\DataModel\DataModel.csproj">
-      <Project>{84e205eb-b5e5-4e14-8f6b-bd3284d48e73}</Project>
-      <Name>DataModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Database\DataRepository\DataRepository.csproj">
-      <Project>{ba9d1b4b-4f94-466a-b5e9-2b8d21d6e941}</Project>
-      <Name>DataRepository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WbEasyCalcModel\WbEasyCalcModel.csproj">
+    <ProjectReference Include="..\..\WbEasyCalcModel\WbEasyCalcModel.csproj">
       <Project>{999ce3b3-3b81-4349-9bde-7eccadfa43fb}</Project>
       <Name>WbEasyCalcModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WbEasyCalc\WbEasyCalcRepository.csproj">
-      <Project>{9ae2bb62-74d4-449e-b531-505ba70fba14}</Project>
-      <Name>WbEasyCalcRepository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ExcelNpoi\ExcelNpoi.csproj">
-      <Project>{72312fb8-0ea0-4e29-8d99-ea9cf6c1ccca}</Project>
-      <Name>ExcelNpoi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Opc\Opc.csproj">
-      <Project>{ec4ad061-40ea-4bff-811e-fd01b81f3382}</Project>
-      <Name>Opc</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

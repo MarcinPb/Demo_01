@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using DataModel;
-using DataRepository;
+using Database.DataModel;
+
 using GlobalRepository;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using WbEasyCalcModel;
@@ -27,7 +27,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
 
         public bool Save()
         {
-            DataModel.WaterConsumption model = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.SaveItem(Model.Model);
+            Database.DataModel.WaterConsumption model = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.SaveItem(Model.Model);
             Messenger.Default.Send<EditedViewModel>(this);
             return true;
         }

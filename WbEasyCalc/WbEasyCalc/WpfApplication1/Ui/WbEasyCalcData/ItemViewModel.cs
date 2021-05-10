@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using DataRepository;
+
 using GlobalRepository;
 using WbEasyCalcModel;
 using WbEasyCalcRepository;
@@ -168,11 +168,11 @@ namespace WpfApplication1.Ui.WbEasyCalcData
         public WaterConsumptionMap.MapViewModel WaterConsumptionReportViewModel { get; set; }
 
 
-        public DataModel.WbEasyCalcData Model
+        public Database.DataModel.WbEasyCalcData Model
         {
             get
             {
-                return new DataModel.WbEasyCalcData()
+                return new Database.DataModel.WbEasyCalcData()
                 {
                     WbEasyCalcDataId = this.Id,
 
@@ -194,7 +194,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             }
         }
 
-        public ItemViewModel(DataModel.WbEasyCalcData model)
+        public ItemViewModel(Database.DataModel.WbEasyCalcData model)
         {
             Id = model.WbEasyCalcDataId;
 

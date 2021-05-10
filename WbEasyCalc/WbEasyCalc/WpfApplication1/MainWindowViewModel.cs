@@ -1,4 +1,4 @@
-﻿using DataModel;
+﻿using Database.DataModel;
 using GlobalRepository;
 using WpfApplication1.Utility;
 using NLog;

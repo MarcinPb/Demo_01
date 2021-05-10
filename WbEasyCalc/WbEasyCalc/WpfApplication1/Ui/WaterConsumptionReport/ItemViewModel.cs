@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using DataRepository;
+
 using GlobalRepository;
 using WbEasyCalcModel;
 using WbEasyCalcRepository;
@@ -13,7 +13,7 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
 
     public class ItemViewModel : ViewModelBase
     {
-        public DataModel.WaterConsumption Model => new DataModel.WaterConsumption()
+        public Database.DataModel.WaterConsumption Model => new Database.DataModel.WaterConsumption()
         {
             WaterConsumptionId = Id,
             Description = Description,
@@ -177,7 +177,7 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
         #endregion
 
 
-        public ItemViewModel(DataModel.WaterConsumption model)
+        public ItemViewModel(Database.DataModel.WaterConsumption model)
         {
             Id = model.WaterConsumptionId;
 

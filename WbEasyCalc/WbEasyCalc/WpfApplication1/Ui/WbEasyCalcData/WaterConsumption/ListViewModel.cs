@@ -8,8 +8,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using DataRepository;
-using DataRepository.WaterConsumption;
+using Database.DataRepository.WaterConsumption;
 using GlobalRepository;
 using NLog;
 using WpfApplication1.Utility;
@@ -199,7 +198,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
             {
                 if (id == 0)
                 {
-                    GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp = new ListRepositoryTemp(new List<DataModel.WaterConsumption>());
+                    GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp = new ListRepositoryTemp(new List<Database.DataModel.WaterConsumption>());
                 }
                 else
                 {

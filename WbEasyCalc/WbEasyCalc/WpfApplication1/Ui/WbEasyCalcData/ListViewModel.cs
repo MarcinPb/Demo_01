@@ -8,7 +8,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using DataRepository;
+
 using GlobalRepository;
 using WpfApplication1.Utility;
 
@@ -235,7 +235,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
 
                 ReadSelectedItemsCmd = new RelayCommand<IList>(ReadSelectedItemsExecute);
 
-                Messenger.Default.Register<DataModel.WbEasyCalcData>(this, OnSaveModel);
+                Messenger.Default.Register<Database.DataModel.WbEasyCalcData>(this, OnSaveModel);
                 LoadData();
             }
             catch (Exception e)
@@ -248,7 +248,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             Messenger.Default.Unregister(this);
         }
 
-        private void OnSaveModel(DataModel.WbEasyCalcData model)
+        private void OnSaveModel(Database.DataModel.WbEasyCalcData model)
         {
             LoadData();
             SelectedRow = List.FirstOrDefault(x => x.Model.WbEasyCalcDataId == model.WbEasyCalcDataId);

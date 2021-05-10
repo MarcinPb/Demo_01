@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using DataModel;
-using DataRepository;
+using Database.DataModel;
+
 using GlobalRepository;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using WbEasyCalcModel;

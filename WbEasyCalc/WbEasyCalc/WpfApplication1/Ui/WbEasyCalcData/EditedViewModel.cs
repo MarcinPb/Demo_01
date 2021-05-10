@@ -4,8 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using AutoMapper;
-using DataModel;
-using DataRepository;
+using Database.DataModel;
+
 using GlobalRepository;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using WbEasyCalcModel;
@@ -102,8 +102,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData
 
         public bool Save()
         {
-            DataModel.WbEasyCalcData model = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.SaveItem(ItemViewModel.Model);
-            Messenger.Default.Send<DataModel.WbEasyCalcData>(model);
+            Database.DataModel.WbEasyCalcData model = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.SaveItem(ItemViewModel.Model);
+            Messenger.Default.Send<Database.DataModel.WbEasyCalcData>(model);
             return true;
         }
 

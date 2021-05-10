@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
-using DataModel;
-using DataRepository;
+using Database.DataModel;
+using Database.DataRepository;
 using WbEasyCalcModel;
 
 namespace GlobalRepository
@@ -23,7 +23,7 @@ namespace GlobalRepository
 
             if (db == DatabaseType.Sql)
             {
-                DataRepository = new DataRepository.MainRepo(CnnString("TWDB"));
+                DataRepository = new MainRepo(CnnString("TWDB"));
             }
             else if (db == DatabaseType.TextFile)
             {
