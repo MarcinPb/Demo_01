@@ -28,20 +28,17 @@
             SelectedObject="{Binding ItemViewModel}"                                   
             ShowTitle="False"
             >
-            <!--
-                           Filter="{Binding ItemViewModel.Id}"
-            
-            AutoGenerateProperties="False"
-            <xctk:PropertyGrid.PropertyDefinitions>
-                <xctk:PropertyDefinition TargetProperties="Name" />
-                <xctk:PropertyDefinition TargetProperties="Background" />
-                <xctk:PropertyDefinition TargetProperties="BorderBrush" />
-                <xctk:PropertyDefinition TargetProperties="BorderThickness" />
-                <xctk:PropertyDefinition TargetProperties="FontSize" />
-                <xctk:PropertyDefinition TargetProperties="FontStyle" />
-                <xctk:PropertyDefinition TargetProperties="Width" />
-                <xctk:PropertyDefinition TargetProperties="Height" /
-            </xctk:PropertyGrid.PropertyDefinitions>>-->
+
+            <xctk:PropertyGrid.EditorDefinitions>
+                <xctk:EditorTemplateDefinition TargetProperties="Zone">
+                    <xctk:EditorTemplateDefinition.EditingTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding Instance.ZoneItemsSource}" SelectedValue="{Binding Instance.Zone}" />
+                        </DataTemplate>
+                    </xctk:EditorTemplateDefinition.EditingTemplate>
+                </xctk:EditorTemplateDefinition>
+            </xctk:PropertyGrid.EditorDefinitions>
+
         </xctk:PropertyGrid>
     </Grid>
 </UserControl>

@@ -40,12 +40,10 @@ namespace WpfApplication1.Ui.PropertyGrid
         [Category("Physical")]
         [DisplayName("Zone")]
         [Description("This property uses the DoubleUpDown as the default editor.")] 
-        //[ItemsSource(typeof(FontSizeItemsSource))]
         public string Zone { get; set; }
 
         public ItemViewModel(int objId)
         {
-            //_model = new DesignerRepo().GetItem(objId);
             InfraData infraData = InfraRepo.GetInfraData();
 
             var geometry = infraData.InfraChangeableData.InfraValueList.Where(f => f.ObjId == objId).Join(
@@ -70,28 +68,24 @@ namespace WpfApplication1.Ui.PropertyGrid
             Id = _model.ObjId;
             Name = _model.Label;
             IsActive = _model.IsActive;
-            Zone = _model.ZoneId.ToString();
 
+            //Zone = _model.ZoneId.ToString();
+            if(_model.ZoneId != null)
+            {
+                var zoneList = infraData.InfraChangeableData.ZoneDict;
+                Zone = zoneList.FirstOrDefault(x => x.ZoneId == _model.ZoneId)?.Name;
+            }
         }
 
-
         [Category("Physical")]
-        [DisplayName("FontSizeItemsSource")]
+        [DisplayName("ZoneItemsSource")]
         [Browsable(false)]
-        public ObservableCollection<string> FontSizeItemsSource
+        public ObservableCollection<string> ZoneItemsSource
         {
             get
             {
-                ObservableCollection<string> sizes = new ObservableCollection<string>();
-
-                // Items generation could be made here
-                sizes.Add("1 - Przybków");
-                sizes.Add("2 - Stare Miasto");
-                sizes.Add("3 - Kopernik");
-                sizes.Add("4 - Piekary");
-                sizes.Add("5 - Północ");
-                sizes.Add("6 - ZPW");
-                return sizes;
+                ObservableCollection<string> list = new ObservableCollection<string>(InfraRepo.GetInfraData().InfraChangeableData.ZoneDict.Select(x => x.Name));
+                return list;
             }
 
         }

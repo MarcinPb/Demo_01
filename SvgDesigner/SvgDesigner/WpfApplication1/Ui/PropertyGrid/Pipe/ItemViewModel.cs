@@ -62,10 +62,24 @@ namespace WpfApplication1.Ui.PropertyGrid.Pipe
 
         public ItemViewModel(int id) : base(id)
         {
+            object fieldValue;
+            var infraValueList = InfraRepo.GetInfraData().InfraChangeableData.InfraValueList;
+
             Path = _model.Geometry.ToList();
 
-            //HMITopologyStartNodeLabel = (string)_model.Fields["HMITopologyStartNodeLabel"];
-            //HMITopologyStopNodeLabel = (string)_model.Fields["HMITopologyStopNodeLabel"];
+            fieldValue = _model.Fields["HMITopologyStartNodeID"];
+            if (fieldValue != null)
+            {
+                int relatedId = (int)fieldValue;
+                HMITopologyStartNodeLabel = infraValueList.FirstOrDefault(x => x.ObjId == relatedId && x.FieldId == 2).StringValue;
+            }
+            fieldValue = _model.Fields["HMITopologyStopNodeID"];
+            if (fieldValue != null)
+            {
+                int relatedId = (int)fieldValue;
+                HMITopologyStopNodeLabel = infraValueList.FirstOrDefault(x => x.ObjId == relatedId && x.FieldId == 2).StringValue;
+            }
+
             Physical_IsUserDefinedLength = (bool)_model.Fields["Physical_IsUserDefinedLength"];
             PipeStatus = (int)(_model.Fields["PipeStatus"] ?? 0);
             Physical_PipeMaterial = (string)_model.Fields["Physical_PipeMaterial"];

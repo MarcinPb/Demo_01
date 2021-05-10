@@ -33,7 +33,7 @@
                 <xctk:EditorTemplateDefinition TargetProperties="Zone">
                     <xctk:EditorTemplateDefinition.EditingTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding Instance.FontSizeItemsSource}" SelectedValue="{Binding Instance.Zone}" />
+                            <ComboBox ItemsSource="{Binding Instance.ZoneItemsSource}" SelectedValue="{Binding Instance.Zone}" />
                         </DataTemplate>
                     </xctk:EditorTemplateDefinition.EditingTemplate>
                 </xctk:EditorTemplateDefinition>
