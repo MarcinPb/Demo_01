@@ -41,6 +41,7 @@ namespace GeometryReader.Test
             InfraChangeableDataLists importedDataOutputLists = importer.ImportData(_sqliteFile, importedDataInputLists);
 
             InfraRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);
+            InfraRepo.InsertToInfraDemandPattern(importedDataOutputLists.DemandPatternDict);
             InfraRepo.InsertToInfraObj(importedDataOutputLists.InfraObjList);
             InfraRepo.InsertToInfraValue(importedDataOutputLists.InfraValueList);
             InfraRepo.InsertToInfraGeometry(importedDataOutputLists.InfraGeometryList);

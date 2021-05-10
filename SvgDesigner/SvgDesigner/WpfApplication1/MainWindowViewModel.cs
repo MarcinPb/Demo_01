@@ -72,10 +72,11 @@ namespace WpfApplication1
             //importer.InnerProgressChanged -= OnInnerProgressChanged;
             //importer.ProgressChanged -= OnProgressChanged;
 
-            InfraRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);
-            InfraRepo.InsertToInfraObj(importedDataOutputLists.InfraObjList);
-            InfraRepo.InsertToInfraValue(importedDataOutputLists.InfraValueList);
-            InfraRepo.InsertToInfraGeometry(importedDataOutputLists.InfraGeometryList);
+            InfraRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);                      //  14601
+            InfraRepo.InsertToInfraDemandPattern(importedDataOutputLists.DemandPatternDict);    //  
+            InfraRepo.InsertToInfraObj(importedDataOutputLists.InfraObjList);                   //     16
+            InfraRepo.InsertToInfraValue(importedDataOutputLists.InfraValueList);               // 518964
+            InfraRepo.InsertToInfraGeometry(importedDataOutputLists.InfraGeometryList);         //  25138
         }
 
         private void OnInnerProgressChanged(object sender, GeometryReader.ProgressEventArgs e)

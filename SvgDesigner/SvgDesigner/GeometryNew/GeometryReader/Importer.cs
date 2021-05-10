@@ -66,11 +66,10 @@ namespace GeometryReader
 
                 IDomainDataSet domainDataSet = domainDataSetProxy.OpenDomainDataSet();
 
-
-                // Zone list
+                // Zone and DemandPattern lists
                 IdahoDomainDataSet idahoDomainDataSet = (IdahoDomainDataSet)domainDataSet;
                 List<InfraZone> zoneDict = idahoDomainDataSet.ZoneElementManager.Elements().Cast<ModelingElementBase>().Select(x => new InfraZone { ZoneId = x.Id, Name = x.Label }).ToList();
-
+                List<InfraDemandPattern> demandPatternDict = idahoDomainDataSet.IdahoPatternElementManager.Elements().Cast<ModelingElementBase>().Select(x => new InfraDemandPattern { DemandPatternId = x.Id, Name = x.Label }).ToList();
 
                 // InfraObj list
                 List<InfraObj> infraObjList = new List<InfraObj>();
@@ -150,13 +149,14 @@ namespace GeometryReader
                     }
                 }
                 OnInnerProgressChanged(1);
-                OnProgressChanged(1, $"Successfully imported {infraObjList.Count} objects, {infraValueList.Count} fields, {infraGeometryList.Count} geometries and {zoneDict.Count} zones.");
+                OnProgressChanged(1, $"Successfully imported {infraObjList.Count} objects, {infraValueList.Count} fields, {infraGeometryList.Count} geometries, {zoneDict.Count} zones and {demandPatternDict.Count} demand patterns.");
 
                 InfraChangeableDataLists importedDataOutputLists = new InfraChangeableDataLists
                 {
                     InfraObjList = infraObjList,
                     InfraValueList = infraValueList,
                     InfraGeometryList = infraGeometryList,
+                    DemandPatternDict = demandPatternDict,
                     ZoneDict = zoneDict
                 };
 

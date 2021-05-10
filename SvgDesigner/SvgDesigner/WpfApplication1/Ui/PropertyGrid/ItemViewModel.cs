@@ -12,6 +12,8 @@ namespace WpfApplication1.Ui.PropertyGrid
 {
     public class ItemViewModel : ViewModelBase
     {
+        protected DesignerObj _model;
+
 
         private int _id;
         [Category("<General>")]
@@ -41,7 +43,6 @@ namespace WpfApplication1.Ui.PropertyGrid
         //[ItemsSource(typeof(FontSizeItemsSource))]
         public string Zone { get; set; }
 
-        protected DesignerObj _model;
         public ItemViewModel(int objId)
         {
             //_model = new DesignerRepo().GetItem(objId);
@@ -117,6 +118,7 @@ namespace WpfApplication1.Ui.PropertyGrid
             switch (infraField.DataTypeId)
             {
                 case 1:
+                case 8:
                     result = infraValue.IntValue;
                     break;
                 case 2:

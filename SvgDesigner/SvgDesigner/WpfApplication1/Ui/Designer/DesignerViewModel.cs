@@ -92,36 +92,9 @@ namespace WpfApplication1.Ui.Designer
 
             if (locationPoint != null)
             {
-                //PushPin = new PushPinShp() { Id = 100000, X = locationPoint.Value.X, Y = locationPoint.Value.Y, TypeId = 2, ZoneId = zoneId};
                 PushPin = locationPoint;
                 ObjList.Add(PushPin);
             }
         }
-
-
-        #region Waste
-
-        //private ICommand _addCommand;
-        //public ICommand AddCommand
-        //{
-        //    get { return _addCommand ?? (_addCommand = new RelayCommand(OnAddExecute, () => true)); }
-        //}
-        //private void OnAddExecute()
-        //{
-        //    ObjList.Add(new PushPinShp() { Id = 100000, X = 210, Y = 30, TypeId = 2 });
-        //}
-
-        //private ICommand _moveCommand;
-        //public ICommand MoveCommand
-        //{
-        //    get { return _moveCommand ?? (_moveCommand = new RelayCommand(OnMoveExecute, () => true)); }
-        //}
-        //private void OnMoveExecute()
-        //{
-        //    var obj = ObjList.LastOrDefault();
-        //    if (obj != null) obj.X += 20;
-        //}
-
-        #endregion
     }
 }

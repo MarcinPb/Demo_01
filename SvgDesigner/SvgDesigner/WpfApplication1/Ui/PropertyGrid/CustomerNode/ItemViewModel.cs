@@ -25,9 +25,23 @@ namespace WpfApplication1.Ui.PropertyGrid.CustomerNode
 
         public ItemViewModel(int id) : base(id)
         {
-            Demand_AssociatedElement = (string)_model.Fields["Demand_AssociatedElement"];
+            var infraValueList = InfraRepo.GetInfraData().InfraChangeableData.InfraValueList;
+            var infraDemandPatternList = InfraRepo.GetInfraData().InfraChangeableData.DemandPatternDict;
+
+            if (_model.Fields["Demand_AssociatedElement"] != null)
+            {
+                int relatedId = (int)_model.Fields["Demand_AssociatedElement"];
+                Demand_AssociatedElement = infraValueList.FirstOrDefault(x => x.ObjId == relatedId && x.FieldId == 2).StringValue;
+            }
+
             Demand_BaseFlow = (double)_model.Fields["Demand_BaseFlow"];
-            Demand_DemandPattern = (string)_model.Fields["Demand_DemandPattern"];
+
+            object fieldValue = _model.Fields["Demand_DemandPattern"];
+            if (fieldValue != null)
+            {
+                int relatedId = (int)fieldValue;
+                Demand_DemandPattern = infraDemandPatternList.FirstOrDefault(x => x.DemandPatternId == relatedId)?.Name;
+            }
         }
     }
 }

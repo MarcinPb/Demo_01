@@ -170,6 +170,28 @@ namespace Database.DataRepository
             }
         }
 
+        public static void InsertToInfraDemandPattern(List<InfraDemandPattern> list)
+        {
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    DELETE FROM dbo.tbInfraDemandPattern;
+                ";
+                cnn.Execute(sql);
+
+                sql = $@"
+                    INSERT INTO dbo.tbInfraDemandPattern (
+                        DemandPatternId,  Name
+                    ) VALUES (
+                        @DemandPatternId, @Name
+                    );
+                ";
+                cnn.Execute(sql, list);
+            }
+        }
+
         public static void InsertToInfraValue(List<InfraValue> infraValueList)
         {
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
@@ -351,12 +373,24 @@ namespace Database.DataRepository
                 zoneDict = cnn.Query<InfraZone>(sql).ToList();
             }
 
+            List<InfraDemandPattern> demandPatternDict;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    SELECT * FROM dbo.tbInfraDemandPattern;
+                ";
+                demandPatternDict = cnn.Query<InfraDemandPattern>(sql).ToList();
+            }
+
             InfraChangeableDataLists importedDataOutputLists = new InfraChangeableDataLists
             {
                 InfraObjList = infraObjList,
                 InfraValueList = infraValueList,
                 InfraGeometryList = infraGeometryList,
-                ZoneDict = zoneDict
+                ZoneDict = zoneDict,
+                DemandPatternDict = demandPatternDict,
             };
 
             return importedDataOutputLists;
