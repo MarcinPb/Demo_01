@@ -116,6 +116,14 @@
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\Configuration\EditedViewModel.cs" />
+    <Compile Include="Ui\DesignerWithPropreryGrid\EditedView.xaml.cs">
+      <DependentUpon>EditedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\DesignerWithPropreryGrid\EditedViewModel.cs" />
+    <Compile Include="Ui\Designer\DesignerView.xaml.cs">
+      <DependentUpon>DesignerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\Designer\DesignerViewModel.cs" />
     <Compile Include="Ui\Designer\Model\DesignerObj.cs" />
     <Compile Include="Ui\Designer\Model\Point2D.cs" />
     <Compile Include="Ui\Designer\Model\ShapeModel\ConnectionShp.cs" />
@@ -128,6 +136,27 @@
     <Compile Include="Ui\Designer\Repo\DesignerRepo.cs" />
     <Compile Include="Ui\Designer\Repo\DesignerRepoTwo.cs" />
     <Compile Include="Ui\Designer\Repo\ShpRepo.cs" />
+    <Compile Include="Ui\PropertyGrid\CustomerNode\EditedView.xaml.cs">
+      <DependentUpon>EditedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\PropertyGrid\CustomerNode\EditedViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\CustomerNode\ItemViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\EditedView.xaml.cs">
+      <DependentUpon>EditedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\PropertyGrid\EditedViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\ItemViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\ItemXyViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\Junction\EditedView.xaml.cs">
+      <DependentUpon>EditedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\PropertyGrid\Junction\EditedViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\Junction\ItemViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\Pipe\EditedView.xaml.cs">
+      <DependentUpon>EditedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\PropertyGrid\Pipe\EditedViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\Pipe\ItemViewModel.cs" />
     <Compile Include="Ui\WaterConsumptionReport\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
@@ -255,6 +284,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ui\Configuration\EditedView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\DesignerWithPropreryGrid\EditedView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\Designer\DesignerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\PropertyGrid\CustomerNode\EditedView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\PropertyGrid\EditedView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\PropertyGrid\Junction\EditedView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\PropertyGrid\Pipe\EditedView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -454,7 +507,14 @@
   <ItemGroup>
     <Resource Include="Controls\filter.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\DataContainer_MoveFirstHS.png" />
+    <Resource Include="Resources\DataContainer_MoveLastHS.png" />
+    <Resource Include="Resources\DataContainer_MoveNextHS.png" />
+    <Resource Include="Resources\DataContainer_MovePreviousHS.png" />
+    <Resource Include="Resources\DeleteHS.png" />
+    <Resource Include="Resources\PointerHS.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

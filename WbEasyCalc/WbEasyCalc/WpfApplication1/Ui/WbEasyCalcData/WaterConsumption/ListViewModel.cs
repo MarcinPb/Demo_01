@@ -11,6 +11,7 @@ using System.Windows;
 using Database.DataRepository.WaterConsumption;
 using GlobalRepository;
 using NLog;
+using WpfApplication1.Ui.Designer.Model;
 using WpfApplication1.Utility;
 
 namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
@@ -113,9 +114,19 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                     return;
                 }
 
-                var editedViewModel = new EditedViewModel(SelectedRow.Model.WaterConsumptionId);
+                //var editedViewModel = new EditedViewModel(SelectedRow.Model.WaterConsumptionId);
+                //var result = DialogUtility.ShowModal(editedViewModel);
+                //editedViewModel.Dispose();
+
+                int zoneId = 6773;
+                Shp _pushPinPoint = null;
+                var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(zoneId, _pushPinPoint);
                 var result = DialogUtility.ShowModal(editedViewModel);
-                editedViewModel.Dispose();
+                if (result == true)
+                {
+                    _pushPinPoint = editedViewModel.PushPin;
+                    MessageBox.Show($"Water consumption location: X={_pushPinPoint.X}, Y={_pushPinPoint.Y}", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             catch (Exception e)
             {

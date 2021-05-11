@@ -11,6 +11,7 @@
     xmlns:waterExcelWaterConsumptionMap="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap"
     xmlns:waterConsumptionReport="clr-namespace:WpfApplication1.Ui.WaterConsumptionReport"
     xmlns:configuration="clr-namespace:WpfApplication1.Ui.Configuration"
+    xmlns:uiDesignerWithPropreryGrid="clr-namespace:WpfApplication1.Ui.DesignerWithPropreryGrid" 
     >
     <!--<controls:TextHeaderToBooleanConverter x:Key="YesNoToBooleanConverter" />-->
     <wpf:ApplicationIdCredentialsProvider x:Key="MyCredentials" ApplicationId="SB1meHUME1wfK2U9s64I~BDIKAFlkZRHGfBWlfDVtjA~AoMBUdvmsIyrtgNmavFb3WmcBIoDg01WZ-Z2zIB-eC6Z2pL3MGM8RDT8I4D3e9bR" />
@@ -99,5 +100,8 @@
         </Setter>
     </Style>
 
+    <DataTemplate DataType="{x:Type uiDesignerWithPropreryGrid:EditedViewModel}">
+        <uiDesignerWithPropreryGrid:EditedView />
+    </DataTemplate>
 
 </ResourceDictionary>
