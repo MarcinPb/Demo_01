@@ -56,15 +56,15 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Wb\WbEasyCalcModel\WbEasyCalcModel.csproj">
+    <ProjectReference Include="..\..\Wb\WbEasyCalcModel\WbEasyCalcModel.csproj">
       <Project>{999ce3b3-3b81-4349-9bde-7eccadfa43fb}</Project>
       <Name>WbEasyCalcModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\DataModel\DataModel.csproj">
+    <ProjectReference Include="..\DataModel\DataModel.csproj">
       <Project>{84e205eb-b5e5-4e14-8f6b-bd3284d48e73}</Project>
       <Name>DataModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\DataRepository\DataRepository.csproj">
+    <ProjectReference Include="..\DataRepository\DataRepository.csproj">
       <Project>{ba9d1b4b-4f94-466a-b5e9-2b8d21d6e941}</Project>
       <Name>DataRepository</Name>
     </ProjectReference>
