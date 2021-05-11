@@ -63,17 +63,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WbEasyCalcModel\WbEasyCalcModel.csproj">
-      <Project>{999ce3b3-3b81-4349-9bde-7eccadfa43fb}</Project>
-      <Name>WbEasyCalcModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WbEasyCalc\WbEasyCalcRepository.csproj">
-      <Project>{9ae2bb62-74d4-449e-b531-505ba70fba14}</Project>
-      <Name>WbEasyCalcRepository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\ExcelNpoi\ExcelNpoi.csproj">
       <Project>{72312fb8-0ea0-4e29-8d99-ea9cf6c1ccca}</Project>
       <Name>ExcelNpoi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Wb\WbEasyCalcModel\WbEasyCalcModel.csproj">
+      <Project>{999CE3B3-3B81-4349-9BDE-7ECCADFA43FB}</Project>
+      <Name>WbEasyCalcModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataModel\DataModel.csproj">
       <Project>{84e205eb-b5e5-4e14-8f6b-bd3284d48e73}</Project>

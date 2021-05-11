@@ -52,7 +52,7 @@
     <Compile Include="ZoneItem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WbEasyCalcModel\WbEasyCalcModel.csproj">
+    <ProjectReference Include="..\..\Wb\WbEasyCalcModel\WbEasyCalcModel.csproj">
       <Project>{999ce3b3-3b81-4349-9bde-7eccadfa43fb}</Project>
       <Name>WbEasyCalcModel</Name>
     </ProjectReference>
