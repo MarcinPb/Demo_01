@@ -38,7 +38,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="InfraRepoTest.cs" />
+    <Compile Include="InfraTest.cs" />
     <Compile Include="MainRepoTest2.cs" />
     <Compile Include="MainRepoTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

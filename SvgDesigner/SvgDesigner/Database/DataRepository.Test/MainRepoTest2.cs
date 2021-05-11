@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Database.DataModel.Infra;
-using Database.DataRepository.Infra;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Database.DataRepository.Infra.Infra.Test
+namespace Database.DataRepository.Test
 {
     [TestClass]
     public class MainRepoTest2

@@ -7,7 +7,7 @@ using WpfApplication1.Ui.Designer.Repo;
 namespace WpfApplication1.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class InfraTest
     {
         [TestMethod]
         public void TestMethod1()

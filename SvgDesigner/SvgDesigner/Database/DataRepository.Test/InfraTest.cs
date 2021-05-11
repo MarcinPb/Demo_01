@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Database.DataModel.Infra;
-using Database.DataRepository.Infra;
+﻿using Database.DataRepository.Infra;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Database.DataRepository.Infra.Infra.Test
+namespace Database.DataRepository.Test
 {
     [TestClass]
-    public class InfraRepoTest
+    public class InfraTest
     {
         [TestMethod]
         public void GetInfraDataTest()
