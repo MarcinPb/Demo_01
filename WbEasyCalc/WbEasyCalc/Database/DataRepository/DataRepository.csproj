@@ -65,10 +65,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ExcelNpoi\ExcelNpoi.csproj">
-      <Project>{72312fb8-0ea0-4e29-8d99-ea9cf6c1ccca}</Project>
-      <Name>ExcelNpoi</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Wb\WbEasyCalcModel\WbEasyCalcModel.csproj">
       <Project>{999CE3B3-3B81-4349-9BDE-7ECCADFA43FB}</Project>
       <Name>WbEasyCalcModel</Name>

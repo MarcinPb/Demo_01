@@ -430,6 +430,10 @@
       <Project>{ba9d1b4b-4f94-466a-b5e9-2b8d21d6e941}</Project>
       <Name>DataRepository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ExcelNpoi\ExcelNpoi\ExcelNpoi.csproj">
+      <Project>{72312fb8-0ea0-4e29-8d99-ea9cf6c1ccca}</Project>
+      <Name>ExcelNpoi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GlobalRepository\GlobalRepository.csproj">
       <Project>{1cb5b95d-8662-475c-a11c-1b3c138fe649}</Project>
       <Name>GlobalRepository</Name>
