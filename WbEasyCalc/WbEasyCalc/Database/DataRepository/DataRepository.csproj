@@ -7,8 +7,8 @@
     <ProjectGuid>{BA9D1B4B-4F94-466A-B5E9-2B8D21D6E941}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataRepository</RootNamespace>
-    <AssemblyName>DataRepository</AssemblyName>
+    <RootNamespace>Database.DataRepository</RootNamespace>
+    <AssemblyName>Database.DataRepository</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

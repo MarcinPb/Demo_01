@@ -7,8 +7,8 @@
     <ProjectGuid>{9AE2BB62-74D4-449E-B531-505BA70FBA14}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WbEasyCalcRepository</RootNamespace>
-    <AssemblyName>WbEasyCalcRepository</AssemblyName>
+    <RootNamespace>Wb.WbEasyCalcRepository</RootNamespace>
+    <AssemblyName>Wb.WbEasyCalcRepository</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

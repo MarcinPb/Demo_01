@@ -7,8 +7,8 @@
     <ProjectGuid>{84E205EB-B5E5-4E14-8F6B-BD3284D48E73}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataModel</RootNamespace>
-    <AssemblyName>DataModel</AssemblyName>
+    <RootNamespace>Database.DataModel</RootNamespace>
+    <AssemblyName>Database.DataModel</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

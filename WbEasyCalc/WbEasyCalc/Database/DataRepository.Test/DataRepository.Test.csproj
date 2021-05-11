@@ -7,8 +7,8 @@
     <ProjectGuid>{67CDABBB-8FEE-4F05-AA55-F593DC818E65}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataRepository.Test</RootNamespace>
-    <AssemblyName>DataRepository.Test</AssemblyName>
+    <RootNamespace>Database.DataRepository.Test</RootNamespace>
+    <AssemblyName>Database.DataRepository.Test</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
