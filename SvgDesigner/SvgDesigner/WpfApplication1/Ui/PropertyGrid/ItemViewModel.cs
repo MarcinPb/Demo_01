@@ -1,5 +1,5 @@
-﻿using Database.DataModel;
-using Database.DataRepository;
+﻿using Database.DataModel.Infra;
+using Database.DataRepository.Infra;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

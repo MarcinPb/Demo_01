@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Database.DataModel.Infra;
 using Haestad.Domain;
 using Haestad.Domain.ModelingObjects;
 using Haestad.Domain.ModelingObjects.Water;
 using Haestad.Support.Support;
-using Database.DataModel;
 
 namespace GeometryReader
 {

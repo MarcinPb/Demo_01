@@ -8,7 +8,7 @@ using WbEasyCalcModel;
 namespace DataRepository.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class WbTest
     {
         string _cnnString = ConfigurationManager.ConnectionStrings["TWDB"].ConnectionString;
 

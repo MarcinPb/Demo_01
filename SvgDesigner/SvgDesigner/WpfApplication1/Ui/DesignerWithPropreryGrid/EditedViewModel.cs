@@ -1,5 +1,5 @@
-﻿using Database.DataModel;
-using Database.DataRepository;
+﻿using Database.DataModel.Infra;
+using Database.DataRepository.Infra;
 using GeometryReader;
 using System;
 using System.Linq;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database.DataModel
+namespace Database.DataModel.Infra
 {
     public class ImportedBaseOutputLists
     {

@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infra\InfraData.cs" />
+    <Compile Include="Infra\InfraRepo.cs" />
     <Compile Include="MainRepo.cs" />
     <Compile Include="IBaseItemRepository.cs" />
     <Compile Include="IMainRepo.cs" />

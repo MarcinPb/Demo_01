@@ -42,8 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InfraData.cs" />
-    <Compile Include="InfraRepo.cs" />
+    <Compile Include="Infra\InfraData.cs" />
+    <Compile Include="Infra\InfraRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database.DataModel
+namespace Database.DataModel.Infra
 {
-    public class InfraObjType
+    public class InfraZone
     {
-        public int ObjTypeId { get; set; }
+        public int ZoneId { get; set; }
         public string Name { get; set; }
     }
 }

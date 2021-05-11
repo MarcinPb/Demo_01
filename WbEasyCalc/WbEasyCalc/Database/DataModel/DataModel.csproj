@@ -43,6 +43,19 @@
   <ItemGroup>
     <Compile Include="ConfigMatrix.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Infra\ImportedBaseOutputLists.cs" />
+    <Compile Include="Infra\ImportedField.cs" />
+    <Compile Include="Infra\InfraChangeableDataLists.cs" />
+    <Compile Include="Infra\InfraConstantDataLists.cs" />
+    <Compile Include="Infra\InfraDemandPattern.cs" />
+    <Compile Include="Infra\InfraField.cs" />
+    <Compile Include="Infra\InfraGeometry.cs" />
+    <Compile Include="Infra\InfraObj.cs" />
+    <Compile Include="Infra\InfraObjType.cs" />
+    <Compile Include="Infra\InfraObjTypeField.cs" />
+    <Compile Include="Infra\InfraUnitCorrection.cs" />
+    <Compile Include="Infra\InfraValue.cs" />
+    <Compile Include="Infra\InfraZone.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="WaterConsumptionCategoryStatusExcel.cs" />
     <Compile Include="IdNamePair.cs" />
@@ -57,6 +70,7 @@
       <Name>WbEasyCalcModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

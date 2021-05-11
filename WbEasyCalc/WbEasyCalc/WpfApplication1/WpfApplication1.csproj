@@ -116,6 +116,18 @@
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\Configuration\EditedViewModel.cs" />
+    <Compile Include="Ui\Designer\Model\DesignerObj.cs" />
+    <Compile Include="Ui\Designer\Model\Point2D.cs" />
+    <Compile Include="Ui\Designer\Model\ShapeModel\ConnectionShp.cs" />
+    <Compile Include="Ui\Designer\Model\ShapeModel\EllipseShp.cs" />
+    <Compile Include="Ui\Designer\Model\ShapeModel\LineShp.cs" />
+    <Compile Include="Ui\Designer\Model\ShapeModel\PathShp.cs" />
+    <Compile Include="Ui\Designer\Model\ShapeModel\PushPinShp.cs" />
+    <Compile Include="Ui\Designer\Model\ShapeModel\RectangleShp.cs" />
+    <Compile Include="Ui\Designer\Model\Shp.cs" />
+    <Compile Include="Ui\Designer\Repo\DesignerRepo.cs" />
+    <Compile Include="Ui\Designer\Repo\DesignerRepoTwo.cs" />
+    <Compile Include="Ui\Designer\Repo\ShpRepo.cs" />
     <Compile Include="Ui\WaterConsumptionReport\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>

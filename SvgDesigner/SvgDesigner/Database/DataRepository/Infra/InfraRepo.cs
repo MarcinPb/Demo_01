@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Database.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,8 +7,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Database.DataModel.Infra;
 
-namespace Database.DataRepository
+namespace Database.DataRepository.Infra
 {
     public class InfraRepo
     {

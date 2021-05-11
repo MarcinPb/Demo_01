@@ -1,11 +1,11 @@
-﻿using Database.DataModel;
+﻿using Database.DataModel.Infra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database.DataRepository
+namespace Database.DataRepository.Infra
 {
     public class InfraData
     {

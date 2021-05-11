@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database.DataModel
+namespace Database.DataModel.Infra
 {
-    public class InfraDemandPattern
+    public class InfraObjType
     {
-        public int DemandPatternId { get; set; }
+        public int ObjTypeId { get; set; }
         public string Name { get; set; }
     }
 }

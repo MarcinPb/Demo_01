@@ -41,19 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImportedBaseOutputLists.cs" />
-    <Compile Include="InfraConstantDataLists.cs" />
-    <Compile Include="InfraChangeableDataLists.cs" />
-    <Compile Include="ImportedField.cs" />
-    <Compile Include="InfraGeometry.cs" />
-    <Compile Include="InfraUnitCorrection.cs" />
-    <Compile Include="InfraDemandPattern.cs" />
-    <Compile Include="InfraZone.cs" />
-    <Compile Include="InfraObjType.cs" />
-    <Compile Include="InfraValue.cs" />
-    <Compile Include="InfraField.cs" />
-    <Compile Include="InfraObj.cs" />
-    <Compile Include="InfraObjTypeField.cs" />
+    <Compile Include="Infra\ImportedBaseOutputLists.cs" />
+    <Compile Include="Infra\InfraConstantDataLists.cs" />
+    <Compile Include="Infra\InfraChangeableDataLists.cs" />
+    <Compile Include="Infra\ImportedField.cs" />
+    <Compile Include="Infra\InfraGeometry.cs" />
+    <Compile Include="Infra\InfraUnitCorrection.cs" />
+    <Compile Include="Infra\InfraDemandPattern.cs" />
+    <Compile Include="Infra\InfraZone.cs" />
+    <Compile Include="Infra\InfraObjType.cs" />
+    <Compile Include="Infra\InfraValue.cs" />
+    <Compile Include="Infra\InfraField.cs" />
+    <Compile Include="Infra\InfraObj.cs" />
+    <Compile Include="Infra\InfraObjTypeField.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

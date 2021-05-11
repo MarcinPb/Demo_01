@@ -2,6 +2,7 @@
 using GlobalRepository;
 using WpfApplication1.Utility;
 using NLog;
+using WpfApplication1.Ui.Designer.Repo;
 
 namespace WpfApplication1
 {
@@ -28,6 +29,9 @@ namespace WpfApplication1
 
             WbEasyCalcDataViewModel = new Ui.WbEasyCalcData.ListViewModel();
             WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel();
+
+            // Singleton run before opening designer first time. It takes more or less 5 sek.
+            var designerObjList1 = DesignerRepoTwo.DesignerObjList;
         }
 
     }
