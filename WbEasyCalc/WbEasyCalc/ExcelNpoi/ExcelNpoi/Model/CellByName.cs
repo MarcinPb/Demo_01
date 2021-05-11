@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ExcelNpoi.Model
+namespace ExcelNpoi.ExcelNpoi.Model
 {
     public class CellByName<T>
     {

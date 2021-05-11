@@ -5,7 +5,7 @@ using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
 //using Grundfos.WG.Model;
 
-namespace ExcelNpoi
+namespace ExcelNpoi.ExcelNpoi
 {
     public class ExcelWriter
     {

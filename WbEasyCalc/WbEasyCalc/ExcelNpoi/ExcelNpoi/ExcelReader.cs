@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using ExcelNpoi.Model;
+using ExcelNpoi.ExcelNpoi.Model;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 
-namespace ExcelNpoi
+namespace ExcelNpoi.ExcelNpoi
 {
     public class ExcelReader
     {
@@ -83,14 +83,14 @@ namespace ExcelNpoi
             string rowName = Regex.Match(cellName, @"\d+").Value;
 
             int columnNo = ascii.IndexOf(columnName);
-            int rowNo = Convert.ToInt32(rowName)-1;
+            int rowNo = Convert.ToInt32(rowName) - 1;
 
             return ReadCell<T>(sheetName, columnNo, rowNo);
         }
 
         public T ReadCell<T>(string sheetName, int columnNo, int rowNo)
         {
-            var sheet = this.Workbook.GetSheet(sheetName);
+            var sheet = Workbook.GetSheet(sheetName);
             if (sheet == null)
             {
                 string message = $"Could not find setting sheet: {SettingsSheetName}.";
@@ -100,7 +100,7 @@ namespace ExcelNpoi
             IRow row = sheet.GetRow(rowNo);
             ICell valueCell = row.GetCell(columnNo);
 
-            T value = this.GetCellValue<T>(valueCell);
+            T value = GetCellValue<T>(valueCell);
             return value;
         }
 
@@ -287,27 +287,27 @@ namespace ExcelNpoi
             }
             if (t == typeof(double))
             {
-                cell.SetCellValue(Convert.ToDouble(value)); 
+                cell.SetCellValue(Convert.ToDouble(value));
                 return;
             }
             if (t == typeof(string))
             {
-                cell.SetCellValue(value==null ? string.Empty : value.ToString()); 
+                cell.SetCellValue(value == null ? string.Empty : value.ToString());
                 return;
             }
             if (typeof(T) == typeof(bool))
             {
-                cell.SetCellValue(Convert.ToBoolean(value)); 
+                cell.SetCellValue(Convert.ToBoolean(value));
                 return;
             }
             if (typeof(T) == typeof(DateTime))
             {
-                cell.SetCellValue(Convert.ToBoolean(value)); 
+                cell.SetCellValue(Convert.ToBoolean(value));
                 return;
             }
             if (typeof(T) == typeof(DateTime))
             {
-                cell.SetCellValue(Convert.ToDateTime(value)); 
+                cell.SetCellValue(Convert.ToDateTime(value));
                 return;
             }
 

@@ -7,8 +7,8 @@
     <ProjectGuid>{72312FB8-0EA0-4E29-8D99-EA9CF6C1CCCA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExcelNpoi</RootNamespace>
-    <AssemblyName>ExcelNpoi</AssemblyName>
+    <RootNamespace>ExcelNpoi.ExcelNpoi</RootNamespace>
+    <AssemblyName>ExcelNpoi.ExcelNpoi</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
