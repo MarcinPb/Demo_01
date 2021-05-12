@@ -145,7 +145,7 @@ namespace Database.DataRepository
 
                 p.Add("@YearNo", yearNo);
                 p.Add("@MonthNo", monthNo);
-                p.Add("@ZoneId", zoneId);
+                p.Add("@RelatedId", zoneId);
 
                 // input
                 p.Add("@Start_PeriodDays_M21", dbType: DbType.Int32, direction: ParameterDirection.Output);

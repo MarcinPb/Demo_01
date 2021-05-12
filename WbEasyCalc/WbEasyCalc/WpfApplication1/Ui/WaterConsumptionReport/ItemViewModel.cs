@@ -22,7 +22,7 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
 
             WaterConsumptionCategoryId = WaterConsumptionCategoryId,
             WaterConsumptionStatusId = WaterConsumptionStatusId,
-            ZoneId = ZoneId,
+            RelatedId = ZoneId,
 
             StartDate = StartDate,
             EndDate = EndDate,
@@ -170,7 +170,7 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
             set
             {
                 _zoneId = value;
-                RaisePropertyChanged("ZoneId");
+                RaisePropertyChanged("RelatedId");
             }
         }
 
@@ -183,7 +183,7 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
 
             if (model.WaterConsumptionId != 0)
             {
-                ZoneId = model.ZoneId;
+                ZoneId = model.RelatedId;
                 WaterConsumptionCategoryId = model.WaterConsumptionCategoryId;
                 WaterConsumptionStatusId = model.WaterConsumptionStatusId;
                 StartDate = model.StartDate;

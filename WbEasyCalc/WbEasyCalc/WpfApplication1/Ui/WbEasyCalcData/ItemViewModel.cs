@@ -95,7 +95,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             set
             {
                 _zoneId = value;
-                RaisePropertyChanged("ZoneId");
+                RaisePropertyChanged("RelatedId");
             }
         }
 

@@ -73,7 +73,7 @@ namespace WpfApplication1.Ui.Designer
                     
                 var objPosition = ObjList.FirstOrDefault(x => x.Id == id);
                 var mousePosition = e.GetPosition(e.Device.Target);
-                PushPin = new PushPinShp() { Id = 100000, X = objPosition.X + mousePosition.X, Y = objPosition.Y + mousePosition.Y, TypeId = 2 };
+                PushPin = new PushPinShp() { Id = 100000, X = objPosition.X + mousePosition.X, Y = objPosition.Y + mousePosition.Y, TypeId = 2, RelatedId = SelectedItem };
                 ObjList.Add(PushPin);
 
                 //Messenger.Default.Send(PushPin);

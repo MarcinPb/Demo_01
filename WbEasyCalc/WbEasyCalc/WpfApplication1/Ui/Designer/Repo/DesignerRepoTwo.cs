@@ -87,14 +87,14 @@ namespace WpfApplication1.Ui.Designer.Repo
                 })
                 .ToList();
 
-            // Set up ZoneId for CustomerMeters and ScadaElements
+            // Set up RelatedId for CustomerMeters and ScadaElements
             //var domainObjects2 = domainObjects.GroupJoin(
             //    domainObjects,
             //    l => l.AssociatedId,
             //    r => r.ObjId,
             //    (l, r) => new 
             //    )
-            //domainObjects.ForEach(cm => cm.ZoneId = domainObjects.FirstOrDefault(j => cm.AssociatedId == j.ObjId)?.ZoneId);
+            //domainObjects.ForEach(cm => cm.RelatedId = domainObjects.FirstOrDefault(j => cm.AssociatedId == j.ObjId)?.RelatedId);
             foreach (var cm in domainObjects.Where(f => f.ObjTypeId == 73))
             {
                 var attachedObj = domainObjects.FirstOrDefault(j => cm.AssociatedId == j.ObjId);

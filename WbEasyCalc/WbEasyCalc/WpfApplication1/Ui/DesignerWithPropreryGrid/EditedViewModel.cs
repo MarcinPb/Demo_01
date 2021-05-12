@@ -39,7 +39,7 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
         #endregion
 
 
-        public Shp PushPin { get; set; }
+        public PushPinShp PushPin { get; set; }
 
         public DesignerViewModel DesignerViewModel { get; set; }
 
@@ -64,7 +64,7 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
             WaterConsumption model = Model.Model;
             model.Lontitude = PushPin.X;
             model.Latitude = PushPin.Y;
-            model.ZoneId = model.ZoneId;
+            model.RelatedId = PushPin.RelatedId;
 
             model = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.SaveItem(model);
             Messenger.Default.Send<WaterConsumption>(model);
@@ -88,13 +88,13 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
             //Messenger.Default.Register<ItemViewModel>(this, OnCategoryChange);
 
             // Designer -----------------------------------
-            Shp locationPoint = null;
+            //Shp locationPoint = null;
             if (id != 0)
             {
-                locationPoint = new PushPinShp { X = Model.Lontitude, Y = Model.Latitude, ZoneId = 1, TypeId = 4 };
+                PushPin = new PushPinShp { X = Model.Lontitude, Y = Model.Latitude, ZoneId = 1, TypeId = 4, Id=100000, RelatedId = Model.RelatedId };
             }
-            //DesignerViewModel = new DesignerViewModel(Model.ZoneId, locationPoint);
-            DesignerViewModel = new DesignerViewModel(6773, locationPoint);
+            //DesignerViewModel = new DesignerViewModel(Model.RelatedId, locationPoint);
+            DesignerViewModel = new DesignerViewModel(6773, PushPin);
             DesignerViewModel.PropertyChanged += DesignerViewModel_PropertyChanged;    
 
             PropertyGridViewModel = new Ui.PropertyGrid.EditedViewModel();
@@ -158,7 +158,7 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
             }
             else if (shp is PushPinShp)
             {
-                PushPin = shp;
+                PushPin = (PushPinShp)shp;
             }
         }
     }

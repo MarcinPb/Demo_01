@@ -84,7 +84,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
         //    var WbEasyCalcDataModel = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetItem(id);
         //    _yearNo = WbEasyCalcDataModel.YearNo;
         //    _monthNo = WbEasyCalcDataModel.MonthNo;
-        //    _zoneId = WbEasyCalcDataModel.ZoneId;
+        //    _zoneId = WbEasyCalcDataModel.RelatedId;
         //}
 
         public MapViewModel(int yearNo, int monthNo, int zoneId)
@@ -134,7 +134,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
             var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList().Where(x => x.StartDate >= FilterStartDate && x.EndDate <= FilterEndDate).Select(x => new RowViewModel(x));
             if (_yearNo != 0)
             {
-                rowModelList = rowModelList.Where(x => x.Model.ZoneId == _zoneId);
+                rowModelList = rowModelList.Where(x => x.Model.RelatedId == _zoneId);
             }
             var mapItemList = rowModelList.Select(x => new MapItem1()
             {

@@ -161,9 +161,9 @@ namespace Database.DataRepository.Infra
 
                 sql = $@"
                     INSERT INTO dbo.tbInfraZone (
-                        ZoneId,  Name
+                        RelatedId,  Name
                     ) VALUES (
-                        @ZoneId, @Name
+                        @RelatedId, @Name
                     );
                 ";
                 cnn.Execute(sql, list);

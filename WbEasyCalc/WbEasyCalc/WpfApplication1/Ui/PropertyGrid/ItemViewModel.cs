@@ -69,7 +69,7 @@ namespace WpfApplication1.Ui.PropertyGrid
             Name = _model.Label;
             IsActive = _model.IsActive;
 
-            //Zone = _model.ZoneId.ToString();
+            //Zone = _model.RelatedId.ToString();
             if(_model.ZoneId != null)
             {
                 var zoneList = infraData.InfraChangeableData.ZoneDict;

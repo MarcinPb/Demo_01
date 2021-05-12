@@ -23,7 +23,7 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
 
             WaterConsumptionCategoryId = WaterConsumptionCategoryId,
             WaterConsumptionStatusId = WaterConsumptionStatusId,
-            ZoneId = ZoneId,
+            RelatedId = RelatedId,
 
             StartDate = StartDate,
             EndDate = EndDate,
@@ -173,17 +173,17 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
             set { _value = value; RaisePropertyChanged(nameof(Value)); }
         }
 
-        private int _zoneId;
-        public int ZoneId
+        private int _relatedId;
+        public int RelatedId
         {
             get
             {
-                return _zoneId;
+                return _relatedId;
             }
             set
             {
-                _zoneId = value;
-                RaisePropertyChanged("ZoneId");
+                _relatedId = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -197,7 +197,7 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
             if (model.WaterConsumptionId != 0)
             {
                 WbEasyCalcDataId = model.WbEasyCalcDataId;
-                ZoneId = model.ZoneId;
+                RelatedId = model.RelatedId;
                 WaterConsumptionCategoryId = model.WaterConsumptionCategoryId;
                 WaterConsumptionStatusId = model.WaterConsumptionStatusId;
                 StartDate = model.StartDate;
@@ -206,7 +206,7 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
             else
             {
                 WbEasyCalcDataId = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetList().First().WbEasyCalcDataId; 
-                ZoneId = GlobalConfig.DataRepository.ZoneList.First().ZoneId;
+                RelatedId = GlobalConfig.DataRepository.ZoneList.First().ZoneId;
                 WaterConsumptionCategoryId = GlobalConfig.DataRepository.WaterConsumptionCategoryList.First().Id;
                 WaterConsumptionStatusId = GlobalConfig.DataRepository.WaterConsumptionStatusList.First().Id;
                 StartDate = DateTime.Now;

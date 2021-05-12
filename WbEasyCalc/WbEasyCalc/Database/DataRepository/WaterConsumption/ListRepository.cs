@@ -55,7 +55,7 @@ namespace Database.DataRepository.WaterConsumption
                 p.Add("@EndDate" , model.EndDate);
                 p.Add("@Latitude", model.Latitude);
                 p.Add("@Lontitude", model.Lontitude);
-                p.Add("@ZoneId", model.ZoneId);
+                p.Add("@RelatedId", model.RelatedId);
                 p.Add("@Value", model.Value);
 
                 connection.Execute("dbo.spWaterConsumptionSave", p, commandType: CommandType.StoredProcedure);

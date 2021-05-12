@@ -23,7 +23,7 @@ namespace Database.DataModel
         public DateTime EndDate { get; set; }
         public double Latitude { get; set; }
         public double Lontitude { get; set; }
-        public int ZoneId { get; set; }
+        public int RelatedId { get; set; }
         public double Value { get; set; }
 
         public object Clone()
@@ -46,7 +46,7 @@ namespace Database.DataModel
                 EndDate = EndDate,
                 Latitude = Latitude,
                 Lontitude = Lontitude,
-                ZoneId = ZoneId,
+                RelatedId = RelatedId,
                 Value = Value,
             };
         }
