@@ -14,10 +14,13 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock" 
         xmlns:s="clr-namespace:System;assembly=mscorlib"
+        xmlns:converters="clr-namespace:WpfApplication1.Converters"
         mc:Ignorable="d"
              
         >
     <UserControl.Resources>
+        <converters:FloatConverter x:Key="FloatConverter" />
+
         <DataTemplate DataType="{x:Type uiDesigner:DesignerViewModel}">
             <uiDesigner:DesignerView />
         </DataTemplate>
@@ -34,14 +37,60 @@
             <uiDesignerCustNode:EditedView />
         </DataTemplate>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <ContentControl Grid.Column="0" Content="{Binding DesignerViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Margin="5 0 5 0"/>
-        <ContentControl Grid.Column="2"  Content="{Binding PropertyGridViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0 0 0 10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Id" Grid.Row="0" Grid.Column="0" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="7 0 0 0" Text="Category" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Status" />
+                <!--<TextBlock Grid.Row="0" Grid.Column="3" Text="Zone" />-->
+                <TextBlock Grid.Row="0" Grid.Column="4" Margin="7 0 0 0" Text="Start" />
+                <TextBlock Grid.Row="0" Grid.Column="5" Margin="7 0 0 0" Text="End" />
+                <TextBlock Grid.Row="0" Grid.Column="6" Margin="7 0 0 0" Text="Value [m3]" />
+                <TextBlock Grid.Row="0" Grid.Column="7" Margin="7 0 0 0" Text="Description"/>
+
+                <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=Model.Id, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" />
+                <ComboBox Grid.Row="1" Grid.Column="1" Margin="7 0 0 0" ItemsSource="{Binding Path=WaterConsumptionCategoryList}" SelectedValuePath="Id" DisplayMemberPath="Name" SelectedValue="{Binding Path=Model.WaterConsumptionCategoryId}" />
+                <ComboBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=WaterConsumptionStatusList}" SelectedValuePath="Id" DisplayMemberPath="Name" SelectedValue="{Binding Path=Model.WaterConsumptionStatusId}" />
+                <!--<ComboBox Grid.Row="1" Grid.Column="3" ItemsSource="{Binding Path=ZoneItemList}" SelectedValuePath="ZoneId" DisplayMemberPath="ZoneName" SelectedValue="{Binding Path=Model.ZoneId}" />-->
+                <xctk:DateTimePicker Grid.Row="1" Grid.Column="4" Margin="7 0 0 0" Value="{Binding Path=Model.StartDate}" Format="Custom" FormatString="dd-MM-yyyy hh:mm:ss" />
+                <xctk:DateTimePicker Grid.Row="1" Grid.Column="5" Margin="7 0 0 0" Value="{Binding Path=Model.EndDate}" Format="Custom" FormatString="dd-MM-yyyy hh:mm:ss" />
+                <TextBox Grid.Row="1" Grid.Column="6" Margin="7 0 0 0" Text="{Binding Path=Model.Value, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"/>
+                <TextBox Grid.Row="1" Grid.Column="7" Margin="7 0 0 0" Text="{Binding Path=Model.Description, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentControl Grid.Column="0" Content="{Binding DesignerViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Margin="5 0 5 0"/>
+            <ContentControl Grid.Column="2"  Content="{Binding PropertyGridViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        </Grid>
     </Grid>
 </UserControl>

@@ -1,6 +1,10 @@
-﻿using Database.DataModel.Infra;
+﻿using Database.DataModel;
+using Database.DataModel.Infra;
 using Database.DataRepository.Infra;
+using GlobalRepository;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +18,27 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
 {
     public class EditedViewModel : ViewModelBase, IDialogViewModel
     {
+        #region Upper panel
+
+        private ItemViewModel _model;
+        public ItemViewModel Model
+        {
+            get => _model;
+            set { _model = value; RaisePropertyChanged(); }
+        }
+
+        public List<IdNamePair> WaterConsumptionCategoryList { get; set; }
+
+        private ObservableCollection<IdNamePair> _waterConsumptionStatusList;
+        public ObservableCollection<IdNamePair> WaterConsumptionStatusList
+        {
+            get => _waterConsumptionStatusList;
+            set { _waterConsumptionStatusList = value; RaisePropertyChanged(); }
+        }
+
+        #endregion
+
+
         public Shp PushPin { get; set; }
 
         public DesignerViewModel DesignerViewModel { get; set; }
@@ -36,6 +61,13 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
                 MessageBox.Show("You can not save water consumption without its location.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
+            WaterConsumption model = Model.Model;
+            model.Lontitude = PushPin.X;
+            model.Latitude = PushPin.Y;
+            model.ZoneId = model.ZoneId;
+
+            model = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.SaveItem(model);
+            Messenger.Default.Send<WaterConsumption>(model);
             return true;
         }
 
@@ -45,15 +77,71 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
 
         #endregion
 
-
-        public EditedViewModel(int? zoneId = null, Shp locationPoint = null)
+        public EditedViewModel(int id)
         {
-            DesignerViewModel = new DesignerViewModel(zoneId, locationPoint);
-            PropertyGridViewModel = new Ui.PropertyGrid.EditedViewModel();
+            // Consumption Model --------------------------
+            Model = new ItemViewModel(GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetItem(id));
+            Model.PropertyChanged += Model_PropertyChanged;
 
-            Messenger.Default.Register<Shp>(this, OnShpReceived);
+            WaterConsumptionCategoryList = GlobalConfig.DataRepository.WaterConsumptionCategoryList;
+            WaterConsumptionStatusList = GetWaterConsumptionStatusList();
+            //Messenger.Default.Register<ItemViewModel>(this, OnCategoryChange);
+
+            // Designer -----------------------------------
+            Shp locationPoint = null;
+            if (id != 0)
+            {
+                locationPoint = new PushPinShp { X = Model.Lontitude, Y = Model.Latitude, ZoneId = 1, TypeId = 4 };
+            }
+            //DesignerViewModel = new DesignerViewModel(Model.ZoneId, locationPoint);
+            DesignerViewModel = new DesignerViewModel(6773, locationPoint);
+            DesignerViewModel.PropertyChanged += DesignerViewModel_PropertyChanged;    
+
+            PropertyGridViewModel = new Ui.PropertyGrid.EditedViewModel();
+            //Messenger.Default.Register<Shp>(this, OnShpReceived);
+
         }
 
+
+        private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "WaterConsumptionCategoryId")
+            {
+                OnCategoryChange(null);
+            }
+        }
+
+        private void OnCategoryChange(ItemViewModel obj)
+        {
+            WaterConsumptionStatusList = GetWaterConsumptionStatusList();
+            Model.WaterConsumptionStatusId = WaterConsumptionStatusList.FirstOrDefault().Id;
+        }
+
+        private ObservableCollection<IdNamePair> GetWaterConsumptionStatusList()
+        {
+            //return GlobalConfig.DataRepository.WaterConsumptionStatusList;
+            var categoryId = Model.Model.WaterConsumptionCategoryId;
+            var statusIdList = GlobalConfig.DataRepository.WaterConsumptionCategoryStatusExcelList.Where(x => x.CategoryId == categoryId);
+            var statusList = GlobalConfig.DataRepository.WaterConsumptionStatusList.Where(x => statusIdList.Any(y => x.Id == y.StatusId));
+            return new ObservableCollection<IdNamePair>(statusList);
+        }
+
+        private void DesignerViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectedItem" )
+            {
+                var designerViewModel = (DesignerViewModel)sender;
+                var objList = designerViewModel.ObjList;
+                var id = designerViewModel.SelectedItem;
+                var shp = objList.FirstOrDefault(x => x.Id == id);
+
+                OnShpReceived(shp);
+            }
+            else if (e.PropertyName == "PushPin")
+            {
+                OnShpReceived(((DesignerViewModel)sender).PushPin);
+            }
+        }
         private void OnShpReceived(Shp shp)
         {
             if (shp is PathShp)

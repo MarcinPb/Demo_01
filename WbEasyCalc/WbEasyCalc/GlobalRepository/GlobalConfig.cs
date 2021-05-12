@@ -1,8 +1,7 @@
-﻿using System;
-using System.Configuration;
-using Database.DataModel;
+﻿using Database.DataModel;
 using Database.DataRepository;
-using WbEasyCalcModel;
+using System;
+using System.Configuration;
 
 namespace GlobalRepository
 {

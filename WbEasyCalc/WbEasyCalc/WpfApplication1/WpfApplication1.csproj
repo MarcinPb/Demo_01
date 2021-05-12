@@ -120,6 +120,7 @@
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\DesignerWithPropreryGrid\EditedViewModel.cs" />
+    <Compile Include="Ui\DesignerWithPropreryGrid\ItemViewModel.cs" />
     <Compile Include="Ui\Designer\DesignerView.xaml.cs">
       <DependentUpon>DesignerView.xaml</DependentUpon>
     </Compile>

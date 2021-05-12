@@ -23,9 +23,15 @@ namespace WpfApplication1.Ui.Designer
         public int SelectedItem
         {
             get => _selectedItem;
-            set { _selectedItem = value; RaisePropertyChanged(nameof(SelectedItem)); }
+            set { _selectedItem = value; RaisePropertyChanged(); }
         }
-        public Shp PushPin { get; set; }
+
+        private Shp _pushPin;
+        public Shp PushPin
+        {
+            get => _pushPin;
+            set { _pushPin = value; RaisePropertyChanged(); }
+        }
 
         public RelayCommand<object> MouseLeftButtonDownCmd { get; }
         private int id;
@@ -53,7 +59,8 @@ namespace WpfApplication1.Ui.Designer
                 }
                 SelectedItem = id;
                 var shp = ObjList.FirstOrDefault(x => x.Id == id);
-                Messenger.Default.Send(shp);
+
+                //Messenger.Default.Send(shp);
             }
             else if (e.ClickCount == 2)
             {
@@ -69,7 +76,7 @@ namespace WpfApplication1.Ui.Designer
                 PushPin = new PushPinShp() { Id = 100000, X = objPosition.X + mousePosition.X, Y = objPosition.Y + mousePosition.Y, TypeId = 2 };
                 ObjList.Add(PushPin);
 
-                Messenger.Default.Send(PushPin);
+                //Messenger.Default.Send(PushPin);
             }
         }
 

@@ -88,9 +88,13 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                 {
                     SelectedRow = null;
                 }
-                var editedViewModel = new EditedViewModel(0);
+
+                //var editedViewModel = new EditedViewModel(0);
+                //var result = DialogUtility.ShowModal(editedViewModel);
+                //editedViewModel.Dispose();
+
+                var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(0);
                 var result = DialogUtility.ShowModal(editedViewModel);
-                editedViewModel.Dispose();
             }
             catch (Exception exception)
             {
@@ -109,24 +113,14 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
         {
             try
             {
-                if (SelectedRow == null)
-                {
-                    return;
-                }
+                if (SelectedRow == null) { return; }
 
                 //var editedViewModel = new EditedViewModel(SelectedRow.Model.WaterConsumptionId);
                 //var result = DialogUtility.ShowModal(editedViewModel);
                 //editedViewModel.Dispose();
 
-                int zoneId = 6773;
-                Shp _pushPinPoint = null;
-                var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(zoneId, _pushPinPoint);
+                var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(SelectedRow.Model.WaterConsumptionId);
                 var result = DialogUtility.ShowModal(editedViewModel);
-                if (result == true)
-                {
-                    _pushPinPoint = editedViewModel.PushPin;
-                    MessageBox.Show($"Water consumption location: X={_pushPinPoint.X}, Y={_pushPinPoint.Y}", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
             }
             catch (Exception e)
             {
@@ -225,7 +219,9 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
 
                 ReadSelectedItemsCmd = new RelayCommand<IList>(ReadSelectedItemsExecute);
 
-                Messenger.Default.Register<EditedViewModel>(this, OnSaveModel);
+                //Messenger.Default.Register<EditedViewModel>(this, OnSaveModel);
+                //Messenger.Default.Register<DesignerWithPropreryGrid.EditedViewModel>(this, OnSaveModel);
+                Messenger.Default.Register<Database.DataModel.WaterConsumption>(this, OnSaveModel);
                 LoadData();
             }
             catch (Exception e)
@@ -239,11 +235,10 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
             Messenger.Default.Unregister(this);
         }
 
-
-        private void OnSaveModel(EditedViewModel model)
+        private void OnSaveModel(Database.DataModel.WaterConsumption model)
         {
             LoadData();
-            SelectedRow = List.FirstOrDefault(x => x.Model.WaterConsumptionId == model.Model.Model.WaterConsumptionId);
+            SelectedRow = List.FirstOrDefault(x => x.Model.WaterConsumptionId == model.WaterConsumptionId);
             Messenger.Default.Send<ListViewModel>(this);
         }
 
