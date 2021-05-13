@@ -31,7 +31,7 @@ namespace WpfApplication1
             WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel();
 
             // Singleton run before opening designer first time. It takes more or less 5 sek.
-            //var designerObjList1 = DesignerRepoTwo.DesignerObjList;
+            var designerObjList1 = DesignerRepoTwo.DesignerObjList;
         }
 
     }

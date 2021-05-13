@@ -193,10 +193,15 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 if (ItemViewModel.MonthNo < 13)
                 {
                     ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_SystemInputVolumeM3_D6 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_SystemInputVolumeM3_D6;
+                    
                     ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_UnbMetConsM3_D8 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_UnbMetConsM3_D8;
 
                     ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_DistributionAndTransmissionMains_D7 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_DistributionAndTransmissionMains_D7;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_NoCustomers_H7 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_NoCustomers_H7;
                     ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_NoOfConnOfRegCustomers_H10 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_NoOfConnOfRegCustomers_H10;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_NoOfInactAccountsWSvcConns_H18 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_NoOfInactAccountsWSvcConns_H18;
+
+                    ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_DailyAvgPrsM_F7 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_DailyAvgPrsM_F7;
                 }
 
                 // Sum parameters for all year.
