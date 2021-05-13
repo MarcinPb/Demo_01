@@ -57,7 +57,7 @@
                 <ComboBox Grid.Row="1" Grid.Column="1" Margin="7 0 0 0" ItemsSource="{Binding Path=YearList}" SelectedValuePath="Id" DisplayMemberPath="Name" SelectedValue="{Binding Path=ItemViewModel.YearNo}" />
                 <ComboBox Grid.Row="1" Grid.Column="2" Margin="7 0 0 0"  ItemsSource="{Binding Path=MonthList}" SelectedValuePath="Id" DisplayMemberPath="Name" SelectedValue="{Binding Path=ItemViewModel.MonthNo}" />
                 <ComboBox Grid.Row="1" Grid.Column="3" Margin="7 0 0 0"  ItemsSource="{Binding Path=ZoneItemList}" SelectedValuePath="ZoneId" DisplayMemberPath="ZoneName" SelectedValue="{Binding Path=ItemViewModel.ZoneId}" />
-                <Button Grid.Row="1" Grid.Column="4" Margin="7 0 0 0"  Command="{Binding LoadDataFromSystemCmd}" Content="Load from GIS and SCADA" Padding="5 0" />
+                <Button Grid.Row="1" Grid.Column="4" Margin="7 0 0 0"  Command="{Binding LoadDataFromSystemCmd}" Content="Load from GIS, WaterGEMS and SCADA" Padding="5 0" />
                 <TextBox Grid.Row="1" Grid.Column="5" Margin="7 0 0 0" Text="{Binding Path=ItemViewModel.Description, UpdateSourceTrigger=PropertyChanged}"/>
                 <CheckBox Grid.Row="1" Grid.Column="6" Margin="7 0 0 0" IsChecked="{Binding Path=ItemViewModel.IsArchive}" IsEnabled="{Binding Path=ItemViewModel.IsAccepted, Converter={StaticResource NegConverter}}"/>
                 <CheckBox Grid.Row="1" Grid.Column="7" Margin="7 0 0 0" IsChecked="{Binding Path=ItemViewModel.IsAccepted}" IsEnabled="{Binding Path=ItemViewModel.IsArchive}" />
