@@ -126,10 +126,22 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
                 Id = 1,
                 TypeId = 1,
                 Location = new Location(x.Model.Latitude, x.Model.Lontitude),
+                //Location = GetLocationFromGis(x.Model.Lontitude, x.Model.Latitude),
                 Name = GetPushPinName(new Location(x.Model.Latitude, x.Model.Lontitude)),
             });
             MapItemList = new ObservableCollection<IMapItem>(mapItemList);
         }
+        private Location GetLocationFromGis(double x, double y)
+        {
+            var moveXx = -63.4400885695583;
+            var multiXx = 0.0000142625456859728;
+
+            var moveYy = 0.562678511340267;
+            var multiYy = 0.00000892357598435176;
+
+            return new Location(moveYy + y * 0.3048 * multiYy, moveXx + x * 0.3048 * multiXx);
+        }
+
 
         private void MouseDoubleClick(object obj)
         {

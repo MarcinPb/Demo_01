@@ -131,7 +131,11 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
 
         private void LoadData(int yearNo, int monthNo, int zoneId)
         {
-            var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList().Where(x => x.StartDate >= FilterStartDate && x.EndDate <= FilterEndDate).Select(x => new RowViewModel(x));
+            var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList()
+            //var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList()
+                .Where(x => x.StartDate >= FilterStartDate && x.EndDate <= FilterEndDate)
+                .Select(x => new RowViewModel(x));
+
             if (_yearNo != 0)
             {
                 rowModelList = rowModelList.Where(x => x.Model.RelatedId == _zoneId);
@@ -142,8 +146,21 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
                 TypeId = 1,
                 Location = new Location(x.Model.Latitude, x.Model.Lontitude),
                 Name = GetPushPinName(new Location(x.Model.Latitude, x.Model.Lontitude)),
+                //Location = GetLocationFromGis(x.Model.Lontitude, x.Model.Latitude),
+                //Name = GetPushPinName(GetLocationFromGis(x.Model.Lontitude, x.Model.Latitude)),
             });
             MapItemList = new ObservableCollection<IMapItem>(mapItemList);
+        }
+
+        private Location GetLocationFromGis(double x, double y)
+        {
+            var moveXx = -63.4400885695583;
+            var multiXx = 0.0000142625456859728;
+
+            var moveYy = 0.562678511340267;
+            var multiYy = 0.00000892357598435176;
+
+            return new Location(moveYy + y * multiYy, moveXx + x * multiXx);
         }
 
         private void MouseDoubleClick(object obj)

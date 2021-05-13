@@ -31,11 +31,11 @@ namespace WpfApplication1.Ui.Designer.Repo
             var xFactor = svgWidth / (pointBottomRight.X - pointTopLeft.X);
             var yFactor = svgHeight / (pointBottomRight.Y - pointTopLeft.Y);
 
-            int designerObjQty = designerObjList.Count;
+            //int designerObjQty = designerObjList.Count;
 
             foreach (var o in designerObjList)
             {
-                var gem = o.Geometry.Count;
+                //var gem = o.Geometry.Count;
                 for (int i = 0; i < o.Geometry.Count; i++)
                 {
                     var p = o.Geometry[i];
