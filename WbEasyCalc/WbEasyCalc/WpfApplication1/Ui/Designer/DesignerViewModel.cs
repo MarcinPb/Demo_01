@@ -13,6 +13,8 @@ namespace WpfApplication1.Ui.Designer
 {
     public class DesignerViewModel : ViewModelBase
     {
+        private int _id;
+
         public DateTime StartDate { get; set; }
         public double CanvasWidth { get; set; }
         public double CanvasHeight { get; set; }
@@ -34,32 +36,30 @@ namespace WpfApplication1.Ui.Designer
         }
 
         public RelayCommand<object> MouseLeftButtonDownCmd { get; }
-        private int id;
         private void OnMouseDoubleClickCmdExecute(object obj)
         {
             MouseButtonEventArgs e = (MouseButtonEventArgs)obj;
             if (e.ClickCount == 1)
             {
-                id = 0;
+                _id = 0;
                 if (e.Device.Target is Path)
                 {
-                    id = Convert.ToInt32(((Path)e.Device.Target).Tag);
+                    _id = Convert.ToInt32(((Path)e.Device.Target).Tag);
                 }
                 else if (e.Device.Target is Ellipse)
                 {
-                    id = Convert.ToInt32(((Ellipse)e.Device.Target).Tag);
+                    _id = Convert.ToInt32(((Ellipse)e.Device.Target).Tag);
                 }
                 else if (e.Device.Target is Rectangle)
                 {
-                    id = Convert.ToInt32(((Rectangle)e.Device.Target).Tag);
+                    _id = Convert.ToInt32(((Rectangle)e.Device.Target).Tag);
                 }
                 else 
                 {
                     return;
                 }
-                SelectedItem = id;
-                var shp = ObjList.FirstOrDefault(x => x.Id == id);
-
+                SelectedItem = _id;
+                //var shp = ObjList.FirstOrDefault(x => x.Id == id);
                 //Messenger.Default.Send(shp);
             }
             else if (e.ClickCount == 2)
@@ -71,7 +71,7 @@ namespace WpfApplication1.Ui.Designer
                     ObjList.Remove(objToRemove);
                 }
                     
-                var objPosition = ObjList.FirstOrDefault(x => x.Id == id);
+                var objPosition = ObjList.FirstOrDefault(x => x.Id == _id);
                 var mousePosition = e.GetPosition(e.Device.Target);
                 PushPin = new PushPinShp() { Id = 100000, X = objPosition.X + mousePosition.X, Y = objPosition.Y + mousePosition.Y, TypeId = 2, RelatedId = SelectedItem };
                 ObjList.Add(PushPin);
@@ -99,6 +99,8 @@ namespace WpfApplication1.Ui.Designer
 
             if (locationPoint != null)
             {
+                SelectedItem = locationPoint.Id;
+
                 PushPin = locationPoint;
                 ObjList.Add(PushPin);
             }

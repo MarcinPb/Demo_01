@@ -85,21 +85,21 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
 
             WaterConsumptionCategoryList = GlobalConfig.DataRepository.WaterConsumptionCategoryList;
             WaterConsumptionStatusList = GetWaterConsumptionStatusList();
-            //Messenger.Default.Register<ItemViewModel>(this, OnCategoryChange);
 
             // Designer -----------------------------------
-            //Shp locationPoint = null;
             if (id != 0)
             {
                 PushPin = new PushPinShp { X = Model.Lontitude, Y = Model.Latitude, ZoneId = 1, TypeId = 4, Id=100000, RelatedId = Model.RelatedId };
             }
-            //DesignerViewModel = new DesignerViewModel(Model.RelatedId, locationPoint);
             DesignerViewModel = new DesignerViewModel(6773, PushPin);
-            DesignerViewModel.PropertyChanged += DesignerViewModel_PropertyChanged;    
+            DesignerViewModel.PropertyChanged += DesignerViewModel_PropertyChanged;
 
+            // PropertyGrid -----------------------------------
             PropertyGridViewModel = new Ui.PropertyGrid.EditedViewModel();
-            //Messenger.Default.Register<Shp>(this, OnShpReceived);
-
+            if (id != 0)
+            {
+                DesignerViewModel.SelectedItem = Model.RelatedId;
+            }
         }
 
 
