@@ -22,6 +22,9 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
 
         #region Props: List, SelectedRow, RowsQty, WaterConsumptionEditedViewModel
 
+        public int ZoneId { get; set; }
+
+
         private ObservableCollection<RowViewModel> _list;
         public ObservableCollection<RowViewModel> List
         {
@@ -93,7 +96,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                 //var result = DialogUtility.ShowModal(editedViewModel);
                 //editedViewModel.Dispose();
 
-                var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(0);
+                var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(0, this.ZoneId);
                 var result = DialogUtility.ShowModal(editedViewModel);
             }
             catch (Exception exception)
@@ -119,7 +122,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
                 //var result = DialogUtility.ShowModal(editedViewModel);
                 //editedViewModel.Dispose();
 
-                var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(SelectedRow.Model.WaterConsumptionId);
+                var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(SelectedRow.Model.WaterConsumptionId, this.ZoneId);
                 var result = DialogUtility.ShowModal(editedViewModel);
             }
             catch (Exception e)

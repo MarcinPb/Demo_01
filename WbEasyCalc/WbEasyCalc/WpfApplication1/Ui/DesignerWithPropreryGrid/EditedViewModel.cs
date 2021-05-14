@@ -18,6 +18,9 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
 {
     public class EditedViewModel : ViewModelBase, IDialogViewModel
     {
+        public int ZoneId { get; set; }
+
+
         #region Upper panel
 
         private ItemViewModel _model;
@@ -77,7 +80,7 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
 
         #endregion
 
-        public EditedViewModel(int id)
+        public EditedViewModel(int id, int zoneId)
         {
             // Consumption Model --------------------------
             Model = new ItemViewModel(GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetItem(id));
@@ -89,9 +92,9 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
             // Designer -----------------------------------
             if (id != 0)
             {
-                PushPin = new PushPinShp { X = Model.Lontitude, Y = Model.Latitude, ZoneId = 1, TypeId = 4, Id=100000, RelatedId = Model.RelatedId };
+                PushPin = new PushPinShp { X = Model.Lontitude, Y = Model.Latitude, ZoneId = zoneId, TypeId = 4, Id=100000, RelatedId = Model.RelatedId };
             }
-            DesignerViewModel = new DesignerViewModel(6773, PushPin);
+            DesignerViewModel = new DesignerViewModel(zoneId, PushPin);
             DesignerViewModel.PropertyChanged += DesignerViewModel_PropertyChanged;
 
             // PropertyGrid -----------------------------------

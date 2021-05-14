@@ -96,6 +96,10 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             {
                 _zoneId = value;
                 RaisePropertyChanged("RelatedId");
+                if (WaterConsumptionListViewModel !=null)
+                {
+                    WaterConsumptionListViewModel.ZoneId = _zoneId;
+                }
             }
         }
 
@@ -225,7 +229,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 EasyCalcViewModel.StartViewModel.Start_PeriodDays_M21 = model.EasyCalcModel.StartModel.Start_PeriodDays_M21;
             }
 
-            WaterConsumptionListViewModel = new Ui.WbEasyCalcData.WaterConsumption.ListViewModel(Id);
+            WaterConsumptionListViewModel = new Ui.WbEasyCalcData.WaterConsumption.ListViewModel(Id) { ZoneId = this.ZoneId};
+
             WaterConsumptionReportViewModel = new Ui.WbEasyCalcData.WaterConsumptionMap.MapViewModel(YearNo, MonthNo, ZoneId);
         }
         public void Dispose()
