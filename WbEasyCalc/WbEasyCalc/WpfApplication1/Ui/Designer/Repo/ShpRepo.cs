@@ -13,29 +13,18 @@ namespace WpfApplication1.Ui.Designer.Repo
 {
     public class ShpRepo
     {
-        //private static List<DesignerObj> _designerObjList = DesignerRepoTwo.DesignerObjList;
-        //public static List<Shp> ShpObjList { get; } = GetShpList();
-
-        //public ShpRepo(double svgWidth, double svgHeight, double margin)
-        //{
-        //}
-
-        public static List<Shp> GetShpList(double svgWidth, double svgHeight, double margin, int zoneId)
+        public static List<Shp> GetShpList(double svgWidth, double svgHeight, double margin, List<DesignerObj> designerObjList)
         {
             const double dotR = 0.2;
-
-            var designerObjList = DesignerRepoTwo.DesignerObjList.Where(f => f.ZoneId == zoneId).Select(x => (DesignerObj)x.Clone()).ToList();
 
             var pointTopLeft = GetPointTopLeft(designerObjList);
             var pointBottomRight = GetPointBottomRight(designerObjList);
             var xFactor = svgWidth / (pointBottomRight.X - pointTopLeft.X);
             var yFactor = svgHeight / (pointBottomRight.Y - pointTopLeft.Y);
 
-            //int designerObjQty = designerObjList.Count;
-
+            // Geometry
             foreach (var o in designerObjList)
             {
-                //var gem = o.Geometry.Count;
                 for (int i = 0; i < o.Geometry.Count; i++)
                 {
                     var p = o.Geometry[i];
@@ -45,6 +34,7 @@ namespace WpfApplication1.Ui.Designer.Repo
                 }
             }
 
+            // Pipes (69)
             var pathList = designerObjList
                 .Where(f => f.ObjTypeId== 69)
                 .Select(o => new PathShp
@@ -60,6 +50,7 @@ namespace WpfApplication1.Ui.Designer.Repo
                 })
                 .ToList();
 
+            // All shapes except Pipes and CustomerMeters
             var objMyList = designerObjList
                 .Where(f => f.ObjTypeId != 69 && f.ObjTypeId != 73)
                 .Select(j => new EllipseShp
@@ -75,6 +66,8 @@ namespace WpfApplication1.Ui.Designer.Repo
                     ZoneId = j.ZoneId,
                 }).ToList();
 
+
+            // CustomerMeters (73)
             var cnShpList = designerObjList
                 .Where(f => f.ObjTypeId== 73)
                 .Select(p => new RectangleShp
@@ -89,6 +82,7 @@ namespace WpfApplication1.Ui.Designer.Repo
                     ZoneId = p.ZoneId,
                 }).ToList();
 
+            // Connections between CustomerMeter and its attached Junction
             var custNodeLineList = designerObjList
                 .Where(f => f.ObjTypeId == 73 && f.AssociatedId != null)
                 .Select(p => new ConnectionShp
@@ -103,6 +97,7 @@ namespace WpfApplication1.Ui.Designer.Repo
                     ZoneId = p.ZoneId,
                 }).ToList();
 
+            // All shaps together
             var result = custNodeLineList
                 .Select(cl => (Shp)cl)
                 .Union(pathList.Select(l => (Shp)l))
@@ -113,12 +108,10 @@ namespace WpfApplication1.Ui.Designer.Repo
             return result;
         }
 
-
         private static PathGeometry GetPathGeometry(DesignerObj designerObj)
         {
             PathFigure myPathFigure = new PathFigure();
             myPathFigure.StartPoint = new Point(0, 0);
-
 
             PathSegmentCollection myPathSegmentCollection = new PathSegmentCollection();
             var geometryListWithoutFirst = designerObj.Geometry.Where(f => f != designerObj.Geometry[0]);

@@ -13,7 +13,7 @@ namespace WpfApplication1.Ui.Designer
 {
     public class DesignerViewModel : ViewModelBase
     {
-        private int _id;
+        private int _objId;
 
         public DateTime StartDate { get; set; }
         public double CanvasWidth { get; set; }
@@ -41,42 +41,38 @@ namespace WpfApplication1.Ui.Designer
             MouseButtonEventArgs e = (MouseButtonEventArgs)obj;
             if (e.ClickCount == 1)
             {
-                _id = 0;
+                _objId = 0;
                 if (e.Device.Target is Path)
                 {
-                    _id = Convert.ToInt32(((Path)e.Device.Target).Tag);
+                    _objId = Convert.ToInt32(((Path)e.Device.Target).Tag);
                 }
                 else if (e.Device.Target is Ellipse)
                 {
-                    _id = Convert.ToInt32(((Ellipse)e.Device.Target).Tag);
+                    _objId = Convert.ToInt32(((Ellipse)e.Device.Target).Tag);
                 }
                 else if (e.Device.Target is Rectangle)
                 {
-                    _id = Convert.ToInt32(((Rectangle)e.Device.Target).Tag);
+                    _objId = Convert.ToInt32(((Rectangle)e.Device.Target).Tag);
                 }
                 else 
                 {
                     return;
                 }
-                SelectedItem = _id;
-                //var shp = ObjList.FirstOrDefault(x => x.Id == id);
-                //Messenger.Default.Send(shp);
+                SelectedItem = _objId;
             }
             else if (e.ClickCount == 2)
             {
-
-                // Remove form collection.
+                // Remove an old PushPin form the ObjList collection.
                 var objToRemove = ObjList.FirstOrDefault(x => x.Id == 100000);
                 if (objToRemove != null) {
                     ObjList.Remove(objToRemove);
                 }
-                    
-                var objPosition = ObjList.FirstOrDefault(x => x.Id == _id);
+
+                // Add a new PushPin to the ObjList collection.
+                var objPosition = ObjList.FirstOrDefault(x => x.Id == _objId);
                 var mousePosition = e.GetPosition(e.Device.Target);
                 PushPin = new PushPinShp() { Id = 100000, X = objPosition.X + mousePosition.X, Y = objPosition.Y + mousePosition.Y, TypeId = 2, RelatedId = SelectedItem };
                 ObjList.Add(PushPin);
-
-                //Messenger.Default.Send(PushPin);
             }
         }
 
@@ -93,7 +89,9 @@ namespace WpfApplication1.Ui.Designer
             CanvasWidth = svgWidth + 2 * margin;
             CanvasHeight = svgHeight + 2 * margin;
 
-            var list = ShpRepo.GetShpList(svgWidth, svgHeight, margin, (int)zoneId) ;
+            var designerObjList = DesignerRepoTwo.DesignerObjList.Where(f => f.ZoneId == zoneId).Select(x => (DesignerObj)x.Clone()).ToList();
+
+            var list = ShpRepo.GetShpList(svgWidth, svgHeight, margin, designerObjList) ;
 
             ObjList = new ObservableCollection<Shp>(list);
 
