@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -14,6 +15,13 @@ namespace WpfApplication1.Ui.Designer
     public class DesignerViewModel : ViewModelBase
     {
         private int _objId;
+        private List<DesignerObj> _designerObjList;
+        private ShpRepo _shapeRepo;
+
+        //private Point _pointTopLeft;
+        //private Point _pointBottomRight;
+        //double _xFactor;
+        //double _yFactor;
 
         public DateTime StartDate { get; set; }
         public double CanvasWidth { get; set; }
@@ -28,8 +36,8 @@ namespace WpfApplication1.Ui.Designer
             set { _selectedItem = value; RaisePropertyChanged(); }
         }
 
-        private Shp _pushPin;
-        public Shp PushPin
+        private DesignerObj _pushPin;
+        public DesignerObj PushPin
         {
             get => _pushPin;
             set { _pushPin = value; RaisePropertyChanged(); }
@@ -66,18 +74,46 @@ namespace WpfApplication1.Ui.Designer
                 var objToRemove = ObjList.FirstOrDefault(x => x.Id == 100000);
                 if (objToRemove != null) {
                     ObjList.Remove(objToRemove);
+
+                    var designerObjToRemove = _designerObjList.FirstOrDefault(x => x.ObjId == 100000);
+                    _designerObjList.Remove(designerObjToRemove);
                 }
+
 
                 // Add a new PushPin to the ObjList collection.
                 var objPosition = ObjList.FirstOrDefault(x => x.Id == _objId);
                 var mousePosition = e.GetPosition(e.Device.Target);
-                PushPin = new PushPinShp() { Id = 100000, X = objPosition.X + mousePosition.X, Y = objPosition.Y + mousePosition.Y, TypeId = 2, RelatedId = SelectedItem };
-                ObjList.Add(PushPin);
+                var pushPinShp = new PushPinShp() 
+                { 
+                    Id = 100000, 
+                    X = objPosition.X + mousePosition.X, 
+                    Y = objPosition.Y + mousePosition.Y, 
+                    TypeId = 2, 
+                    RelatedId = SelectedItem 
+                };
+                ObjList.Add(pushPinShp);
+                //
+                Point designerPushPinPoint = _shapeRepo.ShpPointToDesignerPoint(new Point(pushPinShp.X, pushPinShp.Y));
+                var designerObj = new DesignerObj()
+                {
+                    ObjId = 100000,
+                    ObjTypeId = 1000,
+                    //ZoneId = _zoneId,
+                    AssociatedId = SelectedItem,
+                    Xp = designerPushPinPoint.X,
+                    Yp = designerPushPinPoint.Y,
+                    Geometry = new List<Point> { designerPushPinPoint },
+                };
+                _designerObjList.Add(designerObj);
+
+                PushPin = designerObj;
             }
         }
 
-        public DesignerViewModel(int? zoneId = null, Shp locationPoint = null)
+        public DesignerViewModel(List<DesignerObj> designerObjList)
         {
+            _designerObjList = designerObjList;
+
             StartDate = Convert.ToDateTime("2021-03-09 11:30");
 
             MouseLeftButtonDownCmd = new RelayCommand<object>(OnMouseDoubleClickCmdExecute);
@@ -89,19 +125,36 @@ namespace WpfApplication1.Ui.Designer
             CanvasWidth = svgWidth + 2 * margin;
             CanvasHeight = svgHeight + 2 * margin;
 
-            var designerObjList = DesignerRepoTwo.DesignerObjList.Where(f => f.ZoneId == zoneId).Select(x => (DesignerObj)x.Clone()).ToList();
+            //_pointTopLeft = GetPointTopLeft(_designerObjList);
+            //_pointBottomRight = GetPointBottomRight(_designerObjList);
+            //_xFactor = svgWidth / (_pointBottomRight.X - _pointTopLeft.X);
+            //_yFactor = svgHeight / (_pointBottomRight.Y - _pointTopLeft.Y);
 
-            var list = ShpRepo.GetShpList(svgWidth, svgHeight, margin, designerObjList) ;
-
+            _shapeRepo = new ShpRepo(svgWidth, svgHeight, margin, _designerObjList);
+            List<Shp> list = _shapeRepo.GetShpList();
             ObjList = new ObservableCollection<Shp>(list);
 
-            if (locationPoint != null)
-            {
-                SelectedItem = locationPoint.Id;
-
-                PushPin = locationPoint;
-                ObjList.Add(PushPin);
-            }
+            //if (locationPoint != null)
+            //{
+            //    SelectedItem = locationPoint.Id;
+            //    PushPin = locationPoint;
+            //    ObjList.Add(PushPin);
+            //}
         }
+
+        //private Point GetPointTopLeft(IEnumerable<DesignerObj> junctionList)
+        //{
+        //    var xMin = junctionList.Min(x => x.Geometry[0].X);
+        //    var yMin = junctionList.Min(x => x.Geometry[0].Y);
+        //    return new Point(xMin, yMin);
+        //}
+        //private Point GetPointBottomRight(IEnumerable<DesignerObj> junctionList)
+        //{
+        //    var xMax = junctionList.Max(x => x.Geometry[0].X);
+        //    var yMax = junctionList.Max(x => x.Geometry[0].Y);
+        //    return new Point(xMax, yMax);
+        //}
+
+
     }
 }

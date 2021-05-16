@@ -13,14 +13,25 @@ namespace WpfApplication1.Ui.Designer.Repo
 {
     public class ShpRepo
     {
-        public static List<Shp> GetShpList(double svgWidth, double svgHeight, double margin, List<DesignerObj> designerObjList)
+        private List<Shp> _shpList;
+        
+        private double _margin;
+
+        private Point _pointTopLeft;
+        private Point _pointBottomRight;
+        private double _xFactor;
+        private double _yFactor;
+
+        public ShpRepo(double svgWidth, double svgHeight, double margin, List<DesignerObj> designerObjList)
         {
             const double dotR = 0.2;
 
-            var pointTopLeft = GetPointTopLeft(designerObjList);
-            var pointBottomRight = GetPointBottomRight(designerObjList);
-            var xFactor = svgWidth / (pointBottomRight.X - pointTopLeft.X);
-            var yFactor = svgHeight / (pointBottomRight.Y - pointTopLeft.Y);
+            _margin = margin;
+
+            _pointTopLeft = GetPointTopLeft(designerObjList);
+            _pointBottomRight = GetPointBottomRight(designerObjList);
+            _xFactor = svgWidth / (_pointBottomRight.X - _pointTopLeft.X);
+            _yFactor = svgHeight / (_pointBottomRight.Y - _pointTopLeft.Y);
 
             // Geometry
             foreach (var o in designerObjList)
@@ -28,15 +39,29 @@ namespace WpfApplication1.Ui.Designer.Repo
                 for (int i = 0; i < o.Geometry.Count; i++)
                 {
                     var p = o.Geometry[i];
-                    p.X = (p.X - pointTopLeft.X) * xFactor + margin;
-                    p.Y = (pointBottomRight.Y - p.Y) * yFactor + margin;
+                    p.X = (p.X - _pointTopLeft.X) * _xFactor + margin;                // x = (pX - margin) / xFactor + pointTopLeft.X
+                    p.Y = (_pointBottomRight.Y - p.Y) * _yFactor + margin;            // y = pointBottomRight.Y - (pY - margin) / yFactor 
                     o.Geometry[i] = p;
                 }
             }
 
+            // PushPin (1000)
+            var pushPinList = designerObjList
+                .Where(f => f.ObjTypeId == 1000)
+                .Select(j => new PushPinShp
+                {
+                    Id = j.ObjId,
+                    Name = j.Label,
+                    X = j.Geometry[0].X,
+                    Y = j.Geometry[0].Y,
+                    TypeId = 2,
+
+                    ZoneId = j.ZoneId,
+                }).ToList();
+
             // Pipes (69)
             var pathList = designerObjList
-                .Where(f => f.ObjTypeId== 69)
+                .Where(f => f.ObjTypeId == 69)
                 .Select(o => new PathShp
                 {
                     Id = o.ObjId,
@@ -50,9 +75,9 @@ namespace WpfApplication1.Ui.Designer.Repo
                 })
                 .ToList();
 
-            // All shapes except Pipes and CustomerMeters
+            // All shapes except Pipes, CustomerMeters and PushPin
             var objMyList = designerObjList
-                .Where(f => f.ObjTypeId != 69 && f.ObjTypeId != 73)
+                .Where(f => f.ObjTypeId != 69 && f.ObjTypeId != 73 && f.ObjTypeId != 1000)
                 .Select(j => new EllipseShp
                 {
                     Id = j.ObjId,
@@ -69,7 +94,7 @@ namespace WpfApplication1.Ui.Designer.Repo
 
             // CustomerMeters (73)
             var cnShpList = designerObjList
-                .Where(f => f.ObjTypeId== 73)
+                .Where(f => f.ObjTypeId == 73)
                 .Select(p => new RectangleShp
                 {
                     Id = p.ObjId,
@@ -103,12 +128,30 @@ namespace WpfApplication1.Ui.Designer.Repo
                 .Union(pathList.Select(l => (Shp)l))
                 .Union(objMyList.Select(o => (Shp)o))
                 .Union(cnShpList.Select(c => (Shp)c))
+                .Union(pushPinList.Select(c => (Shp)c))
                 .ToList();
 
-            return result;
+            _shpList = result;
+
         }
 
-        private static PathGeometry GetPathGeometry(DesignerObj designerObj)
+        public List<Shp> GetShpList()
+        {
+            return _shpList;
+        }
+
+        internal Point ShpPointToDesignerPoint(Point point)
+        {
+
+            //p.X = (x - pointTopLeft.X) * xFactor + margin;                // x = (pX - margin) / xFactor + pointTopLeft.X
+            //p.Y = (pointBottomRight.Y - y) * yFactor + margin;            // y = pointBottomRight.Y - (pY - margin) / yFactor 
+            var xx = (point.X - _margin) / _xFactor + _pointTopLeft.X;
+            var yy = _pointBottomRight.Y - (point.Y - _margin) / _yFactor;
+
+            return new Point(xx, yy);
+        }
+
+        private PathGeometry GetPathGeometry(DesignerObj designerObj)
         {
             PathFigure myPathFigure = new PathFigure();
             myPathFigure.StartPoint = new Point(0, 0);
@@ -134,13 +177,13 @@ namespace WpfApplication1.Ui.Designer.Repo
             return myPathGeometry;
         }
 
-        private static Point GetPointTopLeft(IEnumerable<DesignerObj> junctionList)
+        private Point GetPointTopLeft(IEnumerable<DesignerObj> junctionList)
         {
             var xMin = junctionList.Min(x => x.Geometry[0].X);
             var yMin = junctionList.Min(x => x.Geometry[0].Y);
             return new Point(xMin, yMin);
         }
-        private static Point GetPointBottomRight(IEnumerable<DesignerObj> junctionList)
+        private Point GetPointBottomRight(IEnumerable<DesignerObj> junctionList)
         {
             var xMax = junctionList.Max(x => x.Geometry[0].X);
             var yMax = junctionList.Max(x => x.Geometry[0].Y);

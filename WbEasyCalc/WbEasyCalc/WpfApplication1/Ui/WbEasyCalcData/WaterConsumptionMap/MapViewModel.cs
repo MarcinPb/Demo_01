@@ -131,22 +131,22 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
 
         private void LoadData(int yearNo, int monthNo, int zoneId)
         {
-            var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList()
-            //var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList()
-                .Where(x => x.StartDate >= FilterStartDate && x.EndDate <= FilterEndDate)
+            //var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList()
+            var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList()
+                //.Where(x => x.StartDate >= FilterStartDate && x.EndDate <= FilterEndDate)
                 .Select(x => new RowViewModel(x));
 
-            if (_yearNo != 0)
-            {
-                rowModelList = rowModelList.Where(x => x.Model.RelatedId == _zoneId);
-            }
+            //if (_yearNo != 0)
+            //{
+            //    rowModelList = rowModelList.Where(x => x.Model.RelatedId == _zoneId);
+            //}
             var mapItemList = rowModelList.Select(x => new MapItem1()
             {
                 Id = 1,
                 TypeId = 1,
-                Location = new Location(x.Model.Latitude, x.Model.Lontitude),
                 Name = GetPushPinName(new Location(x.Model.Latitude, x.Model.Lontitude)),
-                //Location = GetLocationFromGis(x.Model.Lontitude, x.Model.Latitude),
+                //Location = new Location(x.Model.Latitude, x.Model.Lontitude),
+                Location = GetLocationFromGis(x.Model.Lontitude, x.Model.Latitude),
                 //Name = GetPushPinName(GetLocationFromGis(x.Model.Lontitude, x.Model.Latitude)),
             });
             MapItemList = new ObservableCollection<IMapItem>(mapItemList);
