@@ -161,7 +161,6 @@
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\WaterConsumptionReport\EditedViewModel.cs" />
-    <Compile Include="Ui\WaterConsumptionReport\ItemViewModel.cs" />
     <Compile Include="Ui\WbEasyCalcData\Excel\BaseSheetViewModel.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Ui\WbEasyCalcData\Excel\MatrixIn\MatrixTwoView.xaml.cs">

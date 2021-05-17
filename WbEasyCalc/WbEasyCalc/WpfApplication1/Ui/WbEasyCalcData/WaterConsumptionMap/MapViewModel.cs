@@ -14,6 +14,7 @@ using WpfApplication1.Map;
 using System.Windows.Input;
 using System.Windows.Controls;
 using NLog;
+using System.Collections.Specialized;
 
 namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
 {
@@ -25,18 +26,39 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
         private int _monthNo;
         private int _zoneId;
 
-        public List<IdNamePair> WaterConsumptionCategoryList { get; set; }
-        public List<IdNamePair> WaterConsumptionStatusList { get; set; }
-        public List<ZoneItem> ZoneItemList { get; set; }
+        public ObservableCollection<IdNamePair> WaterConsumptionCategoryList { get; set; }
+        public ObservableCollection<IdNamePair> SelectedWaterConsumptionCategoryList { get; set; }
+
+        public ObservableCollection<IdNamePair> WaterConsumptionStatusList { get; set; }
+        public ObservableCollection<IdNamePair> SelectedWaterConsumptionStatusList { get; set; }
+
+        public ObservableCollection<ZoneItem> ZoneItemList { get; set; }
+        public ObservableCollection<ZoneItem> SelectedZoneItemList { get; set; }
 
         private DateTime _filterStartDate;
         public DateTime FilterStartDate
         {
             get => _filterStartDate;
-            set { _filterStartDate = value; RaisePropertyChanged(nameof(FilterStartDate)); LoadData(); }
+            set { _filterStartDate = value; RaisePropertyChanged(); LoadData(); }
         }
-
-        public DateTime FilterEndDate { get; set; }
+        private DateTime _filterEndDate;
+        public DateTime FilterEndDate
+        {
+            get => _filterEndDate;
+            set { _filterEndDate = value; RaisePropertyChanged(); LoadData(); }
+        }
+        private double _valueFrom;
+        public double ValueFrom
+        {
+            get => _valueFrom;
+            set { _valueFrom = value; RaisePropertyChanged(); LoadData(); }
+        }
+        private double _valueTo;
+        public double ValueTo
+        {
+            get => _valueTo;
+            set { _valueTo = value; RaisePropertyChanged(); LoadData(); }
+        }
 
         private ObservableCollection<IMapItem> _mapItemList;
         public ObservableCollection<IMapItem> MapItemList
@@ -83,13 +105,21 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
                 _zoneId = zoneId;
 
                 MapOpacity = 1;
-                ZoomLevel = 15;
+                ZoomLevel = 12;
                 Center = new Location(51.20150, 16.17970);
 
 
-                WaterConsumptionCategoryList = GlobalConfig.DataRepository.WaterConsumptionCategoryList;
-                WaterConsumptionStatusList = GlobalConfig.DataRepository.WaterConsumptionStatusList;
-                ZoneItemList = GlobalConfig.DataRepository.ZoneList;
+                WaterConsumptionCategoryList = new ObservableCollection<IdNamePair>(GlobalConfig.DataRepository.WaterConsumptionCategoryList);
+                SelectedWaterConsumptionCategoryList = new ObservableCollection<IdNamePair>(GlobalConfig.DataRepository.WaterConsumptionCategoryList);
+                SelectedWaterConsumptionCategoryList.CollectionChanged += SelectedWaterConsumptionCategoryList_CollectionChanged;  
+                
+                WaterConsumptionStatusList = new ObservableCollection<IdNamePair>(GlobalConfig.DataRepository.WaterConsumptionStatusList);
+                SelectedWaterConsumptionStatusList = new ObservableCollection<IdNamePair>(GlobalConfig.DataRepository.WaterConsumptionStatusList);
+                SelectedWaterConsumptionStatusList.CollectionChanged += SelectedWaterConsumptionStatusList_CollectionChanged; 
+                
+                ZoneItemList = new ObservableCollection<ZoneItem>(GlobalConfig.DataRepository.ZoneList);
+                SelectedZoneItemList = new ObservableCollection<ZoneItem>(GlobalConfig.DataRepository.ZoneList);
+                SelectedZoneItemList.CollectionChanged += SelectedZoneItemList_CollectionChanged;
 
                 if (_yearNo == 0)
                 {
@@ -101,6 +131,9 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
                     FilterStartDate = new DateTime(_yearNo, _monthNo, 1, 0, 0, 0);
                     FilterEndDate = FilterStartDate.AddMonths(1).AddSeconds(-1);
                 }
+
+                ValueFrom = 0;
+                ValueTo = 999999;
 
                 LoadData();
 
@@ -114,9 +147,34 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
 
         }
 
+        private void SelectedZoneItemList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void SelectedWaterConsumptionStatusList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void SelectedWaterConsumptionCategoryList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            LoadData();
+        }
+
         public void LoadData()
         {
-            var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
+            var rowModelList1 = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
+            var rowModelList = rowModelList1.Where(f => 
+                SelectedWaterConsumptionCategoryList.Any(ct => f.WaterConsumptionCategoryId == ct.Id) && 
+                SelectedWaterConsumptionStatusList.Any(st => f.WaterConsumptionStatusId == st.Id) && 
+                SelectedZoneItemList.Any(zn => _zoneId == zn.ZoneId) && 
+                f.StartDate >= FilterStartDate &&
+                f.EndDate <= FilterEndDate &&
+                f.Value >= ValueFrom &&
+                f.Value <= ValueTo
+            );
+
             var mapItemList = rowModelList.Select(x => new MapItem1()
             {
                 Id = 1,
