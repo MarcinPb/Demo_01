@@ -173,6 +173,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                     SetValue(ItemViewModel.EasyCalcViewModel.UnbConsViewModel, item.Key, item.Sum);
                 }                
             }
+
+            ItemViewModel.WaterConsumptionReportViewModel.LoadData();
         }
         public void SetValue<T>(T obj, string propertyName, object value)
         {

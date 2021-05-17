@@ -250,7 +250,6 @@
       <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\WbEasyCalcData\WaterConsumptionMap\MapViewModel.cs" />
-    <Compile Include="Ui\WbEasyCalcData\WaterConsumptionMap\RowViewModel.cs" />
     <Compile Include="Ui\WbEasyCalcData\WaterConsumption\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>

@@ -18,10 +18,10 @@
         <converters:PercentageConverter  x:Key="PercentageConverter" />
         <converters:BooleanFlagSwitchConverter  x:Key="NegConverter" />
 
+        <!--
         <DataTemplate DataType="{x:Type excelFinancialData:ViewModel}">
             <excelFinancialData:View />
         </DataTemplate>
-        <!--
         <DataTemplate DataType="{x:Type excelMatrixOneIn:ViewModel}">
             <excelMatrixOneIn:View />
         </DataTemplate>
@@ -61,7 +61,8 @@
 
         <TabControl Grid.Row="1"  Margin="7 7 0 7" >
             <TabItem Header="Financial Data">
-                <ContentControl Content="{Binding FinancialDataViewModel}" />
+                <!--<ContentControl Content="{Binding FinancialDataViewModel}" />-->
+                <excelFinancialData:View  DataContext="{Binding FinancialDataViewModel}"/>
             </TabItem>
             <TabItem Header="Matrix 1">
                 <view:MatrixOneView  DataContext="{Binding MatrixOneInViewModel}"/>

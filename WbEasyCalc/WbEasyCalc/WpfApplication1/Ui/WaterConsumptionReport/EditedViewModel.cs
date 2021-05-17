@@ -33,7 +33,12 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
         //    set { _model = value; RaisePropertyChanged(); }
         //}
 
-        public List<IdNamePair> WaterConsumptionCategoryList { get; set; }
+        public ObservableCollection<IdNamePair> WaterConsumptionCategoryList { get; set; }
+        public ObservableCollection<IdNamePair> SelectedWaterConsumptionCategoryList { get; set; }
+
+        //public List<int> SelectedWaterConsumptionCategoryIdList { get; set; }
+        //public string SelectedWaterConsumptionCategoryIdString { get; set; }
+
         public List<IdNamePair> WaterConsumptionStatusList { get; set; }
         public List<ZoneItem> ZoneItemList { get; set; }
 
@@ -91,7 +96,12 @@ namespace WpfApplication1.Ui.WaterConsumptionReport
                 Center = new Location(51.20150, 16.17970);        
 
 
-                WaterConsumptionCategoryList = GlobalConfig.DataRepository.WaterConsumptionCategoryList;
+                WaterConsumptionCategoryList = new ObservableCollection<IdNamePair>(GlobalConfig.DataRepository.WaterConsumptionCategoryList);
+                SelectedWaterConsumptionCategoryList = new ObservableCollection<IdNamePair>(GlobalConfig.DataRepository.WaterConsumptionCategoryList.Take(3));
+
+                //SelectedWaterConsumptionCategoryIdList = new List<int>() { 1, 2, 4 };
+                //SelectedWaterConsumptionCategoryIdString = "1,2,4";
+
                 WaterConsumptionStatusList = GlobalConfig.DataRepository.WaterConsumptionStatusList;
                 ZoneItemList = GlobalConfig.DataRepository.ZoneList;
 

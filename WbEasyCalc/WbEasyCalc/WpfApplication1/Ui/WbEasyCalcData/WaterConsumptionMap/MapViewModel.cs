@@ -93,8 +93,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
 
                 if (_yearNo == 0)
                 {
-                    FilterStartDate = new DateTime(2019, 1, 1, 0, 0, 0);
-                    FilterEndDate = new DateTime(2022, 1, 1, 0, 0, 0);
+                    FilterStartDate = new DateTime(yearNo, 1, 1, 0, 0, 0);
+                    FilterEndDate = FilterStartDate.AddYears(1).AddSeconds(-1);;
                 }
                 else
                 {
@@ -114,19 +114,15 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
 
         }
 
-        private void LoadData()
+        public void LoadData()
         {
-            var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList()
-                .Select(x => new RowViewModel(x));
-
+            var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
             var mapItemList = rowModelList.Select(x => new MapItem1()
             {
                 Id = 1,
                 TypeId = 1,
-                Name = GetPushPinName(new Location(x.Model.Latitude, x.Model.Lontitude)),
-                //Location = new Location(x.Model.Latitude, x.Model.Lontitude),
-                Location = GetLocationFromGis(x.Model.Lontitude, x.Model.Latitude),
-                //Name = GetPushPinName(GetLocationFromGis(x.Model.Lontitude, x.Model.Latitude)),
+                Name = GetPushPinName(new Location(x.Lontitude, x.Lontitude)),
+                Location = GetLocationFromGis(x.Lontitude, x.Latitude),
             });
             MapItemList = new ObservableCollection<IMapItem>(mapItemList);
         }

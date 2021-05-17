@@ -52,7 +52,15 @@
                 <TextBlock Grid.Row="0" Grid.Column="9" Margin="7 0 0 0" Text="Accepted"/>
 
                 <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=Model.Id, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" />
-                <xctk:CheckComboBox  Grid.Row="1" Grid.Column="1" Margin="0 0 7 0" ItemsSource="{Binding Path=WaterConsumptionCategoryList}"  DisplayMemberPath="Name" SelectedValue="{Binding Path=Model.WaterConsumptionCategoryId}" />
+                <xctk:CheckComboBox  Grid.Row="1" Grid.Column="1" Margin="0 0 7 0" 
+                                     ItemsSource="{Binding Path=WaterConsumptionCategoryList}"  
+                                     DisplayMemberPath="Name" 
+                                     SelectedItemsOverride="{Binding Path=SelectedWaterConsumptionCategoryList}"
+                                     />
+                
+                
+                
+                
                 <xctk:CheckComboBox  Grid.Row="1" Grid.Column="2" Margin="0 0 7 0" ItemsSource="{Binding Path=WaterConsumptionStatusList}" DisplayMemberPath="Name" SelectedValue="{Binding Path=Model.WaterConsumptionStatusId}" />
                 <xctk:CheckComboBox  Grid.Row="1" Grid.Column="3" Margin="0 0 0 0" ItemsSource="{Binding Path=ZoneItemList}" DisplayMemberPath="ZoneName" SelectedValue="{Binding Path=Model.ZoneId}" />
                 <xctk:DateTimePicker Grid.Row="1" Grid.Column="4" Margin="7 0 0 0" Value="{Binding Path=FilterStartDate}" Format="Custom" FormatString="dd-MM-yyyy hh:mm:ss" />
