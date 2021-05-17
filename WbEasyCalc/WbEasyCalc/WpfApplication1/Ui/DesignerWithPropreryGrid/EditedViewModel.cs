@@ -44,6 +44,9 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
 
         public List<IdNamePair> WaterConsumptionCategoryList { get; set; }
 
+        /// <summary>
+        /// WaterConsumptionStatusList property depends on WaterConsumptionCategoryList property. Thus this one has to implement INotifyPropertyChanged.
+        /// </summary>
         private ObservableCollection<IdNamePair> _waterConsumptionStatusList;
         public ObservableCollection<IdNamePair> WaterConsumptionStatusList
         {
@@ -71,7 +74,7 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
 
         public bool Save()
         {
-            var pushPin = _designerObjList.FirstOrDefault(x => x.ObjId == 100000);
+            //var pushPin = _designerObjList.FirstOrDefault(x => x.ObjId == 100000);
             if (PushPin == null)
             {
                 MessageBox.Show("You can not save water consumption without its location.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -118,7 +121,7 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
             WaterConsumptionStatusList = GetWaterConsumptionStatusList();
 
             // Designer ------------------------------------------
-            _designerObjList = DesignerRepoTwo.DesignerObjList.Where(f => f.ZoneId == zoneId).Select(x => (DesignerObj)x.Clone()).ToList();
+            _designerObjList = DesignerRepo.DesignerObjList.Where(f => f.ZoneId == zoneId).Select(x => (DesignerObj)x.Clone()).ToList();
             if (waterConsumptionId != 0)
             {
                 PushPin = new DesignerObj 
@@ -149,16 +152,10 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
         {
             if (e.PropertyName == "WaterConsumptionCategoryId")
             {
-                OnCategoryChange(null);
+                WaterConsumptionStatusList = GetWaterConsumptionStatusList();
+                Model.WaterConsumptionStatusId = WaterConsumptionStatusList.FirstOrDefault().Id;
             }
         }
-
-        private void OnCategoryChange(ItemViewModel obj)
-        {
-            WaterConsumptionStatusList = GetWaterConsumptionStatusList();
-            Model.WaterConsumptionStatusId = WaterConsumptionStatusList.FirstOrDefault().Id;
-        }
-
         private ObservableCollection<IdNamePair> GetWaterConsumptionStatusList()
         {
             //return GlobalConfig.DataRepository.WaterConsumptionStatusList;
@@ -177,84 +174,23 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
                 var id = designerViewModel.SelectedItem;
                 var shp = objList.FirstOrDefault(x => x.Id == id);
 
-                OnShpReceived(shp);
+                if (shp is PathShp)
+                {
+                    PropertyGridViewModel = new Ui.PropertyGrid.Pipe.EditedViewModel(shp.Id);
+                }
+                else if (shp is EllipseShp)
+                {
+                    PropertyGridViewModel = new Ui.PropertyGrid.Junction.EditedViewModel(shp.Id);
+                }
+                else if (shp is RectangleShp)
+                {
+                    PropertyGridViewModel = new Ui.PropertyGrid.CustomerNode.EditedViewModel(shp.Id);
+                }
             }
             else if (e.PropertyName == "PushPin")
             {
-                //OnShpReceived(((DesignerViewModel)sender).PushPin);
                 PushPin = ((DesignerViewModel)sender).PushPin;
             }
         }
-        private void OnShpReceived(Shp shp)
-        {
-            if (shp is PathShp)
-            {
-                PropertyGridViewModel = new Ui.PropertyGrid.Pipe.EditedViewModel(shp.Id);
-            }
-            else if (shp is EllipseShp)
-            {
-                PropertyGridViewModel = new Ui.PropertyGrid.Junction.EditedViewModel(shp.Id);
-            }
-            else if (shp is RectangleShp)
-            {
-                PropertyGridViewModel = new Ui.PropertyGrid.CustomerNode.EditedViewModel(shp.Id);
-            }
-            //else if (shp is PushPinShp)
-            //{
-            //    PushPin = ShpToDesignerObj((PushPinShp)shp);
-            //}
-        }
-
-
-        #region Waste
-
-        //private DesignerObj ShpToDesignerObj(PushPinShp shp)
-        //{
-        //    var xx = (PushPin.X - _margin) / xFactor + pointTopLeft.X;
-        //    var yy = pointBottomRight.Y - (PushPin.Y - margin) / xFactor;
-
-        //    var point = new Point(shp.X, shp.Y);
-
-        //    return new DesignerObj()
-        //    {
-        //        ObjId = 100000,
-        //        ObjTypeId = 1000,
-        //        ZoneId = _zoneId,
-        //        AssociatedId = Model.RelatedId,
-        //        Xp = point.X,
-        //        Yp = point.Y,
-        //        Geometry = new List<Point> { point },
-        //    };
-        //}
-
-
-        //double svgWidth = 800;
-        //double svgHeight = 600;
-        //double margin = 20;
-
-        //List<DesignerObj> designerObjList = DesignerRepoTwo.DesignerObjList.Where(f => f.ZoneId == 6773).Select(x => (DesignerObj)x.Clone()).ToList();
-
-        //var pointTopLeft = GetPointTopLeft(designerObjList);
-        //var pointBottomRight = GetPointBottomRight(designerObjList);
-        //var xFactor = svgWidth / (pointBottomRight.X - pointTopLeft.X);
-        //var yFactor = svgHeight / (pointBottomRight.Y - pointTopLeft.Y);
-
-        //var xx = (PushPin.X - margin) / xFactor + pointTopLeft.X;
-        //var yy = pointBottomRight.Y - (PushPin.Y - margin) / xFactor; 
-
-        //private static Point GetPointTopLeft(IEnumerable<DesignerObj> junctionList)
-        //{
-        //    var xMin = junctionList.Min(x => x.Geometry[0].X);
-        //    var yMin = junctionList.Min(x => x.Geometry[0].Y);
-        //    return new Point(xMin, yMin);
-        //}
-        //private static Point GetPointBottomRight(IEnumerable<DesignerObj> junctionList)
-        //{
-        //    var xMax = junctionList.Max(x => x.Geometry[0].X);
-        //    var yMax = junctionList.Max(x => x.Geometry[0].Y);
-        //    return new Point(xMax, yMax);
-        //}
-
-        #endregion
     }
 }

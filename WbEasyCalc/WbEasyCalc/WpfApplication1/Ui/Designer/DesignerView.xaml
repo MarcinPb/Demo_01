@@ -68,9 +68,10 @@
             </Grid.RowDefinitions>
             <ToolBarTray Grid.Row="0">
                 <ToolBar>
-                    <Button Name="CmdSelect" ToolTip="Select" Command="{Binding AddCommand}"  >
-                        <Image Source="..\..\Resources\PointerHS.png"  />
+                    <Button Name="CmdSelect" ToolTip="Select" Command="{Binding AddCommand}" IsEnabled="False" >
+                        <Image Source="..\..\Resources\PointerHS.png" />
                     </Button>
+                    <!--
                     <Separator/>
                     <Button Name="MoveFirst" ToolTip="Move First" Command="{Binding MoveCommand}"  >
                         <Image Source="..\..\Resources\DataContainer_MoveFirstHS.png"  />
@@ -85,6 +86,7 @@
                     <Button Name="MoveLast" ToolTip="Move Last" Command="{Binding MoveCommand}"  >
                         <Image Source="..\..\Resources\DataContainer_MoveLastHS.png"  />
                     </Button>
+                    -->
                 </ToolBar>
             </ToolBarTray>
             <Grid Grid.Row="1" >
@@ -136,7 +138,7 @@
                                         <Line Fill="Transparent" StrokeThickness="0.02" X1="0" Y1="0" X2="{Binding X2}" Y2="{Binding Y2}" Stroke="Black" />
                                     </DataTemplate>
                                     <DataTemplate DataType="{x:Type shapeModel:PushPinShp}">
-                                        <Polygon Fill="Red" Opacity="0.5"  StrokeThickness="0.2" Points="0,0 -5,-10 5,-10" Stroke="Black" />
+                                        <Polygon Fill="Red" Opacity="0.5" StrokeThickness="0.05"  Points="0,0 -5,-10 5,-10" Stroke="Black" />
                                     </DataTemplate>
                                 </ItemsControl.Resources>
                             </ItemsControl>

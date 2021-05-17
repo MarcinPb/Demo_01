@@ -25,13 +25,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
         private int _monthNo;
         private int _zoneId;
 
-        //private ItemViewModel _model;
-        //public ItemViewModel Model
-        //{
-        //    get => _model;
-        //    set { _model = value; RaisePropertyChanged(); }
-        //}
-
         public List<IdNamePair> WaterConsumptionCategoryList { get; set; }
         public List<IdNamePair> WaterConsumptionStatusList { get; set; }
         public List<ZoneItem> ZoneItemList { get; set; }
@@ -40,7 +33,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
         public DateTime FilterStartDate
         {
             get => _filterStartDate;
-            set { _filterStartDate = value; RaisePropertyChanged(nameof(FilterStartDate)); LoadData(_yearNo, _monthNo, _zoneId); }
+            set { _filterStartDate = value; RaisePropertyChanged(nameof(FilterStartDate)); LoadData(); }
         }
 
         public DateTime FilterEndDate { get; set; }
@@ -79,14 +72,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
 
         #endregion
 
-        //public EditedViewModel(int id)
-        //{
-        //    var WbEasyCalcDataModel = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetItem(id);
-        //    _yearNo = WbEasyCalcDataModel.YearNo;
-        //    _monthNo = WbEasyCalcDataModel.MonthNo;
-        //    _zoneId = WbEasyCalcDataModel.RelatedId;
-        //}
-
         public MapViewModel(int yearNo, int monthNo, int zoneId)
         {
             try
@@ -117,7 +102,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
                     FilterEndDate = FilterStartDate.AddMonths(1).AddSeconds(-1);
                 }
 
-                LoadData(_yearNo, _monthNo, _zoneId);
+                LoadData();
 
                 MouseDoubleClickCmd = new RelayCommand<object>(MouseDoubleClick);
             }
@@ -129,17 +114,11 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
 
         }
 
-        private void LoadData(int yearNo, int monthNo, int zoneId)
+        private void LoadData()
         {
-            //var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList()
             var rowModelList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList()
-                //.Where(x => x.StartDate >= FilterStartDate && x.EndDate <= FilterEndDate)
                 .Select(x => new RowViewModel(x));
 
-            //if (_yearNo != 0)
-            //{
-            //    rowModelList = rowModelList.Where(x => x.Model.RelatedId == _zoneId);
-            //}
             var mapItemList = rowModelList.Select(x => new MapItem1()
             {
                 Id = 1,

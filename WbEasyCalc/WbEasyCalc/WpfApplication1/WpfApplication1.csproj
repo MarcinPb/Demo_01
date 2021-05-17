@@ -135,7 +135,6 @@
     <Compile Include="Ui\Designer\Model\ShapeModel\RectangleShp.cs" />
     <Compile Include="Ui\Designer\Model\Shp.cs" />
     <Compile Include="Ui\Designer\Repo\DesignerRepo.cs" />
-    <Compile Include="Ui\Designer\Repo\DesignerRepoTwo.cs" />
     <Compile Include="Ui\Designer\Repo\ShpRepo.cs" />
     <Compile Include="Ui\PropertyGrid\CustomerNode\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>

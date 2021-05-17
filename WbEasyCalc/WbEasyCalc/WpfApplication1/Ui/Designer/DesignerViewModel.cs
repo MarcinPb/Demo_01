@@ -18,11 +18,6 @@ namespace WpfApplication1.Ui.Designer
         private List<DesignerObj> _designerObjList;
         private ShpRepo _shapeRepo;
 
-        //private Point _pointTopLeft;
-        //private Point _pointBottomRight;
-        //double _xFactor;
-        //double _yFactor;
-
         public DateTime StartDate { get; set; }
         public double CanvasWidth { get; set; }
         public double CanvasHeight { get; set; }
@@ -125,36 +120,10 @@ namespace WpfApplication1.Ui.Designer
             CanvasWidth = svgWidth + 2 * margin;
             CanvasHeight = svgHeight + 2 * margin;
 
-            //_pointTopLeft = GetPointTopLeft(_designerObjList);
-            //_pointBottomRight = GetPointBottomRight(_designerObjList);
-            //_xFactor = svgWidth / (_pointBottomRight.X - _pointTopLeft.X);
-            //_yFactor = svgHeight / (_pointBottomRight.Y - _pointTopLeft.Y);
-
             _shapeRepo = new ShpRepo(svgWidth, svgHeight, margin, _designerObjList);
             List<Shp> list = _shapeRepo.GetShpList();
             ObjList = new ObservableCollection<Shp>(list);
-
-            //if (locationPoint != null)
-            //{
-            //    SelectedItem = locationPoint.Id;
-            //    PushPin = locationPoint;
-            //    ObjList.Add(PushPin);
-            //}
         }
-
-        //private Point GetPointTopLeft(IEnumerable<DesignerObj> junctionList)
-        //{
-        //    var xMin = junctionList.Min(x => x.Geometry[0].X);
-        //    var yMin = junctionList.Min(x => x.Geometry[0].Y);
-        //    return new Point(xMin, yMin);
-        //}
-        //private Point GetPointBottomRight(IEnumerable<DesignerObj> junctionList)
-        //{
-        //    var xMax = junctionList.Max(x => x.Geometry[0].X);
-        //    var yMax = junctionList.Max(x => x.Geometry[0].Y);
-        //    return new Point(xMax, yMax);
-        //}
-
 
     }
 }
