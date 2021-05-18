@@ -17,7 +17,7 @@ using NLog;
 using System.Collections.Specialized;
 using Database.DataRepository.Infra;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
+namespace WpfApplication1.Ui.WaterConsumptionMap
 {
     public class MapViewModel : ViewModelBase
     {
@@ -28,8 +28,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
         private int _zoneId;
 
 
-        private List<Database.DataModel.WaterConsumption> _waterConsumptionList;
-        public List<Database.DataModel.WaterConsumption> WaterConsumptionList
+        private List<WaterConsumption> _waterConsumptionList;
+        public List<WaterConsumption> WaterConsumptionList
         {
             get => _waterConsumptionList;
             set { _waterConsumptionList = value; RaisePropertyChanged(); LoadData(); }
@@ -120,12 +120,12 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
 
                 WaterConsumptionCategoryList = new ObservableCollection<IdNamePair>(GlobalConfig.DataRepository.WaterConsumptionCategoryList);
                 SelectedWaterConsumptionCategoryList = new ObservableCollection<IdNamePair>(GlobalConfig.DataRepository.WaterConsumptionCategoryList);
-                SelectedWaterConsumptionCategoryList.CollectionChanged += SelectedWaterConsumptionCategoryList_CollectionChanged;  
-                
+                SelectedWaterConsumptionCategoryList.CollectionChanged += SelectedWaterConsumptionCategoryList_CollectionChanged;
+
                 WaterConsumptionStatusList = new ObservableCollection<IdNamePair>(GlobalConfig.DataRepository.WaterConsumptionStatusList);
                 SelectedWaterConsumptionStatusList = new ObservableCollection<IdNamePair>(GlobalConfig.DataRepository.WaterConsumptionStatusList);
-                SelectedWaterConsumptionStatusList.CollectionChanged += SelectedWaterConsumptionStatusList_CollectionChanged; 
-                
+                SelectedWaterConsumptionStatusList.CollectionChanged += SelectedWaterConsumptionStatusList_CollectionChanged;
+
                 ZoneItemList = new ObservableCollection<ZoneItem>(GlobalConfig.DataRepository.ZoneList);
                 SelectedZoneItemList = new ObservableCollection<ZoneItem>(GlobalConfig.DataRepository.ZoneList);
                 SelectedZoneItemList.CollectionChanged += SelectedZoneItemList_CollectionChanged;
@@ -133,7 +133,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
                 if (_yearNo == 0)
                 {
                     FilterStartDate = new DateTime(yearNo, 1, 1, 0, 0, 0);
-                    FilterEndDate = FilterStartDate.AddYears(1).AddSeconds(-1);;
+                    FilterEndDate = FilterStartDate.AddYears(1).AddSeconds(-1); ;
                 }
                 else
                 {
@@ -173,14 +173,14 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
 
         private void LoadData()
         {
-            if (WaterConsumptionList == null) { return;  } 
+            if (WaterConsumptionList == null) { return; }
 
             //var rowModelList1 = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
             var rowModelList1 = WaterConsumptionList;
-            var rowModelList = rowModelList1.Where(f => 
-                SelectedWaterConsumptionCategoryList.Any(ct => f.WaterConsumptionCategoryId == ct.Id) && 
-                SelectedWaterConsumptionStatusList.Any(st => f.WaterConsumptionStatusId == st.Id) && 
-                SelectedZoneItemList.Any(zn => _zoneId == zn.ZoneId) && 
+            var rowModelList = rowModelList1.Where(f =>
+                SelectedWaterConsumptionCategoryList.Any(ct => f.WaterConsumptionCategoryId == ct.Id) &&
+                SelectedWaterConsumptionStatusList.Any(st => f.WaterConsumptionStatusId == st.Id) &&
+                SelectedZoneItemList.Any(zn => _zoneId == zn.ZoneId) &&
                 f.StartDate >= FilterStartDate &&
                 f.EndDate <= FilterEndDate &&
                 f.Value >= ValueFrom &&
@@ -210,23 +210,23 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
 
         private void MouseDoubleClick(object obj)
         {
-            var ea = (MouseEventArgs)obj;
-            var originalSource = ea.OriginalSource;
+            //var ea = (MouseEventArgs)obj;
+            //var originalSource = ea.OriginalSource;
 
-            if (originalSource is Border)
-            {
-                var map = (Microsoft.Maps.MapControl.WPF.Map)ea.Source;
+            //if (originalSource is Border)
+            //{
+            //    var map = (Microsoft.Maps.MapControl.WPF.Map)ea.Source;
 
-                Point mousePosition = ea.GetPosition(map);
-                Location mouseLocation = map.ViewportPointToLocation(mousePosition);
+            //    Point mousePosition = ea.GetPosition(map);
+            //    Location mouseLocation = map.ViewportPointToLocation(mousePosition);
 
-                var editedViewModel = new WaterConsumption.EditedViewModel(0);
-                var result = DialogUtility.ShowModal(editedViewModel);
-                editedViewModel.Dispose();
-            }
+            //    var editedViewModel = new WaterConsumption.EditedViewModel(0);
+            //    var result = DialogUtility.ShowModal(editedViewModel);
+            //    editedViewModel.Dispose();
+            //}
         }
 
-        private string GetPushPinName(Database.DataModel.WaterConsumption waterConsumption)
+        private string GetPushPinName(WaterConsumption waterConsumption)
         {
             var infraObjName = InfraRepo.GetInfraData().InfraChangeableData.InfraValueList.FirstOrDefault(x => x.ObjId == waterConsumption.RelatedId && x.FieldId == 2).StringValue;    // Label
             return $"{infraObjName} - {waterConsumption.Value} m3 - {waterConsumption.StartDate} - {waterConsumption.EndDate}";

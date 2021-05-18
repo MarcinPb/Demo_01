@@ -6,6 +6,7 @@ using System.Windows;
 using GlobalRepository;
 using WbEasyCalcModel;
 using WbEasyCalcRepository;
+using WpfApplication1.Ui.WaterConsumptionMap;
 using WpfApplication1.Ui.WbEasyCalcData.Excel;
 //using WpfApplication1.Ui.WbEasyCalcData.ViewModel.Tabs;
 using WpfApplication1.Utility;
@@ -169,7 +170,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
         }
 
 
-        public WaterConsumptionMap.MapViewModel WaterConsumptionReportViewModel { get; set; }
+        public MapViewModel WaterConsumptionReportViewModel { get; set; }
 
 
         public Database.DataModel.WbEasyCalcData Model
@@ -231,7 +232,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
 
             WaterConsumptionListViewModel = new Ui.WbEasyCalcData.WaterConsumption.ListViewModel(Id) { ZoneId = this.ZoneId};
 
-            WaterConsumptionReportViewModel = new Ui.WbEasyCalcData.WaterConsumptionMap.MapViewModel(YearNo, MonthNo, ZoneId);
+            WaterConsumptionReportViewModel = new Ui.WaterConsumptionMap.MapViewModel(YearNo, MonthNo, ZoneId);
             WaterConsumptionReportViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
             //WaterConsumptionReportViewModel.LoadData();
         }

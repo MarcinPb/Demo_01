@@ -245,10 +245,10 @@
     <Compile Include="Ui\WbEasyCalcData\Excel\WaterBalance\WaterBalancePeriodView.xaml.cs">
       <DependentUpon>WaterBalancePeriodView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ui\WbEasyCalcData\WaterConsumptionMap\MapView.xaml.cs">
+    <Compile Include="Ui\WaterConsumptionMap\MapView.xaml.cs">
       <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ui\WbEasyCalcData\WaterConsumptionMap\MapViewModel.cs" />
+    <Compile Include="Ui\WaterConsumptionMap\MapViewModel.cs" />
     <Compile Include="Ui\WbEasyCalcData\WaterConsumption\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
@@ -409,7 +409,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ui\WbEasyCalcData\WaterConsumptionMap\MapView.xaml">
+    <Page Include="Ui\WaterConsumptionMap\MapView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
