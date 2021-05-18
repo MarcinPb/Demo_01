@@ -232,6 +232,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             WaterConsumptionListViewModel = new Ui.WbEasyCalcData.WaterConsumption.ListViewModel(Id) { ZoneId = this.ZoneId};
 
             WaterConsumptionReportViewModel = new Ui.WbEasyCalcData.WaterConsumptionMap.MapViewModel(YearNo, MonthNo, ZoneId);
+            WaterConsumptionReportViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
+            //WaterConsumptionReportViewModel.LoadData();
         }
         public void Dispose()
         {

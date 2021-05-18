@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using NLog;
 using System.Collections.Specialized;
+using Database.DataRepository.Infra;
 
 namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
 {
@@ -25,6 +26,21 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
         private int _yearNo;
         private int _monthNo;
         private int _zoneId;
+
+
+        private List<Database.DataModel.WaterConsumption> _waterConsumptionList;
+        public List<Database.DataModel.WaterConsumption> WaterConsumptionList
+        {
+            get => _waterConsumptionList;
+            set { _waterConsumptionList = value; RaisePropertyChanged(); LoadData(); }
+        }
+
+        private ObservableCollection<IMapItem> _mapItemList;
+        public ObservableCollection<IMapItem> MapItemList
+        {
+            get => _mapItemList;
+            set { _mapItemList = value; RaisePropertyChanged(nameof(MapItemList)); }
+        }
 
         public ObservableCollection<IdNamePair> WaterConsumptionCategoryList { get; set; }
         public ObservableCollection<IdNamePair> SelectedWaterConsumptionCategoryList { get; set; }
@@ -58,13 +74,6 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
         {
             get => _valueTo;
             set { _valueTo = value; RaisePropertyChanged(); LoadData(); }
-        }
-
-        private ObservableCollection<IMapItem> _mapItemList;
-        public ObservableCollection<IMapItem> MapItemList
-        {
-            get => _mapItemList;
-            set { _mapItemList = value; RaisePropertyChanged(nameof(MapItemList)); }
         }
 
         #region Map
@@ -105,7 +114,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
                 _zoneId = zoneId;
 
                 MapOpacity = 1;
-                ZoomLevel = 12;
+                ZoomLevel = 11;
                 Center = new Location(51.20150, 16.17970);
 
 
@@ -135,7 +144,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
                 ValueFrom = 0;
                 ValueTo = 999999;
 
-                LoadData();
+                //LoadData();
 
                 MouseDoubleClickCmd = new RelayCommand<object>(MouseDoubleClick);
             }
@@ -162,9 +171,12 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
             LoadData();
         }
 
-        public void LoadData()
+        private void LoadData()
         {
-            var rowModelList1 = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
+            if (WaterConsumptionList == null) { return;  } 
+
+            //var rowModelList1 = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
+            var rowModelList1 = WaterConsumptionList;
             var rowModelList = rowModelList1.Where(f => 
                 SelectedWaterConsumptionCategoryList.Any(ct => f.WaterConsumptionCategoryId == ct.Id) && 
                 SelectedWaterConsumptionStatusList.Any(st => f.WaterConsumptionStatusId == st.Id) && 
@@ -179,7 +191,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
             {
                 Id = 1,
                 TypeId = 1,
-                Name = GetPushPinName(new Location(x.Lontitude, x.Lontitude)),
+                Name = GetPushPinName(x),
                 Location = GetLocationFromGis(x.Lontitude, x.Latitude),
             });
             MapItemList = new ObservableCollection<IMapItem>(mapItemList);
@@ -214,6 +226,10 @@ namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumptionMap
             }
         }
 
-        private string GetPushPinName(Location location) => $"{location.Latitude} - {location.Longitude}";
+        private string GetPushPinName(Database.DataModel.WaterConsumption waterConsumption)
+        {
+            var infraObjName = InfraRepo.GetInfraData().InfraChangeableData.InfraValueList.FirstOrDefault(x => x.ObjId == waterConsumption.RelatedId && x.FieldId == 2).StringValue;    // Label
+            return $"{infraObjName} - {waterConsumption.Value} m3 - {waterConsumption.StartDate} - {waterConsumption.EndDate}";
+        }
     }
 }

@@ -174,7 +174,8 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 }                
             }
 
-            ItemViewModel.WaterConsumptionReportViewModel.LoadData();
+            //ItemViewModel.WaterConsumptionReportViewModel.LoadData();
+            ItemViewModel.WaterConsumptionReportViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
         }
         public void SetValue<T>(T obj, string propertyName, object value)
         {
