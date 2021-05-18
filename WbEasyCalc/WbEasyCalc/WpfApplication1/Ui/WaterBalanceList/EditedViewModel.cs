@@ -102,8 +102,8 @@ namespace WpfApplication1.Ui.WaterBalanceList
 
         public bool Save()
         {
-            Database.DataModel.WbEasyCalcData model = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.SaveItem(ItemViewModel.Model);
-            Messenger.Default.Send<Database.DataModel.WbEasyCalcData>(model);
+            WbEasyCalcData model = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.SaveItem(ItemViewModel.Model);
+            Messenger.Default.Send<WbEasyCalcData>(model);
             return true;
         }
 
@@ -174,7 +174,6 @@ namespace WpfApplication1.Ui.WaterBalanceList
                 }                
             }
 
-            //ItemViewModel.WaterConsumptionReportViewModel.LoadData();
             ItemViewModel.WaterConsumptionReportViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
         }
         public void SetValue<T>(T obj, string propertyName, object value)

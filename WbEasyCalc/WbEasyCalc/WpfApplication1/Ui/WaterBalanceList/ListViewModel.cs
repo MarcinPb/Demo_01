@@ -8,7 +8,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-
+using Database.DataModel;
 using GlobalRepository;
 using WpfApplication1.Utility;
 
@@ -127,6 +127,8 @@ namespace WpfApplication1.Ui.WaterBalanceList
                     GlobalConfig.DataRepository.WbEasyCalcDataListRepository.DeleteItem(SelectedRow.Model.WbEasyCalcDataId);
                     LoadData();
                     SelectedRow = null;
+
+                    Messenger.Default.Send<ListViewModel>(this);
                 }
             }
             catch (Exception e)
@@ -235,7 +237,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
 
                 ReadSelectedItemsCmd = new RelayCommand<IList>(ReadSelectedItemsExecute);
 
-                Messenger.Default.Register<Database.DataModel.WbEasyCalcData>(this, OnSaveModel);
+                Messenger.Default.Register<WbEasyCalcData>(this, OnSaveModel);
                 LoadData();
             }
             catch (Exception e)
@@ -248,10 +250,12 @@ namespace WpfApplication1.Ui.WaterBalanceList
             Messenger.Default.Unregister(this);
         }
 
-        private void OnSaveModel(Database.DataModel.WbEasyCalcData model)
+        private void OnSaveModel(WbEasyCalcData model)
         {
             LoadData();
             SelectedRow = List.FirstOrDefault(x => x.Model.WbEasyCalcDataId == model.WbEasyCalcDataId);
+
+            Messenger.Default.Send<ListViewModel>(this);
         }
 
         private void LoadData()

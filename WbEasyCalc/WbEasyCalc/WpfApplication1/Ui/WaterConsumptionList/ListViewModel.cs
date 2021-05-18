@@ -8,6 +8,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Database.DataModel;
 using Database.DataRepository.WaterConsumption;
 using GlobalRepository;
 using NLog;
@@ -130,6 +131,8 @@ namespace WpfApplication1.Ui.WaterConsumptionList
                     GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.DeleteItem(SelectedRow.Model.WaterConsumptionId);
                     LoadData();
                     SelectedRow = null;
+
+                    Messenger.Default.Send<ListViewModel>(this);
                 }
             }
             catch (Exception e)
@@ -197,7 +200,7 @@ namespace WpfApplication1.Ui.WaterConsumptionList
 
                 ReadSelectedItemsCmd = new RelayCommand<IList>(ReadSelectedItemsExecute);
 
-                Messenger.Default.Register<Database.DataModel.WaterConsumption>(this, OnSaveModel);
+                Messenger.Default.Register<WaterConsumption>(this, OnSaveModel);
                 LoadData();
             }
             catch (Exception e)
@@ -211,10 +214,11 @@ namespace WpfApplication1.Ui.WaterConsumptionList
             Messenger.Default.Unregister(this);
         }
 
-        private void OnSaveModel(Database.DataModel.WaterConsumption model)
+        private void OnSaveModel(WaterConsumption model)
         {
             LoadData();
             SelectedRow = List.FirstOrDefault(x => x.Model.WaterConsumptionId == model.WaterConsumptionId);
+            
             Messenger.Default.Send<ListViewModel>(this);
         }
 

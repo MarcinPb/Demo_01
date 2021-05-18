@@ -4,6 +4,7 @@ using WpfApplication1.Utility;
 using NLog;
 using WpfApplication1.Ui.Designer.Repo;
 using WpfApplication1.Ui.WaterConsumptionMap;
+using System;
 
 namespace WpfApplication1
 {
@@ -14,7 +15,7 @@ namespace WpfApplication1
 
         public Ui.WaterBalanceList.ListViewModel WbEasyCalcDataViewModel { get; set; }
         //public Ui.WaterConsumptionReport.EditedViewModel WaterConsumptionReportViewModel { get; set; }
-        public MapViewModel WaterConsumptionReportViewModel { get; set; }
+        public MapViewModel WaterConsumptionMapViewModel { get; set; }
 
         public RelayCommand OptionsCmd { get; set; }
         private void OptionsCmdExecute()
@@ -32,12 +33,19 @@ namespace WpfApplication1
             WbEasyCalcDataViewModel = new Ui.WaterBalanceList.ListViewModel();
 
             //WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel();
-            WaterConsumptionReportViewModel = new Ui.WaterConsumptionMap.MapViewModel(2021, 5, null);
-            WaterConsumptionReportViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList();
+            WaterConsumptionMapViewModel = new Ui.WaterConsumptionMap.MapViewModel(2021, 5, null);
+            WaterConsumptionMapViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList();
 
             // Singleton run before opening designer first time. It takes more or less 5 sek.
             var designerObjList1 = DesignerRepo.DesignerObjList;
+
+
+            Messenger.Default.Register<Ui.WaterBalanceList.ListViewModel>(this, OnSaveOrDeleteModel);
         }
 
+        private void OnSaveOrDeleteModel(Ui.WaterBalanceList.ListViewModel model)
+        {
+            WaterConsumptionMapViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList();
+        }
     }
 }

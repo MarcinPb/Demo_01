@@ -232,7 +232,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
 
             WaterConsumptionListViewModel = new WaterConsumptionList.ListViewModel(Id) { ZoneId = this.ZoneId};
 
-            WaterConsumptionReportViewModel = new Ui.WaterConsumptionMap.MapViewModel(YearNo, MonthNo, ZoneId);
+            WaterConsumptionReportViewModel = new MapViewModel(YearNo, MonthNo, ZoneId);
             WaterConsumptionReportViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
             //WaterConsumptionReportViewModel.LoadData();
         }

@@ -33,7 +33,7 @@
                 <ContentControl  Content="{Binding WbEasyCalcDataViewModel}" />
             </TabItem>
             <TabItem Header="Water Consumption Map" >
-                <ContentControl Content="{Binding WaterConsumptionReportViewModel}" />
+                <ContentControl Content="{Binding WaterConsumptionMapViewModel}" />
             </TabItem>
         </TabControl>
         <StatusBar Grid.Row="2" >
