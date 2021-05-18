@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.Excel.UnauthCons
+namespace WpfApplication1.Ui.WaterBalanceList.Excel.UnauthCons
 {
     /// <summary>
     /// Interaction logic for View.xaml

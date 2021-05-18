@@ -15,7 +15,7 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using NLog;
 using WbEasyCalcModel.WbEasyCalc;
-using WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixIn;
+using WpfApplication1.Ui.WaterBalanceList.Excel.MatrixIn;
 
 namespace WpfApplication1.Ui.Configuration
 {
@@ -44,16 +44,16 @@ namespace WpfApplication1.Ui.Configuration
 
         #endregion
 
-        public WbEasyCalcData.Excel.FinancialData.ViewModel FinancialDataViewModel { get; set; }
+        public WaterBalanceList.Excel.FinancialData.ViewModel FinancialDataViewModel { get; set; }
         public ViewModel MatrixOneInViewModel { get; set; }
         public ViewModel MatrixTwoInViewModel { get; set; }
 
         public EditedViewModel()
         {
             var model = GlobalConfig.DataRepository.Option.GetItem(0);
-            FinancialDataViewModel = new WbEasyCalcData.Excel.FinancialData.ViewModel(model.FinancDataModel);
-            MatrixOneInViewModel = new WbEasyCalcData.Excel.MatrixIn.ViewModel(model.MatrixOneInModel);
-            MatrixTwoInViewModel = new WbEasyCalcData.Excel.MatrixIn.ViewModel(model.MatrixTwoInModel);
+            FinancialDataViewModel = new WaterBalanceList.Excel.FinancialData.ViewModel(model.FinancDataModel);
+            MatrixOneInViewModel = new WaterBalanceList.Excel.MatrixIn.ViewModel(model.MatrixOneInModel);
+            MatrixTwoInViewModel = new WaterBalanceList.Excel.MatrixIn.ViewModel(model.MatrixTwoInModel);
         }
     }
 }

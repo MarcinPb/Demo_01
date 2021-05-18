@@ -8,7 +8,7 @@ using WbEasyCalcModel;
 using WbEasyCalcRepository;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
+namespace WpfApplication1.Ui.WaterConsumptionList
 {
 
     public class ItemViewModel : ViewModelBase

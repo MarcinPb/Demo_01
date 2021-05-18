@@ -7,7 +7,7 @@ using WbEasyCalcModel;
 using WbEasyCalcModel.WbEasyCalc;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.Excel.WaterBalance
+namespace WpfApplication1.Ui.WaterBalanceList.Excel.WaterBalance
 {
     public class ViewModel : BaseSheetViewModel
     {

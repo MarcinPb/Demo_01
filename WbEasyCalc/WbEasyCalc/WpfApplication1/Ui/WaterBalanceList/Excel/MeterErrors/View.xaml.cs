@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MeterErrors
+namespace WpfApplication1.Ui.WaterBalanceList.Excel.MeterErrors
 {
     /// <summary>
     /// Interaction logic for View.xaml

@@ -12,7 +12,7 @@ namespace WpfApplication1
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 
-        public Ui.WbEasyCalcData.ListViewModel WbEasyCalcDataViewModel { get; set; }
+        public Ui.WaterBalanceList.ListViewModel WbEasyCalcDataViewModel { get; set; }
         //public Ui.WaterConsumptionReport.EditedViewModel WaterConsumptionReportViewModel { get; set; }
         public MapViewModel WaterConsumptionReportViewModel { get; set; }
 
@@ -29,7 +29,7 @@ namespace WpfApplication1
 
             GlobalConfig.InitializeConnection(DatabaseType.Sql);
 
-            WbEasyCalcDataViewModel = new Ui.WbEasyCalcData.ListViewModel();
+            WbEasyCalcDataViewModel = new Ui.WaterBalanceList.ListViewModel();
 
             //WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel();
             WaterConsumptionReportViewModel = new Ui.WaterConsumptionMap.MapViewModel(2021, 5, 6773);

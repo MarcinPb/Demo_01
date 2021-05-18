@@ -9,9 +9,9 @@
              xmlns:converters="clr-namespace:WpfApplication1.Converters"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" 
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:excelFinancialData="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.FinancialData"                   
+             xmlns:excelFinancialData="clr-namespace:WpfApplication1.Ui.WaterBalanceList.Excel.FinancialData"                   
              
-             xmlns:view="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixIn"
+             xmlns:view="clr-namespace:WpfApplication1.Ui.WaterBalanceList.Excel.MatrixIn"
              >
     <UserControl.Resources>
         <converters:FloatConverter x:Key="FloatConverter" />

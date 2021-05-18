@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using WbEasyCalcModel;
 using WbEasyCalcModel.WbEasyCalc;
-using WpfApplication1.Ui.WbEasyCalcData.Excel;
+using WpfApplication1.Ui.WaterBalanceList.Excel;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.Excel.UnauthCons
+namespace WpfApplication1.Ui.WaterBalanceList.Excel.UnauthCons
 {
     public class ViewModel : BaseSheetViewModel
     {

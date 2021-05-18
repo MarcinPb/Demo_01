@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.Excel
+namespace WpfApplication1.Ui.WaterBalanceList.Excel
 {
     public class BaseSheetViewModel : ViewModelBase
     {

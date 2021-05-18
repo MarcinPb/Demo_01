@@ -6,12 +6,12 @@ using System.Windows;
 using GlobalRepository;
 using WbEasyCalcModel;
 using WbEasyCalcRepository;
+using WpfApplication1.Ui.WaterBalanceList.Excel;
 using WpfApplication1.Ui.WaterConsumptionMap;
-using WpfApplication1.Ui.WbEasyCalcData.Excel;
 //using WpfApplication1.Ui.WbEasyCalcData.ViewModel.Tabs;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.WbEasyCalcData
+namespace WpfApplication1.Ui.WaterBalanceList
 {
 
     public class ItemViewModel : ViewModelBase, IDisposable
@@ -158,7 +158,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
         //    get => _waterConsumptionViewModel;
         //    set { _waterConsumptionViewModel = value; RaisePropertyChanged(); }
         //}
-        public Ui.WbEasyCalcData.WaterConsumption.ListViewModel WaterConsumptionListViewModel { get; set; }
+        public WaterConsumptionList.ListViewModel WaterConsumptionListViewModel { get; set; }
 
 
 
@@ -230,7 +230,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 EasyCalcViewModel.StartViewModel.Start_PeriodDays_M21 = model.EasyCalcModel.StartModel.Start_PeriodDays_M21;
             }
 
-            WaterConsumptionListViewModel = new Ui.WbEasyCalcData.WaterConsumption.ListViewModel(Id) { ZoneId = this.ZoneId};
+            WaterConsumptionListViewModel = new WaterConsumptionList.ListViewModel(Id) { ZoneId = this.ZoneId};
 
             WaterConsumptionReportViewModel = new Ui.WaterConsumptionMap.MapViewModel(YearNo, MonthNo, ZoneId);
             WaterConsumptionReportViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();

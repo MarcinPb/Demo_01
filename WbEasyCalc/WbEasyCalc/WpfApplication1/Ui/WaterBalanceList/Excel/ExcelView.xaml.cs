@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.Excel
+namespace WpfApplication1.Ui.WaterBalanceList.Excel
 {
     /// <summary>
     /// Interaction logic for ExcelView.xaml

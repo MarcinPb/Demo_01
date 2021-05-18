@@ -7,7 +7,7 @@ using WbEasyCalcModel;
 using WbEasyCalcModel.WbEasyCalc;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixIn
+namespace WpfApplication1.Ui.WaterBalanceList.Excel.MatrixIn
 {
     public class ViewModel : BaseSheetViewModel
     {

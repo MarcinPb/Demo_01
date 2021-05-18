@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="WpfApplication1.Ui.WbEasyCalcData.EditedView"
+﻿<UserControl x:Class="WpfApplication1.Ui.WaterBalanceList.EditedView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
              mc:Ignorable="d"              
              xmlns:converters="clr-namespace:WpfApplication1.Converters" 
-             xmlns:excel="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.Excel"
-             xmlns:waterConsumption="clr-namespace:WpfApplication1.Ui.WbEasyCalcData.WaterConsumption"
+             xmlns:excel="clr-namespace:WpfApplication1.Ui.WaterBalanceList.Excel"
+             xmlns:waterConsumption="clr-namespace:WpfApplication1.Ui.WaterConsumptionList"
              >
     <UserControl.Resources>
         <converters:FloatConverter x:Key="FloatConverter" />

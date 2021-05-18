@@ -10,10 +10,10 @@ using GlobalRepository;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using WbEasyCalcModel;
 using WbEasyCalcModel.WbEasyCalc;
-using WpfApplication1.Ui.WbEasyCalcData.Excel;
+using WpfApplication1.Ui.WaterBalanceList.Excel;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.WbEasyCalcData
+namespace WpfApplication1.Ui.WaterBalanceList
 {
     public class EditedViewModel : ViewModelBase, IDialogViewModel, IDisposable
     {
@@ -136,7 +136,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
                 new IdNamePair(){ Id=1, Name="1"},
                 new IdNamePair(){ Id=2, Name="2"},
             };
-            Messenger.Default.Register<WaterConsumption.ListViewModel>(this, OnWaterConsumptionChangedReceived);
+            Messenger.Default.Register<WaterConsumptionList.ListViewModel>(this, OnWaterConsumptionChangedReceived);
         }
         public void Dispose()
         {
@@ -144,7 +144,7 @@ namespace WpfApplication1.Ui.WbEasyCalcData
             Messenger.Default.Unregister(this);
         }
 
-        private void OnWaterConsumptionChangedReceived(WaterConsumption.ListViewModel waterConsumptionListViewModel)
+        private void OnWaterConsumptionChangedReceived(WaterConsumptionList.ListViewModel waterConsumptionListViewModel)
         {
             //ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_BilledMetConsBulkWatSupExpM3_D6 = sum;
             var waterConsumptionList = waterConsumptionListViewModel.List.Select(x => x.Model);

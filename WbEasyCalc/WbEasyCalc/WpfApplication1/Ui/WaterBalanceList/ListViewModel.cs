@@ -12,7 +12,7 @@ using System.Windows;
 using GlobalRepository;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.WbEasyCalcData
+namespace WpfApplication1.Ui.WaterBalanceList
 {
     public class ListViewModel : ViewModelBase, IDisposable
     {

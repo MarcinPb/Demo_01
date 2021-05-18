@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using WbEasyCalcModel;
 using WbEasyCalcModel.WbEasyCalc;
 using WbEasyCalcRepository;
-using WpfApplication1.Ui.WbEasyCalcData.Excel.MatrixOut;
+using WpfApplication1.Ui.WaterBalanceList.Excel.MatrixOut;
 //using WpfApplication1.Ui.WbEasyCalcData.Excel.WaterBalance;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.Excel
+namespace WpfApplication1.Ui.WaterBalanceList.Excel
 {
     public class ExcelViewModel : ViewModelBase, IDisposable
     {

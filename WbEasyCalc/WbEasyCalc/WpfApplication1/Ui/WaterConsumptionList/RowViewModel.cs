@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GlobalRepository;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
+namespace WpfApplication1.Ui.WaterConsumptionList
 {
     public class RowViewModel
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WpfApplication1.Ui.WbEasyCalcData
+namespace WpfApplication1.Ui.WaterBalanceList
 {
     /// <summary>
     /// Interaction logic for ItemView.xaml

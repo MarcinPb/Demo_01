@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
+namespace WpfApplication1.Ui.WaterConsumptionList
 {
     /// <summary>
     /// Interaction logic for ListView.xaml

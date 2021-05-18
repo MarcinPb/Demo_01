@@ -15,7 +15,7 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using NLog;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
+namespace WpfApplication1.Ui.WaterConsumptionList
 {
     public class EditedViewModel : ViewModelBase, IDialogViewModel, IDisposable
     {

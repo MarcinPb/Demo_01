@@ -14,7 +14,7 @@ using NLog;
 using WpfApplication1.Ui.Designer.Model;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.WaterConsumption
+namespace WpfApplication1.Ui.WaterConsumptionList
 {
     public class ListViewModel : ViewModelBase, IDisposable
     {

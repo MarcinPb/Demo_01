@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WbEasyCalcModel.WbEasyCalc;
-using WpfApplication1.Ui.WbEasyCalcData.Excel;
+using WpfApplication1.Ui.WaterBalanceList.Excel;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.WbEasyCalcData.Excel.Start
+namespace WpfApplication1.Ui.WaterBalanceList.Excel.Start
 {
     public class ViewModel : BaseSheetViewModel
     {
