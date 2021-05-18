@@ -49,8 +49,7 @@ namespace WpfApplication1.Ui.WaterConsumptionList
                 RemoveRowCmd.RaiseCanExecuteChanged();
                 CloneCmd.RaiseCanExecuteChanged();
 
-                WaterConsumptionEditedViewModel = null;
-                //OpenRowCmdExecute();
+                //WaterConsumptionEditedViewModel = null;
             }
         }
 
@@ -67,16 +66,16 @@ namespace WpfApplication1.Ui.WaterConsumptionList
 
 
 
-        private EditedViewModel _customerEditedViewModel;
-        public EditedViewModel WaterConsumptionEditedViewModel
-        {
-            get => _customerEditedViewModel;
-            set
-            {
-                _customerEditedViewModel = value;
-                RaisePropertyChanged();
-            }
-        }
+        //private EditedViewModel _customerEditedViewModel;
+        //public EditedViewModel WaterConsumptionEditedViewModel
+        //{
+        //    get => _customerEditedViewModel;
+        //    set
+        //    {
+        //        _customerEditedViewModel = value;
+        //        RaisePropertyChanged();
+        //    }
+        //}
 
         #endregion
 

@@ -245,11 +245,6 @@
       <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\WaterConsumptionMap\MapViewModel.cs" />
-    <Compile Include="Ui\WaterConsumptionList\EditedView.xaml.cs">
-      <DependentUpon>EditedView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Ui\WaterConsumptionList\EditedViewModel.cs" />
-    <Compile Include="Ui\WaterConsumptionList\ItemViewModel.cs" />
     <Compile Include="Ui\WaterConsumptionList\ListView.xaml.cs">
       <DependentUpon>ListView.xaml</DependentUpon>
     </Compile>
@@ -402,10 +397,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ui\WaterConsumptionMap\MapView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Ui\WaterConsumptionList\EditedView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

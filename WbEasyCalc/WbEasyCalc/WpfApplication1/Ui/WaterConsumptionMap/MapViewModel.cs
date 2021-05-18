@@ -25,7 +25,7 @@ namespace WpfApplication1.Ui.WaterConsumptionMap
 
         private int _yearNo;
         private int _monthNo;
-        private int _zoneId;
+        private int? _zoneId;
 
 
         private List<WaterConsumption> _waterConsumptionList;
@@ -103,7 +103,7 @@ namespace WpfApplication1.Ui.WaterConsumptionMap
 
         #endregion
 
-        public MapViewModel(int yearNo, int monthNo, int zoneId)
+        public MapViewModel(int yearNo, int monthNo, int? zoneId = null)
         {
             try
             {
@@ -180,7 +180,7 @@ namespace WpfApplication1.Ui.WaterConsumptionMap
             var rowModelList = rowModelList1.Where(f =>
                 SelectedWaterConsumptionCategoryList.Any(ct => f.WaterConsumptionCategoryId == ct.Id) &&
                 SelectedWaterConsumptionStatusList.Any(st => f.WaterConsumptionStatusId == st.Id) &&
-                SelectedZoneItemList.Any(zn => _zoneId == zn.ZoneId) &&
+                SelectedZoneItemList.Any(zn => _zoneId==null || _zoneId == zn.ZoneId) &&
                 f.StartDate >= FilterStartDate &&
                 f.EndDate <= FilterEndDate &&
                 f.Value >= ValueFrom &&
