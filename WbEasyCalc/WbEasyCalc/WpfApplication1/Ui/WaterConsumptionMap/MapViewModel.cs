@@ -175,12 +175,12 @@ namespace WpfApplication1.Ui.WaterConsumptionMap
         {
             if (WaterConsumptionList == null) { return; }
 
-            //var rowModelList1 = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
             var rowModelList1 = WaterConsumptionList;
             var rowModelList = rowModelList1.Where(f =>
                 SelectedWaterConsumptionCategoryList.Any(ct => f.WaterConsumptionCategoryId == ct.Id) &&
                 SelectedWaterConsumptionStatusList.Any(st => f.WaterConsumptionStatusId == st.Id) &&
-                SelectedZoneItemList.Any(zn => _zoneId==null || _zoneId == zn.ZoneId) &&
+                //SelectedZoneItemList.Any(zn => _zoneId==null || _zoneId == zn.ZoneId) &&
+                SelectedZoneItemList.Any(zn => GetZoneId(f) == zn.ZoneId) &&
                 f.StartDate >= FilterStartDate &&
                 f.EndDate <= FilterEndDate &&
                 f.Value >= ValueFrom &&
@@ -195,6 +195,22 @@ namespace WpfApplication1.Ui.WaterConsumptionMap
                 Location = GetLocationFromGis(x.Lontitude, x.Latitude),
             });
             MapItemList = new ObservableCollection<IMapItem>(mapItemList);
+        }
+
+        private int GetZoneId(WaterConsumption waterConsumption)
+        {
+            int zoneId;
+
+            if (_zoneId == null)
+            {
+                zoneId = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetList().FirstOrDefault(f => f.WbEasyCalcDataId == waterConsumption.WbEasyCalcDataId).ZoneId;
+            }
+            else
+            {
+                zoneId = (int)_zoneId;
+            }
+
+            return zoneId;
         }
 
         private Location GetLocationFromGis(double x, double y)

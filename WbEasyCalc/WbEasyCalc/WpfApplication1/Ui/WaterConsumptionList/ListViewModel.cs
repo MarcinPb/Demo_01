@@ -20,7 +20,7 @@ namespace WpfApplication1.Ui.WaterConsumptionList
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        #region Props: List, SelectedRow, RowsQty, WaterConsumptionEditedViewModel
+        #region Props: ZoneId, List, SelectedRow, RowsQty, WaterConsumptionEditedViewModel
 
         public int ZoneId { get; set; }
 
@@ -48,8 +48,6 @@ namespace WpfApplication1.Ui.WaterConsumptionList
                 OpenRowCmd.RaiseCanExecuteChanged();
                 RemoveRowCmd.RaiseCanExecuteChanged();
                 CloneCmd.RaiseCanExecuteChanged();
-
-                //WaterConsumptionEditedViewModel = null;
             }
         }
 
@@ -64,19 +62,6 @@ namespace WpfApplication1.Ui.WaterConsumptionList
             }
         }
 
-
-
-        //private EditedViewModel _customerEditedViewModel;
-        //public EditedViewModel WaterConsumptionEditedViewModel
-        //{
-        //    get => _customerEditedViewModel;
-        //    set
-        //    {
-        //        _customerEditedViewModel = value;
-        //        RaisePropertyChanged();
-        //    }
-        //}
-
         #endregion
 
         #region Commands: AddRowCmd, OpenRowCmd, RemoveRowCmd
@@ -90,10 +75,6 @@ namespace WpfApplication1.Ui.WaterConsumptionList
                 {
                     SelectedRow = null;
                 }
-
-                //var editedViewModel = new EditedViewModel(0);
-                //var result = DialogUtility.ShowModal(editedViewModel);
-                //editedViewModel.Dispose();
 
                 var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(0, this.ZoneId);
                 var result = DialogUtility.ShowModal(editedViewModel);
@@ -116,10 +97,6 @@ namespace WpfApplication1.Ui.WaterConsumptionList
             try
             {
                 if (SelectedRow == null) { return; }
-
-                //var editedViewModel = new EditedViewModel(SelectedRow.Model.WaterConsumptionId);
-                //var result = DialogUtility.ShowModal(editedViewModel);
-                //editedViewModel.Dispose();
 
                 var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(SelectedRow.Model.WaterConsumptionId, this.ZoneId);
                 var result = DialogUtility.ShowModal(editedViewModel);
@@ -216,13 +193,10 @@ namespace WpfApplication1.Ui.WaterConsumptionList
                 AddRowCmd = new RelayCommand(AddRowCmdExecute, AddRowCmdCanExecute);
                 OpenRowCmd = new RelayCommand(OpenRowCmdExecute, OpenRowCmdCanExecute);
                 RemoveRowCmd = new RelayCommand(RemoveRowCmdExecute, RemoveRowCmdCanExecute);
-                //SaveRowCmd = new RelayCommand(SaveRowCmdExecute, SaveRowCmdCanExecute);
                 CloneCmd = new RelayCommand(CloneCmdExecute, CloneCmdCanExecute);
 
                 ReadSelectedItemsCmd = new RelayCommand<IList>(ReadSelectedItemsExecute);
 
-                //Messenger.Default.Register<EditedViewModel>(this, OnSaveModel);
-                //Messenger.Default.Register<DesignerWithPropreryGrid.EditedViewModel>(this, OnSaveModel);
                 Messenger.Default.Register<Database.DataModel.WaterConsumption>(this, OnSaveModel);
                 LoadData();
             }

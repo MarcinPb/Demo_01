@@ -32,7 +32,7 @@ namespace WpfApplication1
             WbEasyCalcDataViewModel = new Ui.WaterBalanceList.ListViewModel();
 
             //WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel();
-            WaterConsumptionReportViewModel = new Ui.WaterConsumptionMap.MapViewModel(2021, 5, 6773);
+            WaterConsumptionReportViewModel = new Ui.WaterConsumptionMap.MapViewModel(2021, 5, null);
             WaterConsumptionReportViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList();
 
             // Singleton run before opening designer first time. It takes more or less 5 sek.
