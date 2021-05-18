@@ -29,10 +29,10 @@
             </MenuItem>
         </Menu>
         <TabControl  Grid.Row="1" Margin="10" >
-            <TabItem Header="WB-EasyCalc List"  >
+            <TabItem Header="Water Balance List"  >
                 <ContentControl  Content="{Binding WbEasyCalcDataViewModel}" />
             </TabItem>
-            <TabItem Header="Water Consumption Report" >
+            <TabItem Header="Water Consumption Map" >
                 <ContentControl Content="{Binding WaterConsumptionReportViewModel}" />
             </TabItem>
         </TabControl>
