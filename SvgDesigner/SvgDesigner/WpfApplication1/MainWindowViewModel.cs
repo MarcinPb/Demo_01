@@ -2,6 +2,7 @@
 using Database.DataRepository.Infra;
 using GeometryReader;
 using System;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,22 +18,16 @@ namespace WpfApplication1
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public EditedViewModel DesignerViewModel { get; set; }
+        #region Data Import
 
-        //public DesignerViewModel DesignerViewModel { get; set; }
+        private string _databaseName;
+        public string DatabaseName
+        {
+            get { return _databaseName; }
+            set { _databaseName = value; RaisePropertyChanged(); }
+        }
 
-        //private Ui.PropertyGrid.EditedViewModel _propertyGridViewModel;
-        //public Ui.PropertyGrid.EditedViewModel PropertyGridViewModel
-        //{
-        //    get { return _propertyGridViewModel; }
-        //    set { _propertyGridViewModel = value; RaisePropertyChanged(nameof(PropertyGridViewModel)); }
-        //}
-
-
-
-        #region ImportChangeableData
-
-        private readonly string _sqliteFile = @"K:\temp\sandbox\Nowy model testowy\testOPC.wtg.sqlite";
+        public string SqliteFile { get; set; }
 
         private double _progressPercent;
         public double ProgressPercent
@@ -59,16 +54,25 @@ namespace WpfApplication1
             set { _innerProgressMessage = value; RaisePropertyChanged(nameof(InnerProgressMessage)); }
         }
 
-        public RelayCommand<object> ImportDataCmd { get; }
 
-        private async void ImportDataCmdExecute(object obj)
+        public RelayCommand ImportConstantDataCmd { get; }
+        private void ImportConstantDataCmdExecute()
+        {
+            var importer = new Importer();
+            var importedBaseOutputLists = importer.ImportBase(SqliteFile);
+            InfraRepo.InsertToInfraObjType(importedBaseOutputLists.InfraObjTypeList);
+            InfraRepo.InsertToInfraField(importedBaseOutputLists.ImportedFieldList);
+        }
+
+        public RelayCommand<object> ImportChangableDataCmd { get; }
+        private async void ImportChangableDataCmdExecute(object obj)
         {
             InfraConstantDataLists infraConstantDataLists = InfraRepo.GetInfraConstantData();
 
             var importer = new Importer();
             importer.ProgressChanged += OnProgressChanged;
             importer.InnerProgressChanged += OnInnerProgressChanged;
-            InfraChangeableDataLists importedDataOutputLists = await Task<int>.Run(() => importer.ImportData(_sqliteFile, infraConstantDataLists));
+            InfraChangeableDataLists importedDataOutputLists = await Task<int>.Run(() => importer.ImportData(SqliteFile, infraConstantDataLists));
             //importer.InnerProgressChanged -= OnInnerProgressChanged;
             //importer.ProgressChanged -= OnProgressChanged;
 
@@ -93,6 +97,7 @@ namespace WpfApplication1
 
         #endregion
 
+        public EditedViewModel DesignerViewModel { get; set; }
 
         #region Open Designer
 
@@ -134,14 +139,39 @@ namespace WpfApplication1
 
         public MainWindowViewModel()
         {
-            ImportDataCmd = new RelayCommand<object>(ImportDataCmdExecute);
+            ImportChangableDataCmd = new RelayCommand<object>(ImportChangableDataCmdExecute);
+            ImportConstantDataCmd = new RelayCommand(ImportConstantDataCmdExecute);
             OpenDesignerCmd = new RelayCommand(OpenRowCmdExecute, OpenRowCmdCanExecute);
             OpenDesignerNextCmd = new RelayCommand(OpenRowNextCmdExecute, OpenRowNextCmdCanExecute);
+
+            SqliteFile = GetSqliteFile();
+            DatabaseName = GetDatabaseName("WaterInfra_5_ConnStr");
 
             // Singleton run before opening designer first time. It takes more or less 5 sek.
             var designerObjList1 = DesignerRepoTwo.DesignerObjList;
 
-            DesignerViewModel = new EditedViewModel(6773);
+            if (designerObjList1.Count == 0) { return; }
+
+            var zoneId = InfraRepo.GetInfraData().InfraChangeableData.ZoneDict.FirstOrDefault().ZoneId;
+            DesignerViewModel = new EditedViewModel(zoneId);
         }
+
+
+        private string GetSqliteFile()
+        {
+            return System.Configuration.ConfigurationManager.AppSettings["SqliteFile"]; ;
+        }
+        private string GetDatabaseName(string name = "WaterInfra_5_ConnStr")
+        {
+            var connString = GetConnectionString("WaterInfra_5_ConnStr");
+            var databaseName = connString.Split(';')[1].Split('=')[1];
+
+            return databaseName;
+        }
+        private string GetConnectionString(string name = "WaterInfra_5_ConnStr")
+        {
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+        }
+
     }
 }

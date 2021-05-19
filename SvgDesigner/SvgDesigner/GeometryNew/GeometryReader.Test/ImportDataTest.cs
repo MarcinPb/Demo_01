@@ -10,10 +10,12 @@ namespace GeometryReader.Test
     [TestClass]
     public class ImportDataTest
     {
-        private readonly string _sqliteFile = @"K:\temp\sandbox\Nowy model testowy\testOPC.wtg.sqlite";
+        private readonly string _sqliteFile = 
+            //@"K:\temp\sandbox\Nowy model testowy\testOPC.wtg.sqlite";
+            @"K:\temp\sandbox\Nowy model testowy\nowy.wtg.sqlite";
 
         [TestMethod]
-        public void ImportInfraBaseTest()
+        public void ImportInfraConstantDataTest()
         {
             //new Importer().ImportBase(_sqliteFile);
 
@@ -26,7 +28,7 @@ namespace GeometryReader.Test
 
 
         [TestMethod]
-        public void ImportInfraDataTest()
+        public void ImportInfraChangableDataTest()
         {
             //InfraConstantDataLists importedDataInputLists = new InfraConstantDataLists()
             //{

@@ -102,6 +102,11 @@ namespace GeometryReader
                         foreach (var field in fieldList)
                         {
                             var supportedField = supportedFields.FirstOrDefault(x => x.Id == field.FieldId);
+                            //if (supportedField==null)
+                            //{
+                            //    continue;
+                            //}
+
                             var infraValue = new InfraValue
                             {
                                 ValueId = infraValueList.Count + 1,

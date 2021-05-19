@@ -39,7 +39,8 @@
                 <MenuItem Header="Exit"/>
             </MenuItem>
             <MenuItem Header="Data">
-                <MenuItem Header="Import Changeable Data" Command="{Binding ImportDataCmd}"/>
+                <MenuItem Header="Import Constant Data" Command="{Binding ImportConstantDataCmd}"/>
+                <MenuItem Header="Import Changeable Data" Command="{Binding ImportChangableDataCmd}"/>
                 <Separator/>
                 <MenuItem Header="Designer - 1 - Przybków"  Command="{Binding OpenDesignerCmd}"/>
                 <MenuItem Header="Designer - 2 - Stare Miasto"  Command="{Binding OpenDesignerNextCmd}"/>
@@ -55,7 +56,11 @@
         <StatusBar Grid.Row="2">
             <StatusBarItem >
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Progress: "/>
+                    <Label Content="Database:"/>
+                    <Label Content="{Binding DatabaseName}" />
+                    <Label Margin ="15 0 0 0" Content="Sqllite File:"/>
+                    <Label Content="{Binding SqliteFile}" />
+                    <Label Margin ="15 0 0 0" Content="Progress:"/>
                     <ProgressBar Value="{Binding ProgressPercent, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="1" Width="200"/>
                     <ProgressBar Value="{Binding InnerProgressPercent, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="1" Width="200" Margin="20 0 0 0"/>
                     <Label Content="{Binding ProgressMessage}" />
