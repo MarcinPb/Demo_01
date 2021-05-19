@@ -46,6 +46,7 @@
     <Compile Include="Infra\InfraChangeableDataLists.cs" />
     <Compile Include="Infra\ImportedField.cs" />
     <Compile Include="Infra\InfraGeometry.cs" />
+    <Compile Include="Infra\InfraSpecialFieldId.cs" />
     <Compile Include="Infra\InfraUnitCorrection.cs" />
     <Compile Include="Infra\InfraDemandPattern.cs" />
     <Compile Include="Infra\InfraZone.cs" />

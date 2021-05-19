@@ -12,8 +12,8 @@ namespace WpfApplication1.Test
         [TestMethod]
         public void TestMethod1()
         {
-            var designerObjList1 = DesignerRepoTwo.DesignerObjList;
-            var designerObjList2 = DesignerRepoTwo.DesignerObjList;
+            var designerObjList1 = DesignerRepo.DesignerObjList;
+            var designerObjList2 = DesignerRepo.DesignerObjList;
             //var designerObjList3 = DesignerRepoTwo.GetListByZone(6773);
 
 

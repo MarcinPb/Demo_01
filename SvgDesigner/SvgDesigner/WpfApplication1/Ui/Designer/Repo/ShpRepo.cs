@@ -24,7 +24,7 @@ namespace WpfApplication1.Ui.Designer.Repo
         {
             const double dotR = 0.2;
 
-            var designerObjList = DesignerRepoTwo.DesignerObjList.Where(f => f.ZoneId == zoneId).Select(x => (DesignerObj)x.Clone()).ToList();
+            var designerObjList = DesignerRepo.DesignerObjList.Where(f => f.ZoneId == zoneId).Select(x => (DesignerObj)x.Clone()).ToList();
 
             var pointTopLeft = GetPointTopLeft(designerObjList);
             var pointBottomRight = GetPointBottomRight(designerObjList);

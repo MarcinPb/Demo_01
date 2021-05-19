@@ -148,7 +148,7 @@ namespace WpfApplication1
             DatabaseName = GetDatabaseName("WaterInfra_5_ConnStr");
 
             // Singleton run before opening designer first time. It takes more or less 5 sek.
-            var designerObjList1 = DesignerRepoTwo.DesignerObjList;
+            var designerObjList1 = DesignerRepo.DesignerObjList;
 
             if (designerObjList1.Count == 0) { return; }
 

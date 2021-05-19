@@ -57,9 +57,9 @@ namespace WpfApplication1.Ui.PropertyGrid
             _model = new DesignerObj()
             {
                 ObjId = objId,
-                Label = infraData.InfraChangeableData.InfraValueList.FirstOrDefault(f => f.ObjId == objId && f.FieldId == 2).StringValue,
-                IsActive = infraData.InfraChangeableData.InfraValueList.FirstOrDefault(f => f.ObjId == objId && f.FieldId == 612).BooleanValue ?? false,
-                ZoneId = infraData.InfraChangeableData.InfraValueList.FirstOrDefault(f => f.ObjId == objId && f.FieldId == 614)?.IntValue,
+                Label = infraData.InfraChangeableData.InfraValueList.FirstOrDefault(f => f.ObjId == objId && f.FieldId == infraData.InfraSpecialFieldId.Label).StringValue,
+                IsActive = infraData.InfraChangeableData.InfraValueList.FirstOrDefault(f => f.ObjId == objId && f.FieldId == infraData.InfraSpecialFieldId.HMIActiveTopologyIsActive).BooleanValue ?? false,
+                ZoneId = infraData.InfraChangeableData.InfraValueList.FirstOrDefault(f => f.ObjId == objId && f.FieldId == infraData.InfraSpecialFieldId.Physical_Zone)?.IntValue,
 
                 Fields = GetObjFieldValueList(objId),
                 Geometry = geometry,
