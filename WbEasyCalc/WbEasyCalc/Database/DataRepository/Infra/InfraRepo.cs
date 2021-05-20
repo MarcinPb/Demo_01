@@ -130,14 +130,17 @@ namespace Database.DataRepository.Infra
                        ,[Description]
                     ) VALUES (
                         1
-                       ,3.28084
+                       ,0.3048                      -- 3.28084
                        ,N'FootToMeter'
                     );
                     
                     UPDATE [dbo].[tbInfraField] SET 
                         [UnitCorrectionId] = 1
-                    WHERE [FieldId] IN (
-                        -334626530, 586, 588, 690, 192086302
+                    --WHERE [FieldId] IN (
+                    --    -334626530, 586, 588, 690, 192086302
+                    --);
+                    WHERE [Name] IN (
+                        'HMIGeometryYCoordinate', 'HMIGeometry', 'HMIGeometryScaledLength', 'Physical_HydrantLateralLength', 'HMIGeometryXCoordinate'
                     );
                 ";
                 cnn.Execute(sql);
@@ -146,7 +149,7 @@ namespace Database.DataRepository.Infra
 
         #endregion
 
-        #region Fill changeable data: tbInfraObj, tbInfraValue, tbInfraGeometry, tbInfraZone 
+        #region Fill changeable data: tbInfraZone, tbInfraDemandPattern, tbInfraObj, tbInfraValue, tbInfraGeometry 
 
         public static void InsertToInfraZone(List<InfraZone> list)
         {
@@ -161,9 +164,9 @@ namespace Database.DataRepository.Infra
 
                 sql = $@"
                     INSERT INTO dbo.tbInfraZone (
-                        RelatedId,  Name
+                        ZoneId,  Name
                     ) VALUES (
-                        @RelatedId, @Name
+                        @ZoneId, @Name
                     );
                 ";
                 cnn.Execute(sql, list);
@@ -273,7 +276,6 @@ namespace Database.DataRepository.Infra
         }
 
         #endregion
-
 
         #region Get data: GetInfraData()
 
@@ -402,6 +404,5 @@ namespace Database.DataRepository.Infra
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
-
     }
 }

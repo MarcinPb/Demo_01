@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:utility="clr-namespace:WpfApplication1.Utility"
              xmlns:shapeModel="clr-namespace:WpfApplication1.Ui.Designer.Model.ShapeModel" 
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              >

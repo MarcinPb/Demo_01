@@ -11,6 +11,7 @@ namespace Database.DataRepository.Infra
     {
         public InfraConstantDataLists InfraConstantData { get; set; } 
         public InfraChangeableDataLists InfraChangeableData { get; set; }
+        public InfraSpecialFieldId InfraSpecialFieldId { get; set; }
 
         public bool IsRecalculated { get; set; } = false;
         public void Recalculate() 
@@ -19,8 +20,21 @@ namespace Database.DataRepository.Infra
 
             InfraChangeableData.InfraValueList.ForEach(x => RecalculateRealValue(x));
             RecalculateGeometryValue();
+            CalculateInfraSpecialFieldId();
             IsRecalculated = true;
         }
+        private void CalculateInfraSpecialFieldId()
+        {
+            InfraSpecialFieldId = new InfraSpecialFieldId
+            {
+                Label = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Label").FieldId,
+                HMIActiveTopologyIsActive = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "HMIActiveTopologyIsActive").FieldId,
+                Physical_Zone = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Physical_Zone").FieldId,
+                Demand_AssociatedElement = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Demand_AssociatedElement").FieldId,
+                Scada_TargetElement = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Scada_TargetElement").FieldId,
+            };
+        }
+
         private void RecalculateGeometryValue()
         {
             var value = InfraConstantData.InfraUnitCorrectionList.FirstOrDefault(x => x.UnitCorrectionId == 1).Value;

@@ -27,11 +27,11 @@ namespace WpfApplication1.Ui.Designer.Repo
         {
             InfraData infraData = InfraRepo.GetInfraData();
 
-            var infraValueLabelList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == 2).ToList();                 // Label
-            var infraValueIsActiveList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == 612).ToList();            // HMIActiveTopologyIsActive
-            var infraValueZoneIdList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == 614).ToList();              // Physical_Zone
-            var infraValueAssociatedList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == 735).ToList();          // Demand_AssociatedElement (for Customer Meter)
-            var infraValueTargerList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == 1002).ToList();             // Scada_TargetElement (for SCADA Element)
+            var infraValueLabelList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Label).ToList();                           // Label
+            var infraValueIsActiveList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.HMIActiveTopologyIsActive).ToList();    // HMIActiveTopologyIsActive
+            var infraValueZoneIdList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Physical_Zone).ToList();                  // Physical_Zone
+            var infraValueAssociatedList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Demand_AssociatedElement).ToList();   // Demand_AssociatedElement (for Customer Meter)
+            var infraValueTargerList = infraData.InfraChangeableData.InfraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Scada_TargetElement).ToList();            // Scada_TargetElement (for SCADA Element)
 
             var infraValueGeometryList = infraData.InfraChangeableData.InfraValueList                                                   // Geometry
                 .Join(

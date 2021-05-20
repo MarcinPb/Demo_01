@@ -64,6 +64,7 @@ namespace WpfApplication1.Ui.PropertyGrid.Pipe
         {
             object fieldValue;
             var infraValueList = InfraRepo.GetInfraData().InfraChangeableData.InfraValueList;
+            var labelFieldId = InfraRepo.GetInfraData().InfraSpecialFieldId.Label;
 
             Path = _model.Geometry.ToList();
 
@@ -71,13 +72,13 @@ namespace WpfApplication1.Ui.PropertyGrid.Pipe
             if (fieldValue != null)
             {
                 int relatedId = (int)fieldValue;
-                HMITopologyStartNodeLabel = infraValueList.FirstOrDefault(x => x.ObjId == relatedId && x.FieldId == 2).StringValue;
+                HMITopologyStartNodeLabel = infraValueList.FirstOrDefault(x => x.ObjId == relatedId && x.FieldId == labelFieldId).StringValue;
             }
             fieldValue = _model.Fields["HMITopologyStopNodeID"];
             if (fieldValue != null)
             {
                 int relatedId = (int)fieldValue;
-                HMITopologyStopNodeLabel = infraValueList.FirstOrDefault(x => x.ObjId == relatedId && x.FieldId == 2).StringValue;
+                HMITopologyStopNodeLabel = infraValueList.FirstOrDefault(x => x.ObjId == relatedId && x.FieldId == labelFieldId).StringValue;
             }
 
             Physical_IsUserDefinedLength = (bool)_model.Fields["Physical_IsUserDefinedLength"];

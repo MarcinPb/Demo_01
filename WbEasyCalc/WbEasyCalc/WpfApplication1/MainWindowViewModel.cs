@@ -5,6 +5,7 @@ using NLog;
 using WpfApplication1.Ui.Designer.Repo;
 using WpfApplication1.Ui.WaterConsumptionMap;
 using System;
+using System.Windows;
 
 namespace WpfApplication1
 {
@@ -25,22 +26,28 @@ namespace WpfApplication1
 
         public MainWindowViewModel()
         {
-            Logger.Info("'MainWindowViewModel' started.");
-            OptionsCmd = new RelayCommand(OptionsCmdExecute);
+            try 
+            { 
+                Logger.Info("'MainWindowViewModel' started.");
+                OptionsCmd = new RelayCommand(OptionsCmdExecute);
 
-            GlobalConfig.InitializeConnection(DatabaseType.Sql);
+                GlobalConfig.InitializeConnection(DatabaseType.Sql);
 
-            WbEasyCalcDataViewModel = new Ui.WaterBalanceList.ListViewModel();
+                WbEasyCalcDataViewModel = new Ui.WaterBalanceList.ListViewModel();
 
-            //WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel();
-            WaterConsumptionMapViewModel = new Ui.WaterConsumptionMap.MapViewModel(2021, 5, null);
-            WaterConsumptionMapViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList();
+                //WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel();
+                WaterConsumptionMapViewModel = new Ui.WaterConsumptionMap.MapViewModel(2021, 5, null);
+                WaterConsumptionMapViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList();
 
-            // Singleton run before opening designer first time. It takes more or less 5 sek.
-            var designerObjList1 = DesignerRepo.DesignerObjList;
+                // Singleton run before opening designer first time. It takes more or less 5 sek.
+                var designerObjList1 = DesignerRepo.DesignerObjList;
 
-
-            Messenger.Default.Register<Ui.WaterBalanceList.ListViewModel>(this, OnSaveOrDeleteModel);
+                Messenger.Default.Register<Ui.WaterBalanceList.ListViewModel>(this, OnSaveOrDeleteModel);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void OnSaveOrDeleteModel(Ui.WaterBalanceList.ListViewModel model)

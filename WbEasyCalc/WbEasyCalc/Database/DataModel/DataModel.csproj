@@ -53,6 +53,7 @@
     <Compile Include="Infra\InfraObj.cs" />
     <Compile Include="Infra\InfraObjType.cs" />
     <Compile Include="Infra\InfraObjTypeField.cs" />
+    <Compile Include="Infra\InfraSpecialFieldId.cs" />
     <Compile Include="Infra\InfraUnitCorrection.cs" />
     <Compile Include="Infra\InfraValue.cs" />
     <Compile Include="Infra\InfraZone.cs" />

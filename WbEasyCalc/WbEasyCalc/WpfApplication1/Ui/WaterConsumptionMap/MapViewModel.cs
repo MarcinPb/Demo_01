@@ -244,7 +244,7 @@ namespace WpfApplication1.Ui.WaterConsumptionMap
 
         private string GetPushPinName(WaterConsumption waterConsumption)
         {
-            var infraObjName = InfraRepo.GetInfraData().InfraChangeableData.InfraValueList.FirstOrDefault(x => x.ObjId == waterConsumption.RelatedId && x.FieldId == 2).StringValue;    // Label
+            var infraObjName = InfraRepo.GetInfraData().InfraChangeableData.InfraValueList.FirstOrDefault(x => x.ObjId == waterConsumption.RelatedId && x.FieldId == InfraRepo.GetInfraData().InfraSpecialFieldId.Label).StringValue;    // Label
             return $"{infraObjName} - {waterConsumption.Value} m3 - {waterConsumption.StartDate} - {waterConsumption.EndDate}";
         }
     }

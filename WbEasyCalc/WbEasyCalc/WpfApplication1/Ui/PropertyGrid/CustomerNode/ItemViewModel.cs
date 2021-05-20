@@ -31,7 +31,7 @@ namespace WpfApplication1.Ui.PropertyGrid.CustomerNode
             if (_model.Fields["Demand_AssociatedElement"] != null)
             {
                 int relatedId = (int)_model.Fields["Demand_AssociatedElement"];
-                Demand_AssociatedElement = infraValueList.FirstOrDefault(x => x.ObjId == relatedId && x.FieldId == 2).StringValue;
+                Demand_AssociatedElement = infraValueList.FirstOrDefault(x => x.ObjId == relatedId && x.FieldId == InfraRepo.GetInfraData().InfraSpecialFieldId.Label).StringValue;
             }
 
             Demand_BaseFlow = (double)_model.Fields["Demand_BaseFlow"];
