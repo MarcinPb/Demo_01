@@ -1,0 +1,40 @@
+﻿
+namespace GeometryModel
+{
+    public enum WgAttributes
+    {
+        ControlIsOpen = 0,
+        IsOpen =-1,
+        NodeAge = 23,
+        NodeConcentration = 24,
+        NodeDemand = 22,
+        NodeHGL = 21,
+        NodePressure = 20,
+        NodeTrace = 25,
+        PercentFull = -1,
+        PipeFlow = 13,
+        PipeVelocity = 14,
+        PumpFlow = 3,
+        PumpHead = 4,
+        PumpPressureDischarge = 6,
+        PumpPressureSuction = 5,
+        PumpSpeed = 1,
+        PumpStatus = 2,
+        ReservoirInflow = 11,
+        ReservoirOutflow = 12,
+        TankInflow = 9,
+        TankOutflow = 10,
+        TankAge = 26,
+        TankConcentration = 27,
+        TankHGL = 8,
+        TankLevel = 7,
+        TankTrace = 28,
+        ValveFlow = 17,
+        ValveFlowSetting = 29,
+        ValvePressureFrom = 18,
+        ValvePressureTo = 19,
+        ValvePressureSetting = 15,
+        ValveRelativeClosure = 30,
+        ValveStatus = 16,
+    }
+}
