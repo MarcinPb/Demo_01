@@ -34,7 +34,7 @@ namespace GeometryReader.Test
             InfraConstantDataLists importedDataInputLists = InfraRepo.GetInfraConstantData();
 
             var importer = new Importer();
-            importer.ProgressChanged += OnProgressChanged;
+            importer.OuterProgressChanged += OnProgressChanged;
             InfraChangeableDataLists importedDataOutputLists = importer.ImportData(sqliteFile, importedDataInputLists);
 
             InfraRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);

@@ -15,6 +15,17 @@ namespace WpfApplication1
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 
+        private string _databaseName;
+        public string DatabaseName
+        {
+            get { return _databaseName; }
+            set { _databaseName = value; RaisePropertyChanged(); }
+        }
+
+        public string SqliteFile { get; set; }
+
+
+
         public Ui.WaterBalanceList.ListViewModel WbEasyCalcDataViewModel { get; set; }
         public MapViewModel WaterConsumptionMapViewModel { get; set; }
 
@@ -46,6 +57,9 @@ namespace WpfApplication1
                 ImportConstantDataCmd = new RelayCommand(ImportConstantDataCmdExecute);
                 ImportChangeableDataCmd = new RelayCommand(ImportChangeableDataCmdExecute);
 
+                DatabaseName = GetDatabaseName("WaterInfra_5_ConnStr");
+                SqliteFile = GetSqliteFile();
+
                 GlobalConfig.InitializeConnection(DatabaseType.Sql);
 
                 WbEasyCalcDataViewModel = new Ui.WaterBalanceList.ListViewModel();
@@ -68,6 +82,23 @@ namespace WpfApplication1
         private void OnSaveOrDeleteModel(Ui.WaterBalanceList.ListViewModel model)
         {
             WaterConsumptionMapViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList();
+        }
+
+        private string GetDatabaseName(string name)
+        {
+            var connString = GetConnectionString(name);
+            var databaseName = connString.Split(';')[1].Split('=')[1];
+
+            return databaseName;
+        }
+        private string GetConnectionString(string name)
+        {
+            return System.Configuration.ConfigurationManager.ConnectionStrings[name].ConnectionString;
+        }
+
+        private string GetSqliteFile()
+        {
+            return System.Configuration.ConfigurationManager.AppSettings["SqliteFile"]; ;
         }
     }
 }

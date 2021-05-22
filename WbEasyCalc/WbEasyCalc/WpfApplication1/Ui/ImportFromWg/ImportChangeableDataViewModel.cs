@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WpfApplication1.Utility;
 
 namespace WpfApplication1.Ui.ImportFromWg
@@ -29,12 +30,14 @@ namespace WpfApplication1.Ui.ImportFromWg
 
         #endregion
 
-        private string _message;
-        public string Message
+        private string _databaseName;
+        public string DatabaseName
         {
-            get => _message;
-            set { _message = value; RaisePropertyChanged(); }
+            get { return _databaseName; }
+            set { _databaseName = value; RaisePropertyChanged(); }
         }
+
+        public string SqliteFile { get; set; }
 
 
         private double _progressPercent;
@@ -71,27 +74,36 @@ namespace WpfApplication1.Ui.ImportFromWg
 
         public async void ImportChangeableData()
         {
-            _logger.Info("Import Changeable Data 1");
-            
-            //Message = "Start ...";
-            var sqliteFile = GetSqliteFile();
+            try
+            {
+                _logger.Info("Import Changeable Data 1");
 
-            InfraConstantDataLists infraConstantDataLists = InfraRepo.GetInfraConstantData();
+                DatabaseName = GetDatabaseName("WaterInfra_5_ConnStr");
+                SqliteFile = GetSqliteFile();
 
-            var importer = new Importer();
-            importer.ProgressChanged += OnProgressChanged;
-            importer.InnerProgressChanged += OnInnerProgressChanged;
-            InfraChangeableDataLists importedDataOutputLists = await Task<int>.Run(() => importer.ImportData(sqliteFile, infraConstantDataLists));
-            //importer.InnerProgressChanged -= OnInnerProgressChanged;
-            //importer.ProgressChanged -= OnProgressChanged;
+                InfraConstantDataLists infraConstantDataLists = InfraRepo.GetInfraConstantData();
 
-            InfraRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);                      //  14601
-            InfraRepo.InsertToInfraDemandPattern(importedDataOutputLists.DemandPatternDict);    //  
-            InfraRepo.InsertToInfraObj(importedDataOutputLists.InfraObjList);                   //     16
-            InfraRepo.InsertToInfraValue(importedDataOutputLists.InfraValueList);               // 518964
-            InfraRepo.InsertToInfraGeometry(importedDataOutputLists.InfraGeometryList);         //  25138
+                var importer = new Importer();
+                importer.OuterProgressChanged += OnOuterProgressChanged;
+                importer.InnerProgressChanged += OnInnerProgressChanged;
+                InfraChangeableDataLists importedDataOutputLists = await Task<int>.Run(() => importer.ImportData(SqliteFile, infraConstantDataLists));
+                importer.InnerProgressChanged -= OnInnerProgressChanged;
+                importer.OuterProgressChanged -= OnOuterProgressChanged;
 
-            //Message = "Constant data were imported successfullly.";
+                InfraRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);                      //  14601
+                InfraRepo.InsertToInfraDemandPattern(importedDataOutputLists.DemandPatternDict);    //  
+                InfraRepo.InsertToInfraObj(importedDataOutputLists.InfraObjList);                   //     16
+                _logger.Info($"InsertToInfraValue = {importedDataOutputLists.InfraValueList.Count}.");
+                InfraRepo.InsertToInfraValue(importedDataOutputLists.InfraValueList);               // 518964
+                InfraRepo.InsertToInfraGeometry(importedDataOutputLists.InfraGeometryList);         //  25138
+
+                ProgressMessage = "Data were saved to database successfully."; 
+            }
+            catch (Exception e)
+            {
+                _logger.Info(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void OnInnerProgressChanged(object sender, GeometryReader.ProgressEventArgs e)
@@ -100,12 +112,23 @@ namespace WpfApplication1.Ui.ImportFromWg
             InnerProgressMessage = e.Message;
         }
 
-        private void OnProgressChanged(object sender, GeometryReader.ProgressEventArgs e)
+        private void OnOuterProgressChanged(object sender, GeometryReader.ProgressEventArgs e)
         {
             ProgressPercent = e.ProgressRatio;
             ProgressMessage = e.Message;
         }
 
+        private string GetDatabaseName(string name = "WaterInfra_5_ConnStr")
+        {
+            var connString = GetConnectionString("WaterInfra_5_ConnStr");
+            var databaseName = connString.Split(';')[1].Split('=')[1];
+
+            return databaseName;
+        }
+        private string GetConnectionString(string name = "WaterInfra_5_ConnStr")
+        {
+            return System.Configuration.ConfigurationManager.ConnectionStrings[name].ConnectionString;
+        }
 
         private string GetSqliteFile()
         {

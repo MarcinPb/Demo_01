@@ -14,7 +14,7 @@ namespace GeometryReader
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public event EventHandler<ProgressEventArgs> ProgressChanged;
+        public event EventHandler<ProgressEventArgs> OuterProgressChanged;
         public event EventHandler<ProgressEventArgs> InnerProgressChanged;
 
 
@@ -84,7 +84,7 @@ namespace GeometryReader
                 int counter = 0;
                 foreach (var objType in infraObjTypeList)
                 {
-                    OnProgressChanged((double)counter++ / infraObjTypeList.Count, objType.Name);
+                    OnOuterProgressChanged((double)counter++ / infraObjTypeList.Count, objType.Name);
 
                     // InfraObj
                     var manager = domainDataSet.DomainElementManager(objType.ObjTypeId);
@@ -159,7 +159,7 @@ namespace GeometryReader
                     }
                 }
                 OnInnerProgressChanged(1);
-                OnProgressChanged(1, $"Successfully imported {infraObjList.Count} objects, {infraValueList.Count} fields, {infraGeometryList.Count} geometries, {zoneDict.Count} zones and {demandPatternDict.Count} demand patterns.");
+                OnOuterProgressChanged(1, $"Successfully imported {infraObjList.Count} objects, {infraValueList.Count} fields, {infraGeometryList.Count} geometries, {zoneDict.Count} zones and {demandPatternDict.Count} demand patterns.");
 
                 InfraChangeableDataLists importedDataOutputLists = new InfraChangeableDataLists
                 {
@@ -262,9 +262,9 @@ namespace GeometryReader
                 infraValue.FloatValue = v;
             }
         }
-        protected virtual void OnProgressChanged(double ratio, string message = "")
+        protected virtual void OnOuterProgressChanged(double ratio, string message = "")
         {
-            this.ProgressChanged?.Invoke(this, new ProgressEventArgs(ratio, message));
+            this.OuterProgressChanged?.Invoke(this, new ProgressEventArgs(ratio, message));
         }
 
         protected virtual void OnInnerProgressChanged(double ratio, string message = "")
