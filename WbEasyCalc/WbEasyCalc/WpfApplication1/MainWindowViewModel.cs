@@ -6,6 +6,7 @@ using WpfApplication1.Ui.Designer.Repo;
 using WpfApplication1.Ui.WaterConsumptionMap;
 using System;
 using System.Windows;
+using WpfApplication1.Ui.ImportFromWg;
 
 namespace WpfApplication1
 {
@@ -15,7 +16,6 @@ namespace WpfApplication1
 
 
         public Ui.WaterBalanceList.ListViewModel WbEasyCalcDataViewModel { get; set; }
-        //public Ui.WaterConsumptionReport.EditedViewModel WaterConsumptionReportViewModel { get; set; }
         public MapViewModel WaterConsumptionMapViewModel { get; set; }
 
         public RelayCommand OptionsCmd { get; set; }
@@ -24,12 +24,23 @@ namespace WpfApplication1
             DialogUtility.ShowModal(new Ui.Configuration.EditedViewModel());
         }
 
+        public RelayCommand ImportConstantDataCmd { get; set; }
+        private void ImportConstantDataCmdExecute()
+        {
+            DialogUtility.ShowModal(new ImportConstantDataViewModel());
+        }
+
+
+
+
         public MainWindowViewModel()
         {
             try 
             { 
                 Logger.Info("'MainWindowViewModel' started.");
+
                 OptionsCmd = new RelayCommand(OptionsCmdExecute);
+                ImportConstantDataCmd = new RelayCommand(ImportConstantDataCmdExecute);
 
                 GlobalConfig.InitializeConnection(DatabaseType.Sql);
 

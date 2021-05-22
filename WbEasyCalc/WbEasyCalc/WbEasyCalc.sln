@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelNpoi.Test", "ExcelNpoi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication1", "WpfApplication1\WpfApplication1.csproj", "{50FD9E45-3EDC-4B40-BFF8-E063E2FE6E15}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeometryNew", "GeometryNew", "{D9C1D237-BF45-41FB-8FE8-00A2DA7B18FE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Geometry", "Geometry", "{D9C1D237-BF45-41FB-8FE8-00A2DA7B18FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryReader", "GeometryNew\GeometryReader\GeometryReader.csproj", "{ED714E90-41B7-4D83-A0BC-3F04B2E7348B}"
 EndProject

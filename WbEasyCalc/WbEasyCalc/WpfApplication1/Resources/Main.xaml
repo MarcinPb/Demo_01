@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:WpfApplication1.Controls"
     xmlns:map="clr-namespace:WpfApplication1.Map"
     xmlns:customer="clr-namespace:WpfApplication1.Ui.WaterBalanceList"
-    xmlns:waterExcelConsumption="clr-namespace:WpfApplication1.Ui.WaterConsumptionList"
+    xmlns:importFromWg="clr-namespace:WpfApplication1.Ui.ImportFromWg"
     xmlns:waterConsumptionMap="clr-namespace:WpfApplication1.Ui.WaterConsumptionMap"
     xmlns:configuration="clr-namespace:WpfApplication1.Ui.Configuration"
     xmlns:uiDesignerWithPropreryGrid="clr-namespace:WpfApplication1.Ui.DesignerWithPropreryGrid" 
@@ -46,6 +46,9 @@
     -->
     <DataTemplate DataType="{x:Type configuration:EditedViewModel}">
         <configuration:EditedView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type importFromWg:ImportConstantDataViewModel}">
+        <importFromWg:ImportConstantDataView />
     </DataTemplate>
 
 

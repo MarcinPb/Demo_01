@@ -136,6 +136,10 @@
     <Compile Include="Ui\Designer\Model\Shp.cs" />
     <Compile Include="Ui\Designer\Repo\DesignerRepo.cs" />
     <Compile Include="Ui\Designer\Repo\ShpRepo.cs" />
+    <Compile Include="Ui\ImportFromWg\ImportConstantDataView.xaml.cs">
+      <DependentUpon>ImportConstantDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\ImportFromWg\ImportConstantDataViewModel.cs" />
     <Compile Include="Ui\PropertyGrid\CustomerNode\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
@@ -283,6 +287,10 @@
     <Page Include="Ui\Designer\DesignerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\ImportFromWg\ImportConstantDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ui\PropertyGrid\CustomerNode\EditedView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -467,6 +475,10 @@
     <ProjectReference Include="..\ExcelNpoi\ExcelNpoi\ExcelNpoi.csproj">
       <Project>{72312fb8-0ea0-4e29-8d99-ea9cf6c1ccca}</Project>
       <Name>ExcelNpoi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GeometryNew\GeometryReader\GeometryReader.csproj">
+      <Project>{ed714e90-41b7-4d83-a0bc-3f04b2e7348b}</Project>
+      <Name>GeometryReader</Name>
     </ProjectReference>
     <ProjectReference Include="..\GlobalRepository\GlobalRepository.csproj">
       <Project>{1cb5b95d-8662-475c-a11c-1b3c138fe649}</Project>

@@ -26,6 +26,7 @@
             </MenuItem>
             <MenuItem Header="Tools" IsEnabled="{Binding IsOpen}">
                 <MenuItem Header="Options..." Command="{Binding OptionsCmd}"/>
+                <MenuItem Header="Import Constant Data" Command="{Binding ImportConstantDataCmd}"/>
             </MenuItem>
         </Menu>
         <TabControl  Grid.Row="1" Margin="10" >

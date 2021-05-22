@@ -174,6 +174,7 @@ namespace WpfApplication1.Ui.WaterConsumptionMap
         private void LoadData()
         {
             if (WaterConsumptionList == null) { return; }
+            if (InfraRepo.GetInfraData().InfraChangeableData.InfraObjList.Count == 0) { return; }
 
             var rowModelList1 = WaterConsumptionList;
             var rowModelList = rowModelList1.Where(f =>

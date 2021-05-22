@@ -6,17 +6,22 @@ using Haestad.Domain;
 using Haestad.Domain.ModelingObjects;
 using Haestad.Domain.ModelingObjects.Water;
 using Haestad.Support.Support;
+using NLog;
 
 namespace GeometryReader
 {
     public class Importer
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
         public event EventHandler<ProgressEventArgs> ProgressChanged;
         public event EventHandler<ProgressEventArgs> InnerProgressChanged;
 
 
         public ImportedBaseOutputLists ImportBase(string fileName)
         {
+            _logger.Info("ImportBase 1");
+
             List<InfraObjType> objectTypeDict;
             List<ImportedField> supportedFieldDict;
 
