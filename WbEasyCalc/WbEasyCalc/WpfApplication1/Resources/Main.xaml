@@ -50,6 +50,9 @@
     <DataTemplate DataType="{x:Type importFromWg:ImportConstantDataViewModel}">
         <importFromWg:ImportConstantDataView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type importFromWg:ImportChangeableDataViewModel}">
+        <importFromWg:ImportChangeableDataView />
+    </DataTemplate>
 
 
     <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">

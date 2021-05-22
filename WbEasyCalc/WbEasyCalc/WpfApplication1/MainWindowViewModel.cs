@@ -30,8 +30,11 @@ namespace WpfApplication1
             DialogUtility.ShowModal(new ImportConstantDataViewModel());
         }
 
-
-
+        public RelayCommand ImportChangeableDataCmd { get; set; }
+        private void ImportChangeableDataCmdExecute()
+        {
+            DialogUtility.ShowModal(new ImportChangeableDataViewModel());
+        }
 
         public MainWindowViewModel()
         {
@@ -41,6 +44,7 @@ namespace WpfApplication1
 
                 OptionsCmd = new RelayCommand(OptionsCmdExecute);
                 ImportConstantDataCmd = new RelayCommand(ImportConstantDataCmdExecute);
+                ImportChangeableDataCmd = new RelayCommand(ImportChangeableDataCmdExecute);
 
                 GlobalConfig.InitializeConnection(DatabaseType.Sql);
 

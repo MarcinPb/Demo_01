@@ -136,9 +136,13 @@
     <Compile Include="Ui\Designer\Model\Shp.cs" />
     <Compile Include="Ui\Designer\Repo\DesignerRepo.cs" />
     <Compile Include="Ui\Designer\Repo\ShpRepo.cs" />
+    <Compile Include="Ui\ImportFromWg\ImportChangeableDataView.xaml.cs">
+      <DependentUpon>ImportChangeableDataView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ui\ImportFromWg\ImportConstantDataView.xaml.cs">
       <DependentUpon>ImportConstantDataView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ui\ImportFromWg\ImportChangeableDataViewModel.cs" />
     <Compile Include="Ui\ImportFromWg\ImportConstantDataViewModel.cs" />
     <Compile Include="Ui\PropertyGrid\CustomerNode\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
@@ -285,6 +289,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Ui\Designer\DesignerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\ImportFromWg\ImportChangeableDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
