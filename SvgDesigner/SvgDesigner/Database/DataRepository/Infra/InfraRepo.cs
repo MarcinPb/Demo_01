@@ -130,7 +130,7 @@ namespace Database.DataRepository.Infra
                        ,[Description]
                     ) VALUES (
                         1
-                       ,3.28084
+                       ,0.3048                      -- 3.28084
                        ,N'FootToMeter'
                     );
                     
