@@ -22,7 +22,7 @@ namespace GlobalRepository
 
             if (db == DatabaseType.Sql)
             {
-                DataRepository = new MainRepo(CnnString("TWDB"));
+                DataRepository = new MainRepo(CnnString("WaterUtility_ConnStr"));
             }
             else if (db == DatabaseType.TextFile)
             {

@@ -426,6 +426,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
                 }
 
                 //ItemViewModel.CalculateExcelNew();
+                MessageBox.Show("GIS, Model (WaterGEMS) and SCADA data were imported succefully.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception e)
             {
@@ -439,6 +440,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
             {
                 EasyCalcModel easyCalcModel = ItemViewModel.Model.EasyCalcModel;
                 GlobalConfig.WbEasyCalcExcel.SaveToExcelFile(excelFileName, easyCalcModel);
+                MessageBox.Show("Data were exported to the Excel file succefully.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception e)
             {
@@ -456,6 +458,8 @@ namespace WpfApplication1.Ui.WaterBalanceList
                 }
                 EasyCalcModel easyCalcModel = GlobalConfig.WbEasyCalcExcel.LoadFromExcelFile(excelFileName);
                 ItemViewModel.EasyCalcViewModel = new ExcelViewModel(easyCalcModel);
+
+                MessageBox.Show("Data were imported from the Excel file succefully.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception e)
             {

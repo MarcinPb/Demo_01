@@ -400,7 +400,7 @@ namespace Database.DataRepository.Infra
 
         #endregion
 
-        private static string GetConnectionString(string name = "WaterInfra_5_ConnStr")
+        private static string GetConnectionString(string name = "WaterInfra_ConnStr")
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }

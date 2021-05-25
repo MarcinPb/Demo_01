@@ -78,7 +78,7 @@ namespace WpfApplication1.Ui.ImportFromWg
             {
                 _logger.Info("Import Changeable Data 1");
 
-                DatabaseName = GetDatabaseName("WaterInfra_5_ConnStr");
+                DatabaseName = GetDatabaseName("WaterInfra_ConnStr");
                 SqliteFile = GetSqliteFile();
 
                 InfraConstantDataLists infraConstantDataLists = InfraRepo.GetInfraConstantData();
@@ -118,14 +118,14 @@ namespace WpfApplication1.Ui.ImportFromWg
             ProgressMessage = e.Message;
         }
 
-        private string GetDatabaseName(string name = "WaterInfra_5_ConnStr")
+        private string GetDatabaseName(string name = "WaterInfra_ConnStr")
         {
-            var connString = GetConnectionString("WaterInfra_5_ConnStr");
+            var connString = GetConnectionString("WaterInfra_ConnStr");
             var databaseName = connString.Split(';')[1].Split('=')[1];
 
             return databaseName;
         }
-        private string GetConnectionString(string name = "WaterInfra_5_ConnStr")
+        private string GetConnectionString(string name = "WaterInfra_ConnStr")
         {
             return System.Configuration.ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }

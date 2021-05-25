@@ -516,6 +516,10 @@
     <Resource Include="Resources\DeleteHS.png" />
     <Resource Include="Resources\PointerHS.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="_Files\WaterUtilityDatabase.sql" />
+    <Content Include="_Files\WaterInfraDatabase.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -10,7 +10,7 @@ namespace DataRepository.Test
     [TestClass]
     public class WbTest
     {
-        string _cnnString = ConfigurationManager.ConnectionStrings["TWDB"].ConnectionString;
+        string _cnnString = ConfigurationManager.ConnectionStrings["WaterUtility_ConnStr"].ConnectionString;
 
         [TestMethod]
         public void TestMethod1()

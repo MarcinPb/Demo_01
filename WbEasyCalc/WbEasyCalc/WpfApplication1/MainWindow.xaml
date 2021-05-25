@@ -53,8 +53,8 @@
             <StatusBarItem >
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Database:"/>
-                    <Label Content="{Binding DatabaseName}" Width="150"/>
-                    <Label Margin ="15 0 0 0" Content="Sqllite File:"/>
+                    <Label Content="{Binding DatabaseName}" Width="200"/>
+                    <Label Margin ="10 0 0 0" Content="Sqllite File:"/>
                     <Label Content="{Binding SqliteFile}"  Width="400"/>
                 </StackPanel>
             </StatusBarItem>

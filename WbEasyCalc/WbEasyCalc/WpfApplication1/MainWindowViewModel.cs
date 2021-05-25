@@ -7,6 +7,7 @@ using WpfApplication1.Ui.WaterConsumptionMap;
 using System;
 using System.Windows;
 using WpfApplication1.Ui.ImportFromWg;
+using System.Threading.Tasks;
 
 namespace WpfApplication1
 {
@@ -22,7 +23,12 @@ namespace WpfApplication1
             set { _databaseName = value; RaisePropertyChanged(); }
         }
 
-        public string SqliteFile { get; set; }
+        private string _sqliteFile;
+        public string SqliteFile 
+        {
+            get { return _sqliteFile; }
+            set { _sqliteFile = value; RaisePropertyChanged(); }
+        }
 
 
 
@@ -57,19 +63,18 @@ namespace WpfApplication1
                 ImportConstantDataCmd = new RelayCommand(ImportConstantDataCmdExecute);
                 ImportChangeableDataCmd = new RelayCommand(ImportChangeableDataCmdExecute);
 
-                DatabaseName = GetDatabaseName("WaterInfra_5_ConnStr");
-                SqliteFile = GetSqliteFile();
+                //DatabaseName = $"{GetDatabaseName("WaterInfra_ConnStr")}, {GetDatabaseName("WaterUtility_ConnStr")}";
+                //SqliteFile = GetSqliteFile();
 
                 GlobalConfig.InitializeConnection(DatabaseType.Sql);
 
                 WbEasyCalcDataViewModel = new Ui.WaterBalanceList.ListViewModel();
 
-                //WaterConsumptionReportViewModel = new Ui.WaterConsumptionReport.EditedViewModel();
                 WaterConsumptionMapViewModel = new Ui.WaterConsumptionMap.MapViewModel(2021, 5, null);
                 WaterConsumptionMapViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList();
 
                 // Singleton run before opening designer first time. It takes more or less 5 sek.
-                var designerObjList1 = DesignerRepo.DesignerObjList;
+                InvokeSingleton();
 
                 Messenger.Default.Register<Ui.WaterBalanceList.ListViewModel>(this, OnSaveOrDeleteModel);
             }
@@ -78,6 +83,18 @@ namespace WpfApplication1
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        public async void InvokeSingleton()
+        {
+            await Task.Run(() => InvokeSingletonInner());
+        }
+        public void InvokeSingletonInner()
+        {
+            var x = DesignerRepo.DesignerObjList;
+            DatabaseName = $"{GetDatabaseName("WaterInfra_ConnStr")}, {GetDatabaseName("WaterUtility_ConnStr")}";
+            SqliteFile = GetSqliteFile();
+        }
+
 
         private void OnSaveOrDeleteModel(Ui.WaterBalanceList.ListViewModel model)
         {
