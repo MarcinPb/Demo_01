@@ -18,8 +18,6 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
             WaterConsumptionId = Id,
             WbEasyCalcDataId = WbEasyCalcDataId,
             Description = Description,
-            IsArchive = IsArchive,
-            IsAccepted = IsAccepted,
 
             WaterConsumptionCategoryId = WaterConsumptionCategoryId,
             WaterConsumptionStatusId = WaterConsumptionStatusId,
@@ -48,34 +46,6 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
             set { _wbEasyCalcDataId = value; RaisePropertyChanged(nameof(WbEasyCalcDataId)); }
         }
 
-        private string _createLogin;
-        public string CreateLogin
-        {
-            get => _createLogin;
-            set { _createLogin = value; RaisePropertyChanged(nameof(CreateLogin)); }
-        }
-
-        private DateTime _createDate;
-        public DateTime CreateDate
-        {
-            get => _createDate;
-            set { _createDate = value; RaisePropertyChanged(nameof(CreateDate)); }
-        }
-
-        private string _modifyLogin;
-        public string ModifyLogin
-        {
-            get => _modifyLogin;
-            set { _modifyLogin = value; RaisePropertyChanged(nameof(ModifyLogin)); }
-        }
-
-        private DateTime _modifyDate;
-        public DateTime ModifyDate
-        {
-            get => _modifyDate;
-            set { _modifyDate = value; RaisePropertyChanged(nameof(ModifyDate)); }
-        }
-
         private string _description;
         public string Description
         {
@@ -87,34 +57,6 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
             {
                 _description = value;
                 RaisePropertyChanged("Description");
-            }
-        }
-
-        private bool _isArchive;
-        public bool IsArchive
-        {
-            get
-            {
-                return _isArchive;
-            }
-            set
-            {
-                _isArchive = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private bool _isAccepted;
-        public bool IsAccepted
-        {
-            get
-            {
-                return _isAccepted;
-            }
-            set
-            {
-                _isAccepted = value;
-                RaisePropertyChanged();
             }
         }
 
@@ -214,8 +156,6 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
             }
 
             Description = model.Description;
-            IsArchive = model.IsArchive;
-            IsAccepted = model.IsAccepted;
 
             Latitude = model.Latitude;
             Lontitude = model.Lontitude;

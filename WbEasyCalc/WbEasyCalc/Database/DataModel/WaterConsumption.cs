@@ -8,14 +8,7 @@ namespace Database.DataModel
         public int WaterConsumptionId { get; set; }
         public int WbEasyCalcDataId { get; set; }
 
-        public string CreateLogin { get; set; }
-        public DateTime CreateDate { get; set; }
-        public string ModifyLogin { get; set; }
-        public DateTime ModifyDate { get; set; }
-
         public string Description { get; set; } = string.Empty;
-        public bool IsArchive { get; set; }
-        public bool IsAccepted { get; set; }
 
         public int WaterConsumptionCategoryId { get; set; }
         public int WaterConsumptionStatusId { get; set; }
@@ -32,13 +25,8 @@ namespace Database.DataModel
             {
                 WaterConsumptionId = WaterConsumptionId,
                 WbEasyCalcDataId = WbEasyCalcDataId,
-                CreateLogin = CreateLogin,
-                CreateDate = CreateDate,
-                ModifyLogin = ModifyLogin,
-                ModifyDate = ModifyDate,
+
                 Description = Description,
-                IsArchive = IsArchive,
-                IsAccepted = IsAccepted,
 
                 WaterConsumptionCategoryId = WaterConsumptionCategoryId,
                 WaterConsumptionStatusId = WaterConsumptionStatusId,

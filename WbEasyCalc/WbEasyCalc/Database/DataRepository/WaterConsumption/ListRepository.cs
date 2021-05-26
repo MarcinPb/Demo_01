@@ -42,10 +42,7 @@ namespace Database.DataRepository.WaterConsumption
                 var p = new DynamicParameters();
                 p.Add("@id", model.WaterConsumptionId, dbType: DbType.Int32, direction: ParameterDirection.InputOutput);
 
-                p.Add("@UserName", userName);
                 p.Add("@Description", model.Description);
-                p.Add("@IsArchive", model.IsArchive);
-                p.Add("@IsAccepted", model.IsAccepted);
 
                 // input
                 p.Add("@WbEasyCalcDataId", model.WbEasyCalcDataId);
@@ -90,7 +87,6 @@ namespace Database.DataRepository.WaterConsumption
             {
                 var p = new DynamicParameters();
                 p.Add("@id", id, dbType: DbType.Int32, direction: ParameterDirection.InputOutput);
-                p.Add("@UserName", userName);
 
                 connection.Execute("dbo.spWaterConsumptionClone", p, commandType: CommandType.StoredProcedure);
 

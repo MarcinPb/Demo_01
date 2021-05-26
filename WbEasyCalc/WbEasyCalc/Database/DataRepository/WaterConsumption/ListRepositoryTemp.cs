@@ -59,7 +59,12 @@ namespace Database.DataRepository.WaterConsumption
 
         public int Clone(int id)
         {
-            throw new NotImplementedException();
+            var model = GetItem(id);
+            var newId = _list.Max(x => x.WaterConsumptionId) + 1;
+            model.WaterConsumptionId = newId;
+            _list.Add(model);
+
+            return newId;
         }
 
         public ListRepositoryTemp(List<Database.DataModel.WaterConsumption> list)

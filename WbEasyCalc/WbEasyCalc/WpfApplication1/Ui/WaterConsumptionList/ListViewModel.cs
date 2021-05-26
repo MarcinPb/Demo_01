@@ -143,7 +143,7 @@ namespace WpfApplication1.Ui.WaterConsumptionList
         }
         public bool RemoveRowCmdCanExecute()
         {
-            return SelectedRow != null && SelectedRow.Model.IsArchive == false;
+            return SelectedRow != null;
         }
 
         public RelayCommand CloneCmd { get; }
@@ -153,7 +153,7 @@ namespace WpfApplication1.Ui.WaterConsumptionList
             try
             {
                 if (SelectedRow == null) return;
-                int id = GlobalConfig.DataRepository.WaterConsumptionListRepository.Clone(SelectedRow.Model.WaterConsumptionId);
+                int id = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.Clone(SelectedRow.Model.WaterConsumptionId);
                 LoadData();
                 SelectedRow = List.FirstOrDefault(x => x.Model.WaterConsumptionId == id);
             }

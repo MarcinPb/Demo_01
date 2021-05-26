@@ -517,7 +517,7 @@
     <Resource Include="Resources\PointerHS.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="_Files\WaterUtilityDatabase.sql" />
+    <Content Include="_Files\WaterUtilityDatabaseWithData.sql" />
     <Content Include="_Files\WaterInfraDatabase.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

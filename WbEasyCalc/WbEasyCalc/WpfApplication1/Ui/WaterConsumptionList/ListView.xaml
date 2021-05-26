@@ -48,8 +48,6 @@
                         <DataGridTextColumn Header="End Date" Width="100" IsReadOnly="True" Binding="{Binding Model.EndDate, StringFormat='{}{0:dd-MM-yyyy HH:mm}'}"/>
                         <DataGridTextColumn Header="Value" Width="100" IsReadOnly="True" Binding="{Binding Model.Value}"/>
                         <DataGridTextColumn Header="Description" Width="370" IsReadOnly="True" Binding="{Binding Model.Description}"/>
-                        <DataGridCheckBoxColumn Header="Archived" Width="90" IsReadOnly="True" Binding="{Binding Model.IsArchive}"/>
-                        <DataGridCheckBoxColumn Header="Accepted" Width="90" IsReadOnly="True" Binding="{Binding Model.IsAccepted}"/>
                     </DataGrid.Columns>
                 </controls:FilteredDataGridCtrl>
                 <StatusBar Grid.Row="2">
