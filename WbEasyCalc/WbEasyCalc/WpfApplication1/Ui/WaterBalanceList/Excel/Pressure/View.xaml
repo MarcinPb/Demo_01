@@ -16,7 +16,7 @@
 
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="10"/>
@@ -50,7 +50,7 @@
         <Label Grid.Row="2" Grid.Column="4" Content="   Daily&#xD;&#xA;Average&#xD;&#xA;Pressure&#xD;&#xA;    [m]"   Style="{StaticResource LabelBlueColTitleStyle}" />
 
         <!--<TextBox Grid.Row="4" Grid.Column="0" Text="{Binding Path=Prs_Area_B7}" Style="{StaticResource TextListLeftStyle}"/>-->
-        <TextBox Grid.Row="4" Grid.Column="0" Text="Total Average Pressure (Model and SCADA)" Style="{StaticResource TextListLeftStyle}" IsEnabled="False"/>
+        <TextBox Grid.Row="4" Grid.Column="0" Text="Connections (Network H30), Total Average Pressure (Model and SCADA)" Style="{StaticResource TextListLeftStyle}" IsEnabled="False"/>
         <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Path=Prs_Area_B8}" Style="{StaticResource TextListLeftStyle}" />
         <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Path=Prs_Area_B9}" Style="{StaticResource TextListLeftStyle}" />
         <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding Path=Prs_Area_B10}" Style="{StaticResource TextListLeftStyle}" />
@@ -62,7 +62,7 @@
         <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding Path=Prs_ApproxNoOfConn_D10, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
         <Border Grid.Row="4" Grid.Column="2" Grid.RowSpan="4" BorderBrush="Black" BorderThickness="1"/>
 
-        <TextBox Grid.Row="4" Grid.Column="4" Text="{Binding Path=Prs_DailyAvgPrsM_F7, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter} }" Style="{StaticResource TextListRightStyle}" />
+        <TextBox Grid.Row="4" Grid.Column="4" Text="{Binding Path=Prs_DailyAvgPrsM_F7, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter} }" Style="{StaticResource TextListRightStyle}"  IsEnabled="False"/>
         <TextBox Grid.Row="5" Grid.Column="4" Text="{Binding Path=Prs_DailyAvgPrsM_F8, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter} }" Style="{StaticResource TextListRightStyle}" />
         <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding Path=Prs_DailyAvgPrsM_F9, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter} }" Style="{StaticResource TextListRightStyle}" />
         <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding Path=Prs_DailyAvgPrsM_F10, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter} }" Style="{StaticResource TextListRightStyle}" />

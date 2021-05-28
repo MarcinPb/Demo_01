@@ -167,6 +167,9 @@
     <Compile Include="Ui\PropertyGrid\Pipe\ItemViewModel.cs" />
     <Compile Include="Ui\WaterBalanceList\Excel\BaseSheetViewModel.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Ui\WaterBalanceList\Excel\FinancialData\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ui\WaterBalanceList\Excel\MatrixIn\MatrixTwoView.xaml.cs">
       <DependentUpon>MatrixTwoView.xaml</DependentUpon>
     </Compile>
@@ -317,6 +320,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Ui\WaterBalanceList\EditedView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\WaterBalanceList\Excel\FinancialData\SettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

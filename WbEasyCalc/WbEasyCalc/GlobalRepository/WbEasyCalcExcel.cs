@@ -331,6 +331,12 @@ namespace GlobalRepository
                     Network_ErrorMargin_J32 = excelReader.ReadCell<double>("Network", "J32"),
                     //Network_ErrorMargin_D35 = excelReader.ReadCell<double>("Network", "D35"),
                 },
+
+
+
+
+
+
                 PressureModel = new WbEasyCalcModel.WbEasyCalc.PressureModel
                 { 
                     Prs_Area_B7 = excelReader.ReadCell<string>("Pressure", "B7"),
@@ -345,6 +351,7 @@ namespace GlobalRepository
                     Prs_DailyAvgPrsM_F9 = excelReader.ReadCell<double>("Pressure", "F9"),
                     Prs_ApproxNoOfConn_D10 = excelReader.ReadCell<double>("Pressure", "D10"),
                     Prs_DailyAvgPrsM_F10 = excelReader.ReadCell<double>("Pressure", "F10"),
+                    Prs_ErrorMarg_F26 = excelReader.ReadCell<double>("Pressure", "F26"),                                                          
                 },
                 IntermModel = new WbEasyCalcModel.WbEasyCalc.IntermModel
                 { 
