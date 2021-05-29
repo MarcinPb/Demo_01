@@ -157,13 +157,23 @@ namespace WpfApplication1.Ui.WaterBalanceList
                 );
             var grouppedList = list.GroupBy(g => g.ExcelCellName).Select(x => new { x.Key, Sum = x.Sum(c => c.Value) });
 
-            foreach(var item in grouppedList)
+            // Clear all Excel cells filled by WaterConsumption sums.  
+            List<string> keyList = GlobalConfig.DataRepository.WaterConsumptionCategoryStatusExcelList.Select(x => x.ExcelCellName).Distinct().ToList();
+            foreach (var key in keyList)
             {
-                //Type type = ItemViewModel.EasyCalcViewModel.GetType();
-                //PropertyInfo pi = type.GetProperty("UnbConsViewModel");
-                //object obj = ItemViewModel.EasyCalcViewModel.UnbConsViewModel;
-                //SetValue(obj, item.Key, item.Sum);
+                if (key.StartsWith("Bil"))
+                {
+                    SetValue(ItemViewModel.EasyCalcViewModel.BilledConsViewModel, key, 0);
+                }
+                else
+                {
+                    SetValue(ItemViewModel.EasyCalcViewModel.UnbConsViewModel, key, 0);
+                }
+            }
 
+            // Fill all Excel cells by WaterConsumption sums.  
+            foreach (var item in grouppedList)
+            {
                 if (item.Key.StartsWith("Bil"))
                 {
                     SetValue(ItemViewModel.EasyCalcViewModel.BilledConsViewModel, item.Key, item.Sum);
