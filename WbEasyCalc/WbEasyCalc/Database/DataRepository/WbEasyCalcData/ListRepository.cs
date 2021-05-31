@@ -10,30 +10,19 @@ namespace Database.DataRepository.WbEasyCalcData
     public class ListRepository : IListRepository
     {
 
-        private List<Database.DataModel.WbEasyCalcData> _list;
         public List<Database.DataModel.WbEasyCalcData> GetList()
         {
             using (IDbConnection cnn = new SqlConnection(_cnnString))
             {
                 string sql = "dbo.spWbEasyCalcDataList";
                 var list = cnn.Query<WbEasyCalcDb>(sql, commandType: CommandType.StoredProcedure).ToList();
-                _list = list.Select(x => x.GetWbEasyCalcData()).ToList();
-                return _list;
+                var resultList = list.Select(x => x.GetWbEasyCalcData()).ToList();
+                return resultList;
             }
         }
 
         public DataModel.WbEasyCalcData GetItem(int id)
         {
-            //if (id != 0)
-            //{
-            //    var item = _list.Single(f => f.WbEasyCalcDataId == id);
-            //    return (Database.DataModel.WbEasyCalcData)item?.Clone();
-            //}
-            //else
-            //{
-            //    return new Database.DataModel.WbEasyCalcData();
-            //}
-
             using (IDbConnection connection = new SqlConnection(_cnnString))
             {
                 var p = new DynamicParameters();
@@ -599,7 +588,7 @@ namespace Database.DataRepository.WbEasyCalcData
             }
         }
 
-        public Database.DataModel.WbEasyCalcData SaveItem(Database.DataModel.WbEasyCalcData model)
+        public DataModel.WbEasyCalcData SaveItem(DataModel.WbEasyCalcData model)
         {
             string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             using (IDbConnection connection = new SqlConnection(_cnnString))
@@ -980,6 +969,7 @@ namespace Database.DataRepository.WbEasyCalcData
                 return recordQty;
             }
         }
+
 
         private readonly string _cnnString;
         public ListRepository(string cnnString)

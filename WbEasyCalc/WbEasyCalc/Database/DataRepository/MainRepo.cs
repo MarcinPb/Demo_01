@@ -18,17 +18,6 @@ namespace Database.DataRepository
         public WaterConsumption.IListRepository WaterConsumptionListRepository { get; private set; }
         public WaterConsumption.IListRepository WaterConsumptionListRepositoryTemp { get; set; }
 
-        public MainRepo(string cnnString)
-        {
-            _cnnString = cnnString;
-
-            Option = new ItemRepository(_cnnString);
-
-            WbEasyCalcDataListRepository = new WbEasyCalcData.ListRepository(_cnnString);
-            WaterConsumptionListRepository = new WaterConsumption.ListRepository(_cnnString);
-
-        }
-
         private List<ZoneItem> _zoneList;
         public List<ZoneItem> ZoneList
         {
@@ -137,7 +126,7 @@ namespace Database.DataRepository
             set => throw new System.NotImplementedException();
         }
 
-        public Database.DataModel.WbEasyCalcData GetAutomaticData(int yearNo, int monthNo, int zoneId)
+        public DataModel.WbEasyCalcData GetAutomaticData(int yearNo, int monthNo, int zoneId)
         {
             using (IDbConnection connection = new SqlConnection(_cnnString))
             {
@@ -208,7 +197,7 @@ namespace Database.DataRepository
                 p.Add("@Prs_DailyAvgPrsM_F10", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@Prs_ErrorMarg_F26", dbType: DbType.Double, direction: ParameterDirection.Output);
 
-                connection.Execute("dbo.spGisModelScadaData", p, commandType: CommandType.StoredProcedure);
+                connection.Execute("dbo.spGisModelScadaData", p, commandType: CommandType.StoredProcedure, commandTimeout: 600);
 
                 return new Database.DataModel.WbEasyCalcData()
                 {
@@ -301,5 +290,17 @@ namespace Database.DataRepository
             }
         }
 
+
+
+        public MainRepo(string cnnString)
+        {
+            _cnnString = cnnString;
+
+            Option = new ItemRepository(_cnnString);
+
+            WbEasyCalcDataListRepository = new WbEasyCalcData.ListRepository(_cnnString);
+            WaterConsumptionListRepository = new WaterConsumption.ListRepository(_cnnString);
+
+        }
     }
 }
