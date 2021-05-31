@@ -5,7 +5,8 @@ using System.Reflection;
 using System.Windows;
 using AutoMapper;
 using Database.DataModel;
-
+using Database.DataModel.Infra;
+using Database.DataRepository.Infra;
 using GlobalRepository;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using WbEasyCalcModel;
@@ -102,8 +103,38 @@ namespace WpfApplication1.Ui.WaterBalanceList
 
         public bool Save()
         {
+            if (!ValidateItem()) { return false; }
+
             WbEasyCalcData model = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.SaveItem(ItemViewModel.Model);
             Messenger.Default.Send<WbEasyCalcData>(model);
+            return true;
+        }
+
+        /// <summary>
+        /// Chacks two conditions. 
+        /// Checks whether StartDate and EndDate each Water Consumption item are in a current Water Balance month (and year).
+        /// checks whether objec where Water Consumption took place is in a current Water Balance zone.
+        /// </summary>
+        /// <returns>Success boolean value.</returns>
+        private bool ValidateItem()
+        {
+            var yearNo = ItemViewModel.Model.YearNo;
+            var monthNo = ItemViewModel.Model.MonthNo;
+            if (ItemViewModel.Model.WaterConsumptionModelList.Any(x => x.StartDate.Month != monthNo || x.EndDate.Month != monthNo || x.StartDate.Year != yearNo || x.EndDate.Year != yearNo))
+            {
+                MessageBox.Show("One of Water Consumption item has wrong Start or End Date.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            const int ZoneFieldId = 647;
+            var zoneId = ItemViewModel.Model.ZoneId;
+            var objIdList = InfraRepo.GetInfraData().InfraChangeableData.InfraValueList.Where(f => f.FieldId == ZoneFieldId && f.IntValue== zoneId);                       
+            if (!ItemViewModel.Model.WaterConsumptionModelList.All(x => objIdList.Any(y => x.RelatedId == y.ObjId)))
+            {
+                MessageBox.Show("One of Water Consumption item does not belong to a choosen Zone.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
             return true;
         }
 
