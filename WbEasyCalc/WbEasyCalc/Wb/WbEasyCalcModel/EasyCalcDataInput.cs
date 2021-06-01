@@ -170,7 +170,7 @@ namespace WbEasyCalcModel
         public string Prs_Area_B8 { get; set; }
         public string Prs_Area_B9 { get; set; }
         public string Prs_Area_B10 { get; set; }
-        public double Prs_ApproxNoOfConn_D7 { get; set; }
+        //public double Prs_ApproxNoOfConn_D7 { get; set; }
         public double Prs_ApproxNoOfConn_D8 { get; set; }
         public double Prs_ApproxNoOfConn_D9 { get; set; }
         public double Prs_ApproxNoOfConn_D10 { get; set; }
@@ -413,7 +413,7 @@ namespace WbEasyCalcModel
                 Prs_Area_B8 = Prs_Area_B8,
                 Prs_Area_B9 = Prs_Area_B9,
                 Prs_Area_B10 = Prs_Area_B10,
-                Prs_ApproxNoOfConn_D7 = Prs_ApproxNoOfConn_D7,
+                //Prs_ApproxNoOfConn_D7 = Prs_ApproxNoOfConn_D7,
                 Prs_DailyAvgPrsM_F7 = Prs_DailyAvgPrsM_F7,
                 Prs_ApproxNoOfConn_D8 = Prs_ApproxNoOfConn_D8,
                 Prs_DailyAvgPrsM_F8 = Prs_DailyAvgPrsM_F8,

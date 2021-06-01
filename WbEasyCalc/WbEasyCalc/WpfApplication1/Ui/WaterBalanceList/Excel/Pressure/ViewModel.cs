@@ -39,7 +39,6 @@ namespace WpfApplication1.Ui.WaterBalanceList.Excel.Pressure
             set { _prs_Area_B10 = value; RaisePropertyChanged(nameof(Prs_Area_B10)); }
         }
 
-        private double _prsApproxNoOfConnD7;
         private double _prsDailyAvgPrsMF7;
         private double _prsApproxNoOfConnD8;
         private double _prsDailyAvgPrsMF8;
@@ -49,11 +48,6 @@ namespace WpfApplication1.Ui.WaterBalanceList.Excel.Pressure
         private double _prsDailyAvgPrsMF10;
         private double _prs_ErrorMarg_F26;
 
-        public double Prs_ApproxNoOfConn_D7
-        {
-            get => _prsApproxNoOfConnD7;
-            set { _prsApproxNoOfConnD7 = value; RaisePropertyChanged(nameof(Prs_ApproxNoOfConn_D7)); Calculate(); }
-        }
         public double Prs_DailyAvgPrsM_F7
         {
             get => _prsDailyAvgPrsMF7;
@@ -107,6 +101,12 @@ namespace WpfApplication1.Ui.WaterBalanceList.Excel.Pressure
             get => _prs_BestEstimate_F33;
             set { _prs_BestEstimate_F33 = value; RaisePropertyChanged(nameof(Prs_BestEstimate_F33)); }
         }
+        private double _prsApproxNoOfConnD7;
+        public double Prs_ApproxNoOfConn_D7
+        {
+            get => _prsApproxNoOfConnD7;
+            set { _prsApproxNoOfConnD7 = value; RaisePropertyChanged(nameof(Prs_ApproxNoOfConn_D7)); }
+        }
         private double _prs_Min_F29;
         public double Prs_Min_F29
         {
@@ -129,7 +129,6 @@ namespace WpfApplication1.Ui.WaterBalanceList.Excel.Pressure
             Prs_Area_B8 = Prs_Area_B8,
             Prs_Area_B9 = Prs_Area_B9,
             Prs_Area_B10 = Prs_Area_B10,
-            Prs_ApproxNoOfConn_D7 = Prs_ApproxNoOfConn_D7,
             Prs_DailyAvgPrsM_F7 = Prs_DailyAvgPrsM_F7,
             Prs_ApproxNoOfConn_D8 = Prs_ApproxNoOfConn_D8,
             Prs_DailyAvgPrsM_F8 = Prs_DailyAvgPrsM_F8,
@@ -140,15 +139,17 @@ namespace WpfApplication1.Ui.WaterBalanceList.Excel.Pressure
             Prs_ErrorMarg_F26 = Prs_ErrorMarg_F26,
             // Output
             Prs_BestEstimate_F33 = Prs_BestEstimate_F33,
+            Prs_ApproxNoOfConn_D7 = Prs_ApproxNoOfConn_D7,
             Prs_Min_F29 = Prs_Min_F29,
             Prs_Max_F31 = Prs_Max_F31,
         };
 
         internal void Refreash(PressureModel model)
         {
-            Prs_BestEstimate_F33 = model.Prs_BestEstimate_F33;
+            Prs_ApproxNoOfConn_D7 = model.Prs_ApproxNoOfConn_D7;
             Prs_Min_F29 = model.Prs_Min_F29;
             Prs_Max_F31 = model.Prs_Max_F31;
+            Prs_BestEstimate_F33 = model.Prs_BestEstimate_F33;
         }
 
         public ViewModel(PressureModel model)
@@ -160,7 +161,7 @@ namespace WpfApplication1.Ui.WaterBalanceList.Excel.Pressure
             Prs_Area_B8 = model.Prs_Area_B8;
             Prs_Area_B9 = model.Prs_Area_B9;
             Prs_Area_B10 = model.Prs_Area_B10;
-            Prs_ApproxNoOfConn_D7 = model.Prs_ApproxNoOfConn_D7;
+            //Prs_ApproxNoOfConn_D7 = model.Prs_ApproxNoOfConn_D7;
             Prs_DailyAvgPrsM_F7 = model.Prs_DailyAvgPrsM_F7;
             Prs_ApproxNoOfConn_D8 = model.Prs_ApproxNoOfConn_D8;
             Prs_DailyAvgPrsM_F8 = model.Prs_DailyAvgPrsM_F8;

@@ -685,7 +685,7 @@ namespace Database.DataRepository.WbEasyCalcData
                         Prs_Area_B8 = Prs_Area_B8,
                         Prs_Area_B9 = Prs_Area_B9,
                         Prs_Area_B10 = Prs_Area_B10,
-                        Prs_ApproxNoOfConn_D7 = Prs_ApproxNoOfConn_D7,
+                        //Prs_ApproxNoOfConn_D7 = Prs_ApproxNoOfConn_D7,
                         Prs_DailyAvgPrsM_F7 = Prs_DailyAvgPrsM_F7,
                         Prs_ApproxNoOfConn_D8 = Prs_ApproxNoOfConn_D8,
                         Prs_DailyAvgPrsM_F8 = Prs_DailyAvgPrsM_F8,
@@ -694,8 +694,6 @@ namespace Database.DataRepository.WbEasyCalcData
                         Prs_ApproxNoOfConn_D10 = Prs_ApproxNoOfConn_D10,
                         Prs_DailyAvgPrsM_F10 = Prs_DailyAvgPrsM_F10,
                         Prs_ErrorMarg_F26 = Prs_ErrorMarg_F26,
-
-
                     },
 
                     IntermModel = new IntermModel

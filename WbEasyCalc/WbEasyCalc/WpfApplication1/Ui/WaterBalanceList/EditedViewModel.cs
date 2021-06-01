@@ -30,7 +30,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
         public List<ZoneItem> ZoneItemList { get; set; }
         public List<IdNamePair> J6_List { get; set; }
 
-        #region Commands: LoadDataFromSystemCmd, ImportFromExcelExecute, ImportFromExcelCanExecute
+        #region Commands: LoadDataFromSystemCmd, ExportToExcelCmd, ExportToExcelCmd
 
         public RelayCommand LoadDataFromSystemCmd => new RelayCommand(LoadDataFromSystemExecute, LoadDataFromSystemCanExecute);
         private void LoadDataFromSystemExecute()
@@ -149,11 +149,11 @@ namespace WpfApplication1.Ui.WaterBalanceList
 
             var model = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetItem(id);
 
-            if (id == 0)
-            {
-                model.EasyCalcModel.MatrixOneIn.SelectedOption = 1;
-                model.EasyCalcModel.MatrixOneIn.C11 = 333;
-            }
+            //if (id == 0)
+            //{
+            //    model.EasyCalcModel.MatrixOneIn.SelectedOption = 1;
+            //    model.EasyCalcModel.MatrixOneIn.C11 = 333;
+            //}
 
             ItemViewModel = new ItemViewModel(model);
 
@@ -397,7 +397,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
                     //ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_Area_B9 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_Area_B9;
                     //ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_Area_B10 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_Area_B10;
                     // Data
-                    ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_ApproxNoOfConn_D7 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_ApproxNoOfConn_D7;
+                    //ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_ApproxNoOfConn_D7 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_ApproxNoOfConn_D7;
                     ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_DailyAvgPrsM_F7 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_DailyAvgPrsM_F7;
                     ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_ApproxNoOfConn_D8 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_ApproxNoOfConn_D8;
                     ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_DailyAvgPrsM_F8 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_DailyAvgPrsM_F8;
@@ -483,6 +483,12 @@ namespace WpfApplication1.Ui.WaterBalanceList
             }
         }
 
+        /// <summary>
+        /// Loads data from an Excel file to a new EasyCalcModel model. 
+        /// Loads MatrixOneIn and MatrixTwoIn from a currently openned EasyCalcModel model to a new created EasyCalcModel model.
+        /// Loads a new created EasyCalcModel model to a currently openned EasyCalcModel model.
+        /// </summary>
+        /// <param name="excelFileName">Full name imported Excel file.</param>
         private void ImportFromExcel(string excelFileName)
         {
             try
@@ -492,6 +498,10 @@ namespace WpfApplication1.Ui.WaterBalanceList
                     ItemViewModel.EasyCalcViewModel.Dispose();  
                 }
                 EasyCalcModel easyCalcModel = GlobalConfig.WbEasyCalcExcel.LoadFromExcelFile(excelFileName);
+                
+                easyCalcModel.MatrixOneIn = ItemViewModel.EasyCalcViewModel.Model.MatrixOneIn;
+                easyCalcModel.MatrixTwoIn = ItemViewModel.EasyCalcViewModel.Model.MatrixTwoIn;
+
                 ItemViewModel.EasyCalcViewModel = new ExcelViewModel(easyCalcModel);
 
                 MessageBox.Show("Data were imported from the Excel file succefully.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);

@@ -172,7 +172,7 @@ namespace Database.DataRepository.WbEasyCalcData
                 p.Add("@Prs_Area_B8", dbType: DbType.String, size: 400, direction: ParameterDirection.Output);
                 p.Add("@Prs_Area_B9", dbType: DbType.String, size: 400, direction: ParameterDirection.Output);
                 p.Add("@Prs_Area_B10", dbType: DbType.String, size: 400, direction: ParameterDirection.Output);
-                p.Add("@Prs_ApproxNoOfConn_D7", dbType: DbType.Double, direction: ParameterDirection.Output);
+                //p.Add("@Prs_ApproxNoOfConn_D7", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@Prs_DailyAvgPrsM_F7", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@Prs_ApproxNoOfConn_D8", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@Prs_DailyAvgPrsM_F8", dbType: DbType.Double, direction: ParameterDirection.Output);
@@ -456,7 +456,7 @@ namespace Database.DataRepository.WbEasyCalcData
                             Prs_Area_B8  = p.Get<string>("Prs_Area_B8"),
                             Prs_Area_B9  = p.Get<string>("Prs_Area_B9"),
                             Prs_Area_B10 = p.Get<string>("Prs_Area_B10"),
-                            Prs_ApproxNoOfConn_D7 = p.Get<double>("@Prs_ApproxNoOfConn_D7"),                                   
+                            //Prs_ApproxNoOfConn_D7 = p.Get<double>("@Prs_ApproxNoOfConn_D7"),                                   
                             Prs_DailyAvgPrsM_F7 = p.Get<double>("@Prs_DailyAvgPrsM_F7"),                                       
                             Prs_ApproxNoOfConn_D8 = p.Get<double>("@Prs_ApproxNoOfConn_D8"),                                   
                             Prs_DailyAvgPrsM_F8 = p.Get<double>("@Prs_DailyAvgPrsM_F8"),                                       
@@ -743,7 +743,7 @@ namespace Database.DataRepository.WbEasyCalcData
                 p.Add("@Prs_Area_B8", model.EasyCalcModel.PressureModel.Prs_Area_B8);
                 p.Add("@Prs_Area_B9", model.EasyCalcModel.PressureModel.Prs_Area_B9);
                 p.Add("@Prs_Area_B10", model.EasyCalcModel.PressureModel.Prs_Area_B10);
-                p.Add("@Prs_ApproxNoOfConn_D7", model.EasyCalcModel.PressureModel.Prs_ApproxNoOfConn_D7);
+                //p.Add("@Prs_ApproxNoOfConn_D7", model.EasyCalcModel.PressureModel.Prs_ApproxNoOfConn_D7);
                 p.Add("@Prs_DailyAvgPrsM_F7", model.EasyCalcModel.PressureModel.Prs_DailyAvgPrsM_F7);
                 p.Add("@Prs_ApproxNoOfConn_D8", model.EasyCalcModel.PressureModel.Prs_ApproxNoOfConn_D8);
                 p.Add("@Prs_DailyAvgPrsM_F8", model.EasyCalcModel.PressureModel.Prs_DailyAvgPrsM_F8);

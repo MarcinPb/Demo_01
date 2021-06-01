@@ -6,6 +6,12 @@ namespace WbEasyCalcRepository.Model
 {
     public class PressureSheet
     {
+        private readonly EasyCalcSheet _data;
+        public PressureSheet(EasyCalcSheet data)
+        {
+            _data = data;
+        }
+
         public List<double> ApproximateNumberOfConnections_D7_D24 { get; set; }
         public List<double> DailyAveragePressureM_F7_F24 { get; set; }
 
@@ -23,13 +29,24 @@ namespace WbEasyCalcRepository.Model
             result += this.ApproximateNumberOfConnections_D7_D24[2] * this.DailyAveragePressureM_F7_F24[2];
 
             result /= (Prs_ApproxNoOfConn_D7 + this.ApproximateNumberOfConnections_D7_D24.Sum());
+            //result /= (this.ApproximateNumberOfConnections_D7_D24.Sum());
 
             return result;
         }
 
-        public double Prs_ApproxNoOfConn_D7 { get; set; }
         public double Prs_DailyAvgPrsM_F7 { get; set; }
         public double Prs_ErrorMarg_F26 { get; set; }
+
+
+
+        public double Prs_ApproxNoOfConn_D7 
+        {
+            get => _data.NetworkSheet.ServiceConnectionsBestEstimate_H30; 
+            //get => this._data.NetworkSheet.NumberOfConnectionsOfRegsteredCustomers_H10
+            //    + this._data.NetworkSheet.EstimatedNumberOfIllegalConnections_H21
+            //    + this._data.NetworkSheet.NumberOfInactiveAccountsWServiceConnections_H18;
+            //get => 7777;
+        }
 
         public double Prs_Min_F29 { get => this.GetPrs_Min_F29(); }
         private double GetPrs_Min_F29()

@@ -66,7 +66,7 @@ namespace GlobalRepository
                 new OpcValue(){Tag=$"WbEasyCalc_{zoneRomanNo}.DEV.Network_NoOfConnOfRegCustomers_H10", Value = easyCalcDataInput.Network_NoOfConnOfRegCustomers_H10},
                 new OpcValue(){Tag=$"WbEasyCalc_{zoneRomanNo}.DEV.Network_NoOfInactAccountsWSvcConns_H18", Value = easyCalcDataInput.Network_NoOfInactAccountsWSvcConns_H18},
                 new OpcValue(){Tag=$"WbEasyCalc_{zoneRomanNo}.DEV.Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32", Value = easyCalcDataInput.Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32},
-                new OpcValue(){Tag=$"WbEasyCalc_{zoneRomanNo}.DEV.Prs_ApproxNoOfConn_D7", Value = easyCalcDataInput.Prs_ApproxNoOfConn_D7},
+                //new OpcValue(){Tag=$"WbEasyCalc_{zoneRomanNo}.DEV.Prs_ApproxNoOfConn_D7", Value = easyCalcDataInput.Prs_ApproxNoOfConn_D7},
                 new OpcValue(){Tag=$"WbEasyCalc_{zoneRomanNo}.DEV.Prs_DailyAvgPrsM_F7", Value = easyCalcDataInput.Prs_DailyAvgPrsM_F7},
 
                 new OpcValue(){Tag=$"WbEasyCalc_{zoneRomanNo}.DEV.WatBal_SystemInputVolume_B19", Value = easyCalcDataOutput.WaterBalancePeriod.SystemInputVolume_B19},

@@ -83,6 +83,7 @@ namespace WbEasyCalcRepository
                 Prs_Min_F29 = easyCalcSheetData.PressureSheet.Prs_Min_F29,
                 Prs_Max_F31 = easyCalcSheetData.PressureSheet.Prs_Max_F31,
                 Prs_BestEstimate_F33 = easyCalcSheetData.PressureSheet.AveragePressureBestEstimate_F33,
+                Prs_ApproxNoOfConn_D7 = easyCalcSheetData.PressureSheet.Prs_ApproxNoOfConn_D7,
 
                 Interm_BestEstimate_H33 = easyCalcSheetData.IntermittentSupplySheet.SupplyTimeBestEstimate_H33,
                 Interm_Min_H29 = easyCalcSheetData.IntermittentSupplySheet.Interm_Min_F29,
@@ -281,7 +282,7 @@ namespace WbEasyCalcRepository
                 //Network_ErrorMargin_D35 = easyCalcDataInput.Network_ErrorMargin_D35,
             };
 
-            data.PressureSheet = new PressureSheet()
+            data.PressureSheet = new PressureSheet(data)
             {
                 ApproximateNumberOfConnections_D7_D24 = new List<double> 
                 { 
@@ -297,7 +298,7 @@ namespace WbEasyCalcRepository
                     easyCalcDataInput.Prs_DailyAvgPrsM_F9, 
                     easyCalcDataInput.Prs_DailyAvgPrsM_F10, 
                 },
-                Prs_ApproxNoOfConn_D7 = easyCalcDataInput.Prs_ApproxNoOfConn_D7,
+                //Prs_ApproxNoOfConn_D7 = easyCalcDataInput.Prs_ApproxNoOfConn_D7,
                 Prs_DailyAvgPrsM_F7 = easyCalcDataInput.Prs_DailyAvgPrsM_F7,
                 Prs_ErrorMarg_F26 = easyCalcDataInput.Prs_ErrorMarg_F26,
             };
@@ -653,6 +654,7 @@ namespace WbEasyCalcRepository
 
             var pressureModel = GetPressureModel(easyCalcSheetData.PressureSheet);
             easyCalcModel.PressureModel.Prs_BestEstimate_F33 = pressureModel.Prs_BestEstimate_F33;
+            easyCalcModel.PressureModel.Prs_ApproxNoOfConn_D7 = pressureModel.Prs_ApproxNoOfConn_D7;
             easyCalcModel.PressureModel.Prs_Min_F29 = pressureModel.Prs_Min_F29;
             easyCalcModel.PressureModel.Prs_Max_F31 = pressureModel.Prs_Max_F31;
 
@@ -857,7 +859,7 @@ namespace WbEasyCalcRepository
                 //Network_ErrorMargin_D35 = easyCalcDataInput.NetworkModel.Network_ErrorMargin_D35,
             };
 
-            data.PressureSheet = new PressureSheet()
+            data.PressureSheet = new PressureSheet(data)
             {
                 ApproximateNumberOfConnections_D7_D24 = new List<double> 
                 { 
@@ -873,7 +875,7 @@ namespace WbEasyCalcRepository
                     easyCalcModel.PressureModel.Prs_DailyAvgPrsM_F9,
                     easyCalcModel.PressureModel.Prs_DailyAvgPrsM_F10, 
                 },
-                Prs_ApproxNoOfConn_D7 =   easyCalcModel.PressureModel.Prs_ApproxNoOfConn_D7,
+                //Prs_ApproxNoOfConn_D7 =   easyCalcModel.PressureModel.Prs_ApproxNoOfConn_D7,
                 Prs_DailyAvgPrsM_F7 =   easyCalcModel.PressureModel.Prs_DailyAvgPrsM_F7, 
                 Prs_ErrorMarg_F26 = easyCalcModel.PressureModel.Prs_ErrorMarg_F26,
             };
@@ -1130,6 +1132,7 @@ namespace WbEasyCalcRepository
                 Prs_Min_F29 = sheet.Prs_Min_F29,
                 Prs_Max_F31 = sheet.Prs_Max_F31,
                 Prs_BestEstimate_F33 = sheet.AveragePressureBestEstimate_F33,
+                Prs_ApproxNoOfConn_D7 = sheet.Prs_ApproxNoOfConn_D7,
             };
 
             return model;

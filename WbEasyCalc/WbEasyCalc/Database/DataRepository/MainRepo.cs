@@ -179,8 +179,6 @@ namespace Database.DataRepository
 
         public DataModel.WbEasyCalcData GetWbYearData(int yearNo, int zoneId)
         {
-            int monthNo = 13;
-
             using (IDbConnection connection = new SqlConnection(_cnnString))
             {
                 var p = new DynamicParameters();
@@ -288,7 +286,7 @@ namespace Database.DataRepository
                 p.Add("@Network_ErrorMargin_J32", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@Network_ErrorMargin_D35", dbType: DbType.Double, direction: ParameterDirection.Output);
 
-                p.Add("@Prs_ApproxNoOfConn_D7", dbType: DbType.Double, direction: ParameterDirection.Output);
+                //p.Add("@Prs_ApproxNoOfConn_D7", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@Prs_DailyAvgPrsM_F7", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@Prs_ApproxNoOfConn_D8", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@Prs_DailyAvgPrsM_F8", dbType: DbType.Double, direction: ParameterDirection.Output);
@@ -432,7 +430,7 @@ namespace Database.DataRepository
                         },
                         PressureModel = new WbEasyCalcModel.WbEasyCalc.PressureModel
                         {
-                            Prs_ApproxNoOfConn_D7 = p.Get<double>("@Prs_ApproxNoOfConn_D7"),
+                            //Prs_ApproxNoOfConn_D7 = p.Get<double>("@Prs_ApproxNoOfConn_D7"),
                             Prs_DailyAvgPrsM_F7 = p.Get<double>("@Prs_DailyAvgPrsM_F7"),
                             Prs_ApproxNoOfConn_D8 = p.Get<double>("@Prs_ApproxNoOfConn_D8"),
                             Prs_DailyAvgPrsM_F8 = p.Get<double>("@Prs_DailyAvgPrsM_F8"),

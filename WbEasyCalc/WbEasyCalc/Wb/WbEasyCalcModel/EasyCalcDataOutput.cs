@@ -20,6 +20,7 @@ namespace WbEasyCalcModel
         public double Prs_Min_F29 { get; set; }  
         public double Prs_Max_F31 { get; set; }
         public double Prs_BestEstimate_F33 { get; set; } // 30.0 
+        public double Prs_ApproxNoOfConn_D7 { get; set; } // 30.0 
 
         public double SysInput_ErrorMarg_F72 { get; set; }
         public double SysInput_Min_D75 { get; set; }
@@ -115,6 +116,7 @@ namespace WbEasyCalcModel
                 Pis = (PisModel)Pis.Clone(),
 
                 Prs_BestEstimate_F33 = Prs_BestEstimate_F33,
+                Prs_ApproxNoOfConn_D7 = Prs_ApproxNoOfConn_D7,
                 Prs_Min_F29 = Prs_Min_F29,
                 Prs_Max_F31 = Prs_Max_F31,
 

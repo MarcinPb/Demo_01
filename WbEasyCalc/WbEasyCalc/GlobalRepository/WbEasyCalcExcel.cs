@@ -332,18 +332,13 @@ namespace GlobalRepository
                     //Network_ErrorMargin_D35 = excelReader.ReadCell<double>("Network", "D35"),
                 },
 
-
-
-
-
-
                 PressureModel = new WbEasyCalcModel.WbEasyCalc.PressureModel
                 { 
                     Prs_Area_B7 = excelReader.ReadCell<string>("Pressure", "B7"),
                     Prs_Area_B8 = excelReader.ReadCell<string>("Pressure", "B8"),
                     Prs_Area_B9 = excelReader.ReadCell<string>("Pressure", "B9"),
                     Prs_Area_B10 = excelReader.ReadCell<string>("Pressure", "B10"),
-                    Prs_ApproxNoOfConn_D7 = excelReader.ReadCell<double>("Pressure", "D7"),
+                    //Prs_ApproxNoOfConn_D7 = excelReader.ReadCell<double>("Pressure", "D7"),
                     Prs_DailyAvgPrsM_F7 = excelReader.ReadCell<double>("Pressure", "F7"),
                     Prs_ApproxNoOfConn_D8 = excelReader.ReadCell<double>("Pressure", "D8"),
                     Prs_DailyAvgPrsM_F8 = excelReader.ReadCell<double>("Pressure", "F8"),
