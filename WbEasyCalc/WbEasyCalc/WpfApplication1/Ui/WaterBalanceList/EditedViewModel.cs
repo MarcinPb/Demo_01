@@ -230,36 +230,30 @@ namespace WpfApplication1.Ui.WaterBalanceList
         {
             try
             {
-                // Invoke spGisModelScadaData on SQL Server.
-                var wbEasyCalcData = GlobalConfig.DataRepository.GetAutomaticData(ItemViewModel.YearNo, ItemViewModel.MonthNo, ItemViewModel.ZoneId);
-
                 if (ItemViewModel.MonthNo < 13)
                 {
-                    ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_SystemInputVolumeM3_D6 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_SystemInputVolumeM3_D6;
+                    var wbEasyCalcData = GlobalConfig.DataRepository.GetWbGisModelScadaData(ItemViewModel.YearNo, ItemViewModel.MonthNo, ItemViewModel.ZoneId);
                     
+                    ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_SystemInputVolumeM3_D6 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_SystemInputVolumeM3_D6;                   
                     ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_UnbMetConsM3_D8 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_UnbMetConsM3_D8;
-
                     ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_DistributionAndTransmissionMains_D7 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_DistributionAndTransmissionMains_D7;
                     ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_NoCustomers_H7 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_NoCustomers_H7;
                     ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_NoOfConnOfRegCustomers_H10 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_NoOfConnOfRegCustomers_H10;
                     ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_NoOfInactAccountsWSvcConns_H18 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_NoOfInactAccountsWSvcConns_H18;
-
                     ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_DailyAvgPrsM_F7 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_DailyAvgPrsM_F7;
                 }
-
-                // Sum parameters for all year.
                 else
                 {
-                    //ItemViewModel.Model.EasyCalcModel = wbEasyCalcData.EasyCalcModel;
-                    //ItemViewModel.EasyCalcViewModel.Model = wbEasyCalcData.EasyCalcModel;
+                    // Sum parameters for all year.
+                    var wbEasyCalcData = GlobalConfig.DataRepository.GetWbYearData(ItemViewModel.YearNo, ItemViewModel.ZoneId);
 
                     ItemViewModel.EasyCalcViewModel.StartViewModel.Start_PeriodDays_M21 = wbEasyCalcData.EasyCalcModel.StartModel.Start_PeriodDays_M21;
 
                     // Text
-                    ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_Desc_B6 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_Desc_B6;
-                    ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_Desc_B7 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_Desc_B7;
-                    ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_Desc_B8 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_Desc_B8;
-                    ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_Desc_B9 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_Desc_B9;
+                    //ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_Desc_B6 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_Desc_B6;
+                    //ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_Desc_B7 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_Desc_B7;
+                    //ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_Desc_B8 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_Desc_B8;
+                    //ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_Desc_B9 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_Desc_B9;                   
                     // Data
                     ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_SystemInputVolumeM3_D6 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_SystemInputVolumeM3_D6;                // @SystemInputVolume
                     ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_SystemInputVolumeError_F6 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_SystemInputVolumeError_F6;
@@ -271,14 +265,14 @@ namespace WpfApplication1.Ui.WaterBalanceList
                     ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_SystemInputVolumeError_F9 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_SystemInputVolumeError_F9;
 
                     // Text
-                    ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_B8 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_B8;
-                    ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_B9 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_B9;
-                    ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_B10 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_B10;
-                    ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_B11 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_B11;
-                    ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_F8 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_F8;
-                    ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_F9 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_F9;
-                    ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_F10 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_F10;
-                    ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_F11 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_F11;
+                    //ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_B8 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_B8;
+                    //ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_B9 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_B9;
+                    //ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_B10 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_B10;
+                    //ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_B11 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_B11;
+                    //ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_F8 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_F8;
+                    //ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_F9 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_F9;
+                    //ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_F10 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_F10;
+                    //ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_Desc_F11 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_Desc_F11;
                     // Data
                     ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_BilledMetConsBulkWatSupExpM3_D6 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_BilledMetConsBulkWatSupExpM3_D6;               // @ZoneSale
                     ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_BilledUnmetConsBulkWatSupExpM3_H6 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_BilledUnmetConsBulkWatSupExpM3_H6;
@@ -292,16 +286,16 @@ namespace WpfApplication1.Ui.WaterBalanceList
                     ItemViewModel.EasyCalcViewModel.BilledConsViewModel.BilledCons_UnbUnmetConsM3_H11 = wbEasyCalcData.EasyCalcModel.BilledConsModel.BilledCons_UnbUnmetConsM3_H11;
 
                     // Text
-                    ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_D8 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_D8;
-                    ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_D9 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_D9;
-                    ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_D10 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_D10;
-                    ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_D11 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_D11;
-                    ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_F6 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_F6;
-                    ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_F7 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_F7;
-                    ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_F8 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_F8;
-                    ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_F9 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_F9;
-                    ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_F10 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_F10;
-                    ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_F11 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_F11;
+                    //ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_D8 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_D8;
+                    //ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_D9 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_D9;
+                    //ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_D10 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_D10;
+                    //ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_D11 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_D11;
+                    //ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_F6 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_F6;
+                    //ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_F7 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_F7;
+                    //ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_F8 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_F8;
+                    //ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_F9 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_F9;
+                    //ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_F10 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_F10;
+                    //ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_Desc_F11 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_Desc_F11;
                     // Data
                     ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_MetConsBulkWatSupExpM3_D6 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_MetConsBulkWatSupExpM3_D6;
                     ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_UnbMetConsM3_D8 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_UnbMetConsM3_D8;
@@ -322,122 +316,122 @@ namespace WpfApplication1.Ui.WaterBalanceList
                     ItemViewModel.EasyCalcViewModel.UnbConsViewModel.UnbilledCons_UnbUnmetConsError_J11 = wbEasyCalcData.EasyCalcModel.UnbilledConsModel.UnbilledCons_UnbUnmetConsError_J11;
 
                     // Text
-                    //ItemViewModel.UnauthCons_Desc_B18 = wbEasyCalcData.UnauthCons_Desc_B18;
-                    //ItemViewModel.UnauthCons_Desc_B19 = wbEasyCalcData.UnauthCons_Desc_B19;
-                    //ItemViewModel.UnauthCons_Desc_B20 = wbEasyCalcData.UnauthCons_Desc_B20;
-                    //ItemViewModel.UnauthCons_Desc_B21 = wbEasyCalcData.UnauthCons_Desc_B21;
+                    //ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_Desc_B18 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_Desc_B18;
+                    //ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_Desc_B19 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_Desc_B19;
+                    //ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_Desc_B20 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_Desc_B20;
+                    //ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_Desc_B21 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_Desc_B21;
                     // Data
-                    //ItemViewModel.UnauthCons_OthersErrorMargin_F18 = wbEasyCalcData.UnauthCons_OthersErrorMargin_F18;
-                    //ItemViewModel.UnauthCons_OthersErrorMargin_F19 = wbEasyCalcData.UnauthCons_OthersErrorMargin_F19;
-                    //ItemViewModel.UnauthCons_OthersErrorMargin_F20 = wbEasyCalcData.UnauthCons_OthersErrorMargin_F20;
-                    //ItemViewModel.UnauthCons_OthersErrorMargin_F21 = wbEasyCalcData.UnauthCons_OthersErrorMargin_F21;
-                    //ItemViewModel.UnauthCons_OthersM3PerDay_J18 = wbEasyCalcData.UnauthCons_OthersM3PerDay_J18;
-                    //ItemViewModel.UnauthCons_OthersM3PerDay_J19 = wbEasyCalcData.UnauthCons_OthersM3PerDay_J19;
-                    //ItemViewModel.UnauthCons_OthersM3PerDay_J20 = wbEasyCalcData.UnauthCons_OthersM3PerDay_J20;
-                    //ItemViewModel.UnauthCons_OthersM3PerDay_J21 = wbEasyCalcData.UnauthCons_OthersM3PerDay_J21;
-                    //ItemViewModel.UnauthCons_IllegalConnDomEstNo_D6 = wbEasyCalcData.UnauthCons_IllegalConnDomEstNo_D6;
-                    //ItemViewModel.UnauthCons_IllegalConnDomPersPerHouse_H6 = wbEasyCalcData.UnauthCons_IllegalConnDomPersPerHouse_H6;
-                    //ItemViewModel.UnauthCons_IllegalConnDomConsLitPerPersDay_J6 = wbEasyCalcData.UnauthCons_IllegalConnDomConsLitPerPersDay_J6;
-                    //ItemViewModel.UnauthCons_IllegalConnDomErrorMargin_F6 = wbEasyCalcData.UnauthCons_IllegalConnDomErrorMargin_F6;
-                    //ItemViewModel.UnauthCons_IllegalConnOthersErrorMargin_F10 = wbEasyCalcData.UnauthCons_IllegalConnOthersErrorMargin_F10;
-                    //ItemViewModel.IllegalConnectionsOthersEstimatedNumber_D10 = wbEasyCalcData.IllegalConnectionsOthersEstimatedNumber_D10;
-                    //ItemViewModel.IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10 = wbEasyCalcData.IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10;
-                    //ItemViewModel.UnauthCons_MeterTampBypEtcEstNo_D14 = wbEasyCalcData.UnauthCons_MeterTampBypEtcEstNo_D14;
-                    //ItemViewModel.UnauthCons_MeterTampBypEtcErrorMargin_F14 = wbEasyCalcData.UnauthCons_MeterTampBypEtcErrorMargin_F14;
-                    //ItemViewModel.UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14 = wbEasyCalcData.UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_OthersErrorMargin_F18 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_OthersErrorMargin_F18;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_OthersErrorMargin_F19 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_OthersErrorMargin_F19;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_OthersErrorMargin_F20 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_OthersErrorMargin_F20;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_OthersErrorMargin_F21 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_OthersErrorMargin_F21;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_OthersM3PerDay_J18 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_OthersM3PerDay_J18;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_OthersM3PerDay_J19 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_OthersM3PerDay_J19;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_OthersM3PerDay_J20 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_OthersM3PerDay_J20;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_OthersM3PerDay_J21 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_OthersM3PerDay_J21;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_IllegalConnDomEstNo_D6 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_IllegalConnDomEstNo_D6;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_IllegalConnDomPersPerHouse_H6 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_IllegalConnDomPersPerHouse_H6;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_IllegalConnDomConsLitPerPersDay_J6 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_IllegalConnDomConsLitPerPersDay_J6;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_IllegalConnDomErrorMargin_F6 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_IllegalConnDomErrorMargin_F6;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_IllegalConnOthersErrorMargin_F10 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_IllegalConnOthersErrorMargin_F10;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.IllegalConnectionsOthersEstimatedNumber_D10 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.IllegalConnectionsOthersEstimatedNumber_D10;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_MeterTampBypEtcEstNo_D14 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_MeterTampBypEtcEstNo_D14;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_MeterTampBypEtcErrorMargin_F14 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_MeterTampBypEtcErrorMargin_F14;
+                    ItemViewModel.EasyCalcViewModel.UnauthConsViewModel.UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14 = wbEasyCalcData.EasyCalcModel.UnauthConsModel.UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14;
 
                     // Text
-                    //ItemViewModel.MetErrors_Desc_D12 = wbEasyCalcData.MetErrors_Desc_D12;
-                    //ItemViewModel.MetErrors_Desc_D13 = wbEasyCalcData.MetErrors_Desc_D13;
-                    //ItemViewModel.MetErrors_Desc_D14 = wbEasyCalcData.MetErrors_Desc_D14;
-                    //ItemViewModel.MetErrors_Desc_D15 = wbEasyCalcData.MetErrors_Desc_D15;
+                    //ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Desc_D12 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Desc_D12;
+                    //ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Desc_D13 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Desc_D13;
+                    //ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Desc_D14 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Desc_D14;
+                    //ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Desc_D15 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Desc_D15;
                     // Data
-                    //ItemViewModel.MetErrors_Total_F12 = wbEasyCalcData.MetErrors_Total_F12;
-                    //ItemViewModel.MetErrors_Total_F13 = wbEasyCalcData.MetErrors_Total_F13;
-                    //ItemViewModel.MetErrors_Total_F14 = wbEasyCalcData.MetErrors_Total_F14;
-                    //ItemViewModel.MetErrors_Total_F15 = wbEasyCalcData.MetErrors_Total_F15;
-                    //ItemViewModel.MetErrors_Meter_H12 = wbEasyCalcData.MetErrors_Meter_H12;
-                    //ItemViewModel.MetErrors_Meter_H13 = wbEasyCalcData.MetErrors_Meter_H13;
-                    //ItemViewModel.MetErrors_Meter_H14 = wbEasyCalcData.MetErrors_Meter_H14;
-                    //ItemViewModel.MetErrors_Meter_H15 = wbEasyCalcData.MetErrors_Meter_H15;
-                    //ItemViewModel.MetErrors_Error_N12 = wbEasyCalcData.MetErrors_Error_N12;
-                    //ItemViewModel.MetErrors_Error_N13 = wbEasyCalcData.MetErrors_Error_N13;
-                    //ItemViewModel.MetErrors_Error_N14 = wbEasyCalcData.MetErrors_Error_N14;
-                    //ItemViewModel.MetErrors_Error_N15 = wbEasyCalcData.MetErrors_Error_N15;
-                    //ItemViewModel.MetErrors_DetailedManualSpec_J6 = wbEasyCalcData.MetErrors_DetailedManualSpec_J6;
-                    //ItemViewModel.MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8 = wbEasyCalcData.MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8;
-                    //ItemViewModel.MetErrors_BilledMetConsWoBulkSupErrorMargin_N8 = wbEasyCalcData.MetErrors_BilledMetConsWoBulkSupErrorMargin_N8;
-                    //ItemViewModel.MeteredBulkSupplyExportErrorMargin_N32 = wbEasyCalcData.MeteredBulkSupplyExportErrorMargin_N32;
-                    //ItemViewModel.UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34 = wbEasyCalcData.UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34;
-                    //ItemViewModel.CorruptMeterReadingPracticessErrorMargin_N38 = wbEasyCalcData.CorruptMeterReadingPracticessErrorMargin_N38;
-                    //ItemViewModel.DataHandlingErrorsOffice_L40 = wbEasyCalcData.DataHandlingErrorsOffice_L40;
-                    //ItemViewModel.DataHandlingErrorsOfficeErrorMargin_N40 = wbEasyCalcData.DataHandlingErrorsOfficeErrorMargin_N40;
-                    //ItemViewModel.MetErrors_MetBulkSupExpMetUnderreg_H32 = wbEasyCalcData.MetErrors_MetBulkSupExpMetUnderreg_H32;
-                    //ItemViewModel.MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34  = wbEasyCalcData.MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34;
-                    //ItemViewModel.MetErrors_CorruptMetReadPractMetUndrreg_H38 = wbEasyCalcData.MetErrors_CorruptMetReadPractMetUndrreg_H38;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Total_F12 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Total_F12;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Total_F13 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Total_F13;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Total_F14 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Total_F14;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Total_F15 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Total_F15;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Meter_H12 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Meter_H12;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Meter_H13 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Meter_H13;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Meter_H14 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Meter_H14;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Meter_H15 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Meter_H15;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Error_N12 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Error_N12;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Error_N13 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Error_N13;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Error_N14 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Error_N14;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Error_N15 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Error_N15;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_DetailedManualSpec_J6 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_DetailedManualSpec_J6;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_BilledMetConsWoBulkSupErrorMargin_N8 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_BilledMetConsWoBulkSupErrorMargin_N8;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MeteredBulkSupplyExportErrorMargin_N32 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MeteredBulkSupplyExportErrorMargin_N32;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.CorruptMeterReadingPracticessErrorMargin_N38 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.CorruptMeterReadingPracticessErrorMargin_N38;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.DataHandlingErrorsOffice_L40 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.DataHandlingErrorsOffice_L40;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.DataHandlingErrorsOfficeErrorMargin_N40 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.DataHandlingErrorsOfficeErrorMargin_N40;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_MetBulkSupExpMetUnderreg_H32 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_MetBulkSupExpMetUnderreg_H32;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34;
+                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_CorruptMetReadPractMetUndrreg_H38 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_CorruptMetReadPractMetUndrreg_H38;
 
                     // Text
-                    //ItemViewModel.Network_Desc_B7 = wbEasyCalcData.Network_Desc_B7;
-                    //ItemViewModel.Network_Desc_B8 = wbEasyCalcData.Network_Desc_B8;
-                    //ItemViewModel.Network_Desc_B9 = wbEasyCalcData.Network_Desc_B9;
-                    //ItemViewModel.Network_Desc_B10 = wbEasyCalcData.Network_Desc_B10;
+                    //ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_Desc_B7 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_Desc_B7;
+                    //ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_Desc_B8 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_Desc_B8;
+                    //ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_Desc_B9 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_Desc_B9;
+                    //ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_Desc_B10 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_Desc_B10;
                     // Data
-                    //ItemViewModel.Network_DistributionAndTransmissionMains_D7 = wbEasyCalcData.Network_DistributionAndTransmissionMains_D7;              // @NetworkLength 
-                    //ItemViewModel.Network_DistributionAndTransmissionMains_D8 = wbEasyCalcData.Network_DistributionAndTransmissionMains_D8;
-                    //ItemViewModel.Network_DistributionAndTransmissionMains_D9 = wbEasyCalcData.Network_DistributionAndTransmissionMains_D9;
-                    //ItemViewModel.Network_DistributionAndTransmissionMains_D10 = wbEasyCalcData.Network_DistributionAndTransmissionMains_D10;
-                    //ItemViewModel.Network_NoOfConnOfRegCustomers_H10 = wbEasyCalcData.Network_NoOfConnOfRegCustomers_H10;                                // @CustomersQuantity 
-                    //ItemViewModel.Network_NoOfInactAccountsWSvcConns_H18 = wbEasyCalcData.Network_NoOfInactAccountsWSvcConns_H18;
-                    //ItemViewModel.Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32 = wbEasyCalcData.Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32;
-                    //ItemViewModel.Network_PossibleUnd_D30 = wbEasyCalcData.Network_PossibleUnd_D30;
-                    //ItemViewModel.Network_NoCustomers_H7 =  wbEasyCalcData.Network_NoCustomers_H7;
-                    //ItemViewModel.Network_ErrorMargin_J7 =  wbEasyCalcData.Network_ErrorMargin_J7;
-                    //ItemViewModel.Network_ErrorMargin_J10 = wbEasyCalcData.Network_ErrorMargin_J10;
-                    //ItemViewModel.Network_ErrorMargin_J18 = wbEasyCalcData.Network_ErrorMargin_J18;
-                    //ItemViewModel.Network_ErrorMargin_J32 = wbEasyCalcData.Network_ErrorMargin_J32;
-                    //ItemViewModel.Network_ErrorMargin_D35 = wbEasyCalcData.Network_ErrorMargin_D35;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_DistributionAndTransmissionMains_D7 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_DistributionAndTransmissionMains_D7;              // @NetworkLength 
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_DistributionAndTransmissionMains_D8 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_DistributionAndTransmissionMains_D8;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_DistributionAndTransmissionMains_D9 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_DistributionAndTransmissionMains_D9;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_DistributionAndTransmissionMains_D10 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_DistributionAndTransmissionMains_D10;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_NoOfConnOfRegCustomers_H10 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_NoOfConnOfRegCustomers_H10;                                // @CustomersQuantity 
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_NoOfInactAccountsWSvcConns_H18 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_NoOfInactAccountsWSvcConns_H18;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_PossibleUnd_D30 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_PossibleUnd_D30;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_NoCustomers_H7 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_NoCustomers_H7;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_ErrorMargin_J7 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_ErrorMargin_J7;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_ErrorMargin_J10 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_ErrorMargin_J10;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_ErrorMargin_J18 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_ErrorMargin_J18;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_ErrorMargin_J32 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_ErrorMargin_J32;
+                    ItemViewModel.EasyCalcViewModel.NetworkViewModel.Network_ErrorMargin_D35 = wbEasyCalcData.EasyCalcModel.NetworkModel.Network_ErrorMargin_D35;
 
+                    // Text
+                    //ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_Area_B7 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_Area_B7;
+                    //ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_Area_B8 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_Area_B8;
+                    //ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_Area_B9 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_Area_B9;
+                    //ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_Area_B10 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_Area_B10;
+                    // Data
+                    ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_ApproxNoOfConn_D7 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_ApproxNoOfConn_D7;
+                    ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_DailyAvgPrsM_F7 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_DailyAvgPrsM_F7;
+                    ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_ApproxNoOfConn_D8 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_ApproxNoOfConn_D8;
+                    ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_DailyAvgPrsM_F8 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_DailyAvgPrsM_F8;
+                    ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_ApproxNoOfConn_D9 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_ApproxNoOfConn_D9;
+                    ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_DailyAvgPrsM_F9 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_DailyAvgPrsM_F9;
+                    ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_ApproxNoOfConn_D10 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_ApproxNoOfConn_D10;
+                    ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_DailyAvgPrsM_F10 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_DailyAvgPrsM_F10;
+                    ItemViewModel.EasyCalcViewModel.PressureViewModel.Prs_ErrorMarg_F26 = wbEasyCalcData.EasyCalcModel.PressureModel.Prs_ErrorMarg_F26;
 
-                    //ItemViewModel.Prs_Area_B7 = wbEasyCalcData.Prs_Area_B7;
-                    //ItemViewModel.Prs_Area_B8 = wbEasyCalcData.Prs_Area_B8;
-                    //ItemViewModel.Prs_Area_B9 = wbEasyCalcData.Prs_Area_B9;
-                    //ItemViewModel.Prs_Area_B10 = wbEasyCalcData.Prs_Area_B10;
-                    //ItemViewModel.Prs_ApproxNoOfConn_D7 = wbEasyCalcData.Prs_ApproxNoOfConn_D7;
-                    //ItemViewModel.Prs_DailyAvgPrsM_F7 = wbEasyCalcData.Prs_DailyAvgPrsM_F7;
-                    //ItemViewModel.Prs_ApproxNoOfConn_D8 = wbEasyCalcData.Prs_ApproxNoOfConn_D8;
-                    //ItemViewModel.Prs_DailyAvgPrsM_F8 = wbEasyCalcData.Prs_DailyAvgPrsM_F8;
-                    //ItemViewModel.Prs_ApproxNoOfConn_D9 = wbEasyCalcData.Prs_ApproxNoOfConn_D9;
-                    //ItemViewModel.Prs_DailyAvgPrsM_F9 = wbEasyCalcData.Prs_DailyAvgPrsM_F9;
-                    //ItemViewModel.Prs_ApproxNoOfConn_D10 = wbEasyCalcData.Prs_ApproxNoOfConn_D10;
-                    //ItemViewModel.Prs_DailyAvgPrsM_F10 = wbEasyCalcData.Prs_DailyAvgPrsM_F10;
-                    //ItemViewModel.Prs_ErrorMarg_F26 = wbEasyCalcData.Prs_ErrorMarg_F26;
+                    // Text
+                    //ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Area_B7 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Area_B7;
+                    //ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Area_B8 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Area_B8;
+                    //ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Area_B9 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Area_B9;
+                    //ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Area_B10 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Area_B10;
+                    // Data
+                    ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Conn_D7 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Conn_D7;
+                    ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Conn_D8 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Conn_D8;
+                    ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Conn_D9 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Conn_D9;
+                    ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Conn_D10 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Conn_D10;
+                    ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Days_F7 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Days_F7;
+                    ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Days_F8 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Days_F8;
+                    ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Days_F9 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Days_F9;
+                    ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Days_F10 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Days_F10;
+                    ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Hour_H7 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Hour_H7;
+                    ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Hour_H8 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Hour_H8;
+                    ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Hour_H9 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Hour_H9;
+                    ItemViewModel.EasyCalcViewModel.IntermittentSupplyViewModel.Interm_Hour_H10 = wbEasyCalcData.EasyCalcModel.IntermModel.Interm_Hour_H10;
 
-                    //ItemViewModel.Interm_Area_B7 = wbEasyCalcData.Interm_Area_B7;
-                    //ItemViewModel.Interm_Area_B8 = wbEasyCalcData.Interm_Area_B8;
-                    //ItemViewModel.Interm_Area_B9 = wbEasyCalcData.Interm_Area_B9;
-                    //ItemViewModel.Interm_Area_B10 = wbEasyCalcData.Interm_Area_B10;
-                    //ItemViewModel.Interm_Conn_D7 =  wbEasyCalcData.Interm_Conn_D7;
-                    //ItemViewModel.Interm_Conn_D8 =  wbEasyCalcData.Interm_Conn_D8;
-                    //ItemViewModel.Interm_Conn_D9 =  wbEasyCalcData.Interm_Conn_D9;
-                    //ItemViewModel.Interm_Conn_D10 = wbEasyCalcData.Interm_Conn_D10;
-                    //ItemViewModel.Interm_Days_F7 =  wbEasyCalcData.Interm_Days_F7;
-                    //ItemViewModel.Interm_Days_F8 =  wbEasyCalcData.Interm_Days_F8;
-                    //ItemViewModel.Interm_Days_F9 =  wbEasyCalcData.Interm_Days_F9;
-                    //ItemViewModel.Interm_Days_F10 = wbEasyCalcData.Interm_Days_F10;
-                    //ItemViewModel.Interm_Hour_H7 =  wbEasyCalcData.Interm_Hour_H7;
-                    //ItemViewModel.Interm_Hour_H8 =  wbEasyCalcData.Interm_Hour_H8;
-                    //ItemViewModel.Interm_Hour_H9 =  wbEasyCalcData.Interm_Hour_H9;
-                    //ItemViewModel.Interm_Hour_H10 = wbEasyCalcData.Interm_Hour_H10;
-
-                    //ItemViewModel.FinancData_G6 =  wbEasyCalcData.FinancData_G6;
-                    //ItemViewModel.FinancData_K6 =  wbEasyCalcData.FinancData_K6;
-                    //ItemViewModel.FinancData_G8 =  wbEasyCalcData.FinancData_G8;
-                    //ItemViewModel.FinancData_D26 = wbEasyCalcData.FinancData_D26;
-                    //ItemViewModel.FinancData_G35 = wbEasyCalcData.FinancData_G35;
-
-
-
-
+                    // Data
+                    //ItemViewModel.EasyCalcViewModel.FinancialDataViewModel.FinancData_G6 = wbEasyCalcData.EasyCalcModel.FinancDataModel.FinancData_G6;
+                    //ItemViewModel.EasyCalcViewModel.FinancialDataViewModel.FinancData_K6 = wbEasyCalcData.EasyCalcModel.FinancDataModel.FinancData_K6;
+                    //ItemViewModel.EasyCalcViewModel.FinancialDataViewModel.FinancData_G8 = wbEasyCalcData.EasyCalcModel.FinancDataModel.FinancData_G8;
+                    ItemViewModel.EasyCalcViewModel.FinancialDataViewModel.FinancData_D26 = wbEasyCalcData.EasyCalcModel.FinancDataModel.FinancData_D26;
+                    ItemViewModel.EasyCalcViewModel.FinancialDataViewModel.FinancData_G35 = wbEasyCalcData.EasyCalcModel.FinancDataModel.FinancData_G35;
 
 
                     //ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_Desc_B6 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_Desc_B6;

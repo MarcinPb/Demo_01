@@ -24,6 +24,7 @@ namespace Database.DataRepository
         List<WaterConsumptionCategoryStatusExcel> WaterConsumptionCategoryStatusExcelList { get; }
         List<ZoneItem> ZoneList { get; }
 
-        Database.DataModel.WbEasyCalcData GetAutomaticData(int yearNo, int monthNo, int zoneId);
+        DataModel.WbEasyCalcData GetWbGisModelScadaData(int yearNo, int monthNo, int zoneId);
+        DataModel.WbEasyCalcData GetWbYearData(int yearNo, int zoneId);
     }
 }

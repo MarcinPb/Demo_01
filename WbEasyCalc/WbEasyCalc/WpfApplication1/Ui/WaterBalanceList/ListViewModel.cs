@@ -74,7 +74,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
 
         #endregion
 
-        #region Commands: AddRowCmd, OpenRowCmd, RemoveRowCmd
+        #region Commands: AddRowCmd, OpenRowCmd, RemoveRowCmd, CloneCmd, CreateAllCmdExecute, ArchiwSelectedItemsCmd
 
         public RelayCommand AddRowCmd { get; }
         private void AddRowCmdExecute()
@@ -141,25 +141,6 @@ namespace WpfApplication1.Ui.WaterBalanceList
             return SelectedRow != null && SelectedRow.Model.IsArchive==false;
         }
 
-        //public RelayCommand SaveRowCmd { get; }
-        //private void SaveRowCmdExecute()
-        //{
-        //    try
-        //    {
-        //        DataModel.WbEasyCalcData row = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.SaveItem(WbEasyCalcDataEditedViewModel.ItemViewModel.Model);
-        //        LoadData();
-        //        SelectedRow = List.FirstOrDefault(x => x.Model.WbEasyCalcDataId == row.WbEasyCalcDataId);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        MessageBox.Show(e.Message, "Error",MessageBoxButton.OK,MessageBoxImage.Error);
-        //    }
-        //}
-        //public bool SaveRowCmdCanExecute()
-        //{
-        //    return true;
-        //}
-
 
         public RelayCommand CloneCmd { get; }
 
@@ -215,7 +196,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
         }
 
 
-        public RelayCommand<IList> ReadSelectedItemsCmd { get; }
+        public RelayCommand<IList> ArchiwSelectedItemsCmd { get; }
 
         private void ReadSelectedItemsExecute(object selectedItems)
         {
@@ -235,7 +216,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
                 CloneCmd = new RelayCommand(CloneCmdExecute, CloneCmdCanExecute);
                 CreateAllCmd = new RelayCommand(CreateAllCmdExecute, CreateAllCmdCanExecute);
 
-                ReadSelectedItemsCmd = new RelayCommand<IList>(ReadSelectedItemsExecute);
+                ArchiwSelectedItemsCmd = new RelayCommand<IList>(ReadSelectedItemsExecute);
 
                 Messenger.Default.Register<WbEasyCalcData>(this, OnSaveModel);
                 LoadData();
@@ -260,7 +241,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
 
         private void LoadData()
         {
-            List = new ObservableCollection<RowViewModel>(GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetList().Select(x => new RowViewModel(x)).ToList());
+            List = new ObservableCollection<RowViewModel>(GlobalConfig.DataRepository.WbEasyCalcDataListRepository.GetList().Select(x => new RowViewModel(x)).OrderByDescending(x => x.Model.WbEasyCalcDataId).ToList());
             RowsQty = List.Count;
         }
 

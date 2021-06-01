@@ -27,7 +27,7 @@
                 <Separator/>
                 <Button 
                     CommandParameter="{Binding SelectedItems, ElementName=DataGrid1}" 
-                    Command="{Binding ReadSelectedItemsCmd}" 
+                    Command="{Binding ArchiwSelectedItemsCmd}" 
                     Content="Archiw Selected Items"
                     />
                 <Separator/>
