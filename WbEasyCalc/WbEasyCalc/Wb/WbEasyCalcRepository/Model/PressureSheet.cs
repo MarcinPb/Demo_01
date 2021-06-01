@@ -13,16 +13,22 @@ namespace WbEasyCalcRepository.Model
         private double GetAveragePressureBestEstimate_F33()
         {
             double result = 0;
-            for (int i = 0; i < this.ApproximateNumberOfConnections_D7_D24.Count; i++)
-            {
-                result += this.ApproximateNumberOfConnections_D7_D24[i] * this.DailyAveragePressureM_F7_F24[i];
-            }
+            //for (int i = 0; i < this.ApproximateNumberOfConnections_D7_D24.Count; i++)
+            //{
+            //    result += this.ApproximateNumberOfConnections_D7_D24[i] * this.DailyAveragePressureM_F7_F24[i];
+            //}
+            result += Prs_ApproxNoOfConn_D7 * Prs_DailyAvgPrsM_F7;
+            result += this.ApproximateNumberOfConnections_D7_D24[0] * this.DailyAveragePressureM_F7_F24[0];
+            result += this.ApproximateNumberOfConnections_D7_D24[1] * this.DailyAveragePressureM_F7_F24[1];
+            result += this.ApproximateNumberOfConnections_D7_D24[2] * this.DailyAveragePressureM_F7_F24[2];
 
-            result /= this.ApproximateNumberOfConnections_D7_D24.Sum();
+            result /= (Prs_ApproxNoOfConn_D7 + this.ApproximateNumberOfConnections_D7_D24.Sum());
 
             return result;
         }
 
+        public double Prs_ApproxNoOfConn_D7 { get; set; }
+        public double Prs_DailyAvgPrsM_F7 { get; set; }
         public double Prs_ErrorMarg_F26 { get; set; }
 
         public double Prs_Min_F29 { get => this.GetPrs_Min_F29(); }

@@ -285,18 +285,20 @@ namespace WbEasyCalcRepository
             {
                 ApproximateNumberOfConnections_D7_D24 = new List<double> 
                 { 
-                    easyCalcDataInput.Prs_ApproxNoOfConn_D7, 
+                    //easyCalcDataInput.Prs_ApproxNoOfConn_D7, 
                     easyCalcDataInput.Prs_ApproxNoOfConn_D8, 
                     easyCalcDataInput.Prs_ApproxNoOfConn_D9, 
                     easyCalcDataInput.Prs_ApproxNoOfConn_D10, 
                 },
                 DailyAveragePressureM_F7_F24 = new List<double> 
                 { 
-                    easyCalcDataInput.Prs_DailyAvgPrsM_F7, 
+                    //easyCalcDataInput.Prs_DailyAvgPrsM_F7, 
                     easyCalcDataInput.Prs_DailyAvgPrsM_F8, 
                     easyCalcDataInput.Prs_DailyAvgPrsM_F9, 
                     easyCalcDataInput.Prs_DailyAvgPrsM_F10, 
                 },
+                Prs_ApproxNoOfConn_D7 = easyCalcDataInput.Prs_ApproxNoOfConn_D7,
+                Prs_DailyAvgPrsM_F7 = easyCalcDataInput.Prs_DailyAvgPrsM_F7,
                 Prs_ErrorMarg_F26 = easyCalcDataInput.Prs_ErrorMarg_F26,
             };
 
@@ -859,18 +861,20 @@ namespace WbEasyCalcRepository
             {
                 ApproximateNumberOfConnections_D7_D24 = new List<double> 
                 { 
-                    easyCalcModel.PressureModel.Prs_ApproxNoOfConn_D7, 
+                    //easyCalcModel.PressureModel.Prs_ApproxNoOfConn_D7, 
                     easyCalcModel.PressureModel.Prs_ApproxNoOfConn_D8, 
                     easyCalcModel.PressureModel.Prs_ApproxNoOfConn_D9,
                     easyCalcModel.PressureModel.Prs_ApproxNoOfConn_D10, 
                 },
                 DailyAveragePressureM_F7_F24 = new List<double> 
                 { 
-                    easyCalcModel.PressureModel.Prs_DailyAvgPrsM_F7, 
+                    //easyCalcModel.PressureModel.Prs_DailyAvgPrsM_F7, 
                     easyCalcModel.PressureModel.Prs_DailyAvgPrsM_F8, 
                     easyCalcModel.PressureModel.Prs_DailyAvgPrsM_F9,
                     easyCalcModel.PressureModel.Prs_DailyAvgPrsM_F10, 
                 },
+                Prs_ApproxNoOfConn_D7 =   easyCalcModel.PressureModel.Prs_ApproxNoOfConn_D7,
+                Prs_DailyAvgPrsM_F7 =   easyCalcModel.PressureModel.Prs_DailyAvgPrsM_F7, 
                 Prs_ErrorMarg_F26 = easyCalcModel.PressureModel.Prs_ErrorMarg_F26,
             };
 

@@ -56,7 +56,7 @@
         <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding Path=Prs_Area_B10}" Style="{StaticResource TextListLeftStyle}" />
         <Border Grid.Row="4" Grid.Column="0" Grid.RowSpan="4" BorderBrush="Black" BorderThickness="1"/>
 
-        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=Prs_ApproxNoOfConn_D7, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" IsEnabled="False"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=Prs_ApproxNoOfConn_D7, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" IsEnabled="True"/>
         <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Path=Prs_ApproxNoOfConn_D8, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
         <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Path=Prs_ApproxNoOfConn_D9, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
         <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding Path=Prs_ApproxNoOfConn_D10, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Style="{StaticResource TextListRightStyle}" />
