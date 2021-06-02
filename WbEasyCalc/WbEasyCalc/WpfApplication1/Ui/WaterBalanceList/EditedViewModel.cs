@@ -8,6 +8,7 @@ using AutoMapper;
 using Database.DataModel;
 using Database.DataModel.Infra;
 using Database.DataRepository.Infra;
+using Database.DataRepository.WaterConsumption;
 using GlobalRepository;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using WbEasyCalcModel;
@@ -435,7 +436,9 @@ namespace WpfApplication1.Ui.WaterBalanceList
                     ItemViewModel.EasyCalcViewModel.FinancialDataViewModel.FinancData_G35 = wbEasyCalcData.EasyCalcModel.FinancDataModel.FinancData_G35;
 
                     // list 
+                    GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp = new ListRepositoryTemp(wbEasyCalcData.WaterConsumptionModelList);
                     ItemViewModel.WaterConsumptionListViewModel.List = new ObservableCollection<WaterConsumptionList.RowViewModel>(wbEasyCalcData.WaterConsumptionModelList.Select(x => new WaterConsumptionList.RowViewModel(x)));
+
 
                     //ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_Desc_B6 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_Desc_B6;
                     //var config = new MapperConfiguration(cfg => cfg.CreateMap<SysInputModel, Excel.SysInput.ViewModel>());
