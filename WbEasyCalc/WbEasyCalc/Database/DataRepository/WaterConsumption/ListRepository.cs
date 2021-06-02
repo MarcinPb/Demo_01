@@ -10,13 +10,13 @@ namespace Database.DataRepository.WaterConsumption
     public class ListRepository : IListRepository
     {
 
-        private List<Database.DataModel.WaterConsumption> _list;
-        public List<Database.DataModel.WaterConsumption> GetList()
+        private List<DataModel.WaterConsumption> _list;
+        public List<DataModel.WaterConsumption> GetList()
         {
             using (IDbConnection cnn = new SqlConnection(_cnnString))
             {
                 string sql = "dbo.spWaterConsumptionList";
-                _list = cnn.Query<Database.DataModel.WaterConsumption>(sql, commandType: CommandType.StoredProcedure).ToList();
+                _list = cnn.Query<DataModel.WaterConsumption>(sql, commandType: CommandType.StoredProcedure).ToList();
                 return _list;
             }
         }

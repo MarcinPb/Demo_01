@@ -313,7 +313,7 @@ namespace Database.DataRepository
                 p.Add("@FinancData_D26", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@FinancData_G35", dbType: DbType.Double, direction: ParameterDirection.Output);
 
-                connection.Execute("dbo.spWbGetYearData", p, commandType: CommandType.StoredProcedure);
+                var list = connection.Query<DataModel.WaterConsumption>("dbo.spWbGetYearData", p, commandType: CommandType.StoredProcedure).ToList();
 
                 return new Database.DataModel.WbEasyCalcData()
                 {
@@ -461,6 +461,7 @@ namespace Database.DataRepository
                             FinancData_G35 = p.Get<double>("FinancData_G35"),
                         },
                     },
+                    WaterConsumptionModelList = list,
                 };
             }
         }

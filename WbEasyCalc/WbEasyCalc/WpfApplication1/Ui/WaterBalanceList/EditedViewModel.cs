@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -120,7 +121,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
         {
             var yearNo = ItemViewModel.Model.YearNo;
             var monthNo = ItemViewModel.Model.MonthNo;
-            if (ItemViewModel.Model.WaterConsumptionModelList.Any(x => x.StartDate.Month != monthNo || x.EndDate.Month != monthNo || x.StartDate.Year != yearNo || x.EndDate.Year != yearNo))
+            if (ItemViewModel.Model.WaterConsumptionModelList.Any(x => (monthNo < 13 && (x.StartDate.Month != monthNo || x.EndDate.Month != monthNo)) || x.StartDate.Year != yearNo || x.EndDate.Year != yearNo))
             {
                 MessageBox.Show("One of Water Consumption item has wrong Start or End Date.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
@@ -433,6 +434,8 @@ namespace WpfApplication1.Ui.WaterBalanceList
                     ItemViewModel.EasyCalcViewModel.FinancialDataViewModel.FinancData_D26 = wbEasyCalcData.EasyCalcModel.FinancDataModel.FinancData_D26;
                     ItemViewModel.EasyCalcViewModel.FinancialDataViewModel.FinancData_G35 = wbEasyCalcData.EasyCalcModel.FinancDataModel.FinancData_G35;
 
+                    // list 
+                    ItemViewModel.WaterConsumptionListViewModel.List = new ObservableCollection<WaterConsumptionList.RowViewModel>(wbEasyCalcData.WaterConsumptionModelList.Select(x => new WaterConsumptionList.RowViewModel(x)));
 
                     //ItemViewModel.EasyCalcViewModel.SysInputViewModel.SysInput_Desc_B6 = wbEasyCalcData.EasyCalcModel.SysInputModel.SysInput_Desc_B6;
                     //var config = new MapperConfiguration(cfg => cfg.CreateMap<SysInputModel, Excel.SysInput.ViewModel>());
