@@ -170,6 +170,9 @@ namespace WpfApplication1.Ui.WaterBalanceList
         {
             try
             {
+                MessageBox.Show("Not implemented yet.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+                
                 int recordQty = GlobalConfig.DataRepository.WbEasyCalcDataListRepository.CreateAll();
                 if (recordQty==0)
                 {
