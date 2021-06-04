@@ -27,6 +27,7 @@ namespace Database.DataRepository.Options
                 var _list2 = list.Select(x => x.GetWbEasyCalcData()).ToList();
                 return new Option()
                 {
+                    MeterErrorsModel = _list2[0].EasyCalcModel.MetErrorsModel,
                     FinancDataModel = _list2[0].EasyCalcModel.FinancDataModel,
                     MatrixOneInModel = _list2[0].EasyCalcModel.MatrixOneIn,
                     MatrixTwoInModel = _list2[0].EasyCalcModel.MatrixTwoIn,
@@ -41,6 +42,7 @@ namespace Database.DataRepository.Options
             {
                 var p = new DynamicParameters();
 
+                p.Add("@MetErrors_DetailedManualSpec_J6", model.MeterErrorsModel.MetErrors_DetailedManualSpec_J6);
                 p.Add("@FinancData_G6", model.FinancDataModel.FinancData_G6);
                 p.Add("@FinancData_K6", model.FinancDataModel.FinancData_K6);
                 p.Add("@FinancData_G8", model.FinancDataModel.FinancData_G8);

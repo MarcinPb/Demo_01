@@ -360,7 +360,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
                     ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Error_N13 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Error_N13;
                     ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Error_N14 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Error_N14;
                     ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_Error_N15 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_Error_N15;
-                    ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_DetailedManualSpec_J6 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_DetailedManualSpec_J6;
+                    //ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_DetailedManualSpec_J6 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_DetailedManualSpec_J6;
                     ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8;
                     ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MetErrors_BilledMetConsWoBulkSupErrorMargin_N8 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MetErrors_BilledMetConsWoBulkSupErrorMargin_N8;
                     ItemViewModel.EasyCalcViewModel.MeterErrorsViewModel.MeteredBulkSupplyExportErrorMargin_N32 = wbEasyCalcData.EasyCalcModel.MetErrorsModel.MeteredBulkSupplyExportErrorMargin_N32;

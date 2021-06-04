@@ -247,7 +247,7 @@ namespace Database.DataRepository
                 p.Add("@UnauthCons_MeterTampBypEtcErrorMargin_F14", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14", dbType: DbType.Double, direction: ParameterDirection.Output);
 
-                p.Add("@MetErrors_DetailedManualSpec_J6", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                //p.Add("@MetErrors_DetailedManualSpec_J6", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 p.Add("@MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@MetErrors_BilledMetConsWoBulkSupErrorMargin_N8", dbType: DbType.Double, direction: ParameterDirection.Output);
                 p.Add("@MetErrors_Total_F12", dbType: DbType.Double, direction: ParameterDirection.Output);
@@ -391,7 +391,7 @@ namespace Database.DataRepository
                         },
                         MetErrorsModel = new WbEasyCalcModel.WbEasyCalc.MetErrorsModel
                         {
-                            MetErrors_DetailedManualSpec_J6 = p.Get<int>("@MetErrors_DetailedManualSpec_J6"),
+                            //MetErrors_DetailedManualSpec_J6 = p.Get<int>("@MetErrors_DetailedManualSpec_J6"),
                             MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8 = p.Get<double>("@MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8"),
                             MetErrors_BilledMetConsWoBulkSupErrorMargin_N8 = p.Get<double>("@MetErrors_BilledMetConsWoBulkSupErrorMargin_N8"),
                             MetErrors_Total_F12 = p.Get<double>("@MetErrors_Total_F12"),

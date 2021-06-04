@@ -30,7 +30,8 @@ namespace WpfApplication1.Ui.Configuration
         public bool Save()
         {
             GlobalConfig.DataRepository.Option.SaveItem(new Option() 
-            { 
+            {
+                MeterErrorsModel = MeterErrorsViewModel.Model,
                 FinancDataModel = FinancialDataViewModel.Model,
                 MatrixOneInModel = MatrixOneInViewModel.Model, 
                 MatrixTwoInModel = MatrixTwoInViewModel.Model, 
@@ -44,6 +45,7 @@ namespace WpfApplication1.Ui.Configuration
 
         #endregion
 
+        public WaterBalanceList.Excel.MeterErrors.ViewModel MeterErrorsViewModel { get; set; }
         public WaterBalanceList.Excel.FinancialData.ViewModel FinancialDataViewModel { get; set; }
         public ViewModel MatrixOneInViewModel { get; set; }
         public ViewModel MatrixTwoInViewModel { get; set; }
@@ -51,6 +53,7 @@ namespace WpfApplication1.Ui.Configuration
         public EditedViewModel()
         {
             var model = GlobalConfig.DataRepository.Option.GetItem(0);
+            MeterErrorsViewModel = new WaterBalanceList.Excel.MeterErrors.ViewModel(model.MeterErrorsModel);
             FinancialDataViewModel = new WaterBalanceList.Excel.FinancialData.ViewModel(model.FinancDataModel);
             MatrixOneInViewModel = new WaterBalanceList.Excel.MatrixIn.ViewModel(model.MatrixOneInModel);
             MatrixTwoInViewModel = new WaterBalanceList.Excel.MatrixIn.ViewModel(model.MatrixTwoInModel);

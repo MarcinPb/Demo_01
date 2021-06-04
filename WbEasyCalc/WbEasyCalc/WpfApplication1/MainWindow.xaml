@@ -25,9 +25,10 @@
                 <MenuItem Header="Exit" Command="{Binding ExitCmd}" CommandParameter="{Binding ElementName=TheMainWindow}"/>
             </MenuItem>
             <MenuItem Header="Tools" IsEnabled="{Binding IsOpen}">
-                <MenuItem Header="Options..." Command="{Binding OptionsCmd}"/>
                 <MenuItem Header="Import Constant Data" Command="{Binding ImportConstantDataCmd}"/>
                 <MenuItem Header="Import Changeable Data" Command="{Binding ImportChangeableDataCmd}"/>
+                <Separator/>
+                <MenuItem Header="Settings" Command="{Binding OptionsCmd}"/>
             </MenuItem>
         </Menu>
         <TabControl  Grid.Row="1" Margin="10" >

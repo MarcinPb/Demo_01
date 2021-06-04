@@ -10,6 +10,7 @@
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" 
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:excelFinancialData="clr-namespace:WpfApplication1.Ui.WaterBalanceList.Excel.FinancialData"                   
+             xmlns:excelMeterErrors="clr-namespace:WpfApplication1.Ui.WaterBalanceList.Excel.MeterErrors"                   
              
              xmlns:view="clr-namespace:WpfApplication1.Ui.WaterBalanceList.Excel.MatrixIn"
              >
@@ -39,6 +40,9 @@
         </Grid.ColumnDefinitions>
 
         <TabControl Grid.Row="1"  Margin="7 7 0 7" >
+            <TabItem Header="Meter Errors">
+                <excelMeterErrors:SettingsView  DataContext="{Binding MeterErrorsViewModel}"/>
+            </TabItem>
             <TabItem Header="Financial Data">
                 <excelFinancialData:SettingsView  DataContext="{Binding FinancialDataViewModel}"/>
             </TabItem>

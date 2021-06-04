@@ -49,7 +49,7 @@
         <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" BorderBrush="White" BorderThickness="1" />
         
         <Label Grid.Row="4" Grid.Column="0" Content="The volumes used this water balance arre for a period of:      " Style="{StaticResource LabelLocal1Style}" />
-        <TextBox Grid.Row="4" Grid.Column="1" Width="60" Text="{Binding Path=Start_PeriodDays_M21, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" FontSize="24" FontWeight="Bold" BorderBrush="White" BorderThickness="1 0" Padding="10"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Width="70" Text="{Binding Path=Start_PeriodDays_M21, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" FontSize="24" FontWeight="Bold" BorderBrush="White" BorderThickness="1 0" Padding="10"/>
         <Label Grid.Row="4" Grid.Column="2" Content="days               " Style="{StaticResource LabelLocal1Style}" />
         <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" BorderBrush="White" BorderThickness="1" />
 
