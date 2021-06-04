@@ -230,7 +230,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
                 EasyCalcViewModel.StartViewModel.Start_PeriodDays_M21 = model.EasyCalcModel.StartModel.Start_PeriodDays_M21;
             }
 
-            WaterConsumptionListViewModel = new WaterConsumptionList.ListViewModel(Id) { ZoneId = this.ZoneId};
+            WaterConsumptionListViewModel = new WaterConsumptionList.ListViewModel(Id) {YearNo = this.YearNo, MonthNo = this.MonthNo, ZoneId = this.ZoneId};
 
             WaterConsumptionReportViewModel = new MapViewModel(YearNo, MonthNo, ZoneId);
             WaterConsumptionReportViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetList();
@@ -251,6 +251,12 @@ namespace WpfApplication1.Ui.WaterBalanceList
             if (EasyCalcViewModel != null && EasyCalcViewModel.StartViewModel != null)
             {
                 EasyCalcViewModel.StartViewModel.Start_PeriodDays_M21 = MonthNo == 13 ? new DateTime(YearNo, 12, 31).DayOfYear : DateTime.DaysInMonth(YearNo, MonthNo);
+            }
+
+            if (WaterConsumptionListViewModel != null)
+            { 
+                WaterConsumptionListViewModel.YearNo = YearNo;
+                WaterConsumptionListViewModel.MonthNo = MonthNo;
             }
         }
 

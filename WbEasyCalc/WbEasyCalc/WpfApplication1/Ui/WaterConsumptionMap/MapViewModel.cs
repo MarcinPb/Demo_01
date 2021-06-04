@@ -130,16 +130,18 @@ namespace WpfApplication1.Ui.WaterConsumptionMap
                 SelectedZoneItemList = new ObservableCollection<ZoneItem>(GlobalConfig.DataRepository.ZoneList);
                 SelectedZoneItemList.CollectionChanged += SelectedZoneItemList_CollectionChanged;
 
-                if (_yearNo == 0 || _monthNo == 13)
-                {
-                    FilterStartDate = new DateTime(yearNo, 1, 1, 0, 0, 0);
-                    FilterEndDate = FilterStartDate.AddYears(1).AddSeconds(-1); ;
-                }
-                else
-                {
-                    FilterStartDate = new DateTime(_yearNo, _monthNo, 1, 0, 0, 0);
-                    FilterEndDate = FilterStartDate.AddMonths(1).AddSeconds(-1);
-                }
+                //if (_yearNo == 0 || _monthNo == 13)
+                //{
+                //    FilterStartDate = new DateTime(yearNo, 1, 1, 0, 0, 0);
+                //    FilterEndDate = FilterStartDate.AddYears(1).AddSeconds(-1); ;
+                //}
+                //else
+                //{
+                //    FilterStartDate = new DateTime(_yearNo, _monthNo, 1, 0, 0, 0);
+                //    FilterEndDate = FilterStartDate.AddMonths(1).AddSeconds(-1);
+                //}
+                FilterStartDate = new DateTime(2016, 1, 1, 0, 0, 0);
+                FilterEndDate = new DateTime(2030, 1, 1, 0, 0, 0);
 
                 ValueFrom = 0;
                 ValueTo = 999999;

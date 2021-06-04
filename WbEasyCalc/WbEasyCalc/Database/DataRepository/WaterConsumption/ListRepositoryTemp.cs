@@ -19,8 +19,8 @@ namespace Database.DataRepository.WaterConsumption
         {
             if (id != 0)
             {
-                var customer = _list.Single(f => f.WaterConsumptionId == id);
-                return (Database.DataModel.WaterConsumption)customer?.Clone();
+                var model = _list.Single(f => f.WaterConsumptionId == id);
+                return (Database.DataModel.WaterConsumption)model?.Clone();
             }
             else
             {

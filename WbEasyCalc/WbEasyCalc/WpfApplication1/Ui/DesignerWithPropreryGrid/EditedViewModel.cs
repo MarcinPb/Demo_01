@@ -109,12 +109,25 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
         /// </summary>
         /// <param name="waterConsumptionId">Id of an item from a WaterConsumption list. Case waterConsumptionId==0 means that a new item is created.</param>
         /// <param name="zoneId">Zone Id</param>
-        public EditedViewModel(int waterConsumptionId, int zoneId)
+        public EditedViewModel(int waterConsumptionId, int yearNo, int monthNo, int zoneId)
         {
             _zoneId = zoneId;
 
             // Upper base panel - Model --------------------------
             Model = new ItemViewModel(GlobalConfig.DataRepository.WaterConsumptionListRepositoryTemp.GetItem(waterConsumptionId));
+            if (waterConsumptionId==0)
+            {
+                if (monthNo < 13)
+                {
+                    Model.StartDate = new DateTime(yearNo, monthNo, 1, 8, 0, 0);
+                    Model.EndDate = new DateTime(yearNo, monthNo, 1, 9, 0, 0);
+                }
+                else
+                {
+                    Model.StartDate = new DateTime(yearNo, 1, 1, 8, 0, 0);
+                    Model.EndDate = new DateTime(yearNo, 1, 1, 9, 0, 0);
+                }
+            }
             Model.PropertyChanged += Model_PropertyChanged;
 
             WaterConsumptionCategoryList = GlobalConfig.DataRepository.WaterConsumptionCategoryList;

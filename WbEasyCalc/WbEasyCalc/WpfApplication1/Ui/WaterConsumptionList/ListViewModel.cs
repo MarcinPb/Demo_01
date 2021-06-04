@@ -23,6 +23,8 @@ namespace WpfApplication1.Ui.WaterConsumptionList
 
         #region Props: ZoneId, List, SelectedRow, RowsQty, WaterConsumptionEditedViewModel
 
+        public int YearNo { get; set; }
+        public int MonthNo { get; set; }
         public int ZoneId { get; set; }
 
 
@@ -77,7 +79,7 @@ namespace WpfApplication1.Ui.WaterConsumptionList
                     SelectedRow = null;
                 }
 
-                var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(0, this.ZoneId);
+                var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(0, this.YearNo, this.MonthNo, this.ZoneId);
                 var result = DialogUtility.ShowModal(editedViewModel);
             }
             catch (Exception exception)
@@ -99,7 +101,7 @@ namespace WpfApplication1.Ui.WaterConsumptionList
             {
                 if (SelectedRow == null) { return; }
 
-                var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(SelectedRow.Model.WaterConsumptionId, this.ZoneId);
+                var editedViewModel = new DesignerWithPropreryGrid.EditedViewModel(SelectedRow.Model.WaterConsumptionId, this.YearNo, this.MonthNo, this.ZoneId);
                 var result = DialogUtility.ShowModal(editedViewModel);
             }
             catch (Exception e)
