@@ -101,7 +101,7 @@ namespace WpfApplication1.Ui.WaterBalanceList
 
         #region IDialogViewModel
 
-        public string Title { get; set; } = "Excel Calculations & Water Consumptions";
+        public string Title { get; set; } = "Water Balance";
 
         public bool Save()
         {

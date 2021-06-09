@@ -34,7 +34,7 @@ namespace WpfApplication1.Utility
         {
             _level++;
             Window mainWindow = Application.Current.MainWindow;
-            this.Left = mainWindow.Left + _level * 100;
+            this.Left = mainWindow.Left + _level * 50;
             this.Top = mainWindow.Top + _level * 50;
 
             _viewModel = this.DataContext as IDialogViewModel;

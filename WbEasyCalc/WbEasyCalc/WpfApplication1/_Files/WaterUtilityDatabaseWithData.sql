@@ -1,9 +1,9 @@
 USE [WaterUtility]
 GO
-/****** Object:  Schema [config]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  Schema [config]    Script Date: 08.06.2021 14:34:10 ******/
 CREATE SCHEMA [config]
 GO
-/****** Object:  UserDefinedFunction [dbo].[fnGetArchivedDate]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  UserDefinedFunction [dbo].[fnGetArchivedDate]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -35,7 +35,7 @@ RETURN @ArchivedDate;
 
 END
 GO
-/****** Object:  UserDefinedFunction [dbo].[fnScadaPressureForZoneAvg]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  UserDefinedFunction [dbo].[fnScadaPressureForZoneAvg]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -119,7 +119,7 @@ BEGIN
 
 END
 GO
-/****** Object:  UserDefinedFunction [dbo].[STRING_SPLIT_MY]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  UserDefinedFunction [dbo].[STRING_SPLIT_MY]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -152,7 +152,7 @@ BEGIN
 RETURN 
 END
 GO
-/****** Object:  Table [dbo].[tb_zuzycia_stref]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  Table [dbo].[tb_zuzycia_stref]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -168,7 +168,7 @@ CREATE TABLE [dbo].[tb_zuzycia_stref](
 	[ilosc_przylaczy_czynnych] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[vwGisWaterConsumption]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  View [dbo].[vwGisWaterConsumption]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -181,7 +181,7 @@ AS
 --SELECT * FROM LEGNICA.legnica.gis_data.zuzycia_stref;
 SELECT * FROM dbo.tb_zuzycia_stref;
 GO
-/****** Object:  Table [config].[WaterBalanceConfig]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  Table [config].[WaterBalanceConfig]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -203,7 +203,7 @@ CREATE TABLE [config].[WaterBalanceConfig](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tbLog]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  Table [dbo].[tbLog]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -216,7 +216,7 @@ CREATE TABLE [dbo].[tbLog](
 	[TestDate] [datetime] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tbMonth]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  Table [dbo].[tbMonth]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -230,12 +230,14 @@ CREATE TABLE [dbo].[tbMonth](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tbSetting]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  Table [dbo].[tbSetting]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[tbSetting](
+	[Id] [int] NOT NULL,
+	[MetErrors_DetailedManualSpec_J6] [int] NULL,
 	[FinancData_G6] [float] NULL,
 	[FinancData_K6] [nvarchar](400) NULL,
 	[FinancData_G8] [float] NULL,
@@ -328,10 +330,14 @@ CREATE TABLE [dbo].[tbSetting](
 	[MatrixTwoIn_H21] [float] NULL,
 	[MatrixTwoIn_H22] [float] NULL,
 	[MatrixTwoIn_H23] [float] NULL,
-	[MatrixTwoIn_H24] [float] NULL
+	[MatrixTwoIn_H24] [float] NULL,
+ CONSTRAINT [PK_tbSetting] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tbWaterConsumption]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  Table [dbo].[tbWaterConsumption]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -354,7 +360,7 @@ CREATE TABLE [dbo].[tbWaterConsumption](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tbWaterConsumptionCategory]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  Table [dbo].[tbWaterConsumptionCategory]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -368,7 +374,7 @@ CREATE TABLE [dbo].[tbWaterConsumptionCategory](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tbWaterConsumptionCategoryStatus]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  Table [dbo].[tbWaterConsumptionCategoryStatus]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -384,7 +390,7 @@ CREATE TABLE [dbo].[tbWaterConsumptionCategoryStatus](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tbWaterConsumptionCategoryStatusExcel]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  Table [dbo].[tbWaterConsumptionCategoryStatusExcel]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -398,7 +404,7 @@ CREATE TABLE [dbo].[tbWaterConsumptionCategoryStatusExcel](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tbWaterConsumptionStatus]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  Table [dbo].[tbWaterConsumptionStatus]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -412,7 +418,7 @@ CREATE TABLE [dbo].[tbWaterConsumptionStatus](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tbWbEasyCalcData]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  Table [dbo].[tbWbEasyCalcData]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -521,7 +527,7 @@ CREATE TABLE [dbo].[tbWbEasyCalcData](
 	[UnauthCons_OthersM3PerDay_J19] [float] NOT NULL,
 	[UnauthCons_OthersM3PerDay_J20] [float] NOT NULL,
 	[UnauthCons_OthersM3PerDay_J21] [float] NOT NULL,
-	[MetErrors_DetailedManualSpec_J6] [bit] NOT NULL,
+	[MetErrors_DetailedManualSpec_J6] [int] NOT NULL,
 	[MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8] [float] NOT NULL,
 	[MetErrors_BilledMetConsWoBulkSupErrorMargin_N8] [float] NOT NULL,
 	[MetErrors_Total_F12] [float] NOT NULL,
@@ -562,7 +568,6 @@ CREATE TABLE [dbo].[tbWbEasyCalcData](
 	[Prs_Area_B8] [nvarchar](400) NULL,
 	[Prs_Area_B9] [nvarchar](400) NULL,
 	[Prs_Area_B10] [nvarchar](400) NULL,
-	[Prs_ApproxNoOfConn_D7] [float] NOT NULL,
 	[Prs_DailyAvgPrsM_F7] [float] NOT NULL,
 	[Prs_ApproxNoOfConn_D8] [float] NOT NULL,
 	[Prs_DailyAvgPrsM_F8] [float] NOT NULL,
@@ -702,7 +707,7 @@ CREATE TABLE [dbo].[tbWbEasyCalcData](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tbYear]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  Table [dbo].[tbYear]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1644,7 +1649,7 @@ INSERT [dbo].[tb_zuzycia_stref] ([id_strefy], [nazwa_strefy], [dlugosc_sieci], [
 GO
 INSERT [dbo].[tb_zuzycia_stref] ([id_strefy], [nazwa_strefy], [dlugosc_sieci], [ilosc_przylaczy], [sprzedaz_w_strefie], [year], [month], [ilosc_przylaczy_czynnych]) VALUES (5, N'SIX', 4337.40698996059, 122, 10757, 2021, 3, 174)
 GO
-INSERT [dbo].[tb_zuzycia_stref] ([id_strefy], [nazwa_strefy], [dlugosc_sieci], [ilosc_przylaczy], [sprzedaz_w_strefie], [year], [month], [ilosc_przylaczy_czynnych]) VALUES (6, N'SI', 19125.3019854906, 453, 70625, 2021, 3, 942)
+INSERT [dbo].[tb_zuzycia_stref] ([id_strefy], [nazwa_strefy], [dlugosc_sieci], [ilosc_przylaczy], [sprzedaz_w_strefie], [year], [month], [ilosc_przylaczy_czynnych]) VALUES (6, N'SI', 19125.3019854906, 466, 70625, 2021, 3, 942)
 GO
 INSERT [dbo].[tb_zuzycia_stref] ([id_strefy], [nazwa_strefy], [dlugosc_sieci], [ilosc_przylaczy], [sprzedaz_w_strefie], [year], [month], [ilosc_przylaczy_czynnych]) VALUES (7, N'VI', 14686.5557244333, 39, 335, 2021, 3, 161)
 GO
@@ -1708,11 +1713,11 @@ INSERT [dbo].[tbMonth] ([MonthId], [MonthName]) VALUES (12, N'12 -December')
 GO
 INSERT [dbo].[tbMonth] ([MonthId], [MonthName]) VALUES (13, N'<Whole Year>')
 GO
-INSERT [dbo].[tbSetting] ([FinancData_G6], [FinancData_K6], [FinancData_G8], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_C11], [MatrixTwoIn_C12], [MatrixTwoIn_C13], [MatrixTwoIn_C14], [MatrixTwoIn_C21], [MatrixTwoIn_C22], [MatrixTwoIn_C23], [MatrixTwoIn_C24], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24]) VALUES (10, N'PLN', 1, 3, 1.5, 2, 4, 8, 2, 4, 8, 999, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 4, 0, 0, 0, 0, 0, 0, 0, 0, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200)
+INSERT [dbo].[tbSetting] ([Id], [MetErrors_DetailedManualSpec_J6], [FinancData_G6], [FinancData_K6], [FinancData_G8], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_C11], [MatrixTwoIn_C12], [MatrixTwoIn_C13], [MatrixTwoIn_C14], [MatrixTwoIn_C21], [MatrixTwoIn_C22], [MatrixTwoIn_C23], [MatrixTwoIn_C24], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24]) VALUES (1, 1, 10, N'PLN', 1, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 5, 0, 0, 0, 0, 0, 0, 0, 0, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200)
 GO
 SET IDENTITY_INSERT [dbo].[tbWaterConsumption] ON 
 GO
-INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (1045, 1104, N'', 1, 1, CAST(N'2021-05-21T12:54:09.857' AS DateTime), CAST(N'2021-05-21T12:54:09.857' AS DateTime), 5671725.89566259, 5581504.3556976, 5450, 1)
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (1045, 1104, N'', 1, 1, CAST(N'2021-05-21T12:54:09.857' AS DateTime), CAST(N'2021-05-21T12:54:09.857' AS DateTime), 5671725.89566259, 5581504.3556976, 5450, 555)
 GO
 INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (1046, 1108, N'', 1, 1, CAST(N'2021-05-25T17:18:34.120' AS DateTime), CAST(N'2021-05-25T17:18:34.120' AS DateTime), 5671925.5026895674, 5580998.4526182469, 5433, 2)
 GO
@@ -1722,11 +1727,11 @@ INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [De
 GO
 INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (1049, 1101, N'', 1, 1, CAST(N'2021-05-25T17:50:10.170' AS DateTime), CAST(N'2021-05-25T17:50:10.170' AS DateTime), 5671726.9438615311, 5581739.9448039858, 5479, 0)
 GO
-INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (1050, 1112, N'', 1, 1, CAST(N'2020-04-27T03:09:01.700' AS DateTime), CAST(N'2020-04-27T03:09:01.700' AS DateTime), 5671013.4892504765, 5582041.9361956613, 5577, 46)
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (1050, 1112, N'', 1, 1, CAST(N'2020-04-27T03:09:01.700' AS DateTime), CAST(N'2020-04-27T03:09:01.700' AS DateTime), 5674063.1064739851, 5581408.4599775458, 5220, 46)
 GO
-INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (1051, 1112, N'', 1, 1, CAST(N'2020-04-27T03:08:53.130' AS DateTime), CAST(N'2020-04-27T03:08:53.130' AS DateTime), 5671931.32861672, 5581425.4461783208, 5553, 324)
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (1051, 1112, N'', 1, 1, CAST(N'2020-04-27T03:08:53.130' AS DateTime), CAST(N'2020-04-27T03:08:53.130' AS DateTime), 5675511.5591139141, 5579675.5748516042, 4003, 324)
 GO
-INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (1052, 1113, N'', 7, 2, CAST(N'2020-04-27T03:09:01.700' AS DateTime), CAST(N'2020-04-27T03:09:01.700' AS DateTime), 5671013.4892504765, 5582041.9361956613, 5577, 100)
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (1052, 1113, N'', 7, 2, CAST(N'2021-05-27T03:09:01.700' AS DateTime), CAST(N'2021-05-27T03:09:01.700' AS DateTime), 5671013.4892504765, 5582041.9361956613, 5577, 100)
 GO
 INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (1054, 1113, N'', 1, 5, CAST(N'2021-05-29T15:59:29.497' AS DateTime), CAST(N'2021-05-29T15:59:29.497' AS DateTime), 5671869.4115676461, 5581315.0006114822, 5486, 700)
 GO
@@ -1739,6 +1744,26 @@ GO
 INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (1058, 1113, N'', 7, 4, CAST(N'2021-05-29T15:52:38.110' AS DateTime), CAST(N'2021-05-29T15:52:38.110' AS DateTime), 5671903.6964080194, 5581603.999223534, 5554, 300)
 GO
 INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (1059, 1113, N'', 7, 6, CAST(N'2021-05-29T15:51:47.183' AS DateTime), CAST(N'2021-05-29T15:51:47.183' AS DateTime), 5671905.3997312989, 5581603.5314135533, 5554, 200)
+GO
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (2056, 1104, N'', 7, 6, CAST(N'2021-05-02T09:09:01.997' AS DateTime), CAST(N'2021-05-02T09:09:01.997' AS DateTime), 5671493.4949830184, 5581829.425715, 5571, 444)
+GO
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (2059, 1104, N'', 1, 1, CAST(N'2021-05-02T11:39:38.237' AS DateTime), CAST(N'2021-05-02T11:39:38.237' AS DateTime), 5671648.0887286719, 5581425.7012461442, 5444, 545)
+GO
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (2069, 1121, N'', 1, 1, CAST(N'2021-05-02T11:39:38.237' AS DateTime), CAST(N'2021-05-02T11:39:38.237' AS DateTime), 5671648.0887286719, 5581425.7012461442, 5444, 545)
+GO
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (2070, 1121, N'', 7, 6, CAST(N'2021-05-02T09:09:01.997' AS DateTime), CAST(N'2021-05-02T09:09:01.997' AS DateTime), 5672826.7666007606, 5581451.9609797392, 5059, 444)
+GO
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (2071, 1121, N'', 1, 1, CAST(N'2021-05-21T12:54:09.857' AS DateTime), CAST(N'2021-05-21T12:54:09.857' AS DateTime), 5671725.89566259, 5581504.3556976, 5450, 555)
+GO
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (2072, 1122, N'', 1, 1, CAST(N'2021-05-01T08:00:00.000' AS DateTime), CAST(N'2021-05-01T09:00:00.000' AS DateTime), 5674907.7394376695, 5585000.6802936662, 4796, 23)
+GO
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (2073, 1122, N'', 1, 1, CAST(N'2021-05-01T08:00:00.000' AS DateTime), CAST(N'2021-05-01T09:00:00.000' AS DateTime), 5675417.6635792237, 5585000.4053815594, 4786, 333)
+GO
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (2074, 1122, N'', 1, 1, CAST(N'2021-05-12T08:00:00.000' AS DateTime), CAST(N'2021-05-22T09:00:00.000' AS DateTime), 5675188.6858311491, 5584556.5154068293, 6049, 222)
+GO
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (2075, 1088, N'', 1, 1, CAST(N'2020-04-01T08:00:00.000' AS DateTime), CAST(N'2020-04-01T09:00:00.000' AS DateTime), 5671451.0491651725, 5581164.1954668164, 5424, 0)
+GO
+INSERT [dbo].[tbWaterConsumption] ([WaterConsumptionId], [WbEasyCalcDataId], [Description], [WaterConsumptionCategoryId], [WaterConsumptionStatusId], [StartDate], [EndDate], [Latitude], [Lontitude], [RelatedId], [Value]) VALUES (2076, 1088, N'', 1, 1, CAST(N'2020-04-01T08:00:00.000' AS DateTime), CAST(N'2020-04-01T09:00:00.000' AS DateTime), 5671925.05346145, 5581469.3635110287, 5553, 0)
 GO
 SET IDENTITY_INSERT [dbo].[tbWaterConsumption] OFF
 GO
@@ -1856,73 +1881,79 @@ INSERT [dbo].[tbWaterConsumptionStatus] ([WaterConsumptionStatusId], [WaterConsu
 GO
 SET IDENTITY_INSERT [dbo].[tbWbEasyCalcData] ON 
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-03-24T20:12:48.470' AS DateTime), 6773, 2019, 1, N'Old - first', 1, 1, 30, N'aaaaaa', N'dddddd', N'xxxxxxxxxx', N'nnnnnnnnn', 18000, 0.01, 0, 0, 0, 0, 0, 0, N'qq', N'ww', N'ee', N'rrr', N'tt', N'yy', N'uu', N'ii', N'aa', N'ss', N'dd', N'ff', N'gg', N'hh', N'jj', N'kk', N'll', N'zz', N'zz', N'xx', N'cc', N'vv', N'qqqq', N'www', N'eeee', N'rrrrrr', N'tt', N'yy', N'uu', N'iii', N'uuuuu', N'iiiiiiiii', N'ooooooooop', N'ppppppp', 500, 250, 14000, 220, 0, 0, 75, 0, 0, 0, 150, 300, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 20, 3, 120, 0.2, 0.1, 5, 500, 30, 0.2, 160, 0.4, 0, 0, 0, 3, 0, 0, 0, 1, 0.02, 0.05, 10000, 2000, 1000, 0, 0.03, 0.04, 0.05, 0, 0.1, 0.1, 0.1, 0, 0.05, 0.1, 0.02, 50, 0.02, 0.02, 0.05, 0.03, 24.2, 0, 0, 0, 700, 15, 10, 0.01, 758, 0, 0.01, 0.05, 0.05, 0.22, N'adddddddddd', N'gzzzzzzzzzzzzz', N'eggggggggg', N'jjjjjjjjjjjj', 740, 37.5, 0, 0, 0, 0, 0, 0, 0.03, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 10, 20000, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 18000, 0.01, 15595, 0.00032061558191728119, 2405, 0.074872944305069064, 15045, 550, 0.00909090909090909, 1359.5681397898293, 0.048505884633143863, 1045.4318602101707, 0.18343186759183736, 14720, 325, 450, 100, 0.05, 525, 0.12118732337558567, 834.56813978982927, 0.020791322514394753, 15045, 2955, 0.060913705583756347)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-06-02T12:50:27.133' AS DateTime), 6773, 2019, 1, N'Old - first', 1, 1, 30, N'aaaaaa', N'dddddd', N'xxxxxxxxxx', N'nnnnnnnnn', 18000, 0.01, 0, 0, 0, 0, 0, 0, N'qq', N'ww', N'ee', N'rrr', N'tt', N'yy', N'uu', N'ii', N'aa', N'ss', N'dd', N'ff', N'gg', N'hh', N'jj', N'kk', N'll', N'zz', N'zz', N'xx', N'cc', N'vv', N'qqqq', N'www', N'eeee', N'rrrrrr', N'tt', N'yy', N'uu', N'iii', N'uuuuu', N'iiiiiiiii', N'ooooooooop', N'ppppppp', 500, 250, 14000, 220, 0, 0, 75, 0, 0, 0, 150, 300, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 20, 3, 120, 0.2, 0.1, 5, 500, 30, 0.2, 160, 0.4, 0, 0, 0, 3, 0, 0, 0, 1, 0.02, 0.05, 10000, 2000, 1000, 0, 0.03, 0.04, 0.05, 0, 0.1, 0.1, 0.1, 0, 0.05, 0.1, 0.02, 50, 0.02, 0.02, 0.05, 0.03, 24.2, 0, 0, 0, 700, 15, 10, 0.01, 758, 0, 0.01, 0.05, 0.05, 0, N'adddddddddd', N'gzzzzzzzzzzzzz', N'eggggggggg', N'jjjjjjjjjjjj', 37.5, 0, 0, 0, 0, 0, 0, 0.03, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 10, 20000, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 18000, 0.01, 15595, 0.00032061558191728119, 2405, 0.074872944305069064, 15045, 550, 0.00909090909090909, 1359.5681397898293, 0.048505884633143863, 1045.4318602101707, 0.18343186759183736, 14720, 325, 450, 100, 0.05, 525, 0.12118732337558567, 834.56813978982927, 0.020791322514394753, 15045, 2955, 0.060913705583756347)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (9, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-02-04T19:11:14.307' AS DateTime), 6773, 2019, 1, N'Old', 0, 0, 30, NULL, NULL, NULL, NULL, 6593339, 0.05, 10, 0.1, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593349, 0.049999924166234284, 5642375, 0, 950974, 0.3466624218974616, 5333026, 309349, 0, 345294.46391752549, 0.001398887036941496, 605679.53608247451, 0.54429328420081236, 5332026, 1000, 309349, 0, 0, 5880, 0.082147610459505027, 339414.46391752549, 0, 5333026, 1260323, 0.261573382380165)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (9, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-02-04T19:11:14.307' AS DateTime), 6773, 2019, 1, N'Old', 0, 0, 30, NULL, NULL, NULL, NULL, 6593339, 0.05, 10, 0.1, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593349, 0.049999924166234284, 5642375, 0, 950974, 0.3466624218974616, 5333026, 309349, 0, 345294.46391752549, 0.001398887036941496, 605679.53608247451, 0.54429328420081236, 5332026, 1000, 309349, 0, 0, 5880, 0.082147610459505027, 339414.46391752549, 0, 5333026, 1260323, 0.261573382380165)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (10, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-03-15T13:50:51.860' AS DateTime), 6773, 2019, 1, N'Old', 0, 0, 10, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5642375, 0, 950964, 0.34666606727489158, 5333026, 309349, 0, 341374.46391752549, 0.00047165014820654242, 609589.53608247451, 0.54080158829016556, 5332026, 1000, 309349, 0, 0, 1960, 0.082147610459505027, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (10, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-03-15T13:50:51.860' AS DateTime), 6773, 2019, 1, N'Old', 0, 0, 10, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5642375, 0, 950964, 0.34666606727489158, 5333026, 309349, 0, 341374.46391752549, 0.00047165014820654242, 609589.53608247451, 0.54080158829016556, 5332026, 1000, 309349, 0, 0, 1960, 0.082147610459505027, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (11, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-05-12T12:00:33.680' AS DateTime), 6773, 2019, 1, N'Old', 0, 0, 11, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3243, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 313592, 0, 6279747, 0.05249685218210224, 4243, 309349, 0, 11955.020618556693, 0.014814717080101118, 6267791.979381443, 0.052596990879694, 3243, 1000, 309349, 0, 0, 2156, 0.082147610459505041, 9799.0206185566931, 0, 4243, 6589096, 0.050032197132960275)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (11, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-05-12T12:00:33.680' AS DateTime), 6773, 2019, 1, N'Old', 0, 0, 11, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3243, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 313592, 0, 6279747, 0.05249685218210224, 4243, 309349, 0, 11955.020618556693, 0.014814717080101118, 6267791.979381443, 0.052596990879694, 3243, 1000, 309349, 0, 0, 2156, 0.082147610459505041, 9799.0206185566931, 0, 4243, 6589096, 0.050032197132960275)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (12, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-05-12T13:36:02.650' AS DateTime), 6774, 2019, 1, N'Old', 1, 0, 12, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5642375, 0, 950964, 0.34666606727489158, 5333026, 309349, 0, 341766.46391752549, 0.00056533100874221894, 609197.53608247451, 0.54114960598586614, 5332026, 1000, 309349, 0, 0, 2352, 0.082147610459505041, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (12, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-05-12T13:36:02.650' AS DateTime), 6774, 2019, 1, N'Old', 1, 0, 12, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5642375, 0, 950964, 0.34666606727489158, 5333026, 309349, 0, 341766.46391752549, 0.00056533100874221894, 609197.53608247451, 0.54114960598586614, 5332026, 1000, 309349, 0, 0, 2352, 0.082147610459505041, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (15, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-05-14T15:17:42.323' AS DateTime), 6773, 2019, 2, N'Very old', 1, 0, 15, NULL, NULL, NULL, NULL, 102537, 0.12, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3740.999, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5056.876, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20342.3603638975, 0, 0, 0, 333, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 102537, 0.11999999999999998, 8797.875, 0, 93739.125, 0.13126258646002936, 3740.999, 5056.876, 0, 0, 0, 93739.125, 0.13126258646002936, 3740.999, 0, 5056.876, 0, 0, 0, 0, 0, 0, 3740.999, 98796.001, 0.12454390739965272)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (15, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-05-14T15:17:42.323' AS DateTime), 6773, 2019, 2, N'Very old', 1, 0, 15, NULL, NULL, NULL, NULL, 102537, 0.12, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3740.999, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5056.876, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20342.3603638975, 0, 0, 0, 333, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 102537, 0.11999999999999998, 8797.875, 0, 93739.125, 0.13126258646002936, 3740.999, 5056.876, 0, 0, 0, 93739.125, 0.13126258646002936, 3740.999, 0, 5056.876, 0, 0, 0, 0, 0, 0, 3740.999, 98796.001, 0.12454390739965272)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (20, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-05-14T09:20:44.220' AS DateTime), 6774, 2019, 2, N'Desc 1', 0, 0, 28, NULL, NULL, NULL, NULL, 2020202, 0.2, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12032, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 2020202, 0.2, 12032, 0, 2008170, 0.2011983049243839, 0, 12032, 0, 0, 0, 2008170, 0.2011983049243839, 0, 0, 12032, 0, 0, 0, 0, 0, 0, 0, 2020202, 0.2)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (20, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-05-14T09:20:44.220' AS DateTime), 6774, 2019, 2, N'Desc 1', 0, 0, 28, NULL, NULL, NULL, NULL, 2020202, 0.2, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12032, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 2020202, 0.2, 12032, 0, 2008170, 0.2011983049243839, 0, 12032, 0, 0, 0, 2008170, 0.2011983049243839, 0, 0, 12032, 0, 0, 0, 0, 0, 0, 0, 2020202, 0.2)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (21, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-03-15T14:08:52.997' AS DateTime), 6773, 2019, 11, N'', 0, 0, 30, NULL, NULL, NULL, NULL, 2120000, 0.21, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 2120000, 0.21, 0, 0, 2120000, 0.21, 0, 0, 0, 0, 0, 2120000, 0.21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2120000, 0.21)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (21, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-03-15T14:08:52.997' AS DateTime), 6773, 2019, 11, N'', 0, 0, 30, NULL, NULL, NULL, NULL, 2120000, 0.21, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 2120000, 0.21, 0, 0, 2120000, 0.21, 0, 0, 0, 0, 0, 2120000, 0.21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2120000, 0.21)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (22, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-03-15T14:15:00.200' AS DateTime), 6774, 2020, 1, N'22 SSSSSSS', 0, 0, 31, NULL, NULL, NULL, NULL, 2222220, 0.22, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 2222220, 0.22, 0, 0, 2222220, 0.22, 0, 0, 0, 0, 0, 2222220, 0.22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2222220, 0.22)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (22, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-03-15T14:15:00.200' AS DateTime), 6774, 2020, 1, N'22 SSSSSSS', 0, 0, 31, NULL, NULL, NULL, NULL, 2222220, 0.22, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 2222220, 0.22, 0, 0, 2222220, 0.22, 0, 0, 0, 0, 0, 2222220, 0.22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2222220, 0.22)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (26, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-03-15T14:09:32.997' AS DateTime), 6773, 2019, 1, N'', 0, 0, 100, NULL, NULL, NULL, NULL, 1001001, 0.88, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 1001001, 0.88, 0, 0, 1001001, 0.88, 0, 0, 0, 0, 0, 1001001, 0.88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1001001, 0.88)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (26, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-03-15T14:09:32.997' AS DateTime), 6773, 2019, 1, N'', 0, 0, 100, NULL, NULL, NULL, NULL, 1001001, 0.88, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 1001001, 0.88, 0, 0, 1001001, 0.88, 0, 0, 0, 0, 0, 1001001, 0.88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1001001, 0.88)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (31, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6773, 2019, 3, N'Generated', 0, 0, 1, NULL, NULL, NULL, NULL, 0, 0.12, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 70420, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20342.3603638975, 0, 0, 0, 911, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 102537, 0.11999999999999998, 68358, 0, 34179, 0.36, 68358, 0, 0, 0, 0, 34179, 0.36, 68358, 0, 0, 0, 0, 0, 0, 0, 0, 68358, 34179, 0.36)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (31, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6773, 2019, 3, N'Generated', 0, 0, 1, NULL, NULL, NULL, NULL, 0, 0.12, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 70420, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20342.3603638975, 0, 0, 0, 911, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 102537, 0.11999999999999998, 68358, 0, 34179, 0.36, 68358, 0, 0, 0, 0, 34179, 0.36, 68358, 0, 0, 0, 0, 0, 0, 0, 0, 68358, 34179, 0.36)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (32, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6774, 2019, 2, N'Generated', 0, 0, 1, NULL, NULL, NULL, NULL, 0, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 0, 0, 0, 0, 0, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5642375, 0, 950964, 0.34666606727489158, 5333026, 309349, 0, 341766.46391752549, 0.00056533100874221894, 609197.53608247451, 0.54114960598586614, 5332026, 1000, 309349, 0, 0, 2352, 0.082147610459505041, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (32, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6774, 2019, 2, N'Generated', 0, 0, 1, NULL, NULL, NULL, NULL, 0, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 0, 0, 0, 0, 0, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5642375, 0, 950964, 0.34666606727489158, 5333026, 309349, 0, 341766.46391752549, 0.00056533100874221894, 609197.53608247451, 0.54114960598586614, 5332026, 1000, 309349, 0, 0, 2352, 0.082147610459505041, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (33, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6773, 2019, 3, N'Generated', 1, 0, 1, NULL, NULL, NULL, NULL, 0, 0.12, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 70420, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20342.3603638975, 0, 0, 0, 911, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 102537, 0.11999999999999998, 68358, 0, 34179, 0.36, 68358, 0, 0, 0, 0, 34179, 0.36, 68358, 0, 0, 0, 0, 0, 0, 0, 0, 68358, 34179, 0.36)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (33, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6773, 2019, 3, N'Generated', 1, 0, 1, NULL, NULL, NULL, NULL, 0, 0.12, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 70420, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20342.3603638975, 0, 0, 0, 911, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 102537, 0.11999999999999998, 68358, 0, 34179, 0.36, 68358, 0, 0, 0, 0, 34179, 0.36, 68358, 0, 0, 0, 0, 0, 0, 0, 0, 68358, 34179, 0.36)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (34, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6774, 2019, 2, N'Generated', 1, 0, 1, NULL, NULL, NULL, NULL, 0, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 0, 0, 0, 0, 0, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5642375, 0, 950964, 0.34666606727489158, 5333026, 309349, 0, 341766.46391752549, 0.00056533100874221894, 609197.53608247451, 0.54114960598586614, 5332026, 1000, 309349, 0, 0, 2352, 0.082147610459505041, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (34, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6774, 2019, 2, N'Generated', 1, 0, 1, NULL, NULL, NULL, NULL, 0, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 0, 0, 0, 0, 0, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5642375, 0, 950964, 0.34666606727489158, 5333026, 309349, 0, 341766.46391752549, 0.00056533100874221894, 609197.53608247451, 0.54114960598586614, 5332026, 1000, 309349, 0, 0, 2352, 0.082147610459505041, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (77, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6773, 2020, 4, N'1. Orygin', 0, 0, 30, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5642375, 0, 950964, 0.34666606727489158, 5333026, 309349, 0, 345294.46391752549, 0.001398887036941496, 605669.53608247451, 0.54430227083626459, 5332026, 1000, 309349, 0, 0, 5880, 0.082147610459505027, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (77, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6773, 2020, 4, N'1. Orygin', 0, 0, 30, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5642375, 0, 950964, 0.34666606727489158, 5333026, 309349, 0, 345294.46391752549, 0.001398887036941496, 605669.53608247451, 0.54430227083626459, 5332026, 1000, 309349, 0, 0, 5880, 0.082147610459505027, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (78, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6773, 2020, 4, N'2. Orygin', 0, 0, 30, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 2000, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5644375, 1.7716753404938545E-05, 948964, 0.34739674873320675, 5333026, 311349, 0.00032118298115619447, 345294.46391752549, 0.001398887036941496, 603669.53608247451, 0.5461056079990817, 5332026, 1000, 309349, 2000, 0.05, 5880, 0.082147610459505027, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (78, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6773, 2020, 4, N'2. Orygin', 0, 0, 30, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 2000, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5644375, 1.7716753404938545E-05, 948964, 0.34739674873320675, 5333026, 311349, 0.00032118298115619447, 345294.46391752549, 0.001398887036941496, 603669.53608247451, 0.5461056079990817, 5332026, 1000, 309349, 2000, 0.05, 5880, 0.082147610459505027, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (81, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-02-03T21:30:41.280' AS DateTime), 6773, 2020, 4, N'4. Orygin', 0, 0, 30, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 3000, 0, 0, 0, 2000, 0, 0, 0, 309349, 3000, 0, 0, 0, 2000, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.1, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5652375, 1.7691678276830535E-05, 940964, 0.3503502878588966, 5338026, 314349, 0.00031811776083270503, 348975.21993127203, 0.013842306109372472, 591988.78006872791, 0.55694020901215513, 5335026, 3000, 312349, 2000, 0.05, 8880, 0.056957495718128637, 340095.21993127203, 0.014125662426983876, 5338026, 1255313, 0.26261733129506348)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (81, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'EMEA\79749', CAST(N'2021-02-03T21:30:41.280' AS DateTime), 6773, 2020, 4, N'4. Orygin', 0, 0, 30, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 3000, 0, 0, 0, 2000, 0, 0, 0, 309349, 3000, 0, 0, 0, 2000, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.1, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5652375, 1.7691678276830535E-05, 940964, 0.3503502878588966, 5338026, 314349, 0.00031811776083270503, 348975.21993127203, 0.013842306109372472, 591988.78006872791, 0.55694020901215513, 5335026, 3000, 312349, 2000, 0.05, 8880, 0.056957495718128637, 340095.21993127203, 0.014125662426983876, 5338026, 1255313, 0.26261733129506348)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1081, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6773, 2019, 1, N'Old', 0, 0, 10, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5642375, 0, 950964, 0.34666606727489158, 5333026, 309349, 0, 341374.46391752549, 0.00047165014820654242, 609589.53608247451, 0.54080158829016556, 5332026, 1000, 309349, 0, 0, 1960, 0.082147610459505027, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1081, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6773, 2019, 1, N'Old', 0, 0, 10, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 309349, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0, 0, 0, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5642375, 0, 950964, 0.34666606727489158, 5333026, 309349, 0, 341374.46391752549, 0.00047165014820654242, 609589.53608247451, 0.54080158829016556, 5332026, 1000, 309349, 0, 0, 1960, 0.082147610459505027, 339414.46391752549, 0, 5333026, 1260313, 0.26157545784261532)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1082, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6773, 2019, 3, N'Generated', 0, 0, 1, NULL, NULL, NULL, NULL, 0, 0.12, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 70420, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20342.3603638975, 0, 0, 0, 911, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 102537, 0.11999999999999998, 68358, 0, 34179, 0.36, 68358, 0, 0, 0, 0, 34179, 0.36, 68358, 0, 0, 0, 0, 0, 0, 0, 0, 68358, 34179, 0.36)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1082, N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), N'none\none', CAST(N'2021-01-14T09:15:40.203' AS DateTime), 6773, 2019, 3, N'Generated', 0, 0, 1, NULL, NULL, NULL, NULL, 0, 0.12, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 70420, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20342.3603638975, 0, 0, 0, 911, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 102537, 0.11999999999999998, 68358, 0, 34179, 0.36, 68358, 0, 0, 0, 0, 34179, 0.36, 68358, 0, 0, 0, 0, 0, 0, 0, 0, 68358, 34179, 0.36)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1083, N'EMEA\79749', CAST(N'2021-01-29T09:12:18.097' AS DateTime), N'EMEA\79749', CAST(N'2021-01-29T09:12:18.097' AS DateTime), 6773, 2021, 1, N'', 0, 0, 31, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1083, N'EMEA\79749', CAST(N'2021-01-29T09:12:18.097' AS DateTime), N'EMEA\79749', CAST(N'2021-01-29T09:12:18.097' AS DateTime), 6773, 2021, 1, N'', 0, 0, 31, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'0', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1084, NULL, CAST(N'2021-02-04T20:24:18.240' AS DateTime), N'EMEA\79749', CAST(N'2021-05-27T14:34:41.557' AS DateTime), 6773, 2020, 4, N'4.1', 0, 0, 30, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 3000, 0, 0, 0, 2000, 0, 0, 0, 309349, 3000, 0, 0, 0, 2000, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 8700, 0.01, 0, 0, 0.02, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5652375, 1.7691678276830535E-05, 940964, 0.35035024205689252, 5338026, 314349, 0.00031811776083270503, 348734.67010309332, 0.013851842071187582, 592229.32989690662, 0.55671399270202115, 5335026, 3000, 312349, 2000, 0.05, 8880, 0.056957495718128637, 339854.67010309332, 0.014135648043349982, 5338026, 1255313, 0.26261733129506348)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1084, N'EMEA\79749', CAST(N'2021-02-04T20:24:18.240' AS DateTime), N'EMEA\79749', CAST(N'2021-05-27T14:34:41.557' AS DateTime), 6773, 2020, 4, N'4.1', 0, 0, 30, NULL, NULL, NULL, NULL, 6593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 3000, 0, 0, 0, 2000, 0, 0, 0, 309349, 3000, 0, 0, 0, 2000, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 8700, 0.01, 0, 0, 0.02, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 6593339, 0.05, 5652375, 1.7691678276830535E-05, 940964, 0.35035024205689252, 5338026, 314349, 0.00031811776083270503, 348734.67010309332, 0.013851842071187582, 592229.32989690662, 0.55671399270202115, 5335026, 3000, 312349, 2000, 0.05, 8880, 0.056957495718128637, 339854.67010309332, 0.014135648043349982, 5338026, 1255313, 0.26261733129506348)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1088, N'EMEA\79749', CAST(N'2021-02-10T09:55:53.470' AS DateTime), N'EMEA\79749', CAST(N'2021-05-27T14:33:58.473' AS DateTime), 6773, 2020, 4, N'4.1', 0, 0, 30, NULL, NULL, NULL, NULL, 7593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 3000, 0, 0, 0, 2000, 0, 0, 0, 309349, 3000, 0, 0, 0, 2000, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 8700, 0.01, 0, 0, 0.02, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 4, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 7593339, 0.05, 5652375, 1.7691678276830535E-05, 1940964, 0.19560742145111232, 5338026, 314349, 0.00031811776083270503, 348734.67010309332, 0.013851842071187582, 1592229.3298969066, 0.23846922393677389, 5335026, 3000, 312349, 2000, 0.05, 8880, 0.056957495718128637, 339854.67010309332, 0.014135648043349982, 5338026, 2255313, 0.16834335189838395)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1088, N'EMEA\79749', CAST(N'2021-02-10T09:55:53.470' AS DateTime), N'EMEA\79749', CAST(N'2021-06-04T14:00:00.163' AS DateTime), 6773, 2020, 4, N'K:\It\Work\Grundfos\Tasks\Legnica\2020-09-07 WaterUtility\Excels\2020-12-23 Stage 1\WB-EasyCalc - open_filled - 04_3.xlsm', 1, 0, 30, NULL, NULL, NULL, NULL, 7593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 3000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 8700, 0.01, 0, 0, 0.02, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 4, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 7593339, 0.05, 3000, 0, 7590339, 0.050019761963200855, 3000, 0, 0, 9165.567010309278, 0.055184073592651088, 7581173.43298969, 0.050080279822820852, 3000, 0, 0, 0, 0, 8880, 0.056957495718128637, 285.56701030927888, 0.0115543770778708, 3000, 7590339, 0.050019761963200855)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1089, N'EMEA\79749', CAST(N'2021-02-10T15:29:07.530' AS DateTime), N'EMEA\79749', CAST(N'2021-02-15T10:25:50.970' AS DateTime), 6773, 2019, 1, N'Old - first', 0, 0, 30, N'aaaaaa', N'dddddd', N'xxxxxxxxxx', N'nnnnnnnnn', 58000, 0.01, 0, 0, 0, 0, 0, 0, N'qq', N'ww', N'ee', N'rrr', N'tt', N'yy', N'uu', N'ii', N'aa', N'ss', N'dd', N'ff', N'gg', N'hh', N'jj', N'kk', N'll', N'zz', N'zz', N'xx', N'cc', N'vv', N'qqqq', N'www', N'eeee', N'rrrrrr', N'tt', N'yy', N'uu', N'iii', N'uuuuu', N'iiiiiiiii', N'ooooooooop', N'ppppppp', 500, 250, 14000, 220, 0, 0, 75, 0, 0, 0, 150, 300, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 20, 3, 120, 0.2, 0.1, 5, 500, 30, 0.2, 160, 0.4, 0, 0, 0, 3, 0, 0, 0, 1, 0.02, 0.05, 10000, 2000, 1000, 0, 0.03, 0.04, 0.05, 0, 0.1, 0.1, 0.1, 0, 0.05, 0.1, 0.02, 50, 0.02, 0.02, 0.05, 0.03, 24.2, 0, 0, 0, 700, 15, 10, 0.01, 758, 0, 0.01, 0.05, 0.05, 0.22, N'adddddddddd', N'gzzzzzzzzzzzzz', N'eggggggggg', N'jjjjjjjjjjjj', 740, 37.5, 0, 0, 0, 0, 0, 0, 0.03, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 10, 20000, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 58000, 0.01, 15595, 0.00032061558191728119, 42405, 0.013678140580680152, 15045, 550, 0.00909090909090909, 1359.5681397898293, 0.048505884633143863, 41045.43186021017, 0.014222253180015259, 14720, 325, 450, 100, 0.05, 525, 0.12118732337558567, 834.56813978982927, 0.020791322514394753, 15045, 42955, 0.013502502619019904)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1089, N'EMEA\79749', CAST(N'2021-02-10T15:29:07.530' AS DateTime), N'EMEA\79749', CAST(N'2021-02-15T10:25:50.970' AS DateTime), 6773, 2019, 1, N'Old - first', 0, 0, 30, N'aaaaaa', N'dddddd', N'xxxxxxxxxx', N'nnnnnnnnn', 58000, 0.01, 0, 0, 0, 0, 0, 0, N'qq', N'ww', N'ee', N'rrr', N'tt', N'yy', N'uu', N'ii', N'aa', N'ss', N'dd', N'ff', N'gg', N'hh', N'jj', N'kk', N'll', N'zz', N'zz', N'xx', N'cc', N'vv', N'qqqq', N'www', N'eeee', N'rrrrrr', N'tt', N'yy', N'uu', N'iii', N'uuuuu', N'iiiiiiiii', N'ooooooooop', N'ppppppp', 500, 250, 14000, 220, 0, 0, 75, 0, 0, 0, 150, 300, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 20, 3, 120, 0.2, 0.1, 5, 500, 30, 0.2, 160, 0.4, 0, 0, 0, 3, 0, 0, 0, 1, 0.02, 0.05, 10000, 2000, 1000, 0, 0.03, 0.04, 0.05, 0, 0.1, 0.1, 0.1, 0, 0.05, 0.1, 0.02, 50, 0.02, 0.02, 0.05, 0.03, 24.2, 0, 0, 0, 700, 15, 10, 0.01, 758, 0, 0.01, 0.05, 0.05, 0.22, N'adddddddddd', N'gzzzzzzzzzzzzz', N'eggggggggg', N'jjjjjjjjjjjj', 37.5, 0, 0, 0, 0, 0, 0, 0.03, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 10, 20000, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 58000, 0.01, 15595, 0.00032061558191728119, 42405, 0.013678140580680152, 15045, 550, 0.00909090909090909, 1359.5681397898293, 0.048505884633143863, 41045.43186021017, 0.014222253180015259, 14720, 325, 450, 100, 0.05, 525, 0.12118732337558567, 834.56813978982927, 0.020791322514394753, 15045, 42955, 0.013502502619019904)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1091, N'EMEA\79749', CAST(N'2021-02-14T09:43:34.353' AS DateTime), N'EMEA\79749', CAST(N'2021-02-14T10:56:56.070' AS DateTime), 6773, 2019, 1, N'Old - 3', 0, 0, 30, N'aaaaaa', N'dddddd', N'xxxxxxxxxx', N'nnnnnnnnn', 18000, 0.01, 0, 0, 0, 0, 0, 0, N'qq', N'ww', N'ee', N'rrr', N'tt', N'yy', N'uu', N'ii', N'aa', N'ss', N'dd', N'ff', N'gg', N'hh', N'jj', N'kk', N'll', N'zz', N'zz', N'xx', N'cc', N'vv', N'qqqq', N'www', N'eeee', N'rrrrrr', N'tt', N'yy', N'uu', N'iii', N'uuuuu', N'iiiiiiiii', N'ooooooooop', N'ppppppp', 500, 250, 14000, 220, 0, 0, 75, 0, 0, 0, 150, 300, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 20, 3, 120, 0.2, 0.1, 5, 500, 30, 0.2, 160, 0.4, 0, 0, 0, 3, 0, 0, 0, 1, 0.02, 0.05, 10000, 2000, 1000, 0, 0.03, 0.04, 0.05, 0, 0.1, 0.1, 0.1, 0, 0.05, 0.1, 0.02, 50, 0.02, 0.02, 0.05, 0.03, 24.2, 0, 0, 0, 700, 15, 10, 0.01, 758, 0, 0.01, 0.05, 0.05, 0.22, N'adddddddddd', N'gzzzzzzzzzzzzz', N'eggggggggg', N'jjjjjjjjjjjj', 740, 37.5, 0, 0, 0, 0, 0, 0, 0.03, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 10, 20000, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 18000, 0.01, 15595, 0.00032061558191728119, 2405, 0.074872944305069064, 15045, 550, 0.00909090909090909, 1359.5681397898293, 0.048505884633143863, 1045.4318602101707, 0.18343186759183736, 14720, 325, 450, 100, 0.05, 525, 0.12118732337558567, 834.56813978982927, 0.020791322514394753, 15045, 2955, 0.060913705583756347)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1091, N'EMEA\79749', CAST(N'2021-02-14T09:43:34.353' AS DateTime), N'EMEA\79749', CAST(N'2021-02-14T10:56:56.070' AS DateTime), 6773, 2019, 1, N'Old - 3', 0, 0, 30, N'aaaaaa', N'dddddd', N'xxxxxxxxxx', N'nnnnnnnnn', 18000, 0.01, 0, 0, 0, 0, 0, 0, N'qq', N'ww', N'ee', N'rrr', N'tt', N'yy', N'uu', N'ii', N'aa', N'ss', N'dd', N'ff', N'gg', N'hh', N'jj', N'kk', N'll', N'zz', N'zz', N'xx', N'cc', N'vv', N'qqqq', N'www', N'eeee', N'rrrrrr', N'tt', N'yy', N'uu', N'iii', N'uuuuu', N'iiiiiiiii', N'ooooooooop', N'ppppppp', 500, 250, 14000, 220, 0, 0, 75, 0, 0, 0, 150, 300, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 20, 3, 120, 0.2, 0.1, 5, 500, 30, 0.2, 160, 0.4, 0, 0, 0, 3, 0, 0, 0, 1, 0.02, 0.05, 10000, 2000, 1000, 0, 0.03, 0.04, 0.05, 0, 0.1, 0.1, 0.1, 0, 0.05, 0.1, 0.02, 50, 0.02, 0.02, 0.05, 0.03, 24.2, 0, 0, 0, 700, 15, 10, 0.01, 758, 0, 0.01, 0.05, 0.05, 0.22, N'adddddddddd', N'gzzzzzzzzzzzzz', N'eggggggggg', N'jjjjjjjjjjjj', 37.5, 0, 0, 0, 0, 0, 0, 0.03, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 10, 20000, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 18000, 0.01, 15595, 0.00032061558191728119, 2405, 0.074872944305069064, 15045, 550, 0.00909090909090909, 1359.5681397898293, 0.048505884633143863, 1045.4318602101707, 0.18343186759183736, 14720, 325, 450, 100, 0.05, 525, 0.12118732337558567, 834.56813978982927, 0.020791322514394753, 15045, 2955, 0.060913705583756347)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1092, N'EMEA\79749', CAST(N'2021-02-14T11:08:03.020' AS DateTime), N'EMEA\79749', CAST(N'2021-03-12T12:27:27.633' AS DateTime), 6773, 2019, 1, N'Old - 4 vvvvvvvvvvvvvv', 0, 0, 30, N'aaaaaa', N'dddddd', N'xxxxxxxxxx', N'nnnnnnnnn', 28000, 0.01, 0, 0, 0, 0, 0, 0, N'qq', N'ww', N'ee', N'rrr', N'tt', N'yy', N'uu', N'ii', N'', N'', N'', N'', N'gg', N'hh', N'jj', N'kk', N'll', N'zz', N'zz', N'xx', N'cc', N'vv', N'qqqq', N'www', N'eeee', N'rrrrrr', N'tt', N'yy', N'uu', N'iii', N'uuuuu', N'iiiiiiiii', N'ooooooooop', N'ppppppp', 500, 250, 14000, 220, 0, 0, 75, 0, 0, 0, 150, 300, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 20, 3, 120, 0.2, 0.1, 5, 500, 30, 0.2, 160, 0.4, 0, 0, 0, 3, 0, 0, 0, 1, 0.02, 0.05, 10000, 2000, 1000, 0, 0.03, 0.04, 0.05, 0, 0.1, 0.1, 0.1, 0, 0.05, 0.1, 0.02, 50, 0.02, 0.02, 0.05, 0.03, 24.2, 0, 0, 0, 700, 15, 10, 0.01, 758, 0, 0.01, 0.05, 0.05, 0, N'adddddddddd', N'gzzzzzzzzzzzzz', N'eggggggggg', N'jjjjjjjjjjjj', 740, 37.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 10, 20000, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 28000, 0.01, 15595, 0.00032061558191728119, 12405, 0.022575142224813296, 15045, 550, 0.00909090909090909, 1359.5681397898293, 0.048505884633143863, 11045.43186021017, 0.02604739569152642, 14720, 325, 450, 100, 0.05, 525, 0.12118732337558567, 834.56813978982927, 0.020791322514394753, 15045, 12955, 0.021613276727132383)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1092, N'EMEA\79749', CAST(N'2021-02-14T11:08:03.020' AS DateTime), N'EMEA\79749', CAST(N'2021-03-12T12:27:27.633' AS DateTime), 6773, 2019, 1, N'Old - 4 vvvvvvvvvvvvvv', 0, 0, 30, N'aaaaaa', N'dddddd', N'xxxxxxxxxx', N'nnnnnnnnn', 28000, 0.01, 0, 0, 0, 0, 0, 0, N'qq', N'ww', N'ee', N'rrr', N'tt', N'yy', N'uu', N'ii', N'', N'', N'', N'', N'gg', N'hh', N'jj', N'kk', N'll', N'zz', N'zz', N'xx', N'cc', N'vv', N'qqqq', N'www', N'eeee', N'rrrrrr', N'tt', N'yy', N'uu', N'iii', N'uuuuu', N'iiiiiiiii', N'ooooooooop', N'ppppppp', 500, 250, 14000, 220, 0, 0, 75, 0, 0, 0, 150, 300, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 20, 3, 120, 0.2, 0.1, 5, 500, 30, 0.2, 160, 0.4, 0, 0, 0, 3, 0, 0, 0, 1, 0.02, 0.05, 10000, 2000, 1000, 0, 0.03, 0.04, 0.05, 0, 0.1, 0.1, 0.1, 0, 0.05, 0.1, 0.02, 50, 0.02, 0.02, 0.05, 0.03, 24.2, 0, 0, 0, 700, 15, 10, 0.01, 758, 0, 0.01, 0.05, 0.05, 0, N'adddddddddd', N'gzzzzzzzzzzzzz', N'eggggggggg', N'jjjjjjjjjjjj', 37.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 10, 20000, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 28000, 0.01, 15595, 0.00032061558191728119, 12405, 0.022575142224813296, 15045, 550, 0.00909090909090909, 1359.5681397898293, 0.048505884633143863, 11045.43186021017, 0.02604739569152642, 14720, 325, 450, 100, 0.05, 525, 0.12118732337558567, 834.56813978982927, 0.020791322514394753, 15045, 12955, 0.021613276727132383)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1098, N'EMEA\79749', CAST(N'2021-03-25T20:43:55.260' AS DateTime), N'EMEA\79749', CAST(N'2021-03-30T13:55:32.707' AS DateTime), 6773, 2020, 1, N'', 0, 0, 31, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 691, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'PLN', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 0, 0, 691, 0, -691, 0, 691, 0, 0, 0, 0, -691, 0, 691, 0, 0, 0, 0, 0, 0, 0, 0, 691, -691, 0)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1098, N'EMEA\79749', CAST(N'2021-03-25T20:43:55.260' AS DateTime), N'EMEA\79749', CAST(N'2021-03-30T13:55:32.707' AS DateTime), 6773, 2020, 1, N'', 0, 0, 31, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 691, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'PLN', 0, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 0, 0, 691, 0, -691, 0, 691, 0, 0, 0, 0, -691, 0, 691, 0, 0, 0, 0, 0, 0, 0, 0, 691, -691, 0)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1099, N'EMEA\79749', CAST(N'2021-04-29T10:27:08.877' AS DateTime), N'EMEA\79749', CAST(N'2021-04-29T12:19:11.450' AS DateTime), 6773, 2019, 1, N'Old - 4 vvvvvvvvvvvvvv', 0, 0, 30, N'aaaaaa', N'dddddd', N'xxxxxxxxxx', N'nnnnnnnnn', 28000, 0.01, 232, 0, 0, 0, 0, 0, N'qq', N'ww', N'ee', N'rrr', N'tt', N'yy', N'uu', N'ii', N'', N'', N'', N'', N'gg', N'hh', N'jj', N'kk', N'll', N'zz', N'zz', N'xx', N'cc', N'vv', N'qqqq', N'www', N'eeee', N'rrrrrr', N'tt', N'yy', N'uu', N'iii', N'uuuuu', N'iiiiiiiii', N'ooooooooop', N'ppppppp', 500, 250, 14000, 220, 0, 0, 75, 0, 0, 0, 150, 300, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 20, 3, 120, 0.2, 0.1, 5, 500, 30, 0.2, 160, 0.4, 0, 0, 0, 3, 0, 0, 0, 1, 0.02, 0.05, 10000, 2000, 1000, 0, 0.03, 0.04, 0.05, 0, 0.1, 0.1, 0.1, 0, 0.05, 0.1, 0.02, 50, 0.02, 0.02, 0.05, 0.03, 24.2, 0, 0, 0, 700, 15, 10, 0.01, 758, 0, 0.01, 0.05, 0.05, 0, N'adddddddddd', N'gzzzzzzzzzzzzz', N'eggggggggg', N'jjjjjjjjjjjj', 740, 37.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 10, 20000, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 28232, 0.0099178237461037128, 15595, 0.00032061558191728119, 12637, 0.022160689981705225, 15045, 550, 0.00909090909090909, 1359.5681397898293, 0.048505884633143863, 11277.43186021017, 0.025511547115774396, 14720, 325, 450, 100, 0.05, 525, 0.12118732337558567, 834.56813978982927, 0.020791322514394753, 15045, 13187, 0.02123303253203913)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1099, N'EMEA\79749', CAST(N'2021-04-29T10:27:08.877' AS DateTime), N'EMEA\79749', CAST(N'2021-04-29T12:19:11.450' AS DateTime), 6773, 2019, 1, N'Old - 4 vvvvvvvvvvvvvv', 0, 0, 30, N'aaaaaa', N'dddddd', N'xxxxxxxxxx', N'nnnnnnnnn', 28000, 0.01, 232, 0, 0, 0, 0, 0, N'qq', N'ww', N'ee', N'rrr', N'tt', N'yy', N'uu', N'ii', N'', N'', N'', N'', N'gg', N'hh', N'jj', N'kk', N'll', N'zz', N'zz', N'xx', N'cc', N'vv', N'qqqq', N'www', N'eeee', N'rrrrrr', N'tt', N'yy', N'uu', N'iii', N'uuuuu', N'iiiiiiiii', N'ooooooooop', N'ppppppp', 500, 250, 14000, 220, 0, 0, 75, 0, 0, 0, 150, 300, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 20, 3, 120, 0.2, 0.1, 5, 500, 30, 0.2, 160, 0.4, 0, 0, 0, 3, 0, 0, 0, 1, 0.02, 0.05, 10000, 2000, 1000, 0, 0.03, 0.04, 0.05, 0, 0.1, 0.1, 0.1, 0, 0.05, 0.1, 0.02, 50, 0.02, 0.02, 0.05, 0.03, 24.2, 0, 0, 0, 700, 15, 10, 0.01, 758, 0, 0.01, 0.05, 0.05, 0, N'adddddddddd', N'gzzzzzzzzzzzzz', N'eggggggggg', N'jjjjjjjjjjjj', 37.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 10, 20000, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 2, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 28232, 0.0099178237461037128, 15595, 0.00032061558191728119, 12637, 0.022160689981705225, 15045, 550, 0.00909090909090909, 1359.5681397898293, 0.048505884633143863, 11277.43186021017, 0.025511547115774396, 14720, 325, 450, 100, 0.05, 525, 0.12118732337558567, 834.56813978982927, 0.020791322514394753, 15045, 13187, 0.02123303253203913)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1100, N'EMEA\79749', CAST(N'2021-04-29T13:52:14.727' AS DateTime), N'EMEA\79749', CAST(N'2021-05-18T14:12:12.543' AS DateTime), 6773, 2020, 4, N'4.1', 0, 0, 30, NULL, NULL, NULL, NULL, 0, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 52572, 0, 0, 0, 2000, 0, 0, 0, 309349, 1111, 0, 0, 0, 3242, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 19539.125613145392, 0, 0, 0, 362, 91, 7, 0, 758, 0.01, 0, 0, 0.02, 0, NULL, NULL, NULL, NULL, 9500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 4, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 0, 0, 5701300, 2.8432111974461968E-05, -5701300, -2.8432111974461968E-05, 5387598, 313702, 0.00051673244034147064, 351742.5567010314, 0.013793430932532911, -6053042.5567010315, -0.0008019840930801348, 5384598, 3000, 310460, 3242, 0.05000000000000001, 8880, 0.056957495718128637, 342862.5567010314, 0.01407357323145182, 5387598, -5387598, 0)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1100, N'EMEA\79749', CAST(N'2021-04-29T13:52:14.727' AS DateTime), N'EMEA\79749', CAST(N'2021-05-18T14:12:12.543' AS DateTime), 6773, 2020, 4, N'4.1', 0, 0, 30, NULL, NULL, NULL, NULL, 0, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 52572, 0, 0, 0, 2000, 0, 0, 0, 309349, 1111, 0, 0, 0, 3242, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 19539.125613145392, 0, 0, 0, 362, 91, 7, 0, 758, 0.01, 0, 0, 0.02, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 4, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 0, 0, 5701300, 2.8432111974461968E-05, -5701300, -2.8432111974461968E-05, 5387598, 313702, 0.00051673244034147064, 351742.5567010314, 0.013793430932532911, -6053042.5567010315, -0.0008019840930801348, 5384598, 3000, 310460, 3242, 0.05000000000000001, 8880, 0.056957495718128637, 342862.5567010314, 0.01407357323145182, 5387598, -5387598, 0)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1101, N'EMEA\79749', CAST(N'2021-05-11T10:56:23.767' AS DateTime), N'EMEA\79749', CAST(N'2021-05-25T17:50:20.400' AS DateTime), 6773, 2021, 5, N'Desc 1', 0, 0, 31, NULL, NULL, NULL, NULL, 111111, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5551.878, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'PLN', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 111111, 0, 5551.878, 0, 105559.122, 0, 5551.878, 0, 0, 0, 0, 105559.122, 0, 5551.878, 0, 0, 0, 0, 0, 0, 0, 0, 5551.878, 105559.122, 0)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1101, N'EMEA\79749', CAST(N'2021-05-11T10:56:23.767' AS DateTime), N'EMEA\79749', CAST(N'2021-05-25T17:50:20.400' AS DateTime), 6773, 2021, 5, N'Desc 1', 0, 0, 31, NULL, NULL, NULL, NULL, 111111, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5551.878, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'PLN', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 111111, 0, 5551.878, 0, 105559.122, 0, 5551.878, 0, 0, 0, 0, 105559.122, 0, 5551.878, 0, 0, 0, 0, 0, 0, 0, 0, 5551.878, 105559.122, 0)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1104, N'EMEA\79749', CAST(N'2021-05-15T12:18:00.277' AS DateTime), N'EMEA\79749', CAST(N'2021-05-25T17:48:48.860' AS DateTime), 6773, 2021, 5, N'xxxxxxxxxxxxxxxxxxxxx', 0, 0, 31, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 600, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'PLN', 0, 0, 0, 1, 333, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 601, 0, -601, 0, 600, 1, 0, 0, 0, -601, 0, 600, 0, 1, 0, 0, 0, 0, 0, 0, 600, -600, 0)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1104, N'EMEA\79749', CAST(N'2021-05-15T12:18:00.277' AS DateTime), N'EMEA\79749', CAST(N'2021-06-02T11:40:57.737' AS DateTime), 6773, 2021, 5, N'xxxxxxxxxxxxxxxxxxxxx vvvvvvv', 1, 0, 31, NULL, NULL, NULL, NULL, 0, 0.08, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 444, 0, 0, 0, 0, 0, 0, 0, 1100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'PLN', 0, 0, 0, 1, 333, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1544, 0, -1544, 0, 444, 1100, 0, 0, 0, -1544, 0, 444, 0, 1100, 0, 0, 0, 0, 0, 0, 444, -444, 0)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1108, N'EMEA\79749', CAST(N'2021-05-25T17:18:50.280' AS DateTime), N'EMEA\79749', CAST(N'2021-05-25T17:49:00.660' AS DateTime), 6773, 2021, 5, N'', 0, 0, 31, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'PLN', 0, 0, 0, 1, 333, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, -2, 0, 0, 2, 0, 0, 0, -2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1108, N'EMEA\79749', CAST(N'2021-05-25T17:18:50.280' AS DateTime), N'EMEA\79749', CAST(N'2021-05-31T16:09:09.397' AS DateTime), 6773, 2021, 5, N'', 0, 0, 31, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'PLN', 0, 0, 0, 1, 333, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, -2, 0, 0, 2, 0, 0, 0, -2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1109, N'EMEA\79749', CAST(N'2021-05-25T17:31:53.067' AS DateTime), N'EMEA\79749', CAST(N'2021-05-27T12:58:26.893' AS DateTime), 6773, 2021, 3, N'', 0, 0, 31, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 70625, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19539.125613145381, 0, 0, 0, 453, 489, 0, 0, 758, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'PLN', 0, 0, 0, 1, 333, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70632, 0, -70632, 0, 70625, 7, 0, 0, 0, -70632, 0, 70625, 0, 7, 0, 0, 0, 0, 0, 0, 70625, -70625, 0)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1109, N'EMEA\79749', CAST(N'2021-05-25T17:31:53.067' AS DateTime), N'EMEA\79749', CAST(N'2021-05-27T12:58:26.893' AS DateTime), 6773, 2021, 3, N'', 0, 0, 31, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 70625, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19539.125613145381, 0, 0, 0, 453, 489, 0, 0, 758, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'PLN', 0, 0, 0, 1, 333, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70632, 0, -70632, 0, 70625, 7, 0, 0, 0, -70632, 0, 70625, 0, 7, 0, 0, 0, 0, 0, 0, 70625, -70625, 0)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1112, N'EMEA\79749', CAST(N'2021-05-27T14:41:05.400' AS DateTime), N'EMEA\79749', CAST(N'2021-05-27T15:11:40.490' AS DateTime), 6773, 2020, 4, N'4.1', 0, 0, 30, NULL, NULL, NULL, NULL, 7593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5332026, 1000, 3000, 0, 0, 0, 2000, 0, 0, 0, 309349, 370, 0, 0, 0, 2000, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 8700, 0.01, 0, 0, 0.02, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 4, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 7593339, 0.05, 5649745, 1.7699913889918925E-05, 1943594, 0.19534273267433261, 5338026, 311719, 0.00032080174772792163, 348653.32989690779, 0.013855072674740027, 1594940.6701030922, 0.23806383506470924, 5335026, 3000, 309719, 2000, 0.05, 8880, 0.056957495718128637, 339773.32989690779, 0.014139031015117709, 5338026, 2255313, 0.16834335189838395)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1112, N'EMEA\79749', CAST(N'2021-05-27T14:41:05.400' AS DateTime), N'EMEA\79749', CAST(N'2021-05-31T22:07:19.853' AS DateTime), 6774, 2020, 4, N'4.1', 1, 0, 30, NULL, NULL, NULL, NULL, 7593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 3000, 0, 0, 0, 0, 0, 0, 0, 0, 370, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 8700, 0.01, 0, 0, 0.02, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 4, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 7593339, 0.05, 3370, 0, 7589969, 0.050022200354177995, 3000, 370, 0, 9177.01030927835, 0.0551152672982817, 7580791.989690722, 0.050082799716157034, 3000, 0, 370, 0, 0, 8880, 0.056957495718128637, 297.01030927835109, 0.011135898937277983, 3000, 7590339, 0.050019761963200855)
 GO
-INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_ApproxNoOfConn_D7], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1113, N'EMEA\79749', CAST(N'2021-05-27T15:11:50.527' AS DateTime), N'EMEA\79749', CAST(N'2021-05-29T15:59:59.643' AS DateTime), 6773, 2020, 4, N'4.1', 0, 0, 30, NULL, NULL, NULL, NULL, 7593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100, 300, 3000, 200, 0, 0, 400, 0, 0, 0, 500, 600, 0, 0, 0, 700, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 8700, 0.01, 0, 0, 0.02, 0, NULL, NULL, NULL, NULL, 9500, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 4, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 7593339, 0.05, 5800, 0.00603448275862069, 7587539, 0.050038220773989568, 4000, 1800, 0.019444444444444445, 9239.79381443299, 0.054741125560012219, 7578299.2061855672, 0.050099274018810973, 3300, 700, 1100, 700, 0.05, 8880, 0.056957495718128637, 359.79381443299008, 0.010515876423229278, 4000, 7589339, 0.050026352756149119)
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1113, N'EMEA\79749', CAST(N'2021-05-27T15:11:50.527' AS DateTime), N'EMEA\79749', CAST(N'2021-05-31T16:13:31.580' AS DateTime), 6773, 2021, 5, N'4.1', 0, 0, 31, NULL, NULL, NULL, NULL, 7593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100, 300, 3000, 200, 0, 0, 400, 0, 0, 0, 500, 600, 0, 0, 0, 700, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 8700, 0.01, 0, 0, 0.02, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 4, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 7593339, 0.05, 5800, 0.00603448275862069, 7587539, 0.050038220773989568, 4000, 1800, 0.019444444444444445, 9535.79381443299, 0.054809875901724155, 7578003.2061855672, 0.050101233930768943, 3300, 700, 1100, 700, 0.05, 9176, 0.056957495718128658, 359.79381443299008, 0.010515876423229278, 4000, 7589339, 0.050026352756149119)
+GO
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1114, N'EMEA\79749', CAST(N'2021-05-31T16:14:36.620' AS DateTime), N'EMEA\79749', CAST(N'2021-05-31T16:15:02.427' AS DateTime), 6774, 2020, 3, N'4.1', 0, 0, 31, NULL, NULL, NULL, NULL, 7593339, 0.05, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 3000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 100, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 260, 0, 0, 0, 8000, 1500, 7, 0, 8700, 0.01, 0, 0, 0.02, 0, NULL, NULL, NULL, NULL, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 4, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 7593339, 0.05, 3000, 0, 7590339, 0.050019761963200855, 3000, 0, 0, 9461.567010309278, 0.055239517450964892, 7580877.43298969, 0.050082238250054457, 3000, 0, 0, 0, 0, 9176, 0.056957495718128658, 285.56701030927888, 0.0115543770778708, 3000, 7590339, 0.050019761963200855)
+GO
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1121, N'EMEA\79749', CAST(N'2021-06-02T12:47:44.733' AS DateTime), N'EMEA\79749', CAST(N'2021-06-02T12:47:44.733' AS DateTime), 6773, 2021, 13, N'', 0, 0, 31, NULL, NULL, NULL, NULL, 0, 0.08, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 444, 0, 0, 0, 0, 0, 0, 0, 1100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 4, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 0, 0, 1544, 0, -1544, 0, 444, 1100, 0, 0, 0, -1544, 0, 444, 0, 1100, 0, 0, 0, 0, 0, 0, 444, -444, 0)
+GO
+INSERT [dbo].[tbWbEasyCalcData] ([WbEasyCalcDataId], [CreateLogin], [CreateDate], [ModifyLogin], [ModifyDate], [ZoneId], [YearNo], [MonthNo], [Description], [IsArchive], [IsAccepted], [Start_PeriodDays_M21], [SysInput_Desc_B6], [SysInput_Desc_B7], [SysInput_Desc_B8], [SysInput_Desc_B9], [SysInput_SystemInputVolumeM3_D6], [SysInput_SystemInputVolumeError_F6], [SysInput_SystemInputVolumeM3_D7], [SysInput_SystemInputVolumeError_F7], [SysInput_SystemInputVolumeM3_D8], [SysInput_SystemInputVolumeError_F8], [SysInput_SystemInputVolumeM3_D9], [SysInput_SystemInputVolumeError_F9], [BilledCons_Desc_B8], [BilledCons_Desc_B9], [BilledCons_Desc_B10], [BilledCons_Desc_B11], [BilledCons_Desc_F8], [BilledCons_Desc_F9], [BilledCons_Desc_F10], [BilledCons_Desc_F11], [UnbilledCons_Desc_D8], [UnbilledCons_Desc_D9], [UnbilledCons_Desc_D10], [UnbilledCons_Desc_D11], [UnbilledCons_Desc_F6], [UnbilledCons_Desc_F7], [UnbilledCons_Desc_F8], [UnbilledCons_Desc_F9], [UnbilledCons_Desc_F10], [UnbilledCons_Desc_F11], [UnauthCons_Desc_B18], [UnauthCons_Desc_B19], [UnauthCons_Desc_B20], [UnauthCons_Desc_B21], [MetErrors_Desc_D12], [MetErrors_Desc_D13], [MetErrors_Desc_D14], [MetErrors_Desc_D15], [Network_Desc_B7], [Network_Desc_B8], [Network_Desc_B9], [Network_Desc_B10], [Interm_Area_B7], [Interm_Area_B8], [Interm_Area_B9], [Interm_Area_B10], [BilledCons_BilledMetConsBulkWatSupExpM3_D6], [BilledCons_BilledUnmetConsBulkWatSupExpM3_H6], [BilledCons_UnbMetConsM3_D8], [BilledCons_UnbMetConsM3_D9], [BilledCons_UnbMetConsM3_D10], [BilledCons_UnbMetConsM3_D11], [BilledCons_UnbUnmetConsM3_H8], [BilledCons_UnbUnmetConsM3_H9], [BilledCons_UnbUnmetConsM3_H10], [BilledCons_UnbUnmetConsM3_H11], [UnbilledCons_MetConsBulkWatSupExpM3_D6], [UnbilledCons_UnbMetConsM3_D8], [UnbilledCons_UnbMetConsM3_D9], [UnbilledCons_UnbMetConsM3_D10], [UnbilledCons_UnbMetConsM3_D11], [UnbilledCons_UnbUnmetConsM3_H6], [UnbilledCons_UnbUnmetConsM3_H7], [UnbilledCons_UnbUnmetConsM3_H8], [UnbilledCons_UnbUnmetConsM3_H9], [UnbilledCons_UnbUnmetConsM3_H10], [UnbilledCons_UnbUnmetConsM3_H11], [UnbilledCons_UnbUnmetConsError_J6], [UnbilledCons_UnbUnmetConsError_J7], [UnbilledCons_UnbUnmetConsError_J8], [UnbilledCons_UnbUnmetConsError_J9], [UnbilledCons_UnbUnmetConsError_J10], [UnbilledCons_UnbUnmetConsError_J11], [UnauthCons_IllegalConnDomEstNo_D6], [UnauthCons_IllegalConnDomPersPerHouse_H6], [UnauthCons_IllegalConnDomConsLitPerPersDay_J6], [UnauthCons_IllegalConnDomErrorMargin_F6], [UnauthCons_IllegalConnOthersErrorMargin_F10], [IllegalConnectionsOthersEstimatedNumber_D10], [IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10], [UnauthCons_MeterTampBypEtcEstNo_D14], [UnauthCons_MeterTampBypEtcErrorMargin_F14], [UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14], [UnauthCons_OthersErrorMargin_F18], [UnauthCons_OthersErrorMargin_F19], [UnauthCons_OthersErrorMargin_F20], [UnauthCons_OthersErrorMargin_F21], [UnauthCons_OthersM3PerDay_J18], [UnauthCons_OthersM3PerDay_J19], [UnauthCons_OthersM3PerDay_J20], [UnauthCons_OthersM3PerDay_J21], [MetErrors_DetailedManualSpec_J6], [MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8], [MetErrors_BilledMetConsWoBulkSupErrorMargin_N8], [MetErrors_Total_F12], [MetErrors_Total_F13], [MetErrors_Total_F14], [MetErrors_Total_F15], [MetErrors_Meter_H12], [MetErrors_Meter_H13], [MetErrors_Meter_H14], [MetErrors_Meter_H15], [MetErrors_Error_N12], [MetErrors_Error_N13], [MetErrors_Error_N14], [MetErrors_Error_N15], [MeteredBulkSupplyExportErrorMargin_N32], [UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34], [CorruptMeterReadingPracticessErrorMargin_N38], [DataHandlingErrorsOffice_L40], [DataHandlingErrorsOfficeErrorMargin_N40], [MetErrors_MetBulkSupExpMetUnderreg_H32], [MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34], [MetErrors_CorruptMetReadPractMetUndrreg_H38], [Network_DistributionAndTransmissionMains_D7], [Network_DistributionAndTransmissionMains_D8], [Network_DistributionAndTransmissionMains_D9], [Network_DistributionAndTransmissionMains_D10], [Network_NoOfConnOfRegCustomers_H10], [Network_NoOfInactAccountsWSvcConns_H18], [Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32], [Network_PossibleUnd_D30], [Network_NoCustomers_H7], [Network_ErrorMargin_J7], [Network_ErrorMargin_J10], [Network_ErrorMargin_J18], [Network_ErrorMargin_J32], [Network_ErrorMargin_D35], [Prs_Area_B7], [Prs_Area_B8], [Prs_Area_B9], [Prs_Area_B10], [Prs_DailyAvgPrsM_F7], [Prs_ApproxNoOfConn_D8], [Prs_DailyAvgPrsM_F8], [Prs_ApproxNoOfConn_D9], [Prs_DailyAvgPrsM_F9], [Prs_ApproxNoOfConn_D10], [Prs_DailyAvgPrsM_F10], [Prs_ErrorMarg_F26], [Interm_Conn_D7], [Interm_Conn_D8], [Interm_Conn_D9], [Interm_Conn_D10], [Interm_Days_F7], [Interm_Days_F8], [Interm_Days_F9], [Interm_Days_F10], [Interm_Hour_H7], [Interm_Hour_H8], [Interm_Hour_H9], [Interm_Hour_H10], [Interm_ErrorMarg_H26], [FinancData_G6], [FinancData_K6], [FinancData_G8], [FinancData_D26], [FinancData_G35], [MatrixOneIn_SelectedOption], [MatrixOneIn_C11], [MatrixOneIn_C12], [MatrixOneIn_C13], [MatrixOneIn_C14], [MatrixOneIn_C21], [MatrixOneIn_C22], [MatrixOneIn_C23], [MatrixOneIn_C24], [MatrixOneIn_D21], [MatrixOneIn_D22], [MatrixOneIn_D23], [MatrixOneIn_D24], [MatrixOneIn_E11], [MatrixOneIn_E12], [MatrixOneIn_E13], [MatrixOneIn_E14], [MatrixOneIn_E21], [MatrixOneIn_E22], [MatrixOneIn_E23], [MatrixOneIn_E24], [MatrixOneIn_F11], [MatrixOneIn_F12], [MatrixOneIn_F13], [MatrixOneIn_F14], [MatrixOneIn_F21], [MatrixOneIn_F22], [MatrixOneIn_F23], [MatrixOneIn_F24], [MatrixOneIn_G11], [MatrixOneIn_G12], [MatrixOneIn_G13], [MatrixOneIn_G14], [MatrixOneIn_G21], [MatrixOneIn_G22], [MatrixOneIn_G23], [MatrixOneIn_G24], [MatrixOneIn_H11], [MatrixOneIn_H12], [MatrixOneIn_H13], [MatrixOneIn_H14], [MatrixOneIn_H21], [MatrixOneIn_H22], [MatrixOneIn_H23], [MatrixOneIn_H24], [MatrixTwoIn_SelectedOption], [MatrixTwoIn_D21], [MatrixTwoIn_D22], [MatrixTwoIn_D23], [MatrixTwoIn_D24], [MatrixTwoIn_E11], [MatrixTwoIn_E12], [MatrixTwoIn_E13], [MatrixTwoIn_E14], [MatrixTwoIn_E21], [MatrixTwoIn_E22], [MatrixTwoIn_E23], [MatrixTwoIn_E24], [MatrixTwoIn_F11], [MatrixTwoIn_F12], [MatrixTwoIn_F13], [MatrixTwoIn_F14], [MatrixTwoIn_F21], [MatrixTwoIn_F22], [MatrixTwoIn_F23], [MatrixTwoIn_F24], [MatrixTwoIn_G11], [MatrixTwoIn_G12], [MatrixTwoIn_G13], [MatrixTwoIn_G14], [MatrixTwoIn_G21], [MatrixTwoIn_G22], [MatrixTwoIn_G23], [MatrixTwoIn_G24], [MatrixTwoIn_H11], [MatrixTwoIn_H12], [MatrixTwoIn_H13], [MatrixTwoIn_H14], [MatrixTwoIn_H21], [MatrixTwoIn_H22], [MatrixTwoIn_H23], [MatrixTwoIn_H24], [SystemInputVolume_B19], [SystemInputVolumeErrorMargin_B21], [AuthorizedConsumption_K12], [AuthorizedConsumptionErrorMargin_K15], [WaterLosses_K29], [WaterLossesErrorMargin_K31], [BilledAuthorizedConsumption_T8], [UnbilledAuthorizedConsumption_T16], [UnbilledAuthorizedConsumptionErrorMargin_T20], [CommercialLosses_T26], [CommercialLossesErrorMargin_T29], [PhysicalLossesM3_T34], [PhyscialLossesErrorMargin_AH35], [BilledMeteredConsumption_AC4], [BilledUnmeteredConsumption_AC9], [UnbilledMeteredConsumption_AC14], [UnbilledUnmeteredConsumption_AC19], [UnbilledUnmeteredConsumptionErrorMargin_AO20], [UnauthorizedConsumption_AC24], [UnauthorizedConsumptionErrorMargin_AO25], [CustomerMeterInaccuraciesAndErrorsM3_AC29], [CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30], [RevenueWaterM3_AY8], [NonRevenueWaterM3_AY24], [NonRevenueWaterErrorMargin_AY26]) VALUES (1122, N'EMEA\79749', CAST(N'2021-06-04T09:11:14.977' AS DateTime), N'EMEA\79749', CAST(N'2021-06-04T12:12:06.783' AS DateTime), 6776, 2021, 5, N'', 0, 0, 31, N'', N'', N'', N'', 33002.2, 0.05, 0, 0, 0, 0, 0, 0, N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', N'', 5332026, 1000, 37381, 0, 0, 0, 2000, 0, 0, 0, 309349, 3000, 0, 0, 0, 2000, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 200, 3, 120, 0.05, 0.05, 500, 200, 1000, 0.1, 160, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.03, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 100, 0.02, 0.03, 0.03, 0.03, 49350.792996808304, 0, 0, 0, 1381, 690, 7, 0, 1465, 0.01, 0, 0, 0.02, 0, N'', N'', N'', N'', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, N'PLN', 1, 0, 0, 1, 1.5, 2, 4, 8, 2, 4, 8, 16, 25, 50, 100, 200, 25, 50, 100, 200, 50, 100, 200, 400, 40, 75, 150, 300, 75, 150, 300, 600, 50, 100, 200, 400, 100, 200, 400, 800, 60, 125, 250, 500, 125, 250, 500, 1000, 4, 55, 110, 220, 400, 50, 100, 200, 350, 80, 160, 320, 600, 65, 125, 250, 450, 105, 210, 420, 800, 75, 150, 300, 550, 130, 260, 520, 1000, 85, 175, 350, 650, 155, 310, 620, 1200, 33002.2, 0.05, 5686756, 1.7584717895404693E-05, -5653753.8, -0.00029239641174854064, 5372407, 314349, 0.00031811776083270503, 352273.329896907, 0.013762001255835817, -6006027.1298969071, -0.00085282539804120924, 5369407, 3000, 312349, 2000, 0.05, 10292, 0.05164235462686214, 341981.329896907, 0.014090718282550199, 5372407, -5339404.8, -0.0003090438095272342)
 GO
 SET IDENTITY_INSERT [dbo].[tbWbEasyCalcData] OFF
 GO
@@ -2193,13 +2224,13 @@ REFERENCES [config].[WaterBalanceConfig] ([ModelZoneId])
 GO
 ALTER TABLE [dbo].[tbWbEasyCalcData] CHECK CONSTRAINT [FK_tbWbEasyCalcData_WaterBalanceConfig]
 GO
-/****** Object:  StoredProcedure [dbo].[spGisModelScadaData]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  StoredProcedure [dbo].[__spGisModelScadaData_01]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[spGisModelScadaData] 
+create PROCEDURE [dbo].[__spGisModelScadaData_01] 
 	@YearNo INT,
 	@MonthNo INT,
 	@ZoneId INT,
@@ -2463,33 +2494,643 @@ BEGIN
 	END;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spMonthList]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  StoredProcedure [dbo].[__spGisModelScadaData_02]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-create PROCEDURE [dbo].[spMonthList] 
+CREATE PROCEDURE [dbo].[__spGisModelScadaData_02] 
+	@YearNo INT,
+	@MonthNo INT,
+	@ZoneId INT,
+
+
+	@Start_PeriodDays_M21 INT OUTPUT,
+
+	--@SysInput_Desc_B6 nvarchar(400) OUTPUT,
+	--@SysInput_Desc_B7 nvarchar(400) OUTPUT,
+	--@SysInput_Desc_B8 nvarchar(400) OUTPUT,
+	--@SysInput_Desc_B9 nvarchar(400) OUTPUT,
+	@SysInput_SystemInputVolumeM3_D6 [float] OUTPUT,
+	@SysInput_SystemInputVolumeError_F6 [float] OUTPUT,
+	@SysInput_SystemInputVolumeM3_D7 [float] OUTPUT,
+	@SysInput_SystemInputVolumeError_F7 [float] OUTPUT,
+	@SysInput_SystemInputVolumeM3_D8 [float] OUTPUT,
+	@SysInput_SystemInputVolumeError_F8 [float] OUTPUT,
+	@SysInput_SystemInputVolumeM3_D9 [float] OUTPUT,
+	@SysInput_SystemInputVolumeError_F9 [float] OUTPUT,
+
+	--@BilledCons_Desc_B8      nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_B9   	 nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_B10  	 nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_B11  	 nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_F8   	 nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_F9   	 nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_F10  	 nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_F11  	 nvarchar(400) OUTPUT,
+	@BilledCons_BilledMetConsBulkWatSupExpM3_D6 [float] OUTPUT,
+	@BilledCons_BilledUnmetConsBulkWatSupExpM3_H6 [float] OUTPUT,
+	@BilledCons_UnbMetConsM3_D8 [float] OUTPUT,
+	@BilledCons_UnbMetConsM3_D9 [float] OUTPUT,
+	@BilledCons_UnbMetConsM3_D10 [float] OUTPUT,
+	@BilledCons_UnbMetConsM3_D11 [float] OUTPUT,
+	@BilledCons_UnbUnmetConsM3_H8 [float] OUTPUT, 
+	@BilledCons_UnbUnmetConsM3_H9 [float] OUTPUT, 
+	@BilledCons_UnbUnmetConsM3_H10 [float] OUTPUT, 
+	@BilledCons_UnbUnmetConsM3_H11 [float] OUTPUT, 
+
+	--@UnbilledCons_Desc_D8 	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_D9 	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_D10	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_D11	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_F6 	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_F7 	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_F8 	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_F9 	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_F10	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_F11	 nvarchar(400) OUTPUT,
+	@UnbilledCons_MetConsBulkWatSupExpM3_D6 [float] OUTPUT,
+	@UnbilledCons_UnbMetConsM3_D8 [float] OUTPUT,
+	@UnbilledCons_UnbMetConsM3_D9 [float] OUTPUT,
+	@UnbilledCons_UnbMetConsM3_D10 [float] OUTPUT,
+	@UnbilledCons_UnbMetConsM3_D11 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsM3_H6 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsM3_H7 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsM3_H8 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsM3_H9 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsM3_H10 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsM3_H11 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsError_J6 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsError_J7 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsError_J8 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsError_J9 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsError_J10 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsError_J11 [float] OUTPUT,
+
+	--@UnauthCons_Desc_B18  	 nvarchar(400) OUTPUT,
+	--@UnauthCons_Desc_B19  	 nvarchar(400) OUTPUT,
+	--@UnauthCons_Desc_B20  	 nvarchar(400) OUTPUT,
+	--@UnauthCons_Desc_B21  	 nvarchar(400) OUTPUT,
+    @UnauthCons_OthersErrorMargin_F18 [float] OUTPUT, 
+    @UnauthCons_OthersErrorMargin_F19 [float] OUTPUT, 
+    @UnauthCons_OthersErrorMargin_F20 [float] OUTPUT, 
+    @UnauthCons_OthersErrorMargin_F21 [float] OUTPUT, 
+	@UnauthCons_OthersM3PerDay_J18 [float] OUTPUT,
+	@UnauthCons_OthersM3PerDay_J19 [float] OUTPUT,
+	@UnauthCons_OthersM3PerDay_J20 [float] OUTPUT,
+	@UnauthCons_OthersM3PerDay_J21 [float] OUTPUT,
+	@UnauthCons_IllegalConnDomEstNo_D6 [int] OUTPUT,
+	@UnauthCons_IllegalConnDomPersPerHouse_H6 [float] OUTPUT,
+	@UnauthCons_IllegalConnDomConsLitPerPersDay_J6 [float] OUTPUT,
+	@UnauthCons_IllegalConnDomErrorMargin_F6 [float] OUTPUT,
+	@UnauthCons_IllegalConnOthersErrorMargin_F10 [float] OUTPUT,
+	@IllegalConnectionsOthersEstimatedNumber_D10 [float] OUTPUT,
+	@IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10 [float] OUTPUT,
+	@UnauthCons_MeterTampBypEtcEstNo_D14 [float] OUTPUT,
+	@UnauthCons_MeterTampBypEtcErrorMargin_F14 [float] OUTPUT,
+	@UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14 [float] OUTPUT,
+
+	--@MetErrors_Desc_D12   	 nvarchar(400) OUTPUT,
+	--@MetErrors_Desc_D13   	 nvarchar(400) OUTPUT,
+	--@MetErrors_Desc_D14   	 nvarchar(400) OUTPUT,
+	--@MetErrors_Desc_D15   	 nvarchar(400) OUTPUT,
+	@MetErrors_DetailedManualSpec_J6 [bit] OUTPUT,
+	@MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8 [float] OUTPUT,
+	@MetErrors_BilledMetConsWoBulkSupErrorMargin_N8 [float] OUTPUT,
+	@MetErrors_Total_F12 [float] OUTPUT,
+	@MetErrors_Total_F13 [float] OUTPUT,
+	@MetErrors_Total_F14 [float] OUTPUT,
+	@MetErrors_Total_F15 [float] OUTPUT,
+	@MetErrors_Meter_H12 [float] OUTPUT,
+	@MetErrors_Meter_H13 [float] OUTPUT,
+	@MetErrors_Meter_H14 [float] OUTPUT,
+	@MetErrors_Meter_H15 [float] OUTPUT,
+	@MetErrors_Error_N12 [float] OUTPUT,
+	@MetErrors_Error_N13 [float] OUTPUT,
+	@MetErrors_Error_N14 [float] OUTPUT,
+	@MetErrors_Error_N15 [float] OUTPUT,
+	@MeteredBulkSupplyExportErrorMargin_N32 [float] OUTPUT,
+	@UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34 [float] OUTPUT,
+	@CorruptMeterReadingPracticessErrorMargin_N38 [float] OUTPUT,
+	@DataHandlingErrorsOffice_L40 [float] OUTPUT,
+	@DataHandlingErrorsOfficeErrorMargin_N40 [float] OUTPUT,
+	@MetErrors_MetBulkSupExpMetUnderreg_H32 [float] OUTPUT,
+	@MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34 [float] OUTPUT,
+	@MetErrors_CorruptMetReadPractMetUndrreg_H38 [float] OUTPUT,
+
+	--@Network_Desc_B7      	 nvarchar(400) OUTPUT,
+	--@Network_Desc_B8      	 nvarchar(400) OUTPUT,
+	--@Network_Desc_B9      	 nvarchar(400) OUTPUT,
+	--@Network_Desc_B10     	 nvarchar(400) OUTPUT,
+	@Network_DistributionAndTransmissionMains_D7 [float] OUTPUT,
+	@Network_DistributionAndTransmissionMains_D8 [float] OUTPUT,
+	@Network_DistributionAndTransmissionMains_D9 [float] OUTPUT,
+	@Network_DistributionAndTransmissionMains_D10 [float] OUTPUT,
+	@Network_NoOfConnOfRegCustomers_H10 [float] OUTPUT,
+	@Network_NoOfInactAccountsWSvcConns_H18 [float] OUTPUT,
+	@Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32 [float] OUTPUT,
+	@Network_PossibleUnd_D30 [float] OUTPUT,
+	@Network_NoCustomers_H7  [float] OUTPUT,
+	@Network_ErrorMargin_J7  [float] OUTPUT,
+	@Network_ErrorMargin_J10 [float] OUTPUT,
+	@Network_ErrorMargin_J18 [float] OUTPUT,
+	@Network_ErrorMargin_J32 [float] OUTPUT,
+	@Network_ErrorMargin_D35 [float] OUTPUT,
+
+	--@Prs_Area_B7 nvarchar(400) OUTPUT,
+	--@Prs_Area_B8 nvarchar(400) OUTPUT,
+	--@Prs_Area_B9 nvarchar(400) OUTPUT,
+	--@Prs_Area_B10 nvarchar(400) OUTPUT,
+	@Prs_ApproxNoOfConn_D7 [float] OUTPUT,
+	@Prs_DailyAvgPrsM_F7 [float] OUTPUT,
+	@Prs_ApproxNoOfConn_D8 [float] OUTPUT,
+	@Prs_DailyAvgPrsM_F8 [float] OUTPUT,
+	@Prs_ApproxNoOfConn_D9 [float] OUTPUT,
+	@Prs_DailyAvgPrsM_F9 [float] OUTPUT,
+	@Prs_ApproxNoOfConn_D10 [float] OUTPUT,
+	@Prs_DailyAvgPrsM_F10 [float] OUTPUT,
+	@Prs_ErrorMarg_F26 [float] OUTPUT,
+
+	--@Interm_Area_B7  nvarchar(400) OUTPUT,
+	--@Interm_Area_B8  nvarchar(400) OUTPUT,
+	--@Interm_Area_B9  nvarchar(400) OUTPUT,
+	--@Interm_Area_B10 nvarchar(400) OUTPUT,
+	@Interm_Conn_D7  [float] OUTPUT,
+	@Interm_Conn_D8  [float] OUTPUT,
+	@Interm_Conn_D9  [float] OUTPUT,
+	@Interm_Conn_D10 [float] OUTPUT,
+	@Interm_Days_F7  [float] OUTPUT,
+	@Interm_Days_F8  [float] OUTPUT,
+	@Interm_Days_F9  [float] OUTPUT,
+	@Interm_Days_F10 [float] OUTPUT,
+	@Interm_Hour_H7  [float] OUTPUT,
+	@Interm_Hour_H8  [float] OUTPUT,
+	@Interm_Hour_H9  [float] OUTPUT,
+	@Interm_Hour_H10 [float] OUTPUT,
+	@Interm_ErrorMarg_H26 [float] OUTPUT,
+
+	--@FinancData_G6 [float] OUTPUT,
+	--@FinancData_K6 nvarchar(400) OUTPUT,
+	--@FinancData_G8 [float] OUTPUT,
+	@FinancData_D26 [float] OUTPUT, 
+	@FinancData_G35 [float] OUTPUT
+
+
 AS
 BEGIN
 	SET NOCOUNT ON;
 
-SELECT 
-    MonthId AS Id,
-	[MonthName] AS [Name]
-FROM
-	tbMonth;
+	/*
+	DECLARE
+		@StartDate DATETIME,
+		@EndDate DATETIME,
+		@ZonePrefix NVARCHAR(50);
+ 
+	SELECT
+		@ZonePrefix = [DestinationName]
+	FROM
+		[config].[WaterBalanceConfig]
+	WHERE
+		[ZoneNo] = @ZoneId;		-- 'SI'
+
+	IF (@MonthNo < 13) BEGIN
+		SELECT @StartDate = CONCAT(@YearNo, '-', FORMAT(@MonthNo, '00'), '-01');
+		SELECT @EndDate = EOMONTH(@StartDate);
+	END ELSE BEGIN
+		SELECT @StartDate = CONCAT(@YearNo, '-01-01');
+		SELECT @EndDate = CONCAT(@YearNo, '-12-31');
+	END;
+
+	SELECT 
+		 @Start_PeriodDays_M21 = 0
+
+		,@SysInput_SystemInputVolumeM3_D6 = 0								-- SystemInputVolume
+		,@SysInput_SystemInputVolumeError_F6 = 0
+		,@SysInput_SystemInputVolumeM3_D7 = 0
+		,@SysInput_SystemInputVolumeError_F7 = 0
+		,@SysInput_SystemInputVolumeM3_D8 = 0
+		,@SysInput_SystemInputVolumeError_F8 = 0
+		,@SysInput_SystemInputVolumeM3_D9 = 0
+		,@SysInput_SystemInputVolumeError_F9 = 0
+
+		,@BilledCons_BilledMetConsBulkWatSupExpM3_D6 = 0					-- sprzedaz_w_strefie
+		,@BilledCons_BilledUnmetConsBulkWatSupExpM3_H6 = 0
+		,@BilledCons_UnbMetConsM3_D8 = 0
+		,@BilledCons_UnbUnmetConsM3_H8 = 0
+
+		,@UnbilledCons_MetConsBulkWatSupExpM3_D6 = 0
+		,@UnbilledCons_UnbMetConsM3_D8 = 0
+		,@UnbilledCons_UnbUnmetConsM3_H6 = 0
+		,@UnbilledCons_UnbUnmetConsError_J6 = 0
+
+		,@UnauthCons_IllegalConnDomEstNo_D6 = 0
+		,@UnauthCons_IllegalConnDomPersPerHouse_H6 = 0
+		,@UnauthCons_IllegalConnDomConsLitPerPersDay_J6 = 0
+		,@UnauthCons_IllegalConnDomErrorMargin_F6 = 0
+		,@UnauthCons_IllegalConnOthersErrorMargin_F10 = 0
+		,@IllegalConnectionsOthersEstimatedNumber_D10 = 0
+		,@IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10 = 0
+		,@UnauthCons_MeterTampBypEtcEstNo_D14 = 0
+		,@UnauthCons_MeterTampBypEtcErrorMargin_F14 = 0
+		,@UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14 = 0
+
+		,@MetErrors_DetailedManualSpec_J6 = 0								-- (t02.[MetErrors_DetailedManualSpec_J6])
+		,@MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8 = 0
+		,@MetErrors_BilledMetConsWoBulkSupErrorMargin_N8 = 0
+		,@MeteredBulkSupplyExportErrorMargin_N32 = 0
+		,@UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34 = 0
+		,@CorruptMeterReadingPracticessErrorMargin_N38 = 0
+		,@DataHandlingErrorsOffice_L40 = 0
+		,@DataHandlingErrorsOfficeErrorMargin_N40 = 0
+		,@MetErrors_MetBulkSupExpMetUnderreg_H32 = 0
+		,@MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34 = 0
+		,@MetErrors_CorruptMetReadPractMetUndrreg_H38 = 0
+
+		,@Network_DistributionAndTransmissionMains_D7 = 0					-- Model: dlugosc_sieci
+		,@Network_NoCustomers_H7 = 0										-- Model: CustomerMetersQuantity
+		,@Network_NoOfConnOfRegCustomers_H10 = 0							-- ilosc przylaczy aktywnych
+		,@Network_NoOfInactAccountsWSvcConns_H18 = 0						-- ilosc przylaczy nieaktywnych
+		,@Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32 = 0
+
+		,@Prs_ApproxNoOfConn_D7 = 0
+		,@Prs_DailyAvgPrsM_F7 = 0											-- 
+		,@Prs_ApproxNoOfConn_D8 = 0
+		,@Prs_DailyAvgPrsM_F8 = 0
+		,@Prs_ApproxNoOfConn_D9 = 0
+		,@Prs_DailyAvgPrsM_F9 = 0
+		,@Prs_ApproxNoOfConn_D10 = 0
+		,@Prs_DailyAvgPrsM_F10 = 0
+		,@Prs_ErrorMarg_F26 = 0
+		;
+	*/
+
+	IF (@MonthNo < 13) BEGIN
+
+		-- GIS -----------------------------------------------------------------------
+		SELECT 
+			@BilledCons_UnbMetConsM3_D8 = sprzedaz_w_strefie,
+			@Network_NoOfConnOfRegCustomers_H10 = ilosc_przylaczy,
+			@Network_NoOfInactAccountsWSvcConns_H18 = ilosc_przylaczy_czynnych - ilosc_przylaczy
+		FROM 
+			[dbo].[vwGisWaterConsumption] vCons
+			INNER JOIN config.WaterBalanceConfig tConf ON vCons.id_strefy = tConf.GisZoneId
+		WHERE 
+			[year] = @YearNo 
+			AND [month] = @MonthNo 
+			AND tConf.ModelZoneId = @ZoneId;
+
+		-- WaterGEMS ------------------------------------------------------------------
+		SELECT 
+			@Network_DistributionAndTransmissionMains_D7 = WaterInfra.[dbo].[fnPipeLenghtInZoneSum](@ZoneId),
+			@Network_NoCustomers_H7 = WaterInfra.[dbo].[fnCustomerMeterInZoneCount](@ZoneId);
+
+		-- SCADA ----------------------------------------------------------------------
+		SELECT 
+			@SysInput_SystemInputVolumeM3_D6 = TWDB.[dbo].[fnWaterConsumptionForZone](@YearNo, @MonthNo, @ZoneId);
+
+		-- SCADA & WaterGEMS ----------------------------------------------------------
+		SELECT 
+			@Prs_DailyAvgPrsM_F7 = COALESCE([dbo].[fnScadaPressureForZoneAvg](@YearNo, @MonthNo, @ZoneId), 0);
 
 
+	END ELSE BEGIN
+
+		SELECT
+				-- Input
+			@Start_PeriodDays_M21 = 0,
+
+			--@SysInput_Desc_B6 = NULL,
+			--@SysInput_Desc_B7 = NULL,
+			--@SysInput_Desc_B8 = NULL,
+			--@SysInput_Desc_B9 = NULL,
+			@SysInput_SystemInputVolumeM3_D6 = 0,
+			@SysInput_SystemInputVolumeError_F6 = 0,
+			@SysInput_SystemInputVolumeM3_D7 = 0,
+			@SysInput_SystemInputVolumeError_F7 = 0,
+			@SysInput_SystemInputVolumeM3_D8 = 0,
+			@SysInput_SystemInputVolumeError_F8 = 0,
+			@SysInput_SystemInputVolumeM3_D9 = 0,
+			@SysInput_SystemInputVolumeError_F9 = 0,
+
+			--@BilledCons_Desc_B8    = NULL,
+			--@BilledCons_Desc_B9    = NULL,
+			--@BilledCons_Desc_B10   = NULL,
+			--@BilledCons_Desc_B11   = NULL,
+			--@BilledCons_Desc_F8    = NULL,
+			--@BilledCons_Desc_F9    = NULL,
+			--@BilledCons_Desc_F10   = NULL,
+			--@BilledCons_Desc_F11   = NULL,
+			@BilledCons_BilledMetConsBulkWatSupExpM3_D6 = 0,
+			@BilledCons_BilledUnmetConsBulkWatSupExpM3_H6 = 0,
+			@BilledCons_UnbMetConsM3_D8 = 0,
+			@BilledCons_UnbMetConsM3_D9 = 0,
+			@BilledCons_UnbMetConsM3_D10 = 0,
+			@BilledCons_UnbMetConsM3_D11 = 0,
+			@BilledCons_UnbUnmetConsM3_H8 = 0, 
+			@BilledCons_UnbUnmetConsM3_H9 = 0, 
+			@BilledCons_UnbUnmetConsM3_H10 = 0, 
+			@BilledCons_UnbUnmetConsM3_H11 = 0, 
+
+			--@UnbilledCons_Desc_D8  = NULL,
+			--@UnbilledCons_Desc_D9  = NULL,
+			--@UnbilledCons_Desc_D10 = NULL,
+			--@UnbilledCons_Desc_D11 = NULL,
+			--@UnbilledCons_Desc_F6  = NULL,
+			--@UnbilledCons_Desc_F7  = NULL,
+			--@UnbilledCons_Desc_F8  = NULL,
+			--@UnbilledCons_Desc_F9  = NULL,
+			--@UnbilledCons_Desc_F10 = NULL,
+			--@UnbilledCons_Desc_F11 = NULL,
+			@UnbilledCons_MetConsBulkWatSupExpM3_D6 = 0,
+			@UnbilledCons_UnbMetConsM3_D8 = 0,
+			@UnbilledCons_UnbMetConsM3_D9 = 0,
+			@UnbilledCons_UnbMetConsM3_D10 = 0,
+			@UnbilledCons_UnbMetConsM3_D11 = 0,
+			@UnbilledCons_UnbUnmetConsM3_H6 = 0,
+			@UnbilledCons_UnbUnmetConsM3_H7 = 0,
+			@UnbilledCons_UnbUnmetConsM3_H8 = 0,
+			@UnbilledCons_UnbUnmetConsM3_H9 = 0,
+			@UnbilledCons_UnbUnmetConsM3_H10 = 0,
+			@UnbilledCons_UnbUnmetConsM3_H11 = 0,
+			@UnbilledCons_UnbUnmetConsError_J6 = 0,
+			@UnbilledCons_UnbUnmetConsError_J7 = 0,
+			@UnbilledCons_UnbUnmetConsError_J8 = 0,
+			@UnbilledCons_UnbUnmetConsError_J9 = 0,
+			@UnbilledCons_UnbUnmetConsError_J10 = 0,
+			@UnbilledCons_UnbUnmetConsError_J11 = 0,
+
+			--@UnauthCons_Desc_B18   = NULL,
+			--@UnauthCons_Desc_B19   = NULL,
+			--@UnauthCons_Desc_B20   = NULL,
+			--@UnauthCons_Desc_B21   = NULL,
+			@UnauthCons_IllegalConnDomEstNo_D6 = 0,
+			@UnauthCons_IllegalConnDomPersPerHouse_H6 = 0,
+			@UnauthCons_IllegalConnDomConsLitPerPersDay_J6 = 0,
+			@UnauthCons_IllegalConnDomErrorMargin_F6 = 0,
+			@UnauthCons_IllegalConnOthersErrorMargin_F10 = 0,
+			@IllegalConnectionsOthersEstimatedNumber_D10 = 0,
+			@IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10 = 0,
+			@UnauthCons_MeterTampBypEtcEstNo_D14 = 0,
+			@UnauthCons_MeterTampBypEtcErrorMargin_F14 = 0,
+			@UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14 = 0,
+			@UnauthCons_OthersErrorMargin_F18 = 0, 
+			@UnauthCons_OthersErrorMargin_F19 = 0, 
+			@UnauthCons_OthersErrorMargin_F20 = 0, 
+			@UnauthCons_OthersErrorMargin_F21 = 0, 
+			@UnauthCons_OthersM3PerDay_J18 = 0,
+			@UnauthCons_OthersM3PerDay_J19 = 0,
+			@UnauthCons_OthersM3PerDay_J20 = 0,
+			@UnauthCons_OthersM3PerDay_J21 = 0,
+
+			--@MetErrors_Desc_D12    = NULL,
+			--@MetErrors_Desc_D13    = NULL,
+			--@MetErrors_Desc_D14    = NULL,
+			--@MetErrors_Desc_D15    = NULL,
+			@MetErrors_DetailedManualSpec_J6 = 0,
+			@MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8 = 0,
+			@MetErrors_BilledMetConsWoBulkSupErrorMargin_N8 = 0,
+			@MetErrors_Total_F12 = 0,
+			@MetErrors_Total_F13 = 0,
+			@MetErrors_Total_F14 = 0,
+			@MetErrors_Total_F15 = 0,
+			@MetErrors_Meter_H12 = 0,
+			@MetErrors_Meter_H13 = 0,
+			@MetErrors_Meter_H14 = 0,
+			@MetErrors_Meter_H15 = 0,
+			@MetErrors_Error_N12 = 0,
+			@MetErrors_Error_N13 = 0,
+			@MetErrors_Error_N14 = 0,
+			@MetErrors_Error_N15 = 0,
+			@MeteredBulkSupplyExportErrorMargin_N32 = 0,
+			@UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34 = 0,
+			@CorruptMeterReadingPracticessErrorMargin_N38 = 0,
+			@DataHandlingErrorsOffice_L40 = 0,
+			@DataHandlingErrorsOfficeErrorMargin_N40 = 0,
+			@MetErrors_MetBulkSupExpMetUnderreg_H32 = 0,
+			@MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34 = 0,
+			@MetErrors_CorruptMetReadPractMetUndrreg_H38 = 0,
+
+			--@Network_Desc_B7       = NULL,
+			--@Network_Desc_B8       = NULL,
+			--@Network_Desc_B9       = NULL,
+			--@Network_Desc_B10      = NULL,
+			@Network_DistributionAndTransmissionMains_D7 = 0,
+			@Network_DistributionAndTransmissionMains_D8 = 0,
+			@Network_DistributionAndTransmissionMains_D9 = 0,
+			@Network_DistributionAndTransmissionMains_D10 = 0,
+			@Network_NoOfConnOfRegCustomers_H10 = 0,
+			@Network_NoOfInactAccountsWSvcConns_H18 = 0,
+			@Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32 = 0,
+			@Network_PossibleUnd_D30 = 0,
+			@Network_NoCustomers_H7 = 0,
+			@Network_ErrorMargin_J7 = 0,
+			@Network_ErrorMargin_J10 = 0,
+			@Network_ErrorMargin_J18 = 0,
+			@Network_ErrorMargin_J32 = 0,
+			@Network_ErrorMargin_D35 = 0,
+
+			--@Prs_Area_B7 = NULL,
+			--@Prs_Area_B8 = NULL,
+			--@Prs_Area_B9 = NULL,
+			--@Prs_Area_B10 = NULL,
+			@Prs_ApproxNoOfConn_D7 = 0,
+			@Prs_DailyAvgPrsM_F7 = 0,
+			@Prs_ApproxNoOfConn_D8 = 0,
+			@Prs_DailyAvgPrsM_F8 = 0,
+			@Prs_ApproxNoOfConn_D9 = 0,
+			@Prs_DailyAvgPrsM_F9 = 0,
+			@Prs_ApproxNoOfConn_D10 = 0,
+			@Prs_DailyAvgPrsM_F10 = 0,
+			@Prs_ErrorMarg_F26 = 0,
+
+			--@Interm_Area_B7        = NULL,
+			--@Interm_Area_B8        = NULL,
+			--@Interm_Area_B9        = NULL,
+			--@Interm_Area_B10       = NULL,
+			@Interm_Conn_D7 = 0,
+			@Interm_Conn_D8 = 0,
+			@Interm_Conn_D9 = 0,
+			@Interm_Conn_D10 = 0,
+			@Interm_Days_F7 = 0,
+			@Interm_Days_F8 = 0,
+			@Interm_Days_F9 = 0,
+			@Interm_Days_F10 = 0,
+			@Interm_Hour_H7 = 0,
+			@Interm_Hour_H8 = 0,
+			@Interm_Hour_H9 = 0,
+			@Interm_Hour_H10 = 0,
+			@Interm_ErrorMarg_H26 = 0,
+
+			--@FinancData_G6 = [FinancData_G6],
+			--@FinancData_K6 = [FinancData_K6],
+			--@FinancData_G8 = [FinancData_G8],
+			@FinancData_D26 = 0,
+			@FinancData_G35 = 0
+		--FROM
+		--	tbSetting
+		--WHERE
+		--	1=1
+			;
+
+
+
+		-- GIS
+		--SELECT 
+		--	@BilledCons_BilledMetConsBulkWatSupExpM3_D6 = SUM([sprzedaz_w_strefie]),
+		--	@Network_DistributionAndTransmissionMains_D7 = AVG([dlugosc_sieci]),     
+		--	@Network_NoOfConnOfRegCustomers_H10 = AVG([ilosc_przylaczy])  
+		--FROM 
+		--	[dbo].[vw_zuzycia_stref_2] 
+		--WHERE 
+		--	[year] = @YearNo 
+		--	AND ZoneId = @ZoneId;
+
+		-- @SysInput_SystemInputVolumeM3_D6
+		SELECT 
+			 @Start_PeriodDays_M21 = SUM(t02.[Start_PeriodDays_M21])
+
+			,@SysInput_SystemInputVolumeM3_D6 = SUM(t02.[SysInput_SystemInputVolumeM3_D6])
+			,@SysInput_SystemInputVolumeError_F6 = AVG(t02.[SysInput_SystemInputVolumeError_F6])
+			,@SysInput_SystemInputVolumeM3_D7 = SUM(t02.[SysInput_SystemInputVolumeM3_D7])
+			,@SysInput_SystemInputVolumeError_F7 = AVG(t02.[SysInput_SystemInputVolumeError_F7])
+			,@SysInput_SystemInputVolumeM3_D8 = SUM(t02.[SysInput_SystemInputVolumeM3_D8])
+			,@SysInput_SystemInputVolumeError_F8 = AVG(t02.[SysInput_SystemInputVolumeError_F8])
+			,@SysInput_SystemInputVolumeM3_D9 = SUM(t02.[SysInput_SystemInputVolumeM3_D9])
+			,@SysInput_SystemInputVolumeError_F9 = AVG(t02.[SysInput_SystemInputVolumeError_F9])
+
+			,@BilledCons_BilledMetConsBulkWatSupExpM3_D6 = SUM(t02.[BilledCons_BilledMetConsBulkWatSupExpM3_D6])					-- sprzedaz_w_strefie
+			,@BilledCons_BilledUnmetConsBulkWatSupExpM3_H6 = SUM(t02.[BilledCons_BilledUnmetConsBulkWatSupExpM3_H6])			
+			,@BilledCons_UnbMetConsM3_D8 = SUM(t02.[BilledCons_UnbMetConsM3_D8])
+			,@BilledCons_UnbMetConsM3_D9 = SUM(t02.[BilledCons_UnbMetConsM3_D9])
+			,@BilledCons_UnbMetConsM3_D10 = SUM(t02.[BilledCons_UnbMetConsM3_D10])
+			,@BilledCons_UnbMetConsM3_D11 = SUM(t02.[BilledCons_UnbMetConsM3_D11])
+			,@BilledCons_UnbUnmetConsM3_H8 = SUM(t02.[BilledCons_UnbUnmetConsM3_H8])
+			,@BilledCons_UnbUnmetConsM3_H9 = SUM(t02.[BilledCons_UnbUnmetConsM3_H9])
+			,@BilledCons_UnbUnmetConsM3_H10 = SUM(t02.[BilledCons_UnbUnmetConsM3_H10])
+			,@BilledCons_UnbUnmetConsM3_H11 = SUM(t02.[BilledCons_UnbUnmetConsM3_H11])
+			
+			,@UnbilledCons_MetConsBulkWatSupExpM3_D6 = SUM(t02.[UnbilledCons_MetConsBulkWatSupExpM3_D6])
+			,@UnbilledCons_UnbMetConsM3_D8 = SUM(t02.[UnbilledCons_UnbMetConsM3_D8])
+			,@UnbilledCons_UnbMetConsM3_D9 = SUM(t02.[UnbilledCons_UnbMetConsM3_D9])
+			,@UnbilledCons_UnbMetConsM3_D10 = SUM(t02.[UnbilledCons_UnbMetConsM3_D10])
+			,@UnbilledCons_UnbMetConsM3_D11 = SUM(t02.[UnbilledCons_UnbMetConsM3_D11])
+			,@UnbilledCons_UnbUnmetConsM3_H6 = SUM(t02.[UnbilledCons_UnbUnmetConsM3_H6])
+			,@UnbilledCons_UnbUnmetConsM3_H7 = SUM(t02.[UnbilledCons_UnbUnmetConsM3_H7])
+			,@UnbilledCons_UnbUnmetConsM3_H8 = SUM(t02.[UnbilledCons_UnbUnmetConsM3_H8])
+			,@UnbilledCons_UnbUnmetConsM3_H9 = SUM(t02.[UnbilledCons_UnbUnmetConsM3_H9])
+			,@UnbilledCons_UnbUnmetConsM3_H10 = SUM(t02.[UnbilledCons_UnbUnmetConsM3_H10])
+			,@UnbilledCons_UnbUnmetConsM3_H11 = SUM(t02.[UnbilledCons_UnbUnmetConsM3_H11])
+			,@UnbilledCons_UnbUnmetConsError_J6 = AVG(t02.[UnbilledCons_UnbUnmetConsError_J6])
+			,@UnbilledCons_UnbUnmetConsError_J7 = AVG(t02.[UnbilledCons_UnbUnmetConsError_J7])
+			,@UnbilledCons_UnbUnmetConsError_J8 = AVG(t02.[UnbilledCons_UnbUnmetConsError_J8])
+			,@UnbilledCons_UnbUnmetConsError_J9 = AVG(t02.[UnbilledCons_UnbUnmetConsError_J9])
+			,@UnbilledCons_UnbUnmetConsError_J10 = AVG(t02.[UnbilledCons_UnbUnmetConsError_J10])
+			,@UnbilledCons_UnbUnmetConsError_J11 = AVG(t02.[UnbilledCons_UnbUnmetConsError_J11])
+
+			,@UnauthCons_IllegalConnDomEstNo_D6 = SUM(t02.[UnauthCons_IllegalConnDomEstNo_D6])
+			,@UnauthCons_IllegalConnDomPersPerHouse_H6 = SUM(t02.[UnauthCons_IllegalConnDomPersPerHouse_H6])
+			,@UnauthCons_IllegalConnDomConsLitPerPersDay_J6 = SUM(t02.[UnauthCons_IllegalConnDomConsLitPerPersDay_J6])
+			,@UnauthCons_IllegalConnDomErrorMargin_F6 = AVG(t02.[UnauthCons_IllegalConnDomErrorMargin_F6])
+			,@UnauthCons_IllegalConnOthersErrorMargin_F10 = AVG(t02.[UnauthCons_IllegalConnOthersErrorMargin_F10])
+			,@IllegalConnectionsOthersEstimatedNumber_D10 = SUM(t02.[IllegalConnectionsOthersEstimatedNumber_D10])
+			,@IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10 = SUM(t02.[IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10])
+			,@UnauthCons_MeterTampBypEtcEstNo_D14 = SUM(t02.[UnauthCons_MeterTampBypEtcEstNo_D14])
+			,@UnauthCons_MeterTampBypEtcErrorMargin_F14 = AVG(t02.[UnauthCons_MeterTampBypEtcErrorMargin_F14])
+			,@UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14 = SUM(t02.[UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14])
+			,@UnauthCons_OthersErrorMargin_F18 = AVG(t02.[UnauthCons_OthersErrorMargin_F18]) 
+			,@UnauthCons_OthersErrorMargin_F19 = AVG(t02.[UnauthCons_OthersErrorMargin_F19]) 
+			,@UnauthCons_OthersErrorMargin_F20 = AVG(t02.[UnauthCons_OthersErrorMargin_F20]) 
+			,@UnauthCons_OthersErrorMargin_F21 = AVG(t02.[UnauthCons_OthersErrorMargin_F21]) 
+			,@UnauthCons_OthersM3PerDay_J18 = SUM(t02.[UnauthCons_OthersM3PerDay_J18])
+			,@UnauthCons_OthersM3PerDay_J19 = SUM(t02.[UnauthCons_OthersM3PerDay_J19])
+			,@UnauthCons_OthersM3PerDay_J20 = SUM(t02.[UnauthCons_OthersM3PerDay_J20])
+			,@UnauthCons_OthersM3PerDay_J21 = SUM(t02.[UnauthCons_OthersM3PerDay_J21])
+
+			,@MetErrors_DetailedManualSpec_J6 = 2																					-- (t02.[MetErrors_DetailedManualSpec_J6])
+			,@MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8 = AVG(t02.[MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8])
+			,@MetErrors_BilledMetConsWoBulkSupErrorMargin_N8 = AVG(t02.[MetErrors_BilledMetConsWoBulkSupErrorMargin_N8])
+			,@MetErrors_Total_F12 = SUM(t02.[MetErrors_Total_F12])
+			,@MetErrors_Total_F13 = SUM(t02.[MetErrors_Total_F13])
+			,@MetErrors_Total_F14 = SUM(t02.[MetErrors_Total_F14])
+			,@MetErrors_Total_F15 = SUM(t02.[MetErrors_Total_F15])
+			,@MetErrors_Meter_H12 = AVG(t02.[MetErrors_Meter_H12])
+			,@MetErrors_Meter_H13 = AVG(t02.[MetErrors_Meter_H13])
+			,@MetErrors_Meter_H14 = AVG(t02.[MetErrors_Meter_H14])
+			,@MetErrors_Meter_H15 = AVG(t02.[MetErrors_Meter_H15])
+			,@MetErrors_Error_N12 = AVG(t02.[MetErrors_Error_N12])
+			,@MetErrors_Error_N13 = AVG(t02.[MetErrors_Error_N13])
+			,@MetErrors_Error_N14 = AVG(t02.[MetErrors_Error_N14])
+			,@MetErrors_Error_N15 = AVG(t02.[MetErrors_Error_N15])
+			,@MeteredBulkSupplyExportErrorMargin_N32 = AVG(t02.[MeteredBulkSupplyExportErrorMargin_N32])
+			,@UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34 = AVG(t02.[UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34])
+			,@CorruptMeterReadingPracticessErrorMargin_N38 = AVG(t02.[CorruptMeterReadingPracticessErrorMargin_N38])
+			,@DataHandlingErrorsOffice_L40 = SUM(t02.[DataHandlingErrorsOffice_L40])
+			,@DataHandlingErrorsOfficeErrorMargin_N40 = AVG(t02.[DataHandlingErrorsOfficeErrorMargin_N40])
+			,@MetErrors_MetBulkSupExpMetUnderreg_H32 = AVG(t02.[MetErrors_MetBulkSupExpMetUnderreg_H32])
+			,@MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34 = AVG(t02.[MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34])
+			,@MetErrors_CorruptMetReadPractMetUndrreg_H38 = AVG(t02.[MetErrors_CorruptMetReadPractMetUndrreg_H38])
+
+			,@Network_DistributionAndTransmissionMains_D7 = AVG(t02.[Network_DistributionAndTransmissionMains_D7])					-- dlugosc_sieci
+			,@Network_DistributionAndTransmissionMains_D8 = AVG(t02.[Network_DistributionAndTransmissionMains_D8])					
+			,@Network_DistributionAndTransmissionMains_D9 = AVG(t02.[Network_DistributionAndTransmissionMains_D9])					
+			,@Network_DistributionAndTransmissionMains_D10 = AVG(t02.[Network_DistributionAndTransmissionMains_D10])					
+			,@Network_NoCustomers_H7 = AVG(t02.[Network_NoCustomers_H7])															-- CustomerMetersQuantity
+			,@Network_NoOfConnOfRegCustomers_H10 = AVG(t02.[Network_NoOfConnOfRegCustomers_H10])									-- ilosc_przylaczy
+			,@Network_NoOfInactAccountsWSvcConns_H18 = AVG(t02.[Network_NoOfInactAccountsWSvcConns_H18])
+			,@Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32 = AVG(t02.[Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32])
+			,@Network_PossibleUnd_D30 = AVG(t02.[Network_PossibleUnd_D30])
+			,@Network_ErrorMargin_J7 =  AVG(t02.[Network_ErrorMargin_J7])
+			,@Network_ErrorMargin_J10 = AVG(t02.[Network_ErrorMargin_J10])
+			,@Network_ErrorMargin_J18 = AVG(t02.[Network_ErrorMargin_J18])
+			,@Network_ErrorMargin_J32 = AVG(t02.[Network_ErrorMargin_J32])
+			,@Network_ErrorMargin_D35 = AVG(t02.[Network_ErrorMargin_D35])
+
+			,@Prs_ApproxNoOfConn_D7 = AVG(t02.[Prs_ApproxNoOfConn_D7])
+			,@Prs_ApproxNoOfConn_D8 = AVG(t02.[Prs_ApproxNoOfConn_D8])
+			,@Prs_ApproxNoOfConn_D9 = AVG(t02.[Prs_ApproxNoOfConn_D9])
+			,@Prs_ApproxNoOfConn_D10 = AVG(t02.[Prs_ApproxNoOfConn_D10])
+			,@Prs_DailyAvgPrsM_F7 = AVG(t02.[Prs_DailyAvgPrsM_F7])
+			,@Prs_DailyAvgPrsM_F8 = AVG(t02.[Prs_DailyAvgPrsM_F8])
+			,@Prs_DailyAvgPrsM_F9 = AVG(t02.[Prs_DailyAvgPrsM_F9])
+			,@Prs_DailyAvgPrsM_F10 = AVG(t02.[Prs_DailyAvgPrsM_F10])
+			,@Prs_ErrorMarg_F26 = AVG(t02.[Prs_ErrorMarg_F26])
+
+			,@Interm_Conn_D7 = AVG(t02.[Interm_Conn_D7])
+			,@Interm_Conn_D8 = AVG(t02.[Interm_Conn_D8])
+			,@Interm_Conn_D9 = AVG(t02.[Interm_Conn_D9])
+			,@Interm_Conn_D10 = AVG(t02.[Interm_Conn_D10])
+			,@Interm_Days_F7 = AVG(t02.[Interm_Days_F7])
+			,@Interm_Days_F8 = AVG(t02.[Interm_Days_F8])
+			,@Interm_Days_F9 = AVG(t02.[Interm_Days_F9])
+			,@Interm_Days_F10 = AVG(t02.[Interm_Days_F10])
+			,@Interm_Hour_H7 = AVG(t02.[Interm_Hour_H7])
+			,@Interm_Hour_H8 = AVG(t02.[Interm_Hour_H8])
+			,@Interm_Hour_H9 = AVG(t02.[Interm_Hour_H9])
+			,@Interm_Hour_H10 = AVG(t02.[Interm_Hour_H10])
+			,@Interm_ErrorMarg_H26 = AVG(t02.[Interm_ErrorMarg_H26])
+
+			,@FinancData_D26 = AVG(t02.[FinancData_D26])
+			,@FinancData_G35 = AVG(t02.[FinancData_G35])
+
+		FROM 
+			dbo.tbWbEasyCalcData t02 
+		WHERE
+			t02.YearNo = @YearNo
+			AND t02.ZoneId = @ZoneId
+			AND t02.IsArchive = 1
+			;	
+
+	END;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spOptionGet]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  StoredProcedure [dbo].[__spOptionGet]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-create PROCEDURE [dbo].[spOptionGet] 
+create PROCEDURE [dbo].[__spOptionGet] 
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -2613,235 +3254,7 @@ FROM
 	;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spSettingGet]    Script Date: 31.05.2021 08:35:53 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE [dbo].[spSettingGet] 
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-	SELECT * FROM dbo.tbSetting;
-END
-GO
-/****** Object:  StoredProcedure [dbo].[spSettingSave]    Script Date: 31.05.2021 08:35:53 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spSettingSave]
-
-	@FinancData_G6 [float],
-	@FinancData_K6 nvarchar(400),
-	@FinancData_G8 [float],
-	--@FinancData_D26 [float], 
-	--@FinancData_G35 [float], 
-
-	@MatrixOneIn_SelectedOption [int], 
-	@MatrixOneIn_C11 [float], 
-	@MatrixOneIn_C12 [float],
-	@MatrixOneIn_C13 [float],
-	@MatrixOneIn_C14 [float],
-	@MatrixOneIn_C21 [float],
-	@MatrixOneIn_C22 [float],
-	@MatrixOneIn_C23 [float],
-	@MatrixOneIn_C24 [float],
-	@MatrixOneIn_D21 [float],
-	@MatrixOneIn_D22 [float],
-	@MatrixOneIn_D23 [float],
-	@MatrixOneIn_D24 [float],
-	@MatrixOneIn_E11 [float],
-	@MatrixOneIn_E12 [float],
-	@MatrixOneIn_E13 [float],
-	@MatrixOneIn_E14 [float],
-	@MatrixOneIn_E21 [float],
-	@MatrixOneIn_E22 [float],
-	@MatrixOneIn_E23 [float],
-	@MatrixOneIn_E24 [float],
-	@MatrixOneIn_F11 [float],
-	@MatrixOneIn_F12 [float],
-	@MatrixOneIn_F13 [float],
-	@MatrixOneIn_F14 [float],
-	@MatrixOneIn_F21 [float],
-	@MatrixOneIn_F22 [float],
-	@MatrixOneIn_F23 [float],
-	@MatrixOneIn_F24 [float],
-	@MatrixOneIn_G11 [float],
-	@MatrixOneIn_G12 [float],
-	@MatrixOneIn_G13 [float],
-	@MatrixOneIn_G14 [float],
-	@MatrixOneIn_G21 [float],
-	@MatrixOneIn_G22 [float],
-	@MatrixOneIn_G23 [float],
-	@MatrixOneIn_G24 [float],
-	@MatrixOneIn_H11 [float],
-	@MatrixOneIn_H12 [float],
-	@MatrixOneIn_H13 [float],
-	@MatrixOneIn_H14 [float],
-	@MatrixOneIn_H21 [float],
-	@MatrixOneIn_H22 [float],
-	@MatrixOneIn_H23 [float],
-	@MatrixOneIn_H24 [float],
-
-	@MatrixTwoIn_SelectedOption [int], 
-	@MatrixTwoIn_C11 [float], 
-	@MatrixTwoIn_C12 [float],
-	@MatrixTwoIn_C13 [float],
-	@MatrixTwoIn_C14 [float],
-	@MatrixTwoIn_C21 [float],
-	@MatrixTwoIn_C22 [float],
-	@MatrixTwoIn_C23 [float],
-	@MatrixTwoIn_C24 [float],
-	@MatrixTwoIn_D21 [float],
-	@MatrixTwoIn_D22 [float],
-	@MatrixTwoIn_D23 [float],
-	@MatrixTwoIn_D24 [float],
-	@MatrixTwoIn_E11 [float],
-	@MatrixTwoIn_E12 [float],
-	@MatrixTwoIn_E13 [float],
-	@MatrixTwoIn_E14 [float],
-	@MatrixTwoIn_E21 [float],
-	@MatrixTwoIn_E22 [float],
-	@MatrixTwoIn_E23 [float],
-	@MatrixTwoIn_E24 [float],
-	@MatrixTwoIn_F11 [float],
-	@MatrixTwoIn_F12 [float],
-	@MatrixTwoIn_F13 [float],
-	@MatrixTwoIn_F14 [float],
-	@MatrixTwoIn_F21 [float],
-	@MatrixTwoIn_F22 [float],
-	@MatrixTwoIn_F23 [float],
-	@MatrixTwoIn_F24 [float],
-	@MatrixTwoIn_G11 [float],
-	@MatrixTwoIn_G12 [float],
-	@MatrixTwoIn_G13 [float],
-	@MatrixTwoIn_G14 [float],
-	@MatrixTwoIn_G21 [float],
-	@MatrixTwoIn_G22 [float],
-	@MatrixTwoIn_G23 [float],
-	@MatrixTwoIn_G24 [float],
-	@MatrixTwoIn_H11 [float],
-	@MatrixTwoIn_H12 [float],
-	@MatrixTwoIn_H13 [float],
-	@MatrixTwoIn_H14 [float],
-	@MatrixTwoIn_H21 [float],
-	@MatrixTwoIn_H22 [float],
-	@MatrixTwoIn_H23 [float],
-	@MatrixTwoIn_H24 [float]
-
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-	UPDATE [dbo].[tbSetting] SET
-
-		FinancData_G6 = @FinancData_G6,
-		FinancData_K6 = @FinancData_K6,
-		FinancData_G8 = @FinancData_G8,
-		--FinancData_D26 = @FinancData_D26,
-		--FinancData_G35 = @FinancData_G35,
-
-		MatrixOneIn_SelectedOption = @MatrixOneIn_SelectedOption,
-		MatrixOneIn_C11 = @MatrixOneIn_C11,
-        MatrixOneIn_C12 = @MatrixOneIn_C12,
-        MatrixOneIn_C13 = @MatrixOneIn_C13,
-        MatrixOneIn_C14 = @MatrixOneIn_C14,
-        MatrixOneIn_C21 = @MatrixOneIn_C21,
-        MatrixOneIn_C22 = @MatrixOneIn_C22,
-        MatrixOneIn_C23 = @MatrixOneIn_C23,
-        MatrixOneIn_C24 = @MatrixOneIn_C24,
-        MatrixOneIn_D21 = @MatrixOneIn_D21,
-        MatrixOneIn_D22 = @MatrixOneIn_D22,
-        MatrixOneIn_D23 = @MatrixOneIn_D23,
-        MatrixOneIn_D24 = @MatrixOneIn_D24,
-        MatrixOneIn_E11 = @MatrixOneIn_E11,
-        MatrixOneIn_E12 = @MatrixOneIn_E12,
-        MatrixOneIn_E13 = @MatrixOneIn_E13,
-        MatrixOneIn_E14 = @MatrixOneIn_E14,
-        MatrixOneIn_E21 = @MatrixOneIn_E21,
-        MatrixOneIn_E22 = @MatrixOneIn_E22,
-        MatrixOneIn_E23 = @MatrixOneIn_E23,
-        MatrixOneIn_E24 = @MatrixOneIn_E24,
-        MatrixOneIn_F11 = @MatrixOneIn_F11,
-        MatrixOneIn_F12 = @MatrixOneIn_F12,
-        MatrixOneIn_F13 = @MatrixOneIn_F13,
-        MatrixOneIn_F14 = @MatrixOneIn_F14,
-        MatrixOneIn_F21 = @MatrixOneIn_F21,
-        MatrixOneIn_F22 = @MatrixOneIn_F22,
-        MatrixOneIn_F23 = @MatrixOneIn_F23,
-        MatrixOneIn_F24 = @MatrixOneIn_F24,
-        MatrixOneIn_G11 = @MatrixOneIn_G11,
-        MatrixOneIn_G12 = @MatrixOneIn_G12,
-        MatrixOneIn_G13 = @MatrixOneIn_G13,
-        MatrixOneIn_G14 = @MatrixOneIn_G14,
-        MatrixOneIn_G21 = @MatrixOneIn_G21,
-        MatrixOneIn_G22 = @MatrixOneIn_G22,
-        MatrixOneIn_G23 = @MatrixOneIn_G23,
-        MatrixOneIn_G24 = @MatrixOneIn_G24,
-        MatrixOneIn_H11 = @MatrixOneIn_H11,
-        MatrixOneIn_H12 = @MatrixOneIn_H12,
-        MatrixOneIn_H13 = @MatrixOneIn_H13,
-        MatrixOneIn_H14 = @MatrixOneIn_H14,
-        MatrixOneIn_H21 = @MatrixOneIn_H21,
-        MatrixOneIn_H22 = @MatrixOneIn_H22,
-        MatrixOneIn_H23 = @MatrixOneIn_H23,
-        MatrixOneIn_H24 = @MatrixOneIn_H24,
-
-		MatrixTwoIn_SelectedOption = @MatrixTwoIn_SelectedOption,
-		MatrixTwoIn_C11 = @MatrixTwoIn_C11,
-        MatrixTwoIn_C12 = @MatrixTwoIn_C12,
-        MatrixTwoIn_C13 = @MatrixTwoIn_C13,
-        MatrixTwoIn_C14 = @MatrixTwoIn_C14,
-        MatrixTwoIn_C21 = @MatrixTwoIn_C21,
-        MatrixTwoIn_C22 = @MatrixTwoIn_C22,
-        MatrixTwoIn_C23 = @MatrixTwoIn_C23,
-        MatrixTwoIn_C24 = @MatrixTwoIn_C24,
-        MatrixTwoIn_D21 = @MatrixTwoIn_D21,
-        MatrixTwoIn_D22 = @MatrixTwoIn_D22,
-        MatrixTwoIn_D23 = @MatrixTwoIn_D23,
-        MatrixTwoIn_D24 = @MatrixTwoIn_D24,
-        MatrixTwoIn_E11 = @MatrixTwoIn_E11,
-        MatrixTwoIn_E12 = @MatrixTwoIn_E12,
-        MatrixTwoIn_E13 = @MatrixTwoIn_E13,
-        MatrixTwoIn_E14 = @MatrixTwoIn_E14,
-        MatrixTwoIn_E21 = @MatrixTwoIn_E21,
-        MatrixTwoIn_E22 = @MatrixTwoIn_E22,
-        MatrixTwoIn_E23 = @MatrixTwoIn_E23,
-        MatrixTwoIn_E24 = @MatrixTwoIn_E24,
-        MatrixTwoIn_F11 = @MatrixTwoIn_F11,
-        MatrixTwoIn_F12 = @MatrixTwoIn_F12,
-        MatrixTwoIn_F13 = @MatrixTwoIn_F13,
-        MatrixTwoIn_F14 = @MatrixTwoIn_F14,
-        MatrixTwoIn_F21 = @MatrixTwoIn_F21,
-        MatrixTwoIn_F22 = @MatrixTwoIn_F22,
-        MatrixTwoIn_F23 = @MatrixTwoIn_F23,
-        MatrixTwoIn_F24 = @MatrixTwoIn_F24,
-        MatrixTwoIn_G11 = @MatrixTwoIn_G11,
-        MatrixTwoIn_G12 = @MatrixTwoIn_G12,
-        MatrixTwoIn_G13 = @MatrixTwoIn_G13,
-        MatrixTwoIn_G14 = @MatrixTwoIn_G14,
-        MatrixTwoIn_G21 = @MatrixTwoIn_G21,
-        MatrixTwoIn_G22 = @MatrixTwoIn_G22,
-        MatrixTwoIn_G23 = @MatrixTwoIn_G23,
-        MatrixTwoIn_G24 = @MatrixTwoIn_G24,
-        MatrixTwoIn_H11 = @MatrixTwoIn_H11,
-        MatrixTwoIn_H12 = @MatrixTwoIn_H12,
-        MatrixTwoIn_H13 = @MatrixTwoIn_H13,
-        MatrixTwoIn_H14 = @MatrixTwoIn_H14,
-        MatrixTwoIn_H21 = @MatrixTwoIn_H21,
-        MatrixTwoIn_H22 = @MatrixTwoIn_H22,
-        MatrixTwoIn_H23 = @MatrixTwoIn_H23,
-        MatrixTwoIn_H24 = @MatrixTwoIn_H24
-
-END;
-
-
-
-GO
-/****** Object:  StoredProcedure [dbo].[spUnpivotTable]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  StoredProcedure [dbo].[__spUnpivotTable]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2849,7 +3262,7 @@ GO
 
 
 
-CREATE PROCEDURE [dbo].[spUnpivotTable] 
+CREATE PROCEDURE [dbo].[__spUnpivotTable] 
 	@IdValue INT = 1,
 	@OrdinalPosition INT = 8,
 	@TableName NVARCHAR(4000) = 'tbWbEasyCalcData',
@@ -2889,937 +3302,12 @@ EXEC (@SqlCmd);
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spWaterConsumptionCategoryList]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  StoredProcedure [dbo].[_spWbEasyCalcDataCreateAll]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
-
-CREATE PROCEDURE [dbo].[spWaterConsumptionCategoryList] 
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-SELECT 
-    WaterConsumptionCategoryId AS Id,
-	WaterConsumptionCategoryName AS [Name]
-FROM
-	tbWaterConsumptionCategory;
-
-
-END
-GO
-/****** Object:  StoredProcedure [dbo].[spWaterConsumptionCategoryStatusExcelList]    Script Date: 31.05.2021 08:35:53 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-CREATE PROCEDURE [dbo].[spWaterConsumptionCategoryStatusExcelList] 
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-SELECT 
-    CategoryId,
-	StatusId,
-	tCS.ExcelCellId,
-	tCSE.ExcelCellName
-FROM
-	tbWaterConsumptionCategoryStatus tCS
-	INNER JOIN tbWaterConsumptionCategoryStatusExcel tCSE ON tCS.ExcelCellId = tCSE.ExcelCellId
-	;
-
-
-END
-GO
-/****** Object:  StoredProcedure [dbo].[spWaterConsumptionClone]    Script Date: 31.05.2021 08:35:53 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spWaterConsumptionClone]
-	@UserName nvarchar(50), 
-	@id [int] OUTPUT
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-	INSERT INTO [dbo].[tbWaterConsumption] (
-		[Description],
-		WaterConsumptionCategoryId,
-		WaterConsumptionStatusId, 
-		StartDate,
-		EndDate,
-		Latitude,
-		Lontitude,
-		RelatedId,
-		[Value]
-	) 
-	SELECT 
-		[Description],
-		WaterConsumptionCategoryId,
-		WaterConsumptionStatusId, 
-		StartDate,
-		EndDate,
-		Latitude,
-		Lontitude,
-		RelatedId,
-		[Value]
-	FROM
-		tbWaterConsumption
-	WHERE
-		WaterConsumptionId = @id;
-
-	SELECT @id = SCOPE_IDENTITY();
-
-END;
-
-GO
-/****** Object:  StoredProcedure [dbo].[spWaterConsumptionDelete]    Script Date: 31.05.2021 08:35:53 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE [dbo].[spWaterConsumptionDelete]
-	@id int
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-	DELETE FROM [dbo].[tbWaterConsumption] WHERE WaterConsumptionId = @id;
-END
-GO
-/****** Object:  StoredProcedure [dbo].[spWaterConsumptionList]    Script Date: 31.05.2021 08:35:53 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-create PROCEDURE [dbo].[spWaterConsumptionList] 
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-	SELECT * FROM dbo.tbWaterConsumption ORDER BY WaterConsumptionId;
-END
-GO
-/****** Object:  StoredProcedure [dbo].[spWaterConsumptionSave]    Script Date: 31.05.2021 08:35:53 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spWaterConsumptionSave]
-	@Description nvarchar(MAX),
-
-	@WbEasyCalcDataId [int],
-	@WaterConsumptionCategoryId [int],
-	@WaterConsumptionStatusId [int], 
-	@StartDate [datetime],
-	@EndDate [datetime],
-	@Latitude [float],
-	@Lontitude [float],
-	@RelatedId [int],
-	@Value [float],
-
-	@id [int] OUTPUT
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-
-/*
-DECLARE 
-	@OldYearNo [int], 
-	@OldMonthNo [int],
-	@OldRelatedId [int], 
-	@OldIsArchive BIT;
-SELECT 
-	@OldYearNo = YearNo, 
-	@OldMonthNo = MonthNo,
-	@OldRelatedId = RelatedId, 
-	@OldIsArchive = IsArchive 
-FROM 
-	[dbo].[tbWbEasyCalcData] 
-WHERE 
-	WbEasyCalcDataId = @id;
-
-DECLARE 
-	@ChangedId [int];
-
-
-IF (@IsArchive=1) BEGIN
-	SELECT
-		@ChangedId = WbEasyCalcDataId
-	FROM
-		[dbo].[tbWbEasyCalcData]
-	WHERE
-		IsArchive = @IsArchive AND
-		RelatedId = @RelatedId AND 
-		YearNo = @YearNo AND 
-		MonthNo = @MonthNo;
-
-	UPDATE [dbo].[tbWbEasyCalcData] SET
-		IsArchive = 0,
-		IsAccepted = 0
-	WHERE
-		RelatedId = @RelatedId AND 
-		YearNo = @YearNo AND 
-		MonthNo = @MonthNo;
-END;
-*/
-
-
-
-IF (@id = 0) BEGIN
-
-	INSERT INTO [dbo].[tbWaterConsumption] (
-		[Description],
-
-		WbEasyCalcDataId,
-		WaterConsumptionCategoryId,
-		WaterConsumptionStatusId, 
-		StartDate,
-		EndDate,
-		Latitude,
-		Lontitude,
-		RelatedId,
-		[Value]
-
-	) VALUES (
-		@Description,
-
-		@WbEasyCalcDataId,
-		@WaterConsumptionCategoryId,
-		@WaterConsumptionStatusId, 
-		@StartDate,
-		@EndDate,
-		@Latitude,
-		@Lontitude,
-		@RelatedId,
-		@Value
-	);
-
-	SELECT @id = SCOPE_IDENTITY();
-
-END ELSE BEGIN
-	UPDATE [dbo].[tbWaterConsumption] SET
-		[Description] = @Description,
-
-		WbEasyCalcDataId = @WbEasyCalcDataId,
-		WaterConsumptionCategoryId = @WaterConsumptionCategoryId,
-		WaterConsumptionStatusId = @WaterConsumptionStatusId, 
-		StartDate = @StartDate,
-		EndDate = @EndDate,
-		Latitude = @Latitude,
-		Lontitude = @Lontitude,
-		RelatedId = @RelatedId,
-		[Value] = @Value
-
-	WHERE 
-		[WaterConsumptionId] = @id;
-END;
-
---EXEC dbo.spWbEasyCalcDataSaveArchive @id, @OldYearNo, @OldMonthNo, @OldRelatedId, @OldIsArchive, @ChangedId;	
-
-END;
-
-
-
-GO
-/****** Object:  StoredProcedure [dbo].[spWaterConsumptionStatusList]    Script Date: 31.05.2021 08:35:53 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-CREATE PROCEDURE [dbo].[spWaterConsumptionStatusList] 
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-SELECT 
-    WaterConsumptionStatusId AS Id,
-	WaterConsumptionStatusName AS [Name]
-FROM
-	tbWaterConsumptionStatus;
-
-
-END
-GO
-/****** Object:  StoredProcedure [dbo].[spWbEasyCalcDataClone]    Script Date: 31.05.2021 08:35:53 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spWbEasyCalcDataClone]
-	@id [int] OUTPUT,
-	@UserName nvarchar(50) 
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-	DECLARE @OldId INT;
-	SET @OldId = @id;
-
-	INSERT INTO [dbo].[tbWbEasyCalcData] (
-		CreateLogin,
-		CreateDate,
-		ModifyLogin,
-		ModifyDate,
-
-		ZoneId, 
-		YearNo, 
-		MonthNo,
-		[Description],
-		IsArchive,
-		IsAccepted,
-
-		-- Input
-		Start_PeriodDays_M21,
-
-		SysInput_Desc_B6,
-		SysInput_Desc_B7,
-		SysInput_Desc_B8,
-		SysInput_Desc_B9,
-		SysInput_SystemInputVolumeM3_D6,
-		SysInput_SystemInputVolumeError_F6,
-		SysInput_SystemInputVolumeM3_D7,
-		SysInput_SystemInputVolumeError_F7,
-		SysInput_SystemInputVolumeM3_D8,
-		SysInput_SystemInputVolumeError_F8,
-		SysInput_SystemInputVolumeM3_D9,
-		SysInput_SystemInputVolumeError_F9,
-
-		BilledCons_Desc_B8   ,
-		BilledCons_Desc_B9   ,
-		BilledCons_Desc_B10  ,
-		BilledCons_Desc_B11  ,
-		BilledCons_Desc_F8   ,
-		BilledCons_Desc_F9   ,
-		BilledCons_Desc_F10  ,
-		BilledCons_Desc_F11  ,
-		UnbilledCons_Desc_D8 ,
-		UnbilledCons_Desc_D9 ,
-		UnbilledCons_Desc_D10,
-		UnbilledCons_Desc_D11,
-		UnbilledCons_Desc_F6 ,
-		UnbilledCons_Desc_F7 ,
-		UnbilledCons_Desc_F8 ,
-		UnbilledCons_Desc_F9 ,
-		UnbilledCons_Desc_F10,
-		UnbilledCons_Desc_F11,
-		UnauthCons_Desc_B18  ,
-		UnauthCons_Desc_B19  ,
-		UnauthCons_Desc_B20  ,
-		UnauthCons_Desc_B21  ,
-		MetErrors_Desc_D12   ,
-		MetErrors_Desc_D13   ,
-		MetErrors_Desc_D14   ,
-		MetErrors_Desc_D15   ,
-		Network_Desc_B7      ,
-		Network_Desc_B8      ,
-		Network_Desc_B9      ,
-		Network_Desc_B10     ,
-		Interm_Area_B7       ,
-		Interm_Area_B8       ,
-		Interm_Area_B9       ,
-		Interm_Area_B10      ,
-
-		BilledCons_BilledMetConsBulkWatSupExpM3_D6,
-		BilledCons_BilledUnmetConsBulkWatSupExpM3_H6,
-
-		BilledCons_UnbMetConsM3_D8,
-		BilledCons_UnbMetConsM3_D9,
-		BilledCons_UnbMetConsM3_D10,
-		BilledCons_UnbMetConsM3_D11,
-		BilledCons_UnbUnmetConsM3_H8, 
-		BilledCons_UnbUnmetConsM3_H9, 
-		BilledCons_UnbUnmetConsM3_H10, 
-		BilledCons_UnbUnmetConsM3_H11, 
-
-		UnbilledCons_MetConsBulkWatSupExpM3_D6,
-
-		UnbilledCons_UnbMetConsM3_D8,
-		UnbilledCons_UnbMetConsM3_D9,
-		UnbilledCons_UnbMetConsM3_D10,
-		UnbilledCons_UnbMetConsM3_D11,
-		UnbilledCons_UnbUnmetConsM3_H6,
-		UnbilledCons_UnbUnmetConsM3_H7,
-		UnbilledCons_UnbUnmetConsM3_H8,
-		UnbilledCons_UnbUnmetConsM3_H9,
-		UnbilledCons_UnbUnmetConsM3_H10,
-		UnbilledCons_UnbUnmetConsM3_H11,
-		UnbilledCons_UnbUnmetConsError_J6,
-		UnbilledCons_UnbUnmetConsError_J7,
-		UnbilledCons_UnbUnmetConsError_J8,
-		UnbilledCons_UnbUnmetConsError_J9,
-		UnbilledCons_UnbUnmetConsError_J10,
-		UnbilledCons_UnbUnmetConsError_J11,
-
-		UnauthCons_IllegalConnDomEstNo_D6,
-		UnauthCons_IllegalConnDomPersPerHouse_H6,
-		UnauthCons_IllegalConnDomConsLitPerPersDay_J6,
-		UnauthCons_IllegalConnDomErrorMargin_F6,
-		UnauthCons_IllegalConnOthersErrorMargin_F10,
-
-		IllegalConnectionsOthersEstimatedNumber_D10,
-		IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10,
-
-		UnauthCons_MeterTampBypEtcEstNo_D14,
-		UnauthCons_MeterTampBypEtcErrorMargin_F14,
-		UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14,
-
-		UnauthCons_OthersErrorMargin_F18, 
-		UnauthCons_OthersErrorMargin_F19, 
-		UnauthCons_OthersErrorMargin_F20, 
-		UnauthCons_OthersErrorMargin_F21, 
-		UnauthCons_OthersM3PerDay_J18,
-		UnauthCons_OthersM3PerDay_J19,
-		UnauthCons_OthersM3PerDay_J20,
-		UnauthCons_OthersM3PerDay_J21,
-
-		MetErrors_DetailedManualSpec_J6,
-		MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8,
-		MetErrors_BilledMetConsWoBulkSupErrorMargin_N8,
-
-		MetErrors_Total_F12,
-		MetErrors_Total_F13,
-		MetErrors_Total_F14,
-		MetErrors_Total_F15,
-		MetErrors_Meter_H12,
-		MetErrors_Meter_H13,
-		MetErrors_Meter_H14,
-		MetErrors_Meter_H15,
-		MetErrors_Error_N12,
-		MetErrors_Error_N13,
-		MetErrors_Error_N14,
-		MetErrors_Error_N15,
-
-		MeteredBulkSupplyExportErrorMargin_N32,
-		UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34,
-		CorruptMeterReadingPracticessErrorMargin_N38,
-		DataHandlingErrorsOffice_L40,
-		DataHandlingErrorsOfficeErrorMargin_N40,
-
-		MetErrors_MetBulkSupExpMetUnderreg_H32,
-		MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34,
-		MetErrors_CorruptMetReadPractMetUndrreg_H38,
-		Network_DistributionAndTransmissionMains_D7,
-		Network_DistributionAndTransmissionMains_D8,
-		Network_DistributionAndTransmissionMains_D9,
-		Network_DistributionAndTransmissionMains_D10,
-		Network_NoOfConnOfRegCustomers_H10,
-		Network_NoOfInactAccountsWSvcConns_H18,
-		Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32,
-
-		Network_PossibleUnd_D30,
-		Network_NoCustomers_H7,
-		Network_ErrorMargin_J7,
-		Network_ErrorMargin_J10,
-		Network_ErrorMargin_J18,
-		Network_ErrorMargin_J32,
-		Network_ErrorMargin_D35,
-
-		Prs_Area_B7,
-		Prs_Area_B8,
-		Prs_Area_B9,
-		Prs_Area_B10,
-		Prs_ApproxNoOfConn_D7,
-		Prs_DailyAvgPrsM_F7,
-		Prs_ApproxNoOfConn_D8,
-		Prs_DailyAvgPrsM_F8,
-		Prs_ApproxNoOfConn_D9,
-		Prs_DailyAvgPrsM_F9,
-		Prs_ApproxNoOfConn_D10,
-		Prs_DailyAvgPrsM_F10,
-
-		Prs_ErrorMarg_F26,
-
-		Interm_Conn_D7,
-		Interm_Conn_D8,
-		Interm_Conn_D9,
-		Interm_Conn_D10,
-		Interm_Days_F7,
-		Interm_Days_F8,
-		Interm_Days_F9,
-		Interm_Days_F10,
-		Interm_Hour_H7,
-		Interm_Hour_H8,
-		Interm_Hour_H9,
-		Interm_Hour_H10,
-		Interm_ErrorMarg_H26,
-
-		FinancData_G6,
-		FinancData_K6,
-		FinancData_G8,
-		FinancData_D26,
-		FinancData_G35,
-
-		MatrixOneIn_SelectedOption,
-		MatrixOneIn_C11,
-		MatrixOneIn_C12,
-		MatrixOneIn_C13,
-		MatrixOneIn_C14,
-		MatrixOneIn_C21,
-		MatrixOneIn_C22,
-		MatrixOneIn_C23,
-		MatrixOneIn_C24,
-		MatrixOneIn_D21,
-		MatrixOneIn_D22,
-		MatrixOneIn_D23,
-		MatrixOneIn_D24,
-		MatrixOneIn_E11,
-		MatrixOneIn_E12,
-		MatrixOneIn_E13,
-		MatrixOneIn_E14,
-		MatrixOneIn_E21,
-		MatrixOneIn_E22,
-		MatrixOneIn_E23,
-		MatrixOneIn_E24,
-		MatrixOneIn_F11,
-		MatrixOneIn_F12,
-		MatrixOneIn_F13,
-		MatrixOneIn_F14,
-		MatrixOneIn_F21,
-		MatrixOneIn_F22,
-		MatrixOneIn_F23,
-		MatrixOneIn_F24,
-		MatrixOneIn_G11,
-		MatrixOneIn_G12,
-		MatrixOneIn_G13,
-		MatrixOneIn_G14,
-		MatrixOneIn_G21,
-		MatrixOneIn_G22,
-		MatrixOneIn_G23,
-		MatrixOneIn_G24,
-		MatrixOneIn_H11,
-		MatrixOneIn_H12,
-		MatrixOneIn_H13,
-		MatrixOneIn_H14,
-		MatrixOneIn_H21,
-		MatrixOneIn_H22,
-		MatrixOneIn_H23,
-		MatrixOneIn_H24,
-
-		MatrixTwoIn_SelectedOption,
-		MatrixTwoIn_D21,
-		MatrixTwoIn_D22,
-		MatrixTwoIn_D23,
-		MatrixTwoIn_D24,
-		MatrixTwoIn_E11,
-		MatrixTwoIn_E12,
-		MatrixTwoIn_E13,
-		MatrixTwoIn_E14,
-		MatrixTwoIn_E21,
-		MatrixTwoIn_E22,
-		MatrixTwoIn_E23,
-		MatrixTwoIn_E24,
-		MatrixTwoIn_F11,
-		MatrixTwoIn_F12,
-		MatrixTwoIn_F13,
-		MatrixTwoIn_F14,
-		MatrixTwoIn_F21,
-		MatrixTwoIn_F22,
-		MatrixTwoIn_F23,
-		MatrixTwoIn_F24,
-		MatrixTwoIn_G11,
-		MatrixTwoIn_G12,
-		MatrixTwoIn_G13,
-		MatrixTwoIn_G14,
-		MatrixTwoIn_G21,
-		MatrixTwoIn_G22,
-		MatrixTwoIn_G23,
-		MatrixTwoIn_G24,
-		MatrixTwoIn_H11,
-		MatrixTwoIn_H12,
-		MatrixTwoIn_H13,
-		MatrixTwoIn_H14,
-		MatrixTwoIn_H21,
-		MatrixTwoIn_H22,
-		MatrixTwoIn_H23,
-		MatrixTwoIn_H24,
-
-		-- Output
-		SystemInputVolume_B19,
-		SystemInputVolumeErrorMargin_B21,	
-		AuthorizedConsumption_K12,
-		AuthorizedConsumptionErrorMargin_K15,
-		WaterLosses_K29, 
-		WaterLossesErrorMargin_K31,
-		BilledAuthorizedConsumption_T8, 
-		UnbilledAuthorizedConsumption_T16, 
-		UnbilledAuthorizedConsumptionErrorMargin_T20,
-		CommercialLosses_T26, 
-		CommercialLossesErrorMargin_T29, 
-		PhysicalLossesM3_T34, 
-		PhyscialLossesErrorMargin_AH35, 
-		BilledMeteredConsumption_AC4,
-		BilledUnmeteredConsumption_AC9,
-		UnbilledMeteredConsumption_AC14,
-		UnbilledUnmeteredConsumption_AC19,
-		UnbilledUnmeteredConsumptionErrorMargin_AO20,
-		UnauthorizedConsumption_AC24,
-		UnauthorizedConsumptionErrorMargin_AO25,
-		CustomerMeterInaccuraciesAndErrorsM3_AC29,
-		CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30,
-		RevenueWaterM3_AY8,
-		NonRevenueWaterM3_AY24,
-		NonRevenueWaterErrorMargin_AY26
-	) 
-	SELECT 
-		@UserName,
-		GETDATE(),
-		@UserName,
-		GETDATE(),
-
-		ZoneId, 
-		YearNo, 
-		MonthNo,
-		[Description],
-		0,
-		0,
-
-		-- Input
-		Start_PeriodDays_M21,
-
-		SysInput_Desc_B6,
-		SysInput_Desc_B7,
-		SysInput_Desc_B8,
-		SysInput_Desc_B9,
-		SysInput_SystemInputVolumeM3_D6,
-		SysInput_SystemInputVolumeError_F6,
-		SysInput_SystemInputVolumeM3_D7,
-		SysInput_SystemInputVolumeError_F7,
-		SysInput_SystemInputVolumeM3_D8,
-		SysInput_SystemInputVolumeError_F8,
-		SysInput_SystemInputVolumeM3_D9,
-		SysInput_SystemInputVolumeError_F9,
-
-		BilledCons_Desc_B8   ,
-		BilledCons_Desc_B9   ,
-		BilledCons_Desc_B10  ,
-		BilledCons_Desc_B11  ,
-		BilledCons_Desc_F8   ,
-		BilledCons_Desc_F9   ,
-		BilledCons_Desc_F10  ,
-		BilledCons_Desc_F11  ,
-		UnbilledCons_Desc_D8 ,
-		UnbilledCons_Desc_D9 ,
-		UnbilledCons_Desc_D10,
-		UnbilledCons_Desc_D11,
-		UnbilledCons_Desc_F6 ,
-		UnbilledCons_Desc_F7 ,
-		UnbilledCons_Desc_F8 ,
-		UnbilledCons_Desc_F9 ,
-		UnbilledCons_Desc_F10,
-		UnbilledCons_Desc_F11,
-		UnauthCons_Desc_B18  ,
-		UnauthCons_Desc_B19  ,
-		UnauthCons_Desc_B20  ,
-		UnauthCons_Desc_B21  ,
-		MetErrors_Desc_D12   ,
-		MetErrors_Desc_D13   ,
-		MetErrors_Desc_D14   ,
-		MetErrors_Desc_D15   ,
-		Network_Desc_B7      ,
-		Network_Desc_B8      ,
-		Network_Desc_B9      ,
-		Network_Desc_B10     ,
-		Interm_Area_B7       ,
-		Interm_Area_B8       ,
-		Interm_Area_B9       ,
-		Interm_Area_B10      ,
-
-		BilledCons_BilledMetConsBulkWatSupExpM3_D6,
-		BilledCons_BilledUnmetConsBulkWatSupExpM3_H6,
-
-		BilledCons_UnbMetConsM3_D8,
-		BilledCons_UnbMetConsM3_D9,
-		BilledCons_UnbMetConsM3_D10,
-		BilledCons_UnbMetConsM3_D11,
-		BilledCons_UnbUnmetConsM3_H8, 
-		BilledCons_UnbUnmetConsM3_H9, 
-		BilledCons_UnbUnmetConsM3_H10, 
-		BilledCons_UnbUnmetConsM3_H11, 
-
-		UnbilledCons_MetConsBulkWatSupExpM3_D6,
-
-		UnbilledCons_UnbMetConsM3_D8,
-		UnbilledCons_UnbMetConsM3_D9,
-		UnbilledCons_UnbMetConsM3_D10,
-		UnbilledCons_UnbMetConsM3_D11,
-		UnbilledCons_UnbUnmetConsM3_H6,
-		UnbilledCons_UnbUnmetConsM3_H7,
-		UnbilledCons_UnbUnmetConsM3_H8,
-		UnbilledCons_UnbUnmetConsM3_H9,
-		UnbilledCons_UnbUnmetConsM3_H10,
-		UnbilledCons_UnbUnmetConsM3_H11,
-		UnbilledCons_UnbUnmetConsError_J6,
-		UnbilledCons_UnbUnmetConsError_J7,
-		UnbilledCons_UnbUnmetConsError_J8,
-		UnbilledCons_UnbUnmetConsError_J9,
-		UnbilledCons_UnbUnmetConsError_J10,
-		UnbilledCons_UnbUnmetConsError_J11,
-
-		UnauthCons_IllegalConnDomEstNo_D6,
-		UnauthCons_IllegalConnDomPersPerHouse_H6,
-		UnauthCons_IllegalConnDomConsLitPerPersDay_J6,
-		UnauthCons_IllegalConnDomErrorMargin_F6,
-		UnauthCons_IllegalConnOthersErrorMargin_F10,
-
-		IllegalConnectionsOthersEstimatedNumber_D10,
-		IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10,
-
-		UnauthCons_MeterTampBypEtcEstNo_D14,
-		UnauthCons_MeterTampBypEtcErrorMargin_F14,
-		UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14,
-
-		UnauthCons_OthersErrorMargin_F18, 
-		UnauthCons_OthersErrorMargin_F19, 
-		UnauthCons_OthersErrorMargin_F20, 
-		UnauthCons_OthersErrorMargin_F21, 
-		UnauthCons_OthersM3PerDay_J18,
-		UnauthCons_OthersM3PerDay_J19,
-		UnauthCons_OthersM3PerDay_J20,
-		UnauthCons_OthersM3PerDay_J21,
-
-		MetErrors_DetailedManualSpec_J6,
-		MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8,
-		MetErrors_BilledMetConsWoBulkSupErrorMargin_N8,
-
-		MetErrors_Total_F12,
-		MetErrors_Total_F13,
-		MetErrors_Total_F14,
-		MetErrors_Total_F15,
-		MetErrors_Meter_H12,
-		MetErrors_Meter_H13,
-		MetErrors_Meter_H14,
-		MetErrors_Meter_H15,
-		MetErrors_Error_N12,
-		MetErrors_Error_N13,
-		MetErrors_Error_N14,
-		MetErrors_Error_N15,
-
-		MeteredBulkSupplyExportErrorMargin_N32,
-		UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34,
-		CorruptMeterReadingPracticessErrorMargin_N38,
-		DataHandlingErrorsOffice_L40,
-		DataHandlingErrorsOfficeErrorMargin_N40,
-
-		MetErrors_MetBulkSupExpMetUnderreg_H32,
-		MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34,
-		MetErrors_CorruptMetReadPractMetUndrreg_H38,
-		Network_DistributionAndTransmissionMains_D7,
-		Network_DistributionAndTransmissionMains_D8,
-		Network_DistributionAndTransmissionMains_D9,
-		Network_DistributionAndTransmissionMains_D10,
-		Network_NoOfConnOfRegCustomers_H10,
-		Network_NoOfInactAccountsWSvcConns_H18,
-		Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32,
-
-		Network_PossibleUnd_D30,
-		Network_NoCustomers_H7,
-		Network_ErrorMargin_J7,
-		Network_ErrorMargin_J10,
-		Network_ErrorMargin_J18,
-		Network_ErrorMargin_J32,
-		Network_ErrorMargin_D35,
-
-		Prs_Area_B7,
-		Prs_Area_B8,
-		Prs_Area_B9,
-		Prs_Area_B10,
-		Prs_ApproxNoOfConn_D7,
-		Prs_DailyAvgPrsM_F7,
-		Prs_ApproxNoOfConn_D8,
-		Prs_DailyAvgPrsM_F8,
-		Prs_ApproxNoOfConn_D9,
-		Prs_DailyAvgPrsM_F9,
-		Prs_ApproxNoOfConn_D10,
-		Prs_DailyAvgPrsM_F10,
-
-		Prs_ErrorMarg_F26,
-
-		Interm_Conn_D7,
-		Interm_Conn_D8,
-		Interm_Conn_D9,
-		Interm_Conn_D10,
-		Interm_Days_F7,
-		Interm_Days_F8,
-		Interm_Days_F9,
-		Interm_Days_F10,
-		Interm_Hour_H7,
-		Interm_Hour_H8,
-		Interm_Hour_H9,
-		Interm_Hour_H10,
-		Interm_ErrorMarg_H26,
-
-		FinancData_G6,
-		FinancData_K6,
-		FinancData_G8,
-		FinancData_D26,
-		FinancData_G35,
-
-		MatrixOneIn_SelectedOption,
-		MatrixOneIn_C11,
-		MatrixOneIn_C12,
-		MatrixOneIn_C13,
-		MatrixOneIn_C14,
-		MatrixOneIn_C21,
-		MatrixOneIn_C22,
-		MatrixOneIn_C23,
-		MatrixOneIn_C24,
-		MatrixOneIn_D21,
-		MatrixOneIn_D22,
-		MatrixOneIn_D23,
-		MatrixOneIn_D24,
-		MatrixOneIn_E11,
-		MatrixOneIn_E12,
-		MatrixOneIn_E13,
-		MatrixOneIn_E14,
-		MatrixOneIn_E21,
-		MatrixOneIn_E22,
-		MatrixOneIn_E23,
-		MatrixOneIn_E24,
-		MatrixOneIn_F11,
-		MatrixOneIn_F12,
-		MatrixOneIn_F13,
-		MatrixOneIn_F14,
-		MatrixOneIn_F21,
-		MatrixOneIn_F22,
-		MatrixOneIn_F23,
-		MatrixOneIn_F24,
-		MatrixOneIn_G11,
-		MatrixOneIn_G12,
-		MatrixOneIn_G13,
-		MatrixOneIn_G14,
-		MatrixOneIn_G21,
-		MatrixOneIn_G22,
-		MatrixOneIn_G23,
-		MatrixOneIn_G24,
-		MatrixOneIn_H11,
-		MatrixOneIn_H12,
-		MatrixOneIn_H13,
-		MatrixOneIn_H14,
-		MatrixOneIn_H21,
-		MatrixOneIn_H22,
-		MatrixOneIn_H23,
-		MatrixOneIn_H24,
-
-		MatrixTwoIn_SelectedOption,
-		MatrixTwoIn_D21,
-		MatrixTwoIn_D22,
-		MatrixTwoIn_D23,
-		MatrixTwoIn_D24,
-		MatrixTwoIn_E11,
-		MatrixTwoIn_E12,
-		MatrixTwoIn_E13,
-		MatrixTwoIn_E14,
-		MatrixTwoIn_E21,
-		MatrixTwoIn_E22,
-		MatrixTwoIn_E23,
-		MatrixTwoIn_E24,
-		MatrixTwoIn_F11,
-		MatrixTwoIn_F12,
-		MatrixTwoIn_F13,
-		MatrixTwoIn_F14,
-		MatrixTwoIn_F21,
-		MatrixTwoIn_F22,
-		MatrixTwoIn_F23,
-		MatrixTwoIn_F24,
-		MatrixTwoIn_G11,
-		MatrixTwoIn_G12,
-		MatrixTwoIn_G13,
-		MatrixTwoIn_G14,
-		MatrixTwoIn_G21,
-		MatrixTwoIn_G22,
-		MatrixTwoIn_G23,
-		MatrixTwoIn_G24,
-		MatrixTwoIn_H11,
-		MatrixTwoIn_H12,
-		MatrixTwoIn_H13,
-		MatrixTwoIn_H14,
-		MatrixTwoIn_H21,
-		MatrixTwoIn_H22,
-		MatrixTwoIn_H23,
-		MatrixTwoIn_H24,
-
-		-- Output
-		SystemInputVolume_B19,
-		SystemInputVolumeErrorMargin_B21,	
-		AuthorizedConsumption_K12,
-		AuthorizedConsumptionErrorMargin_K15,
-		WaterLosses_K29, 
-		WaterLossesErrorMargin_K31,
-		BilledAuthorizedConsumption_T8, 
-		UnbilledAuthorizedConsumption_T16, 
-		UnbilledAuthorizedConsumptionErrorMargin_T20,
-		CommercialLosses_T26, 
-		CommercialLossesErrorMargin_T29, 
-		PhysicalLossesM3_T34, 
-		PhyscialLossesErrorMargin_AH35, 
-		BilledMeteredConsumption_AC4,
-		BilledUnmeteredConsumption_AC9,
-		UnbilledMeteredConsumption_AC14,
-		UnbilledUnmeteredConsumption_AC19,
-		UnbilledUnmeteredConsumptionErrorMargin_AO20,
-		UnauthorizedConsumption_AC24,
-		UnauthorizedConsumptionErrorMargin_AO25,
-		CustomerMeterInaccuraciesAndErrorsM3_AC29,
-		CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30,
-		RevenueWaterM3_AY8,
-		NonRevenueWaterM3_AY24,
-		NonRevenueWaterErrorMargin_AY26
-	FROM
-		tbWbEasyCalcData
-	WHERE
-		WbEasyCalcDataId = @id;
-
-	SELECT @id = SCOPE_IDENTITY();
-
-
-	INSERT INTO [dbo].[tbWaterConsumption](
-		 [WbEasyCalcDataId]
-		,[Description]
-		,[WaterConsumptionCategoryId]
-		,[WaterConsumptionStatusId]
-		,[StartDate]
-		,[EndDate]
-		,[Latitude]
-		,[Lontitude]
-		,[RelatedId]
-		,[Value]
-	)
-	SELECT 
-		 @id
-		,[Description]
-		,[WaterConsumptionCategoryId]
-		,[WaterConsumptionStatusId]
-		,[StartDate]
-		,[EndDate]
-		,[Latitude]
-		,[Lontitude]
-		,[RelatedId]
-		,[Value]
-	FROM 
-		[dbo].[tbWaterConsumption]
-	WHERE
-		[WbEasyCalcDataId] = @OldId;
-
-
-END;
-
-GO
-/****** Object:  StoredProcedure [dbo].[spWbEasyCalcDataCreateAll]    Script Date: 31.05.2021 08:35:53 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spWbEasyCalcDataCreateAll]
+CREATE PROCEDURE [dbo].[_spWbEasyCalcDataCreateAll]
 	@RecordQty int OUTPUT
 AS
 BEGIN
@@ -4061,7 +3549,1466 @@ SELECT @RecordQty = COUNT(*) - @RecordQty FROM tbWbEasyCalcData;
  
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spWbEasyCalcDataDelete]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  StoredProcedure [dbo].[_spWbEasyCalcDataSaveArchive]    Script Date: 08.06.2021 14:34:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[_spWbEasyCalcDataSaveArchive]
+	@NewId [int],
+	@OldYearNo [int] = NULL, 
+	@OldMonthNo [int] = NULL,
+	@OldZoneId [int] = NULL, 
+	@OldIsArchive [bit] = NULL,
+	@ChangedId [INT] = NULL
+AS
+BEGIN
+SET NOCOUNT ON;
+
+begin -- Logging 1 -----------------------------------------------------------------------------
+DELETE FROM [dbo].[tbLog];
+INSERT INTO [dbo].[tbLog](
+     [ExecDate]
+    ,[ExecTime]
+    ,[CommandName]
+    ,[TestDate]
+) VALUES (
+    GETDATE(),
+    1,
+    CONCAT(@NewId, '-', @OldYearNo, '-', @OldMonthNo, '-', @OldZoneId, '-', @OldIsArchive),
+    GETDATE()
+);
+end; 
+
+-- 7 local variables ------------------------
+DECLARE	
+	@OldId INT = NULL, 
+	@OldArchiveDate DATETIME = NULL, 
+	@NewYearNo [int],
+	@NewMonthNo [int], 
+	@NewArchiveDate DATETIME, 
+	@NewZoneId [int], 
+	@NewIsArchive [bit];
+
+DECLARE
+	@ZonePrefix NVARCHAR(50);
+
+begin -- Fill 7 local variables ----------------------------------------------------------------
+
+IF (@OldIsArchive IS NOT NULL) BEGIN
+	SELECT
+		@OldId = @NewId,
+		@OldArchiveDate = dbo.fnGetArchivedDate(@OldYearNo, @OldMonthNo);	--CONCAT(@OldYearNo, '-', FORMAT(@OldMonthNo, '00'), '-01');
+END;
+
+SELECT 
+	@NewYearNo = YearNo,
+	@NewMonthNo = MonthNo, 
+	@NewArchiveDate = dbo.fnGetArchivedDate(YearNo, MonthNo),	--CONCAT(YearNo, '-', FORMAT(MonthNo, '00'), '-01'), 
+	@NewZoneId = ZoneId, 
+	@NewIsArchive = IsArchive 
+FROM 
+	[dbo].[tbWbEasyCalcData] 
+WHERE 
+	WbEasyCalcDataId = @NewId;	
+
+end;
+
+begin -- Logging 2 -----------------------------------------------------------------------------
+INSERT INTO [dbo].[tbLog](
+     [ExecDate]
+    ,[ExecTime]
+    ,[CommandName]
+    ,[TestDate]
+) VALUES (
+    GETDATE(),
+    1,
+    CONCAT(@OldId, '-', @NewYearNo, '-', @NewMonthNo, '-', @NewZoneId, '-', @NewIsArchive),
+    GETDATE()
+)
+end;
+
+-- Create @TabVar -------------------------
+DECLARE @TabVar TABLE
+(
+	ZoneId INT, 
+	VarName NVARCHAR(4000),
+	ScadaId INT,
+	ScadaTime DATETIME,
+	VarValue FLOAT
+);
+/*
+ZoneId	VarName					ScadaId	ScadaTime	VarValue
+------------------------------------------------------------
+1		PeriodDays_M21			225138	2019-01-15	1
+1		SysInpVolumeM3_D6		225099	2019-01-15	1234567
+1		SysInpVolumeError_F6	225120	2019-01-15	0,01
+*/
+
+
+begin -- Fill @TabVar -----------------------------------------------------------------------
+
+DECLARE
+	@IdValue INT = @NewId,
+	@OrdinalPosition INT = 8,
+	@TableName NVARCHAR(4000) = 'tbWbEasyCalcData',
+	@IdColumnName NVARCHAR(4000) = 'WbEasyCalcDataId',
+	@CastType NVARCHAR(4000) = 'FLOAT';
+
+DECLARE @TempTable TABLE (
+	[VarName] [nvarchar](4000) NOT NULL,
+	[VarValue] [float] NOT NULL
+);
+
+INSERT INTO @TempTable 
+EXEC [dbo].[spUnpivotTable]
+	@IdValue,
+	@OrdinalPosition,
+	@TableName,
+	@IdColumnName,
+	@CastType;
+/*
+VarName								VarValue
+--------------------------------------------
+Start_PeriodDays_M21				1
+SysInput_SystemInputVolumeM3_D6		1234567
+SysInput_SystemInputVolumeError_F6	0,01
+*/
+
+
+SELECT
+	@ZonePrefix = [DestinationName]
+FROM
+	[config].[WaterBalanceConfig]
+WHERE
+	[ZoneNo] = @NewZoneId;		-- 'SI'
+
+
+INSERT INTO @TabVar (
+	ZoneId,
+	VarName,
+	ScadaId,
+	ScadaTime,
+	VarValue
+)
+SELECT 
+	@NewZoneId AS ZoneId, 
+	tVar.VarScada,
+	tTelMap.D_ID AS ScadaId,
+	--CONCAT(@NewYearNo, '-', FORMAT(@NewMonthNo, '00'), '-01') ScadaTime,
+	@NewArchiveDate ScadaTime,
+	tTemp.VarValue
+FROM 
+	@TempTable tTemp
+	INNER JOIN tbWbEasyCalcDataVar tVar ON tTemp.VarName = tVar.VarName
+	INNER JOIN [TELWIN_MAP] tTelMap ON CONCAT(@ZonePrefix, '_', tVar.VarScada) = tTelMap.D_NAME;
+/*
+ZoneId	VarName					ScadaId	ScadaTime	VarValue
+------------------------------------------------------------
+1		PeriodDays_M21			225138	2019-01-15	1
+1		SysInpVolumeM3_D6		225099	2019-01-15	1234567
+1		SysInpVolumeError_F6	225120	2019-01-15	0,01
+*/
+end;
+
+
+begin -- Delete in SCADA -----------------------------------------------------------------------
+IF (
+	@OldIsArchive=1 
+	--AND (@OldYearNo<>@NewYearNo OR @OldMonthNo<>@NewMonthNo OR @OldZoneId<>@NewZoneId)
+) 
+BEGIN
+
+	SELECT
+		@ZonePrefix = [DestinationName]
+	FROM
+		[config].[WaterBalanceConfig]
+	WHERE
+		[ZoneNo] = @OldZoneId;		-- 'SI'
+
+	DELETE 
+		[dbo].[AR_0000_2020]
+	FROM 
+		tbWbEasyCalcDataVar tVar 
+		INNER JOIN [TELWIN_MAP] tTelMap ON CONCAT(@ZonePrefix, '_', tVar.VarScada) = tTelMap.D_NAME
+		INNER JOIN [dbo].[AR_0000_2020] tArch ON tTelMap.D_ID = tArch.D_VAR_ID
+	WHERE
+		tArch.D_TIME = @OldArchiveDate;
+
+	begin -- Logging 3 -----------------------------------------------------------------------------
+	INSERT INTO [dbo].[tbLog](		
+		 [ExecDate]
+		,[ExecTime]
+		,[CommandName]
+		,[TestDate]
+	) VALUES (
+		GETDATE(),
+		3,
+		'',
+		GETDATE()
+	);
+	end;
+END;
+end;
+
+
+begin -- Update and Insert in SCADA ------------------------------------------------------------
+
+IF (@NewIsArchive=1)  
+BEGIN
+	
+	-- UPDATE -------------------------------
+	--SELECT 
+	--	tWb.* 
+	--FROM 
+	--	@TabVar tWb
+	--	INNER JOIN AR_0000_2020 tScada ON tWb.ScadaId = tScada.D_VAR_ID AND tWb.ScadaTime = tScada.D_TIME;  
+
+	UPDATE [dbo].[AR_0000_2020] SET
+		[D_VALUE_FLO] = tWb.VarValue
+	FROM 
+		@TabVar tWb
+		INNER JOIN AR_0000_2020 tScada ON tWb.ScadaId = tScada.D_VAR_ID AND tWb.ScadaTime = tScada.D_TIME;
+
+	-- INSERT ------------------------------
+	--SELECT 
+	--	tWb.* 
+	--FROM 
+	--	@TabVar tWb
+	--	LEFT OUTER JOIN AR_0000_2020 tScada ON tWb.ScadaId = tScada.D_VAR_ID AND tWb.ScadaTime = tScada.D_TIME
+	--WHERE
+	--	tScada.D_VAR_ID IS NULL
+	--	; 
+
+	DECLARE @dateStart DATETIME = N'1970-01-01 00:00:00';
+	INSERT INTO [dbo].[AR_0000_2020]
+	(
+		 [D_IDENT]
+		,[D_VAR_ID]
+		,[T_TYPE]
+		,[D_TIME]
+		,[D_STATUS]
+		,[D_TYPE]
+		,[D_VALUE_FLO]
+		,[D_VALUE_INT]
+	)
+	SELECT
+		 CONVERT(BIGINT, CONVERT(VARBINARY, (master.dbo.fn_varbintohexstr(DATEDIFF(SECOND, @dateStart, tWb.ScadaTime)) + '00000000'), 1))
+		,tWb.ScadaId
+		,1
+		,tWb.ScadaTime
+		,16
+		,171
+		,tWb.VarValue
+		,NULL
+	FROM 
+		@TabVar tWb
+		LEFT OUTER JOIN AR_0000_2020 tArch ON tWb.ScadaId = tArch.D_VAR_ID AND tWb.ScadaTime = tArch.D_TIME
+	WHERE
+		tArch.D_VAR_ID IS NULL;
+
+
+	begin -- Logging 4 -----------------------------------------------------------------------------
+
+	INSERT INTO [dbo].[tbLog](
+		 [ExecDate]
+		,[ExecTime]
+		,[CommandName]
+		,[TestDate]
+	) VALUES (
+		GETDATE(),
+		4,
+		'',
+		GETDATE()
+	);
+	end;
+		
+END;
+	
+end;
+
+
+END;
+
+GO
+/****** Object:  StoredProcedure [dbo].[spMonthList]    Script Date: 08.06.2021 14:34:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[spMonthList] 
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+SELECT 
+    MonthId AS Id,
+	[MonthName] AS [Name]
+FROM
+	tbMonth;
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spSettingGet]    Script Date: 08.06.2021 14:34:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[spSettingGet] 
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT * FROM dbo.tbSetting;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spSettingSave]    Script Date: 08.06.2021 14:34:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spSettingSave]
+
+	@MetErrors_DetailedManualSpec_J6 [int],
+
+	@FinancData_G6 [float],
+	@FinancData_K6 nvarchar(400),
+	@FinancData_G8 [float],
+	--@FinancData_D26 [float], 
+	--@FinancData_G35 [float], 
+
+	@MatrixOneIn_SelectedOption [int], 
+	@MatrixOneIn_C11 [float], 
+	@MatrixOneIn_C12 [float],
+	@MatrixOneIn_C13 [float],
+	@MatrixOneIn_C14 [float],
+	@MatrixOneIn_C21 [float],
+	@MatrixOneIn_C22 [float],
+	@MatrixOneIn_C23 [float],
+	@MatrixOneIn_C24 [float],
+	@MatrixOneIn_D21 [float],
+	@MatrixOneIn_D22 [float],
+	@MatrixOneIn_D23 [float],
+	@MatrixOneIn_D24 [float],
+	@MatrixOneIn_E11 [float],
+	@MatrixOneIn_E12 [float],
+	@MatrixOneIn_E13 [float],
+	@MatrixOneIn_E14 [float],
+	@MatrixOneIn_E21 [float],
+	@MatrixOneIn_E22 [float],
+	@MatrixOneIn_E23 [float],
+	@MatrixOneIn_E24 [float],
+	@MatrixOneIn_F11 [float],
+	@MatrixOneIn_F12 [float],
+	@MatrixOneIn_F13 [float],
+	@MatrixOneIn_F14 [float],
+	@MatrixOneIn_F21 [float],
+	@MatrixOneIn_F22 [float],
+	@MatrixOneIn_F23 [float],
+	@MatrixOneIn_F24 [float],
+	@MatrixOneIn_G11 [float],
+	@MatrixOneIn_G12 [float],
+	@MatrixOneIn_G13 [float],
+	@MatrixOneIn_G14 [float],
+	@MatrixOneIn_G21 [float],
+	@MatrixOneIn_G22 [float],
+	@MatrixOneIn_G23 [float],
+	@MatrixOneIn_G24 [float],
+	@MatrixOneIn_H11 [float],
+	@MatrixOneIn_H12 [float],
+	@MatrixOneIn_H13 [float],
+	@MatrixOneIn_H14 [float],
+	@MatrixOneIn_H21 [float],
+	@MatrixOneIn_H22 [float],
+	@MatrixOneIn_H23 [float],
+	@MatrixOneIn_H24 [float],
+
+	@MatrixTwoIn_SelectedOption [int], 
+	@MatrixTwoIn_C11 [float], 
+	@MatrixTwoIn_C12 [float],
+	@MatrixTwoIn_C13 [float],
+	@MatrixTwoIn_C14 [float],
+	@MatrixTwoIn_C21 [float],
+	@MatrixTwoIn_C22 [float],
+	@MatrixTwoIn_C23 [float],
+	@MatrixTwoIn_C24 [float],
+	@MatrixTwoIn_D21 [float],
+	@MatrixTwoIn_D22 [float],
+	@MatrixTwoIn_D23 [float],
+	@MatrixTwoIn_D24 [float],
+	@MatrixTwoIn_E11 [float],
+	@MatrixTwoIn_E12 [float],
+	@MatrixTwoIn_E13 [float],
+	@MatrixTwoIn_E14 [float],
+	@MatrixTwoIn_E21 [float],
+	@MatrixTwoIn_E22 [float],
+	@MatrixTwoIn_E23 [float],
+	@MatrixTwoIn_E24 [float],
+	@MatrixTwoIn_F11 [float],
+	@MatrixTwoIn_F12 [float],
+	@MatrixTwoIn_F13 [float],
+	@MatrixTwoIn_F14 [float],
+	@MatrixTwoIn_F21 [float],
+	@MatrixTwoIn_F22 [float],
+	@MatrixTwoIn_F23 [float],
+	@MatrixTwoIn_F24 [float],
+	@MatrixTwoIn_G11 [float],
+	@MatrixTwoIn_G12 [float],
+	@MatrixTwoIn_G13 [float],
+	@MatrixTwoIn_G14 [float],
+	@MatrixTwoIn_G21 [float],
+	@MatrixTwoIn_G22 [float],
+	@MatrixTwoIn_G23 [float],
+	@MatrixTwoIn_G24 [float],
+	@MatrixTwoIn_H11 [float],
+	@MatrixTwoIn_H12 [float],
+	@MatrixTwoIn_H13 [float],
+	@MatrixTwoIn_H14 [float],
+	@MatrixTwoIn_H21 [float],
+	@MatrixTwoIn_H22 [float],
+	@MatrixTwoIn_H23 [float],
+	@MatrixTwoIn_H24 [float]
+
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	UPDATE [dbo].[tbSetting] SET
+
+		MetErrors_DetailedManualSpec_J6 = @MetErrors_DetailedManualSpec_J6,
+
+		FinancData_G6 = @FinancData_G6,
+		FinancData_K6 = @FinancData_K6,
+		FinancData_G8 = @FinancData_G8,
+		--FinancData_D26 = @FinancData_D26,
+		--FinancData_G35 = @FinancData_G35,
+
+		MatrixOneIn_SelectedOption = @MatrixOneIn_SelectedOption,
+		MatrixOneIn_C11 = @MatrixOneIn_C11,
+        MatrixOneIn_C12 = @MatrixOneIn_C12,
+        MatrixOneIn_C13 = @MatrixOneIn_C13,
+        MatrixOneIn_C14 = @MatrixOneIn_C14,
+        MatrixOneIn_C21 = @MatrixOneIn_C21,
+        MatrixOneIn_C22 = @MatrixOneIn_C22,
+        MatrixOneIn_C23 = @MatrixOneIn_C23,
+        MatrixOneIn_C24 = @MatrixOneIn_C24,
+        MatrixOneIn_D21 = @MatrixOneIn_D21,
+        MatrixOneIn_D22 = @MatrixOneIn_D22,
+        MatrixOneIn_D23 = @MatrixOneIn_D23,
+        MatrixOneIn_D24 = @MatrixOneIn_D24,
+        MatrixOneIn_E11 = @MatrixOneIn_E11,
+        MatrixOneIn_E12 = @MatrixOneIn_E12,
+        MatrixOneIn_E13 = @MatrixOneIn_E13,
+        MatrixOneIn_E14 = @MatrixOneIn_E14,
+        MatrixOneIn_E21 = @MatrixOneIn_E21,
+        MatrixOneIn_E22 = @MatrixOneIn_E22,
+        MatrixOneIn_E23 = @MatrixOneIn_E23,
+        MatrixOneIn_E24 = @MatrixOneIn_E24,
+        MatrixOneIn_F11 = @MatrixOneIn_F11,
+        MatrixOneIn_F12 = @MatrixOneIn_F12,
+        MatrixOneIn_F13 = @MatrixOneIn_F13,
+        MatrixOneIn_F14 = @MatrixOneIn_F14,
+        MatrixOneIn_F21 = @MatrixOneIn_F21,
+        MatrixOneIn_F22 = @MatrixOneIn_F22,
+        MatrixOneIn_F23 = @MatrixOneIn_F23,
+        MatrixOneIn_F24 = @MatrixOneIn_F24,
+        MatrixOneIn_G11 = @MatrixOneIn_G11,
+        MatrixOneIn_G12 = @MatrixOneIn_G12,
+        MatrixOneIn_G13 = @MatrixOneIn_G13,
+        MatrixOneIn_G14 = @MatrixOneIn_G14,
+        MatrixOneIn_G21 = @MatrixOneIn_G21,
+        MatrixOneIn_G22 = @MatrixOneIn_G22,
+        MatrixOneIn_G23 = @MatrixOneIn_G23,
+        MatrixOneIn_G24 = @MatrixOneIn_G24,
+        MatrixOneIn_H11 = @MatrixOneIn_H11,
+        MatrixOneIn_H12 = @MatrixOneIn_H12,
+        MatrixOneIn_H13 = @MatrixOneIn_H13,
+        MatrixOneIn_H14 = @MatrixOneIn_H14,
+        MatrixOneIn_H21 = @MatrixOneIn_H21,
+        MatrixOneIn_H22 = @MatrixOneIn_H22,
+        MatrixOneIn_H23 = @MatrixOneIn_H23,
+        MatrixOneIn_H24 = @MatrixOneIn_H24,
+
+		MatrixTwoIn_SelectedOption = @MatrixTwoIn_SelectedOption,
+		MatrixTwoIn_C11 = @MatrixTwoIn_C11,
+        MatrixTwoIn_C12 = @MatrixTwoIn_C12,
+        MatrixTwoIn_C13 = @MatrixTwoIn_C13,
+        MatrixTwoIn_C14 = @MatrixTwoIn_C14,
+        MatrixTwoIn_C21 = @MatrixTwoIn_C21,
+        MatrixTwoIn_C22 = @MatrixTwoIn_C22,
+        MatrixTwoIn_C23 = @MatrixTwoIn_C23,
+        MatrixTwoIn_C24 = @MatrixTwoIn_C24,
+        MatrixTwoIn_D21 = @MatrixTwoIn_D21,
+        MatrixTwoIn_D22 = @MatrixTwoIn_D22,
+        MatrixTwoIn_D23 = @MatrixTwoIn_D23,
+        MatrixTwoIn_D24 = @MatrixTwoIn_D24,
+        MatrixTwoIn_E11 = @MatrixTwoIn_E11,
+        MatrixTwoIn_E12 = @MatrixTwoIn_E12,
+        MatrixTwoIn_E13 = @MatrixTwoIn_E13,
+        MatrixTwoIn_E14 = @MatrixTwoIn_E14,
+        MatrixTwoIn_E21 = @MatrixTwoIn_E21,
+        MatrixTwoIn_E22 = @MatrixTwoIn_E22,
+        MatrixTwoIn_E23 = @MatrixTwoIn_E23,
+        MatrixTwoIn_E24 = @MatrixTwoIn_E24,
+        MatrixTwoIn_F11 = @MatrixTwoIn_F11,
+        MatrixTwoIn_F12 = @MatrixTwoIn_F12,
+        MatrixTwoIn_F13 = @MatrixTwoIn_F13,
+        MatrixTwoIn_F14 = @MatrixTwoIn_F14,
+        MatrixTwoIn_F21 = @MatrixTwoIn_F21,
+        MatrixTwoIn_F22 = @MatrixTwoIn_F22,
+        MatrixTwoIn_F23 = @MatrixTwoIn_F23,
+        MatrixTwoIn_F24 = @MatrixTwoIn_F24,
+        MatrixTwoIn_G11 = @MatrixTwoIn_G11,
+        MatrixTwoIn_G12 = @MatrixTwoIn_G12,
+        MatrixTwoIn_G13 = @MatrixTwoIn_G13,
+        MatrixTwoIn_G14 = @MatrixTwoIn_G14,
+        MatrixTwoIn_G21 = @MatrixTwoIn_G21,
+        MatrixTwoIn_G22 = @MatrixTwoIn_G22,
+        MatrixTwoIn_G23 = @MatrixTwoIn_G23,
+        MatrixTwoIn_G24 = @MatrixTwoIn_G24,
+        MatrixTwoIn_H11 = @MatrixTwoIn_H11,
+        MatrixTwoIn_H12 = @MatrixTwoIn_H12,
+        MatrixTwoIn_H13 = @MatrixTwoIn_H13,
+        MatrixTwoIn_H14 = @MatrixTwoIn_H14,
+        MatrixTwoIn_H21 = @MatrixTwoIn_H21,
+        MatrixTwoIn_H22 = @MatrixTwoIn_H22,
+        MatrixTwoIn_H23 = @MatrixTwoIn_H23,
+        MatrixTwoIn_H24 = @MatrixTwoIn_H24
+
+END;
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[spWaterConsumptionCategoryList]    Script Date: 08.06.2021 14:34:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[spWaterConsumptionCategoryList] 
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+SELECT 
+    WaterConsumptionCategoryId AS Id,
+	WaterConsumptionCategoryName AS [Name]
+FROM
+	tbWaterConsumptionCategory;
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spWaterConsumptionCategoryStatusExcelList]    Script Date: 08.06.2021 14:34:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[spWaterConsumptionCategoryStatusExcelList] 
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+SELECT 
+    CategoryId,
+	StatusId,
+	tCS.ExcelCellId,
+	tCSE.ExcelCellName
+FROM
+	tbWaterConsumptionCategoryStatus tCS
+	INNER JOIN tbWaterConsumptionCategoryStatusExcel tCSE ON tCS.ExcelCellId = tCSE.ExcelCellId
+	;
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spWaterConsumptionClone]    Script Date: 08.06.2021 14:34:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spWaterConsumptionClone]
+	@UserName nvarchar(50), 
+	@id [int] OUTPUT
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	INSERT INTO [dbo].[tbWaterConsumption] (
+		[Description],
+		WaterConsumptionCategoryId,
+		WaterConsumptionStatusId, 
+		StartDate,
+		EndDate,
+		Latitude,
+		Lontitude,
+		RelatedId,
+		[Value]
+	) 
+	SELECT 
+		[Description],
+		WaterConsumptionCategoryId,
+		WaterConsumptionStatusId, 
+		StartDate,
+		EndDate,
+		Latitude,
+		Lontitude,
+		RelatedId,
+		[Value]
+	FROM
+		tbWaterConsumption
+	WHERE
+		WaterConsumptionId = @id;
+
+	SELECT @id = SCOPE_IDENTITY();
+
+END;
+
+GO
+/****** Object:  StoredProcedure [dbo].[spWaterConsumptionDelete]    Script Date: 08.06.2021 14:34:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[spWaterConsumptionDelete]
+	@id int
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	DELETE FROM [dbo].[tbWaterConsumption] WHERE WaterConsumptionId = @id;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spWaterConsumptionList]    Script Date: 08.06.2021 14:34:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[spWaterConsumptionList] 
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT * FROM dbo.tbWaterConsumption ORDER BY WaterConsumptionId;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spWaterConsumptionSave]    Script Date: 08.06.2021 14:34:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spWaterConsumptionSave]
+	@Description nvarchar(MAX),
+
+	@WbEasyCalcDataId [int],
+	@WaterConsumptionCategoryId [int],
+	@WaterConsumptionStatusId [int], 
+	@StartDate [datetime],
+	@EndDate [datetime],
+	@Latitude [float],
+	@Lontitude [float],
+	@RelatedId [int],
+	@Value [float],
+
+	@id [int] OUTPUT
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+
+/*
+DECLARE 
+	@OldYearNo [int], 
+	@OldMonthNo [int],
+	@OldRelatedId [int], 
+	@OldIsArchive BIT;
+SELECT 
+	@OldYearNo = YearNo, 
+	@OldMonthNo = MonthNo,
+	@OldRelatedId = RelatedId, 
+	@OldIsArchive = IsArchive 
+FROM 
+	[dbo].[tbWbEasyCalcData] 
+WHERE 
+	WbEasyCalcDataId = @id;
+
+DECLARE 
+	@ChangedId [int];
+
+
+IF (@IsArchive=1) BEGIN
+	SELECT
+		@ChangedId = WbEasyCalcDataId
+	FROM
+		[dbo].[tbWbEasyCalcData]
+	WHERE
+		IsArchive = @IsArchive AND
+		RelatedId = @RelatedId AND 
+		YearNo = @YearNo AND 
+		MonthNo = @MonthNo;
+
+	UPDATE [dbo].[tbWbEasyCalcData] SET
+		IsArchive = 0,
+		IsAccepted = 0
+	WHERE
+		RelatedId = @RelatedId AND 
+		YearNo = @YearNo AND 
+		MonthNo = @MonthNo;
+END;
+*/
+
+
+
+IF (@id = 0) BEGIN
+
+	INSERT INTO [dbo].[tbWaterConsumption] (
+		[Description],
+
+		WbEasyCalcDataId,
+		WaterConsumptionCategoryId,
+		WaterConsumptionStatusId, 
+		StartDate,
+		EndDate,
+		Latitude,
+		Lontitude,
+		RelatedId,
+		[Value]
+
+	) VALUES (
+		@Description,
+
+		@WbEasyCalcDataId,
+		@WaterConsumptionCategoryId,
+		@WaterConsumptionStatusId, 
+		@StartDate,
+		@EndDate,
+		@Latitude,
+		@Lontitude,
+		@RelatedId,
+		@Value
+	);
+
+	SELECT @id = SCOPE_IDENTITY();
+
+END ELSE BEGIN
+	UPDATE [dbo].[tbWaterConsumption] SET
+		[Description] = @Description,
+
+		WbEasyCalcDataId = @WbEasyCalcDataId,
+		WaterConsumptionCategoryId = @WaterConsumptionCategoryId,
+		WaterConsumptionStatusId = @WaterConsumptionStatusId, 
+		StartDate = @StartDate,
+		EndDate = @EndDate,
+		Latitude = @Latitude,
+		Lontitude = @Lontitude,
+		RelatedId = @RelatedId,
+		[Value] = @Value
+
+	WHERE 
+		[WaterConsumptionId] = @id;
+END;
+
+--EXEC dbo.spWbEasyCalcDataSaveArchive @id, @OldYearNo, @OldMonthNo, @OldRelatedId, @OldIsArchive, @ChangedId;	
+
+END;
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[spWaterConsumptionStatusList]    Script Date: 08.06.2021 14:34:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[spWaterConsumptionStatusList] 
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+SELECT 
+    WaterConsumptionStatusId AS Id,
+	WaterConsumptionStatusName AS [Name]
+FROM
+	tbWaterConsumptionStatus;
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spWbEasyCalcDataClone]    Script Date: 08.06.2021 14:34:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spWbEasyCalcDataClone]
+	@id [int] OUTPUT,
+	@UserName nvarchar(50) 
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	DECLARE @OldId INT;
+	SET @OldId = @id;
+
+	INSERT INTO [dbo].[tbWbEasyCalcData] (
+		CreateLogin,
+		CreateDate,
+		ModifyLogin,
+		ModifyDate,
+
+		ZoneId, 
+		YearNo, 
+		MonthNo,
+		[Description],
+		IsArchive,
+		IsAccepted,
+
+		-- Input
+		Start_PeriodDays_M21,
+
+		SysInput_Desc_B6,
+		SysInput_Desc_B7,
+		SysInput_Desc_B8,
+		SysInput_Desc_B9,
+		SysInput_SystemInputVolumeM3_D6,
+		SysInput_SystemInputVolumeError_F6,
+		SysInput_SystemInputVolumeM3_D7,
+		SysInput_SystemInputVolumeError_F7,
+		SysInput_SystemInputVolumeM3_D8,
+		SysInput_SystemInputVolumeError_F8,
+		SysInput_SystemInputVolumeM3_D9,
+		SysInput_SystemInputVolumeError_F9,
+
+		BilledCons_Desc_B8   ,
+		BilledCons_Desc_B9   ,
+		BilledCons_Desc_B10  ,
+		BilledCons_Desc_B11  ,
+		BilledCons_Desc_F8   ,
+		BilledCons_Desc_F9   ,
+		BilledCons_Desc_F10  ,
+		BilledCons_Desc_F11  ,
+		UnbilledCons_Desc_D8 ,
+		UnbilledCons_Desc_D9 ,
+		UnbilledCons_Desc_D10,
+		UnbilledCons_Desc_D11,
+		UnbilledCons_Desc_F6 ,
+		UnbilledCons_Desc_F7 ,
+		UnbilledCons_Desc_F8 ,
+		UnbilledCons_Desc_F9 ,
+		UnbilledCons_Desc_F10,
+		UnbilledCons_Desc_F11,
+		UnauthCons_Desc_B18  ,
+		UnauthCons_Desc_B19  ,
+		UnauthCons_Desc_B20  ,
+		UnauthCons_Desc_B21  ,
+		MetErrors_Desc_D12   ,
+		MetErrors_Desc_D13   ,
+		MetErrors_Desc_D14   ,
+		MetErrors_Desc_D15   ,
+		Network_Desc_B7      ,
+		Network_Desc_B8      ,
+		Network_Desc_B9      ,
+		Network_Desc_B10     ,
+		Interm_Area_B7       ,
+		Interm_Area_B8       ,
+		Interm_Area_B9       ,
+		Interm_Area_B10      ,
+
+		BilledCons_BilledMetConsBulkWatSupExpM3_D6,
+		BilledCons_BilledUnmetConsBulkWatSupExpM3_H6,
+
+		BilledCons_UnbMetConsM3_D8,
+		BilledCons_UnbMetConsM3_D9,
+		BilledCons_UnbMetConsM3_D10,
+		BilledCons_UnbMetConsM3_D11,
+		BilledCons_UnbUnmetConsM3_H8, 
+		BilledCons_UnbUnmetConsM3_H9, 
+		BilledCons_UnbUnmetConsM3_H10, 
+		BilledCons_UnbUnmetConsM3_H11, 
+
+		UnbilledCons_MetConsBulkWatSupExpM3_D6,
+
+		UnbilledCons_UnbMetConsM3_D8,
+		UnbilledCons_UnbMetConsM3_D9,
+		UnbilledCons_UnbMetConsM3_D10,
+		UnbilledCons_UnbMetConsM3_D11,
+		UnbilledCons_UnbUnmetConsM3_H6,
+		UnbilledCons_UnbUnmetConsM3_H7,
+		UnbilledCons_UnbUnmetConsM3_H8,
+		UnbilledCons_UnbUnmetConsM3_H9,
+		UnbilledCons_UnbUnmetConsM3_H10,
+		UnbilledCons_UnbUnmetConsM3_H11,
+		UnbilledCons_UnbUnmetConsError_J6,
+		UnbilledCons_UnbUnmetConsError_J7,
+		UnbilledCons_UnbUnmetConsError_J8,
+		UnbilledCons_UnbUnmetConsError_J9,
+		UnbilledCons_UnbUnmetConsError_J10,
+		UnbilledCons_UnbUnmetConsError_J11,
+
+		UnauthCons_IllegalConnDomEstNo_D6,
+		UnauthCons_IllegalConnDomPersPerHouse_H6,
+		UnauthCons_IllegalConnDomConsLitPerPersDay_J6,
+		UnauthCons_IllegalConnDomErrorMargin_F6,
+		UnauthCons_IllegalConnOthersErrorMargin_F10,
+
+		IllegalConnectionsOthersEstimatedNumber_D10,
+		IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10,
+
+		UnauthCons_MeterTampBypEtcEstNo_D14,
+		UnauthCons_MeterTampBypEtcErrorMargin_F14,
+		UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14,
+
+		UnauthCons_OthersErrorMargin_F18, 
+		UnauthCons_OthersErrorMargin_F19, 
+		UnauthCons_OthersErrorMargin_F20, 
+		UnauthCons_OthersErrorMargin_F21, 
+		UnauthCons_OthersM3PerDay_J18,
+		UnauthCons_OthersM3PerDay_J19,
+		UnauthCons_OthersM3PerDay_J20,
+		UnauthCons_OthersM3PerDay_J21,
+
+		MetErrors_DetailedManualSpec_J6,
+		MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8,
+		MetErrors_BilledMetConsWoBulkSupErrorMargin_N8,
+
+		MetErrors_Total_F12,
+		MetErrors_Total_F13,
+		MetErrors_Total_F14,
+		MetErrors_Total_F15,
+		MetErrors_Meter_H12,
+		MetErrors_Meter_H13,
+		MetErrors_Meter_H14,
+		MetErrors_Meter_H15,
+		MetErrors_Error_N12,
+		MetErrors_Error_N13,
+		MetErrors_Error_N14,
+		MetErrors_Error_N15,
+
+		MeteredBulkSupplyExportErrorMargin_N32,
+		UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34,
+		CorruptMeterReadingPracticessErrorMargin_N38,
+		DataHandlingErrorsOffice_L40,
+		DataHandlingErrorsOfficeErrorMargin_N40,
+
+		MetErrors_MetBulkSupExpMetUnderreg_H32,
+		MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34,
+		MetErrors_CorruptMetReadPractMetUndrreg_H38,
+		Network_DistributionAndTransmissionMains_D7,
+		Network_DistributionAndTransmissionMains_D8,
+		Network_DistributionAndTransmissionMains_D9,
+		Network_DistributionAndTransmissionMains_D10,
+		Network_NoOfConnOfRegCustomers_H10,
+		Network_NoOfInactAccountsWSvcConns_H18,
+		Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32,
+
+		Network_PossibleUnd_D30,
+		Network_NoCustomers_H7,
+		Network_ErrorMargin_J7,
+		Network_ErrorMargin_J10,
+		Network_ErrorMargin_J18,
+		Network_ErrorMargin_J32,
+		Network_ErrorMargin_D35,
+
+		Prs_Area_B7,
+		Prs_Area_B8,
+		Prs_Area_B9,
+		Prs_Area_B10,
+		--Prs_ApproxNoOfConn_D7,
+		Prs_DailyAvgPrsM_F7,
+		Prs_ApproxNoOfConn_D8,
+		Prs_DailyAvgPrsM_F8,
+		Prs_ApproxNoOfConn_D9,
+		Prs_DailyAvgPrsM_F9,
+		Prs_ApproxNoOfConn_D10,
+		Prs_DailyAvgPrsM_F10,
+
+		Prs_ErrorMarg_F26,
+
+		Interm_Conn_D7,
+		Interm_Conn_D8,
+		Interm_Conn_D9,
+		Interm_Conn_D10,
+		Interm_Days_F7,
+		Interm_Days_F8,
+		Interm_Days_F9,
+		Interm_Days_F10,
+		Interm_Hour_H7,
+		Interm_Hour_H8,
+		Interm_Hour_H9,
+		Interm_Hour_H10,
+		Interm_ErrorMarg_H26,
+
+		FinancData_G6,
+		FinancData_K6,
+		FinancData_G8,
+		FinancData_D26,
+		FinancData_G35,
+
+		MatrixOneIn_SelectedOption,
+		MatrixOneIn_C11,
+		MatrixOneIn_C12,
+		MatrixOneIn_C13,
+		MatrixOneIn_C14,
+		MatrixOneIn_C21,
+		MatrixOneIn_C22,
+		MatrixOneIn_C23,
+		MatrixOneIn_C24,
+		MatrixOneIn_D21,
+		MatrixOneIn_D22,
+		MatrixOneIn_D23,
+		MatrixOneIn_D24,
+		MatrixOneIn_E11,
+		MatrixOneIn_E12,
+		MatrixOneIn_E13,
+		MatrixOneIn_E14,
+		MatrixOneIn_E21,
+		MatrixOneIn_E22,
+		MatrixOneIn_E23,
+		MatrixOneIn_E24,
+		MatrixOneIn_F11,
+		MatrixOneIn_F12,
+		MatrixOneIn_F13,
+		MatrixOneIn_F14,
+		MatrixOneIn_F21,
+		MatrixOneIn_F22,
+		MatrixOneIn_F23,
+		MatrixOneIn_F24,
+		MatrixOneIn_G11,
+		MatrixOneIn_G12,
+		MatrixOneIn_G13,
+		MatrixOneIn_G14,
+		MatrixOneIn_G21,
+		MatrixOneIn_G22,
+		MatrixOneIn_G23,
+		MatrixOneIn_G24,
+		MatrixOneIn_H11,
+		MatrixOneIn_H12,
+		MatrixOneIn_H13,
+		MatrixOneIn_H14,
+		MatrixOneIn_H21,
+		MatrixOneIn_H22,
+		MatrixOneIn_H23,
+		MatrixOneIn_H24,
+
+		MatrixTwoIn_SelectedOption,
+		MatrixTwoIn_D21,
+		MatrixTwoIn_D22,
+		MatrixTwoIn_D23,
+		MatrixTwoIn_D24,
+		MatrixTwoIn_E11,
+		MatrixTwoIn_E12,
+		MatrixTwoIn_E13,
+		MatrixTwoIn_E14,
+		MatrixTwoIn_E21,
+		MatrixTwoIn_E22,
+		MatrixTwoIn_E23,
+		MatrixTwoIn_E24,
+		MatrixTwoIn_F11,
+		MatrixTwoIn_F12,
+		MatrixTwoIn_F13,
+		MatrixTwoIn_F14,
+		MatrixTwoIn_F21,
+		MatrixTwoIn_F22,
+		MatrixTwoIn_F23,
+		MatrixTwoIn_F24,
+		MatrixTwoIn_G11,
+		MatrixTwoIn_G12,
+		MatrixTwoIn_G13,
+		MatrixTwoIn_G14,
+		MatrixTwoIn_G21,
+		MatrixTwoIn_G22,
+		MatrixTwoIn_G23,
+		MatrixTwoIn_G24,
+		MatrixTwoIn_H11,
+		MatrixTwoIn_H12,
+		MatrixTwoIn_H13,
+		MatrixTwoIn_H14,
+		MatrixTwoIn_H21,
+		MatrixTwoIn_H22,
+		MatrixTwoIn_H23,
+		MatrixTwoIn_H24,
+
+		-- Output
+		SystemInputVolume_B19,
+		SystemInputVolumeErrorMargin_B21,	
+		AuthorizedConsumption_K12,
+		AuthorizedConsumptionErrorMargin_K15,
+		WaterLosses_K29, 
+		WaterLossesErrorMargin_K31,
+		BilledAuthorizedConsumption_T8, 
+		UnbilledAuthorizedConsumption_T16, 
+		UnbilledAuthorizedConsumptionErrorMargin_T20,
+		CommercialLosses_T26, 
+		CommercialLossesErrorMargin_T29, 
+		PhysicalLossesM3_T34, 
+		PhyscialLossesErrorMargin_AH35, 
+		BilledMeteredConsumption_AC4,
+		BilledUnmeteredConsumption_AC9,
+		UnbilledMeteredConsumption_AC14,
+		UnbilledUnmeteredConsumption_AC19,
+		UnbilledUnmeteredConsumptionErrorMargin_AO20,
+		UnauthorizedConsumption_AC24,
+		UnauthorizedConsumptionErrorMargin_AO25,
+		CustomerMeterInaccuraciesAndErrorsM3_AC29,
+		CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30,
+		RevenueWaterM3_AY8,
+		NonRevenueWaterM3_AY24,
+		NonRevenueWaterErrorMargin_AY26
+	) 
+	SELECT 
+		@UserName,
+		GETDATE(),
+		@UserName,
+		GETDATE(),
+
+		ZoneId, 
+		YearNo, 
+		MonthNo,
+		[Description],
+		0,
+		0,
+
+		-- Input
+		Start_PeriodDays_M21,
+
+		SysInput_Desc_B6,
+		SysInput_Desc_B7,
+		SysInput_Desc_B8,
+		SysInput_Desc_B9,
+		SysInput_SystemInputVolumeM3_D6,
+		SysInput_SystemInputVolumeError_F6,
+		SysInput_SystemInputVolumeM3_D7,
+		SysInput_SystemInputVolumeError_F7,
+		SysInput_SystemInputVolumeM3_D8,
+		SysInput_SystemInputVolumeError_F8,
+		SysInput_SystemInputVolumeM3_D9,
+		SysInput_SystemInputVolumeError_F9,
+
+		BilledCons_Desc_B8   ,
+		BilledCons_Desc_B9   ,
+		BilledCons_Desc_B10  ,
+		BilledCons_Desc_B11  ,
+		BilledCons_Desc_F8   ,
+		BilledCons_Desc_F9   ,
+		BilledCons_Desc_F10  ,
+		BilledCons_Desc_F11  ,
+		UnbilledCons_Desc_D8 ,
+		UnbilledCons_Desc_D9 ,
+		UnbilledCons_Desc_D10,
+		UnbilledCons_Desc_D11,
+		UnbilledCons_Desc_F6 ,
+		UnbilledCons_Desc_F7 ,
+		UnbilledCons_Desc_F8 ,
+		UnbilledCons_Desc_F9 ,
+		UnbilledCons_Desc_F10,
+		UnbilledCons_Desc_F11,
+		UnauthCons_Desc_B18  ,
+		UnauthCons_Desc_B19  ,
+		UnauthCons_Desc_B20  ,
+		UnauthCons_Desc_B21  ,
+		MetErrors_Desc_D12   ,
+		MetErrors_Desc_D13   ,
+		MetErrors_Desc_D14   ,
+		MetErrors_Desc_D15   ,
+		Network_Desc_B7      ,
+		Network_Desc_B8      ,
+		Network_Desc_B9      ,
+		Network_Desc_B10     ,
+		Interm_Area_B7       ,
+		Interm_Area_B8       ,
+		Interm_Area_B9       ,
+		Interm_Area_B10      ,
+
+		BilledCons_BilledMetConsBulkWatSupExpM3_D6,
+		BilledCons_BilledUnmetConsBulkWatSupExpM3_H6,
+
+		BilledCons_UnbMetConsM3_D8,
+		BilledCons_UnbMetConsM3_D9,
+		BilledCons_UnbMetConsM3_D10,
+		BilledCons_UnbMetConsM3_D11,
+		BilledCons_UnbUnmetConsM3_H8, 
+		BilledCons_UnbUnmetConsM3_H9, 
+		BilledCons_UnbUnmetConsM3_H10, 
+		BilledCons_UnbUnmetConsM3_H11, 
+
+		UnbilledCons_MetConsBulkWatSupExpM3_D6,
+
+		UnbilledCons_UnbMetConsM3_D8,
+		UnbilledCons_UnbMetConsM3_D9,
+		UnbilledCons_UnbMetConsM3_D10,
+		UnbilledCons_UnbMetConsM3_D11,
+		UnbilledCons_UnbUnmetConsM3_H6,
+		UnbilledCons_UnbUnmetConsM3_H7,
+		UnbilledCons_UnbUnmetConsM3_H8,
+		UnbilledCons_UnbUnmetConsM3_H9,
+		UnbilledCons_UnbUnmetConsM3_H10,
+		UnbilledCons_UnbUnmetConsM3_H11,
+		UnbilledCons_UnbUnmetConsError_J6,
+		UnbilledCons_UnbUnmetConsError_J7,
+		UnbilledCons_UnbUnmetConsError_J8,
+		UnbilledCons_UnbUnmetConsError_J9,
+		UnbilledCons_UnbUnmetConsError_J10,
+		UnbilledCons_UnbUnmetConsError_J11,
+
+		UnauthCons_IllegalConnDomEstNo_D6,
+		UnauthCons_IllegalConnDomPersPerHouse_H6,
+		UnauthCons_IllegalConnDomConsLitPerPersDay_J6,
+		UnauthCons_IllegalConnDomErrorMargin_F6,
+		UnauthCons_IllegalConnOthersErrorMargin_F10,
+
+		IllegalConnectionsOthersEstimatedNumber_D10,
+		IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10,
+
+		UnauthCons_MeterTampBypEtcEstNo_D14,
+		UnauthCons_MeterTampBypEtcErrorMargin_F14,
+		UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14,
+
+		UnauthCons_OthersErrorMargin_F18, 
+		UnauthCons_OthersErrorMargin_F19, 
+		UnauthCons_OthersErrorMargin_F20, 
+		UnauthCons_OthersErrorMargin_F21, 
+		UnauthCons_OthersM3PerDay_J18,
+		UnauthCons_OthersM3PerDay_J19,
+		UnauthCons_OthersM3PerDay_J20,
+		UnauthCons_OthersM3PerDay_J21,
+
+		MetErrors_DetailedManualSpec_J6,
+		MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8,
+		MetErrors_BilledMetConsWoBulkSupErrorMargin_N8,
+
+		MetErrors_Total_F12,
+		MetErrors_Total_F13,
+		MetErrors_Total_F14,
+		MetErrors_Total_F15,
+		MetErrors_Meter_H12,
+		MetErrors_Meter_H13,
+		MetErrors_Meter_H14,
+		MetErrors_Meter_H15,
+		MetErrors_Error_N12,
+		MetErrors_Error_N13,
+		MetErrors_Error_N14,
+		MetErrors_Error_N15,
+
+		MeteredBulkSupplyExportErrorMargin_N32,
+		UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34,
+		CorruptMeterReadingPracticessErrorMargin_N38,
+		DataHandlingErrorsOffice_L40,
+		DataHandlingErrorsOfficeErrorMargin_N40,
+
+		MetErrors_MetBulkSupExpMetUnderreg_H32,
+		MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34,
+		MetErrors_CorruptMetReadPractMetUndrreg_H38,
+		Network_DistributionAndTransmissionMains_D7,
+		Network_DistributionAndTransmissionMains_D8,
+		Network_DistributionAndTransmissionMains_D9,
+		Network_DistributionAndTransmissionMains_D10,
+		Network_NoOfConnOfRegCustomers_H10,
+		Network_NoOfInactAccountsWSvcConns_H18,
+		Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32,
+
+		Network_PossibleUnd_D30,
+		Network_NoCustomers_H7,
+		Network_ErrorMargin_J7,
+		Network_ErrorMargin_J10,
+		Network_ErrorMargin_J18,
+		Network_ErrorMargin_J32,
+		Network_ErrorMargin_D35,
+
+		Prs_Area_B7,
+		Prs_Area_B8,
+		Prs_Area_B9,
+		Prs_Area_B10,
+		--Prs_ApproxNoOfConn_D7,
+		Prs_DailyAvgPrsM_F7,
+		Prs_ApproxNoOfConn_D8,
+		Prs_DailyAvgPrsM_F8,
+		Prs_ApproxNoOfConn_D9,
+		Prs_DailyAvgPrsM_F9,
+		Prs_ApproxNoOfConn_D10,
+		Prs_DailyAvgPrsM_F10,
+
+		Prs_ErrorMarg_F26,
+
+		Interm_Conn_D7,
+		Interm_Conn_D8,
+		Interm_Conn_D9,
+		Interm_Conn_D10,
+		Interm_Days_F7,
+		Interm_Days_F8,
+		Interm_Days_F9,
+		Interm_Days_F10,
+		Interm_Hour_H7,
+		Interm_Hour_H8,
+		Interm_Hour_H9,
+		Interm_Hour_H10,
+		Interm_ErrorMarg_H26,
+
+		FinancData_G6,
+		FinancData_K6,
+		FinancData_G8,
+		FinancData_D26,
+		FinancData_G35,
+
+		MatrixOneIn_SelectedOption,
+		MatrixOneIn_C11,
+		MatrixOneIn_C12,
+		MatrixOneIn_C13,
+		MatrixOneIn_C14,
+		MatrixOneIn_C21,
+		MatrixOneIn_C22,
+		MatrixOneIn_C23,
+		MatrixOneIn_C24,
+		MatrixOneIn_D21,
+		MatrixOneIn_D22,
+		MatrixOneIn_D23,
+		MatrixOneIn_D24,
+		MatrixOneIn_E11,
+		MatrixOneIn_E12,
+		MatrixOneIn_E13,
+		MatrixOneIn_E14,
+		MatrixOneIn_E21,
+		MatrixOneIn_E22,
+		MatrixOneIn_E23,
+		MatrixOneIn_E24,
+		MatrixOneIn_F11,
+		MatrixOneIn_F12,
+		MatrixOneIn_F13,
+		MatrixOneIn_F14,
+		MatrixOneIn_F21,
+		MatrixOneIn_F22,
+		MatrixOneIn_F23,
+		MatrixOneIn_F24,
+		MatrixOneIn_G11,
+		MatrixOneIn_G12,
+		MatrixOneIn_G13,
+		MatrixOneIn_G14,
+		MatrixOneIn_G21,
+		MatrixOneIn_G22,
+		MatrixOneIn_G23,
+		MatrixOneIn_G24,
+		MatrixOneIn_H11,
+		MatrixOneIn_H12,
+		MatrixOneIn_H13,
+		MatrixOneIn_H14,
+		MatrixOneIn_H21,
+		MatrixOneIn_H22,
+		MatrixOneIn_H23,
+		MatrixOneIn_H24,
+
+		MatrixTwoIn_SelectedOption,
+		MatrixTwoIn_D21,
+		MatrixTwoIn_D22,
+		MatrixTwoIn_D23,
+		MatrixTwoIn_D24,
+		MatrixTwoIn_E11,
+		MatrixTwoIn_E12,
+		MatrixTwoIn_E13,
+		MatrixTwoIn_E14,
+		MatrixTwoIn_E21,
+		MatrixTwoIn_E22,
+		MatrixTwoIn_E23,
+		MatrixTwoIn_E24,
+		MatrixTwoIn_F11,
+		MatrixTwoIn_F12,
+		MatrixTwoIn_F13,
+		MatrixTwoIn_F14,
+		MatrixTwoIn_F21,
+		MatrixTwoIn_F22,
+		MatrixTwoIn_F23,
+		MatrixTwoIn_F24,
+		MatrixTwoIn_G11,
+		MatrixTwoIn_G12,
+		MatrixTwoIn_G13,
+		MatrixTwoIn_G14,
+		MatrixTwoIn_G21,
+		MatrixTwoIn_G22,
+		MatrixTwoIn_G23,
+		MatrixTwoIn_G24,
+		MatrixTwoIn_H11,
+		MatrixTwoIn_H12,
+		MatrixTwoIn_H13,
+		MatrixTwoIn_H14,
+		MatrixTwoIn_H21,
+		MatrixTwoIn_H22,
+		MatrixTwoIn_H23,
+		MatrixTwoIn_H24,
+
+		-- Output
+		SystemInputVolume_B19,
+		SystemInputVolumeErrorMargin_B21,	
+		AuthorizedConsumption_K12,
+		AuthorizedConsumptionErrorMargin_K15,
+		WaterLosses_K29, 
+		WaterLossesErrorMargin_K31,
+		BilledAuthorizedConsumption_T8, 
+		UnbilledAuthorizedConsumption_T16, 
+		UnbilledAuthorizedConsumptionErrorMargin_T20,
+		CommercialLosses_T26, 
+		CommercialLossesErrorMargin_T29, 
+		PhysicalLossesM3_T34, 
+		PhyscialLossesErrorMargin_AH35, 
+		BilledMeteredConsumption_AC4,
+		BilledUnmeteredConsumption_AC9,
+		UnbilledMeteredConsumption_AC14,
+		UnbilledUnmeteredConsumption_AC19,
+		UnbilledUnmeteredConsumptionErrorMargin_AO20,
+		UnauthorizedConsumption_AC24,
+		UnauthorizedConsumptionErrorMargin_AO25,
+		CustomerMeterInaccuraciesAndErrorsM3_AC29,
+		CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30,
+		RevenueWaterM3_AY8,
+		NonRevenueWaterM3_AY24,
+		NonRevenueWaterErrorMargin_AY26
+	FROM
+		tbWbEasyCalcData
+	WHERE
+		WbEasyCalcDataId = @id;
+
+	SELECT @id = SCOPE_IDENTITY();
+
+
+	INSERT INTO [dbo].[tbWaterConsumption](
+		 [WbEasyCalcDataId]
+		,[Description]
+		,[WaterConsumptionCategoryId]
+		,[WaterConsumptionStatusId]
+		,[StartDate]
+		,[EndDate]
+		,[Latitude]
+		,[Lontitude]
+		,[RelatedId]
+		,[Value]
+	)
+	SELECT 
+		 @id
+		,[Description]
+		,[WaterConsumptionCategoryId]
+		,[WaterConsumptionStatusId]
+		,[StartDate]
+		,[EndDate]
+		,[Latitude]
+		,[Lontitude]
+		,[RelatedId]
+		,[Value]
+	FROM 
+		[dbo].[tbWaterConsumption]
+	WHERE
+		[WbEasyCalcDataId] = @OldId;
+
+
+END;
+
+GO
+/****** Object:  StoredProcedure [dbo].[spWbEasyCalcDataDelete]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4075,7 +5022,7 @@ BEGIN
 	DELETE FROM [dbo].[tbWbEasyCalcData] WHERE WbEasyCalcDataId = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spWbEasyCalcDataGet]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  StoredProcedure [dbo].[spWbEasyCalcDataGet]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4180,7 +5127,7 @@ CREATE PROCEDURE [dbo].[spWbEasyCalcDataGet]
 	@MetErrors_Desc_D13   	 nvarchar(400) OUTPUT,
 	@MetErrors_Desc_D14   	 nvarchar(400) OUTPUT,
 	@MetErrors_Desc_D15   	 nvarchar(400) OUTPUT,
-	@MetErrors_DetailedManualSpec_J6 [bit] OUTPUT,
+	@MetErrors_DetailedManualSpec_J6 [int] OUTPUT,
 	@MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8 [float] OUTPUT,
 	@MetErrors_BilledMetConsWoBulkSupErrorMargin_N8 [float] OUTPUT,
 	@MetErrors_Total_F12 [float] OUTPUT,
@@ -4227,7 +5174,7 @@ CREATE PROCEDURE [dbo].[spWbEasyCalcDataGet]
 	@Prs_Area_B8 nvarchar(400) OUTPUT,
 	@Prs_Area_B9 nvarchar(400) OUTPUT,
 	@Prs_Area_B10 nvarchar(400) OUTPUT,
-	@Prs_ApproxNoOfConn_D7 [float] OUTPUT,
+	--@Prs_ApproxNoOfConn_D7 [float] OUTPUT,
 	@Prs_DailyAvgPrsM_F7 [float] OUTPUT,
 	@Prs_ApproxNoOfConn_D8 [float] OUTPUT,
 	@Prs_DailyAvgPrsM_F8 [float] OUTPUT,
@@ -4450,7 +5397,7 @@ IF (@id = 0) BEGIN
 		@MetErrors_Desc_D13    = NULL,
 		@MetErrors_Desc_D14    = NULL,
 		@MetErrors_Desc_D15    = NULL,
-		@MetErrors_DetailedManualSpec_J6 = 0,
+		@MetErrors_DetailedManualSpec_J6 = MetErrors_DetailedManualSpec_J6,
 		@MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8 = 0,
 		@MetErrors_BilledMetConsWoBulkSupErrorMargin_N8 = 0,
 		@MetErrors_Total_F12 = 0,
@@ -4497,7 +5444,7 @@ IF (@id = 0) BEGIN
 		@Prs_Area_B8 = NULL,
 		@Prs_Area_B9 = NULL,
 		@Prs_Area_B10 = NULL,
-		@Prs_ApproxNoOfConn_D7 = 0,
+		--@Prs_ApproxNoOfConn_D7 = 0,
 		@Prs_DailyAvgPrsM_F7 = 0,
 		@Prs_ApproxNoOfConn_D8 = 0,
 		@Prs_DailyAvgPrsM_F8 = 0,
@@ -4617,7 +5564,7 @@ IF (@id = 0) BEGIN
 	FROM
 		tbSetting
 	WHERE
-		1=1;
+		Id=1;
 
 END ELSE BEGIN
 
@@ -4782,7 +5729,7 @@ END ELSE BEGIN
 		@Prs_Area_B9 = Prs_Area_B9,
 		@Prs_Area_B10 = Prs_Area_B10,
 
-		@Prs_ApproxNoOfConn_D7  = Prs_ApproxNoOfConn_D7,
+		--@Prs_ApproxNoOfConn_D7  = Prs_ApproxNoOfConn_D7,
 		@Prs_DailyAvgPrsM_F7  = Prs_DailyAvgPrsM_F7,
 		@Prs_ApproxNoOfConn_D8  = Prs_ApproxNoOfConn_D8,
 		@Prs_DailyAvgPrsM_F8  = Prs_DailyAvgPrsM_F8,
@@ -4907,7 +5854,7 @@ END;
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[spWbEasyCalcDataList]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  StoredProcedure [dbo].[spWbEasyCalcDataList]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4921,7 +5868,7 @@ BEGIN
 	SELECT * FROM dbo.tbWbEasyCalcData ORDER BY WbEasyCalcDataId;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spWbEasyCalcDataSave]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  StoredProcedure [dbo].[spWbEasyCalcDataSave]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5040,7 +5987,7 @@ CREATE PROCEDURE [dbo].[spWbEasyCalcDataSave]
 	@UnauthCons_OthersM3PerDay_J20 [float],
 	@UnauthCons_OthersM3PerDay_J21 [float],
 
-	@MetErrors_DetailedManualSpec_J6 [bit],
+	@MetErrors_DetailedManualSpec_J6 [int],
 	@MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8 [float],
 	@MetErrors_BilledMetConsWoBulkSupErrorMargin_N8 [float],
 
@@ -5086,7 +6033,7 @@ CREATE PROCEDURE [dbo].[spWbEasyCalcDataSave]
 	@Prs_Area_B8 nvarchar(400),
 	@Prs_Area_B9 nvarchar(400),
 	@Prs_Area_B10 nvarchar(400),
-	@Prs_ApproxNoOfConn_D7 [float],
+	--@Prs_ApproxNoOfConn_D7 [float],
 	@Prs_DailyAvgPrsM_F7 [float],
 	@Prs_ApproxNoOfConn_D8 [float],
 	@Prs_DailyAvgPrsM_F8 [float],
@@ -5226,7 +6173,7 @@ CREATE PROCEDURE [dbo].[spWbEasyCalcDataSave]
 	@CustomerMeterInaccuraciesAndErrorsErrorMargin_AO30 [float],
 	@RevenueWaterM3_AY8 [float],
 	@NonRevenueWaterM3_AY24 [float],
-	@NonRevenueWaterErrorMargin_AY26 [float], 
+	@NonRevenueWaterErrorMargin_AY26 [float],
 
 	@id [int] OUTPUT
 AS
@@ -5443,7 +6390,7 @@ IF (@id = 0) BEGIN
 		Prs_Area_B8,
 		Prs_Area_B9,
 		Prs_Area_B10,
-		Prs_ApproxNoOfConn_D7,
+		--Prs_ApproxNoOfConn_D7,
 		Prs_DailyAvgPrsM_F7,
 		Prs_ApproxNoOfConn_D8,
 		Prs_DailyAvgPrsM_F8,
@@ -5747,7 +6694,7 @@ IF (@id = 0) BEGIN
 		@Prs_Area_B8,
 		@Prs_Area_B9,
 		@Prs_Area_B10,
-		@Prs_ApproxNoOfConn_D7,
+		--@Prs_ApproxNoOfConn_D7,
 		@Prs_DailyAvgPrsM_F7,
 		@Prs_ApproxNoOfConn_D8,
 		@Prs_DailyAvgPrsM_F8,
@@ -6056,7 +7003,7 @@ END ELSE BEGIN
 		Prs_Area_B9 = @Prs_Area_B9,
 		Prs_Area_B10 = @Prs_Area_B10,
 
-		Prs_ApproxNoOfConn_D7  = @Prs_ApproxNoOfConn_D7,
+		--Prs_ApproxNoOfConn_D7  = @Prs_ApproxNoOfConn_D7,
         Prs_DailyAvgPrsM_F7  = @Prs_DailyAvgPrsM_F7,
         Prs_ApproxNoOfConn_D8  = @Prs_ApproxNoOfConn_D8,
         Prs_DailyAvgPrsM_F8  = @Prs_DailyAvgPrsM_F8,
@@ -6208,289 +7155,395 @@ END;
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[spWbEasyCalcDataSaveArchive]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  StoredProcedure [dbo].[spWbGetGisModelScadaData]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spWbEasyCalcDataSaveArchive]
-	@NewId [int],
-	@OldYearNo [int] = NULL, 
-	@OldMonthNo [int] = NULL,
-	@OldZoneId [int] = NULL, 
-	@OldIsArchive [bit] = NULL,
-	@ChangedId [INT] = NULL
+
+CREATE PROCEDURE [dbo].[spWbGetGisModelScadaData] 
+	@YearNo INT,
+	@MonthNo INT,
+	@ZoneId INT,
+
+	@SysInput_SystemInputVolumeM3_D6 [float] OUTPUT,
+	@BilledCons_UnbMetConsM3_D8 [float] OUTPUT,
+	@Network_DistributionAndTransmissionMains_D7 [float] OUTPUT,
+	@Network_NoOfConnOfRegCustomers_H10 [float] OUTPUT,
+	@Network_NoOfInactAccountsWSvcConns_H18 [float] OUTPUT,
+	@Network_NoCustomers_H7  [float] OUTPUT,
+	@Prs_DailyAvgPrsM_F7 [float] OUTPUT
+
 AS
 BEGIN
-SET NOCOUNT ON;
+	SET NOCOUNT ON;
 
-begin -- Logging 1 -----------------------------------------------------------------------------
-DELETE FROM [dbo].[tbLog];
-INSERT INTO [dbo].[tbLog](
-     [ExecDate]
-    ,[ExecTime]
-    ,[CommandName]
-    ,[TestDate]
-) VALUES (
-    GETDATE(),
-    1,
-    CONCAT(@NewId, '-', @OldYearNo, '-', @OldMonthNo, '-', @OldZoneId, '-', @OldIsArchive),
-    GETDATE()
-);
-end; 
+	-- GIS -----------------------------------------------------------------------
+	SELECT 
+		@BilledCons_UnbMetConsM3_D8 = 0,
+		@Network_NoOfConnOfRegCustomers_H10 = 0,
+		@Network_NoOfInactAccountsWSvcConns_H18 = 0;
 
--- 7 local variables ------------------------
-DECLARE	
-	@OldId INT = NULL, 
-	@OldArchiveDate DATETIME = NULL, 
-	@NewYearNo [int],
-	@NewMonthNo [int], 
-	@NewArchiveDate DATETIME, 
-	@NewZoneId [int], 
-	@NewIsArchive [bit];
-
-DECLARE
-	@ZonePrefix NVARCHAR(50);
-
-begin -- Fill 7 local variables ----------------------------------------------------------------
-
-IF (@OldIsArchive IS NOT NULL) BEGIN
-	SELECT
-		@OldId = @NewId,
-		@OldArchiveDate = dbo.fnGetArchivedDate(@OldYearNo, @OldMonthNo);	--CONCAT(@OldYearNo, '-', FORMAT(@OldMonthNo, '00'), '-01');
-END;
-
-SELECT 
-	@NewYearNo = YearNo,
-	@NewMonthNo = MonthNo, 
-	@NewArchiveDate = dbo.fnGetArchivedDate(YearNo, MonthNo),	--CONCAT(YearNo, '-', FORMAT(MonthNo, '00'), '-01'), 
-	@NewZoneId = ZoneId, 
-	@NewIsArchive = IsArchive 
-FROM 
-	[dbo].[tbWbEasyCalcData] 
-WHERE 
-	WbEasyCalcDataId = @NewId;	
-
-end;
-
-begin -- Logging 2 -----------------------------------------------------------------------------
-INSERT INTO [dbo].[tbLog](
-     [ExecDate]
-    ,[ExecTime]
-    ,[CommandName]
-    ,[TestDate]
-) VALUES (
-    GETDATE(),
-    1,
-    CONCAT(@OldId, '-', @NewYearNo, '-', @NewMonthNo, '-', @NewZoneId, '-', @NewIsArchive),
-    GETDATE()
-)
-end;
-
--- Create @TabVar -------------------------
-DECLARE @TabVar TABLE
-(
-	ZoneId INT, 
-	VarName NVARCHAR(4000),
-	ScadaId INT,
-	ScadaTime DATETIME,
-	VarValue FLOAT
-);
-/*
-ZoneId	VarName					ScadaId	ScadaTime	VarValue
-------------------------------------------------------------
-1		PeriodDays_M21			225138	2019-01-15	1
-1		SysInpVolumeM3_D6		225099	2019-01-15	1234567
-1		SysInpVolumeError_F6	225120	2019-01-15	0,01
-*/
-
-
-begin -- Fill @TabVar -----------------------------------------------------------------------
-
-DECLARE
-	@IdValue INT = @NewId,
-	@OrdinalPosition INT = 8,
-	@TableName NVARCHAR(4000) = 'tbWbEasyCalcData',
-	@IdColumnName NVARCHAR(4000) = 'WbEasyCalcDataId',
-	@CastType NVARCHAR(4000) = 'FLOAT';
-
-DECLARE @TempTable TABLE (
-	[VarName] [nvarchar](4000) NOT NULL,
-	[VarValue] [float] NOT NULL
-);
-
-INSERT INTO @TempTable 
-EXEC [dbo].[spUnpivotTable]
-	@IdValue,
-	@OrdinalPosition,
-	@TableName,
-	@IdColumnName,
-	@CastType;
-/*
-VarName								VarValue
---------------------------------------------
-Start_PeriodDays_M21				1
-SysInput_SystemInputVolumeM3_D6		1234567
-SysInput_SystemInputVolumeError_F6	0,01
-*/
-
-
-SELECT
-	@ZonePrefix = [DestinationName]
-FROM
-	[config].[WaterBalanceConfig]
-WHERE
-	[ZoneNo] = @NewZoneId;		-- 'SI'
-
-
-INSERT INTO @TabVar (
-	ZoneId,
-	VarName,
-	ScadaId,
-	ScadaTime,
-	VarValue
-)
-SELECT 
-	@NewZoneId AS ZoneId, 
-	tVar.VarScada,
-	tTelMap.D_ID AS ScadaId,
-	--CONCAT(@NewYearNo, '-', FORMAT(@NewMonthNo, '00'), '-01') ScadaTime,
-	@NewArchiveDate ScadaTime,
-	tTemp.VarValue
-FROM 
-	@TempTable tTemp
-	INNER JOIN tbWbEasyCalcDataVar tVar ON tTemp.VarName = tVar.VarName
-	INNER JOIN [TELWIN_MAP] tTelMap ON CONCAT(@ZonePrefix, '_', tVar.VarScada) = tTelMap.D_NAME;
-/*
-ZoneId	VarName					ScadaId	ScadaTime	VarValue
-------------------------------------------------------------
-1		PeriodDays_M21			225138	2019-01-15	1
-1		SysInpVolumeM3_D6		225099	2019-01-15	1234567
-1		SysInpVolumeError_F6	225120	2019-01-15	0,01
-*/
-end;
-
-
-begin -- Delete in SCADA -----------------------------------------------------------------------
-IF (
-	@OldIsArchive=1 
-	--AND (@OldYearNo<>@NewYearNo OR @OldMonthNo<>@NewMonthNo OR @OldZoneId<>@NewZoneId)
-) 
-BEGIN
-
-	SELECT
-		@ZonePrefix = [DestinationName]
-	FROM
-		[config].[WaterBalanceConfig]
-	WHERE
-		[ZoneNo] = @OldZoneId;		-- 'SI'
-
-	DELETE 
-		[dbo].[AR_0000_2020]
+	SELECT 
+		@BilledCons_UnbMetConsM3_D8 = sprzedaz_w_strefie,
+		@Network_NoOfConnOfRegCustomers_H10 = ilosc_przylaczy,
+		@Network_NoOfInactAccountsWSvcConns_H18 = ilosc_przylaczy_czynnych - ilosc_przylaczy
 	FROM 
-		tbWbEasyCalcDataVar tVar 
-		INNER JOIN [TELWIN_MAP] tTelMap ON CONCAT(@ZonePrefix, '_', tVar.VarScada) = tTelMap.D_NAME
-		INNER JOIN [dbo].[AR_0000_2020] tArch ON tTelMap.D_ID = tArch.D_VAR_ID
-	WHERE
-		tArch.D_TIME = @OldArchiveDate;
+		[dbo].[vwGisWaterConsumption] vCons
+		INNER JOIN config.WaterBalanceConfig tConf ON vCons.id_strefy = tConf.GisZoneId
+	WHERE 
+		[year] = @YearNo 
+		AND [month] = @MonthNo 
+		AND tConf.ModelZoneId = @ZoneId;
 
-	begin -- Logging 3 -----------------------------------------------------------------------------
-	INSERT INTO [dbo].[tbLog](		
-		 [ExecDate]
-		,[ExecTime]
-		,[CommandName]
-		,[TestDate]
-	) VALUES (
-		GETDATE(),
-		3,
-		'',
-		GETDATE()
-	);
-	end;
-END;
-end;
+	-- WaterGEMS ------------------------------------------------------------------
+	SELECT 
+		@Network_DistributionAndTransmissionMains_D7 = WaterInfra.[dbo].[fnPipeLenghtInZoneSum](@ZoneId),
+		@Network_NoCustomers_H7 = WaterInfra.[dbo].[fnCustomerMeterInZoneCount](@ZoneId);
 
+	-- SCADA ----------------------------------------------------------------------
+	SELECT 
+		@SysInput_SystemInputVolumeM3_D6 = TWDB.[dbo].[fnWaterConsumptionForZone](@YearNo, @MonthNo, @ZoneId);
 
-begin -- Update and Insert in SCADA ------------------------------------------------------------
+	-- SCADA & WaterGEMS ----------------------------------------------------------
+	SELECT 
+		@Prs_DailyAvgPrsM_F7 = COALESCE([dbo].[fnScadaPressureForZoneAvg](@YearNo, @MonthNo, @ZoneId), 0);
 
-IF (@NewIsArchive=1)  
-BEGIN
-	
-	-- UPDATE -------------------------------
-	--SELECT 
-	--	tWb.* 
-	--FROM 
-	--	@TabVar tWb
-	--	INNER JOIN AR_0000_2020 tScada ON tWb.ScadaId = tScada.D_VAR_ID AND tWb.ScadaTime = tScada.D_TIME;  
-
-	UPDATE [dbo].[AR_0000_2020] SET
-		[D_VALUE_FLO] = tWb.VarValue
-	FROM 
-		@TabVar tWb
-		INNER JOIN AR_0000_2020 tScada ON tWb.ScadaId = tScada.D_VAR_ID AND tWb.ScadaTime = tScada.D_TIME;
-
-	-- INSERT ------------------------------
-	--SELECT 
-	--	tWb.* 
-	--FROM 
-	--	@TabVar tWb
-	--	LEFT OUTER JOIN AR_0000_2020 tScada ON tWb.ScadaId = tScada.D_VAR_ID AND tWb.ScadaTime = tScada.D_TIME
-	--WHERE
-	--	tScada.D_VAR_ID IS NULL
-	--	; 
-
-	DECLARE @dateStart DATETIME = N'1970-01-01 00:00:00';
-	INSERT INTO [dbo].[AR_0000_2020]
-	(
-		 [D_IDENT]
-		,[D_VAR_ID]
-		,[T_TYPE]
-		,[D_TIME]
-		,[D_STATUS]
-		,[D_TYPE]
-		,[D_VALUE_FLO]
-		,[D_VALUE_INT]
-	)
-	SELECT
-		 CONVERT(BIGINT, CONVERT(VARBINARY, (master.dbo.fn_varbintohexstr(DATEDIFF(SECOND, @dateStart, tWb.ScadaTime)) + '00000000'), 1))
-		,tWb.ScadaId
-		,1
-		,tWb.ScadaTime
-		,16
-		,171
-		,tWb.VarValue
-		,NULL
-	FROM 
-		@TabVar tWb
-		LEFT OUTER JOIN AR_0000_2020 tArch ON tWb.ScadaId = tArch.D_VAR_ID AND tWb.ScadaTime = tArch.D_TIME
-	WHERE
-		tArch.D_VAR_ID IS NULL;
-
-
-	begin -- Logging 4 -----------------------------------------------------------------------------
-
-	INSERT INTO [dbo].[tbLog](
-		 [ExecDate]
-		,[ExecTime]
-		,[CommandName]
-		,[TestDate]
-	) VALUES (
-		GETDATE(),
-		4,
-		'',
-		GETDATE()
-	);
-	end;
-		
-END;
-	
-end;
-
-
-END;
-
+END
 GO
-/****** Object:  StoredProcedure [dbo].[spYearList]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  StoredProcedure [dbo].[spWbGetYearData]    Script Date: 08.06.2021 14:34:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[spWbGetYearData] 
+	@YearNo INT,
+	@ZoneId INT,
+
+
+	@Start_PeriodDays_M21 INT OUTPUT,
+
+	--@SysInput_Desc_B6 nvarchar(400) OUTPUT,
+	--@SysInput_Desc_B7 nvarchar(400) OUTPUT,
+	--@SysInput_Desc_B8 nvarchar(400) OUTPUT,
+	--@SysInput_Desc_B9 nvarchar(400) OUTPUT,
+	@SysInput_SystemInputVolumeM3_D6 [float] OUTPUT,
+	@SysInput_SystemInputVolumeError_F6 [float] OUTPUT,
+	@SysInput_SystemInputVolumeM3_D7 [float] OUTPUT,
+	@SysInput_SystemInputVolumeError_F7 [float] OUTPUT,
+	@SysInput_SystemInputVolumeM3_D8 [float] OUTPUT,
+	@SysInput_SystemInputVolumeError_F8 [float] OUTPUT,
+	@SysInput_SystemInputVolumeM3_D9 [float] OUTPUT,
+	@SysInput_SystemInputVolumeError_F9 [float] OUTPUT,
+
+	--@BilledCons_Desc_B8      nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_B9   	 nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_B10  	 nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_B11  	 nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_F8   	 nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_F9   	 nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_F10  	 nvarchar(400) OUTPUT,
+	--@BilledCons_Desc_F11  	 nvarchar(400) OUTPUT,
+	@BilledCons_BilledMetConsBulkWatSupExpM3_D6 [float] OUTPUT,
+	@BilledCons_BilledUnmetConsBulkWatSupExpM3_H6 [float] OUTPUT,
+	@BilledCons_UnbMetConsM3_D8 [float] OUTPUT,
+	@BilledCons_UnbMetConsM3_D9 [float] OUTPUT,
+	@BilledCons_UnbMetConsM3_D10 [float] OUTPUT,
+	@BilledCons_UnbMetConsM3_D11 [float] OUTPUT,
+	@BilledCons_UnbUnmetConsM3_H8 [float] OUTPUT, 
+	@BilledCons_UnbUnmetConsM3_H9 [float] OUTPUT, 
+	@BilledCons_UnbUnmetConsM3_H10 [float] OUTPUT, 
+	@BilledCons_UnbUnmetConsM3_H11 [float] OUTPUT, 
+
+	--@UnbilledCons_Desc_D8 	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_D9 	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_D10	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_D11	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_F6 	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_F7 	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_F8 	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_F9 	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_F10	 nvarchar(400) OUTPUT,
+	--@UnbilledCons_Desc_F11	 nvarchar(400) OUTPUT,
+	@UnbilledCons_MetConsBulkWatSupExpM3_D6 [float] OUTPUT,
+	@UnbilledCons_UnbMetConsM3_D8 [float] OUTPUT,
+	@UnbilledCons_UnbMetConsM3_D9 [float] OUTPUT,
+	@UnbilledCons_UnbMetConsM3_D10 [float] OUTPUT,
+	@UnbilledCons_UnbMetConsM3_D11 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsM3_H6 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsM3_H7 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsM3_H8 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsM3_H9 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsM3_H10 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsM3_H11 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsError_J6 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsError_J7 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsError_J8 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsError_J9 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsError_J10 [float] OUTPUT,
+	@UnbilledCons_UnbUnmetConsError_J11 [float] OUTPUT,
+
+	--@UnauthCons_Desc_B18  	 nvarchar(400) OUTPUT,
+	--@UnauthCons_Desc_B19  	 nvarchar(400) OUTPUT,
+	--@UnauthCons_Desc_B20  	 nvarchar(400) OUTPUT,
+	--@UnauthCons_Desc_B21  	 nvarchar(400) OUTPUT,
+    @UnauthCons_OthersErrorMargin_F18 [float] OUTPUT, 
+    @UnauthCons_OthersErrorMargin_F19 [float] OUTPUT, 
+    @UnauthCons_OthersErrorMargin_F20 [float] OUTPUT, 
+    @UnauthCons_OthersErrorMargin_F21 [float] OUTPUT, 
+	@UnauthCons_OthersM3PerDay_J18 [float] OUTPUT,
+	@UnauthCons_OthersM3PerDay_J19 [float] OUTPUT,
+	@UnauthCons_OthersM3PerDay_J20 [float] OUTPUT,
+	@UnauthCons_OthersM3PerDay_J21 [float] OUTPUT,
+	@UnauthCons_IllegalConnDomEstNo_D6 [int] OUTPUT,
+	@UnauthCons_IllegalConnDomPersPerHouse_H6 [float] OUTPUT,
+	@UnauthCons_IllegalConnDomConsLitPerPersDay_J6 [float] OUTPUT,
+	@UnauthCons_IllegalConnDomErrorMargin_F6 [float] OUTPUT,
+	@UnauthCons_IllegalConnOthersErrorMargin_F10 [float] OUTPUT,
+	@IllegalConnectionsOthersEstimatedNumber_D10 [float] OUTPUT,
+	@IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10 [float] OUTPUT,
+	@UnauthCons_MeterTampBypEtcEstNo_D14 [float] OUTPUT,
+	@UnauthCons_MeterTampBypEtcErrorMargin_F14 [float] OUTPUT,
+	@UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14 [float] OUTPUT,
+
+	--@MetErrors_Desc_D12   	 nvarchar(400) OUTPUT,
+	--@MetErrors_Desc_D13   	 nvarchar(400) OUTPUT,
+	--@MetErrors_Desc_D14   	 nvarchar(400) OUTPUT,
+	--@MetErrors_Desc_D15   	 nvarchar(400) OUTPUT,
+	--@MetErrors_DetailedManualSpec_J6 [bit] OUTPUT,
+	@MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8 [float] OUTPUT,
+	@MetErrors_BilledMetConsWoBulkSupErrorMargin_N8 [float] OUTPUT,
+	@MetErrors_Total_F12 [float] OUTPUT,
+	@MetErrors_Total_F13 [float] OUTPUT,
+	@MetErrors_Total_F14 [float] OUTPUT,
+	@MetErrors_Total_F15 [float] OUTPUT,
+	@MetErrors_Meter_H12 [float] OUTPUT,
+	@MetErrors_Meter_H13 [float] OUTPUT,
+	@MetErrors_Meter_H14 [float] OUTPUT,
+	@MetErrors_Meter_H15 [float] OUTPUT,
+	@MetErrors_Error_N12 [float] OUTPUT,
+	@MetErrors_Error_N13 [float] OUTPUT,
+	@MetErrors_Error_N14 [float] OUTPUT,
+	@MetErrors_Error_N15 [float] OUTPUT,
+	@MeteredBulkSupplyExportErrorMargin_N32 [float] OUTPUT,
+	@UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34 [float] OUTPUT,
+	@CorruptMeterReadingPracticessErrorMargin_N38 [float] OUTPUT,
+	@DataHandlingErrorsOffice_L40 [float] OUTPUT,
+	@DataHandlingErrorsOfficeErrorMargin_N40 [float] OUTPUT,
+	@MetErrors_MetBulkSupExpMetUnderreg_H32 [float] OUTPUT,
+	@MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34 [float] OUTPUT,
+	@MetErrors_CorruptMetReadPractMetUndrreg_H38 [float] OUTPUT,
+
+	--@Network_Desc_B7      	 nvarchar(400) OUTPUT,
+	--@Network_Desc_B8      	 nvarchar(400) OUTPUT,
+	--@Network_Desc_B9      	 nvarchar(400) OUTPUT,
+	--@Network_Desc_B10     	 nvarchar(400) OUTPUT,
+	@Network_DistributionAndTransmissionMains_D7 [float] OUTPUT,
+	@Network_DistributionAndTransmissionMains_D8 [float] OUTPUT,
+	@Network_DistributionAndTransmissionMains_D9 [float] OUTPUT,
+	@Network_DistributionAndTransmissionMains_D10 [float] OUTPUT,
+	@Network_NoOfConnOfRegCustomers_H10 [float] OUTPUT,
+	@Network_NoOfInactAccountsWSvcConns_H18 [float] OUTPUT,
+	@Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32 [float] OUTPUT,
+	@Network_PossibleUnd_D30 [float] OUTPUT,
+	@Network_NoCustomers_H7  [float] OUTPUT,
+	@Network_ErrorMargin_J7  [float] OUTPUT,
+	@Network_ErrorMargin_J10 [float] OUTPUT,
+	@Network_ErrorMargin_J18 [float] OUTPUT,
+	@Network_ErrorMargin_J32 [float] OUTPUT,
+	@Network_ErrorMargin_D35 [float] OUTPUT,
+
+	--@Prs_Area_B7 nvarchar(400) OUTPUT,
+	--@Prs_Area_B8 nvarchar(400) OUTPUT,
+	--@Prs_Area_B9 nvarchar(400) OUTPUT,
+	--@Prs_Area_B10 nvarchar(400) OUTPUT,
+	--@Prs_ApproxNoOfConn_D7 [float] OUTPUT,
+	@Prs_DailyAvgPrsM_F7 [float] OUTPUT,
+	@Prs_ApproxNoOfConn_D8 [float] OUTPUT,
+	@Prs_DailyAvgPrsM_F8 [float] OUTPUT,
+	@Prs_ApproxNoOfConn_D9 [float] OUTPUT,
+	@Prs_DailyAvgPrsM_F9 [float] OUTPUT,
+	@Prs_ApproxNoOfConn_D10 [float] OUTPUT,
+	@Prs_DailyAvgPrsM_F10 [float] OUTPUT,
+	@Prs_ErrorMarg_F26 [float] OUTPUT,
+
+	--@Interm_Area_B7  nvarchar(400) OUTPUT,
+	--@Interm_Area_B8  nvarchar(400) OUTPUT,
+	--@Interm_Area_B9  nvarchar(400) OUTPUT,
+	--@Interm_Area_B10 nvarchar(400) OUTPUT,
+	@Interm_Conn_D7  [float] OUTPUT,
+	@Interm_Conn_D8  [float] OUTPUT,
+	@Interm_Conn_D9  [float] OUTPUT,
+	@Interm_Conn_D10 [float] OUTPUT,
+	@Interm_Days_F7  [float] OUTPUT,
+	@Interm_Days_F8  [float] OUTPUT,
+	@Interm_Days_F9  [float] OUTPUT,
+	@Interm_Days_F10 [float] OUTPUT,
+	@Interm_Hour_H7  [float] OUTPUT,
+	@Interm_Hour_H8  [float] OUTPUT,
+	@Interm_Hour_H9  [float] OUTPUT,
+	@Interm_Hour_H10 [float] OUTPUT,
+	@Interm_ErrorMarg_H26 [float] OUTPUT,
+
+	--@FinancData_G6 [float] OUTPUT,
+	--@FinancData_K6 nvarchar(400) OUTPUT,
+	--@FinancData_G8 [float] OUTPUT,
+	@FinancData_D26 [float] OUTPUT, 
+	@FinancData_G35 [float] OUTPUT
+
+
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT 
+		 @Start_PeriodDays_M21 = SUM(t02.[Start_PeriodDays_M21])
+
+		,@SysInput_SystemInputVolumeM3_D6 = SUM(t02.[SysInput_SystemInputVolumeM3_D6])
+		,@SysInput_SystemInputVolumeError_F6 = AVG(t02.[SysInput_SystemInputVolumeError_F6])
+		,@SysInput_SystemInputVolumeM3_D7 = SUM(t02.[SysInput_SystemInputVolumeM3_D7])
+		,@SysInput_SystemInputVolumeError_F7 = AVG(t02.[SysInput_SystemInputVolumeError_F7])
+		,@SysInput_SystemInputVolumeM3_D8 = SUM(t02.[SysInput_SystemInputVolumeM3_D8])
+		,@SysInput_SystemInputVolumeError_F8 = AVG(t02.[SysInput_SystemInputVolumeError_F8])
+		,@SysInput_SystemInputVolumeM3_D9 = SUM(t02.[SysInput_SystemInputVolumeM3_D9])
+		,@SysInput_SystemInputVolumeError_F9 = AVG(t02.[SysInput_SystemInputVolumeError_F9])
+
+		,@BilledCons_BilledMetConsBulkWatSupExpM3_D6 = SUM(t02.[BilledCons_BilledMetConsBulkWatSupExpM3_D6])					-- sprzedaz_w_strefie
+		,@BilledCons_BilledUnmetConsBulkWatSupExpM3_H6 = SUM(t02.[BilledCons_BilledUnmetConsBulkWatSupExpM3_H6])			
+		,@BilledCons_UnbMetConsM3_D8 = SUM(t02.[BilledCons_UnbMetConsM3_D8])
+		,@BilledCons_UnbMetConsM3_D9 = SUM(t02.[BilledCons_UnbMetConsM3_D9])
+		,@BilledCons_UnbMetConsM3_D10 = SUM(t02.[BilledCons_UnbMetConsM3_D10])
+		,@BilledCons_UnbMetConsM3_D11 = SUM(t02.[BilledCons_UnbMetConsM3_D11])
+		,@BilledCons_UnbUnmetConsM3_H8 = SUM(t02.[BilledCons_UnbUnmetConsM3_H8])
+		,@BilledCons_UnbUnmetConsM3_H9 = SUM(t02.[BilledCons_UnbUnmetConsM3_H9])
+		,@BilledCons_UnbUnmetConsM3_H10 = SUM(t02.[BilledCons_UnbUnmetConsM3_H10])
+		,@BilledCons_UnbUnmetConsM3_H11 = SUM(t02.[BilledCons_UnbUnmetConsM3_H11])
+			
+		,@UnbilledCons_MetConsBulkWatSupExpM3_D6 = SUM(t02.[UnbilledCons_MetConsBulkWatSupExpM3_D6])
+		,@UnbilledCons_UnbMetConsM3_D8 = SUM(t02.[UnbilledCons_UnbMetConsM3_D8])
+		,@UnbilledCons_UnbMetConsM3_D9 = SUM(t02.[UnbilledCons_UnbMetConsM3_D9])
+		,@UnbilledCons_UnbMetConsM3_D10 = SUM(t02.[UnbilledCons_UnbMetConsM3_D10])
+		,@UnbilledCons_UnbMetConsM3_D11 = SUM(t02.[UnbilledCons_UnbMetConsM3_D11])
+		,@UnbilledCons_UnbUnmetConsM3_H6 = SUM(t02.[UnbilledCons_UnbUnmetConsM3_H6])
+		,@UnbilledCons_UnbUnmetConsM3_H7 = SUM(t02.[UnbilledCons_UnbUnmetConsM3_H7])
+		,@UnbilledCons_UnbUnmetConsM3_H8 = SUM(t02.[UnbilledCons_UnbUnmetConsM3_H8])
+		,@UnbilledCons_UnbUnmetConsM3_H9 = SUM(t02.[UnbilledCons_UnbUnmetConsM3_H9])
+		,@UnbilledCons_UnbUnmetConsM3_H10 = SUM(t02.[UnbilledCons_UnbUnmetConsM3_H10])
+		,@UnbilledCons_UnbUnmetConsM3_H11 = SUM(t02.[UnbilledCons_UnbUnmetConsM3_H11])
+		,@UnbilledCons_UnbUnmetConsError_J6 = AVG(t02.[UnbilledCons_UnbUnmetConsError_J6])
+		,@UnbilledCons_UnbUnmetConsError_J7 = AVG(t02.[UnbilledCons_UnbUnmetConsError_J7])
+		,@UnbilledCons_UnbUnmetConsError_J8 = AVG(t02.[UnbilledCons_UnbUnmetConsError_J8])
+		,@UnbilledCons_UnbUnmetConsError_J9 = AVG(t02.[UnbilledCons_UnbUnmetConsError_J9])
+		,@UnbilledCons_UnbUnmetConsError_J10 = AVG(t02.[UnbilledCons_UnbUnmetConsError_J10])
+		,@UnbilledCons_UnbUnmetConsError_J11 = AVG(t02.[UnbilledCons_UnbUnmetConsError_J11])
+
+		,@UnauthCons_IllegalConnDomEstNo_D6 = SUM(t02.[UnauthCons_IllegalConnDomEstNo_D6])
+		,@UnauthCons_IllegalConnDomPersPerHouse_H6 = SUM(t02.[UnauthCons_IllegalConnDomPersPerHouse_H6])
+		,@UnauthCons_IllegalConnDomConsLitPerPersDay_J6 = SUM(t02.[UnauthCons_IllegalConnDomConsLitPerPersDay_J6])
+		,@UnauthCons_IllegalConnDomErrorMargin_F6 = AVG(t02.[UnauthCons_IllegalConnDomErrorMargin_F6])
+		,@UnauthCons_IllegalConnOthersErrorMargin_F10 = AVG(t02.[UnauthCons_IllegalConnOthersErrorMargin_F10])
+		,@IllegalConnectionsOthersEstimatedNumber_D10 = SUM(t02.[IllegalConnectionsOthersEstimatedNumber_D10])
+		,@IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10 = SUM(t02.[IllegalConnectionsOthersConsumptionLitersPerConnectionPerDay_J10])
+		,@UnauthCons_MeterTampBypEtcEstNo_D14 = SUM(t02.[UnauthCons_MeterTampBypEtcEstNo_D14])
+		,@UnauthCons_MeterTampBypEtcErrorMargin_F14 = AVG(t02.[UnauthCons_MeterTampBypEtcErrorMargin_F14])
+		,@UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14 = SUM(t02.[UnauthCons_MeterTampBypEtcConsLitPerCustDay_J14])
+		,@UnauthCons_OthersErrorMargin_F18 = AVG(t02.[UnauthCons_OthersErrorMargin_F18]) 
+		,@UnauthCons_OthersErrorMargin_F19 = AVG(t02.[UnauthCons_OthersErrorMargin_F19]) 
+		,@UnauthCons_OthersErrorMargin_F20 = AVG(t02.[UnauthCons_OthersErrorMargin_F20]) 
+		,@UnauthCons_OthersErrorMargin_F21 = AVG(t02.[UnauthCons_OthersErrorMargin_F21]) 
+		,@UnauthCons_OthersM3PerDay_J18 = SUM(t02.[UnauthCons_OthersM3PerDay_J18])
+		,@UnauthCons_OthersM3PerDay_J19 = SUM(t02.[UnauthCons_OthersM3PerDay_J19])
+		,@UnauthCons_OthersM3PerDay_J20 = SUM(t02.[UnauthCons_OthersM3PerDay_J20])
+		,@UnauthCons_OthersM3PerDay_J21 = SUM(t02.[UnauthCons_OthersM3PerDay_J21])
+
+		--,@MetErrors_DetailedManualSpec_J6 = 1																					-- (t02.[MetErrors_DetailedManualSpec_J6])
+		,@MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8 = AVG(t02.[MetErrors_BilledMetConsWoBulkSupMetUndrreg_H8])
+		,@MetErrors_BilledMetConsWoBulkSupErrorMargin_N8 = AVG(t02.[MetErrors_BilledMetConsWoBulkSupErrorMargin_N8])
+		,@MetErrors_Total_F12 = SUM(t02.[MetErrors_Total_F12])
+		,@MetErrors_Total_F13 = SUM(t02.[MetErrors_Total_F13])
+		,@MetErrors_Total_F14 = SUM(t02.[MetErrors_Total_F14])
+		,@MetErrors_Total_F15 = SUM(t02.[MetErrors_Total_F15])
+		,@MetErrors_Meter_H12 = AVG(t02.[MetErrors_Meter_H12])
+		,@MetErrors_Meter_H13 = AVG(t02.[MetErrors_Meter_H13])
+		,@MetErrors_Meter_H14 = AVG(t02.[MetErrors_Meter_H14])
+		,@MetErrors_Meter_H15 = AVG(t02.[MetErrors_Meter_H15])
+		,@MetErrors_Error_N12 = AVG(t02.[MetErrors_Error_N12])
+		,@MetErrors_Error_N13 = AVG(t02.[MetErrors_Error_N13])
+		,@MetErrors_Error_N14 = AVG(t02.[MetErrors_Error_N14])
+		,@MetErrors_Error_N15 = AVG(t02.[MetErrors_Error_N15])
+		,@MeteredBulkSupplyExportErrorMargin_N32 = AVG(t02.[MeteredBulkSupplyExportErrorMargin_N32])
+		,@UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34 = AVG(t02.[UnbilledMeteredConsumptionWithoutBulkSupplyErrorMargin_N34])
+		,@CorruptMeterReadingPracticessErrorMargin_N38 = AVG(t02.[CorruptMeterReadingPracticessErrorMargin_N38])
+		,@DataHandlingErrorsOffice_L40 = SUM(t02.[DataHandlingErrorsOffice_L40])
+		,@DataHandlingErrorsOfficeErrorMargin_N40 = AVG(t02.[DataHandlingErrorsOfficeErrorMargin_N40])
+		,@MetErrors_MetBulkSupExpMetUnderreg_H32 = AVG(t02.[MetErrors_MetBulkSupExpMetUnderreg_H32])
+		,@MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34 = AVG(t02.[MetErrors_UnbillMetConsWoBulkSupplMetUndrreg_H34])
+		,@MetErrors_CorruptMetReadPractMetUndrreg_H38 = AVG(t02.[MetErrors_CorruptMetReadPractMetUndrreg_H38])
+
+		,@Network_DistributionAndTransmissionMains_D7 = AVG(t02.[Network_DistributionAndTransmissionMains_D7])					-- dlugosc_sieci
+		,@Network_DistributionAndTransmissionMains_D8 = AVG(t02.[Network_DistributionAndTransmissionMains_D8])					
+		,@Network_DistributionAndTransmissionMains_D9 = AVG(t02.[Network_DistributionAndTransmissionMains_D9])					
+		,@Network_DistributionAndTransmissionMains_D10 = AVG(t02.[Network_DistributionAndTransmissionMains_D10])					
+		,@Network_NoCustomers_H7 = AVG(t02.[Network_NoCustomers_H7])															-- CustomerMetersQuantity
+		,@Network_NoOfConnOfRegCustomers_H10 = AVG(t02.[Network_NoOfConnOfRegCustomers_H10])									-- ilosc_przylaczy
+		,@Network_NoOfInactAccountsWSvcConns_H18 = AVG(t02.[Network_NoOfInactAccountsWSvcConns_H18])
+		,@Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32 = AVG(t02.[Network_AvgLenOfSvcConnFromBoundaryToMeterM_H32])
+		,@Network_PossibleUnd_D30 = AVG(t02.[Network_PossibleUnd_D30])
+		,@Network_ErrorMargin_J7 =  AVG(t02.[Network_ErrorMargin_J7])
+		,@Network_ErrorMargin_J10 = AVG(t02.[Network_ErrorMargin_J10])
+		,@Network_ErrorMargin_J18 = AVG(t02.[Network_ErrorMargin_J18])
+		,@Network_ErrorMargin_J32 = AVG(t02.[Network_ErrorMargin_J32])
+		,@Network_ErrorMargin_D35 = AVG(t02.[Network_ErrorMargin_D35])
+
+		--,@Prs_ApproxNoOfConn_D7 = AVG(t02.[Prs_ApproxNoOfConn_D7])
+		,@Prs_ApproxNoOfConn_D8 = AVG(t02.[Prs_ApproxNoOfConn_D8])
+		,@Prs_ApproxNoOfConn_D9 = AVG(t02.[Prs_ApproxNoOfConn_D9])
+		,@Prs_ApproxNoOfConn_D10 = AVG(t02.[Prs_ApproxNoOfConn_D10])
+		,@Prs_DailyAvgPrsM_F7 = AVG(t02.[Prs_DailyAvgPrsM_F7])
+		,@Prs_DailyAvgPrsM_F8 = AVG(t02.[Prs_DailyAvgPrsM_F8])
+		,@Prs_DailyAvgPrsM_F9 = AVG(t02.[Prs_DailyAvgPrsM_F9])
+		,@Prs_DailyAvgPrsM_F10 = AVG(t02.[Prs_DailyAvgPrsM_F10])
+		,@Prs_ErrorMarg_F26 = AVG(t02.[Prs_ErrorMarg_F26])
+
+		,@Interm_Conn_D7 = AVG(t02.[Interm_Conn_D7])
+		,@Interm_Conn_D8 = AVG(t02.[Interm_Conn_D8])
+		,@Interm_Conn_D9 = AVG(t02.[Interm_Conn_D9])
+		,@Interm_Conn_D10 = AVG(t02.[Interm_Conn_D10])
+		,@Interm_Days_F7 = AVG(t02.[Interm_Days_F7])
+		,@Interm_Days_F8 = AVG(t02.[Interm_Days_F8])
+		,@Interm_Days_F9 = AVG(t02.[Interm_Days_F9])
+		,@Interm_Days_F10 = AVG(t02.[Interm_Days_F10])
+		,@Interm_Hour_H7 = AVG(t02.[Interm_Hour_H7])
+		,@Interm_Hour_H8 = AVG(t02.[Interm_Hour_H8])
+		,@Interm_Hour_H9 = AVG(t02.[Interm_Hour_H9])
+		,@Interm_Hour_H10 = AVG(t02.[Interm_Hour_H10])
+		,@Interm_ErrorMarg_H26 = AVG(t02.[Interm_ErrorMarg_H26])
+
+		,@FinancData_D26 = AVG(t02.[FinancData_D26])
+		,@FinancData_G35 = AVG(t02.[FinancData_G35])
+
+	FROM 
+		dbo.tbWbEasyCalcData t02 
+	WHERE
+		t02.YearNo = @YearNo
+		AND t02.ZoneId = @ZoneId
+		AND t02.IsArchive = 1
+		;	
+
+	SELECT
+		tWc.*
+	FROM 
+		tbWaterConsumption tWc
+		INNER JOIN dbo.tbWbEasyCalcData tWb ON tWc.WbEasyCalcDataId = tWb.WbEasyCalcDataId	
+	WHERE
+		tWb.YearNo = @YearNo
+		AND tWb.ZoneId = @ZoneId
+		AND tWb.IsArchive = 1
+		;	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spYearList]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6510,7 +7563,7 @@ FROM
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spZoneList]    Script Date: 31.05.2021 08:35:53 ******/
+/****** Object:  StoredProcedure [dbo].[spZoneList]    Script Date: 08.06.2021 14:34:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

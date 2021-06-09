@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="Water Management" 
-        Width="1500" Height="650"
+        Title="Water Utility Manager" 
+        Width="1800" Height="650"
         >
     <Window.DataContext>
         <local:MainWindowViewModel/>
@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="File">
-                <MenuItem Header="Exit" Command="{Binding ExitCmd}" CommandParameter="{Binding ElementName=TheMainWindow}"/>
+                <MenuItem Header="Exit" Command="{Binding ExitCmd}" />
             </MenuItem>
             <MenuItem Header="Tools" IsEnabled="{Binding IsOpen}">
                 <MenuItem Header="Import Constant Data" Command="{Binding ImportConstantDataCmd}"/>

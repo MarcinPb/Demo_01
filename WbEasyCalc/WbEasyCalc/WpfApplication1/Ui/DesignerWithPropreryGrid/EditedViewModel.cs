@@ -70,7 +70,7 @@ namespace WpfApplication1.Ui.DesignerWithPropreryGrid
 
         #region IDialogViewModel
 
-        public string Title { get; set; } = "Designer";
+        public string Title { get; set; } = "Scheme";
 
         public bool Save()
         {

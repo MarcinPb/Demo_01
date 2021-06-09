@@ -35,6 +35,13 @@ namespace WpfApplication1
         public Ui.WaterBalanceList.ListViewModel WbEasyCalcDataViewModel { get; set; }
         public MapViewModel WaterConsumptionMapViewModel { get; set; }
 
+        
+        public RelayCommand ExitCmd { get; set; }
+        private void ExitCmdExecute()
+        {
+            Application.Current.Shutdown();
+        }
+
         public RelayCommand OptionsCmd { get; set; }
         private void OptionsCmdExecute()
         {
@@ -59,6 +66,7 @@ namespace WpfApplication1
             { 
                 Logger.Info("'MainWindowViewModel' started.");
 
+                ExitCmd = new RelayCommand(ExitCmdExecute);
                 OptionsCmd = new RelayCommand(OptionsCmdExecute);
                 ImportConstantDataCmd = new RelayCommand(ImportConstantDataCmdExecute);
                 ImportChangeableDataCmd = new RelayCommand(ImportChangeableDataCmdExecute);

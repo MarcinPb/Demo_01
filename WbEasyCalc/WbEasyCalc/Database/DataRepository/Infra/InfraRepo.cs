@@ -287,7 +287,10 @@ namespace Database.DataRepository.Infra
                 InfraData infraData = new InfraData();
                 infraData.InfraConstantData = GetInfraConstantData();
                 infraData.InfraChangeableData = GetInfraChangableData();
-                infraData.Recalculate();
+                if (infraData.InfraChangeableData.InfraObjList.Count > 0) 
+                { 
+                    infraData.Recalculate();
+                }
 
                 _infraData = infraData;
             }
