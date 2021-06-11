@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryReader", "GeometryN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryReader.Test", "GeometryNew\GeometryReader.Test\GeometryReader.Test.csproj", "{65C3D6C0-E97C-484F-AA05-1BDC7A927815}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication2", "WpfApplication2\WpfApplication2.csproj", "{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -311,6 +313,26 @@ Global
 		{65C3D6C0-E97C-484F-AA05-1BDC7A927815}.Release|x64.Build.0 = Release|Any CPU
 		{65C3D6C0-E97C-484F-AA05-1BDC7A927815}.Release|x86.ActiveCfg = Release|Any CPU
 		{65C3D6C0-E97C-484F-AA05-1BDC7A927815}.Release|x86.Build.0 = Release|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Debug|ARM.Build.0 = Debug|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Debug|x64.Build.0 = Debug|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Debug|x86.Build.0 = Debug|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Release|ARM.ActiveCfg = Release|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Release|ARM.Build.0 = Release|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Release|ARM64.Build.0 = Release|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Release|x64.ActiveCfg = Release|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Release|x64.Build.0 = Release|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Release|x86.ActiveCfg = Release|Any CPU
+		{EDBB5FA4-6EA8-4E50-A761-727E256E5E4D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

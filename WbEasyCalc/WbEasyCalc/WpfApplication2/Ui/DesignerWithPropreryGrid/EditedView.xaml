@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="WpfApplication2.Ui.DesignerWithPropreryGrid.EditedView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        mc:Ignorable="d"
+            
+        xmlns:converters="clr-namespace:WpfApplication1.Converters;assembly=WpfApplication1"
+        xmlns:uiDesigner="clr-namespace:WpfApplication1.Ui.Designer;assembly=WpfApplication1" 
+        xmlns:uiPropertyGrid="clr-namespace:WpfApplication1.Ui.PropertyGrid;assembly=WpfApplication1" 
+        xmlns:uiDesignerPipe="clr-namespace:WpfApplication1.Ui.PropertyGrid.Pipe;assembly=WpfApplication1" 
+        xmlns:uiDesignerJunction="clr-namespace:WpfApplication1.Ui.PropertyGrid.Junction;assembly=WpfApplication1" 
+        xmlns:uiDesignerCustNode="clr-namespace:WpfApplication1.Ui.PropertyGrid.CustomerNode;assembly=WpfApplication1" 
+        >
+    <UserControl.Resources>
+        <converters:FloatConverter x:Key="FloatConverter" />
+
+        <DataTemplate DataType="{x:Type uiDesigner:DesignerViewModel}">
+            <uiDesigner:DesignerView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type uiPropertyGrid:EditedViewModel}">
+            <uiPropertyGrid:EditedView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type uiDesignerPipe:EditedViewModel}">
+            <uiDesignerPipe:EditedView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type uiDesignerJunction:EditedViewModel}">
+            <uiDesignerJunction:EditedView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type uiDesignerCustNode:EditedViewModel}">
+            <uiDesignerCustNode:EditedView />
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentControl Grid.Column="0" Content="{Binding DesignerViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Margin="5 0 5 0"/>
+            <ContentControl Grid.Column="2"  Content="{Binding PropertyGridViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        </Grid>
+    </Grid>
+</UserControl>

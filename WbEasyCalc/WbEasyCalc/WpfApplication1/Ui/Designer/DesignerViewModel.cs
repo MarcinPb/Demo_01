@@ -120,6 +120,8 @@ namespace WpfApplication1.Ui.Designer
             CanvasWidth = svgWidth + 2 * margin;
             CanvasHeight = svgHeight + 2 * margin;
 
+            if (_designerObjList.Count == 0) { return;  }
+
             _shapeRepo = new ShpRepo(svgWidth, svgHeight, margin, _designerObjList);
             List<Shp> list = _shapeRepo.GetShpList();
             ObjList = new ObservableCollection<Shp>(list);

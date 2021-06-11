@@ -8,6 +8,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source = "Controls/FilteredDataGridDict.xaml"/>
                 <ResourceDictionary Source = "Resources/Main.xaml"/>
                 <ResourceDictionary Source = "Resources/WbEasyCalc.xaml"/>
             </ResourceDictionary.MergedDictionaries>
