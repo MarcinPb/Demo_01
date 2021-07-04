@@ -74,12 +74,15 @@ namespace GeometryReader
                 // Zone and DemandPattern lists
                 IdahoDomainDataSet idahoDomainDataSet = (IdahoDomainDataSet)domainDataSet;
                 List<InfraZone> zoneDict = idahoDomainDataSet.ZoneElementManager.Elements().Cast<ModelingElementBase>().Select(x => new InfraZone { ZoneId = x.Id, Name = x.Label }).ToList();
-                List<InfraDemandPattern> demandPatternDict = idahoDomainDataSet.IdahoPatternElementManager.Elements().Cast<ModelingElementBase>().Select(x => new InfraDemandPattern { DemandPatternId = x.Id, Name = x.Label }).ToList();
+                List<InfraDemandPattern> demandPatternDict = idahoDomainDataSet.IdahoPatternElementManager.Elements().Cast<ModelingElementBase>().Select(x => new InfraDemandPattern { DemandPatternId = x.Id, Name = x.Label}).ToList();
+                demandPatternDict.Add(new InfraDemandPattern { DemandPatternId = -1, Name="Fixed" });
+                List<InfraDemandPatternCurve> demandPatternCurveList = GetDemandPatternCurveList(idahoDomainDataSet.IdahoPatternElementManager, demandPatternDict);
 
                 // InfraObj list
                 List<InfraObj> infraObjList = new List<InfraObj>();
                 List<InfraValue> infraValueList = new List<InfraValue>();
                 List<InfraGeometry> infraGeometryList = new List<InfraGeometry>();
+                List<InfraDemandBase> infraInfraDemandBaseList = new List<InfraDemandBase>();
 
                 int counter = 0;
                 foreach (var objType in infraObjTypeList)
@@ -144,7 +147,7 @@ namespace GeometryReader
                                     ManageReferenced(supportedField, objId, infraValue);
                                     break;
                                 case 9:     // Collection   
-                                    ManageCollection(supportedField, objId, infraValue);
+                                    infraInfraDemandBaseList.AddRange(GetDemandCollection(supportedField, objId, infraValue));
                                     break;
                                 case 10:    // Enumerated   
                                     ManageEnumerated(supportedField, objId, infraValue);
@@ -163,15 +166,49 @@ namespace GeometryReader
 
                 InfraChangeableDataLists importedDataOutputLists = new InfraChangeableDataLists
                 {
+                    ZoneDict = zoneDict,
+                    DemandPatternDict = demandPatternDict,
+                    DemandPatternCurveList = demandPatternCurveList,
                     InfraObjList = infraObjList,
                     InfraValueList = infraValueList,
                     InfraGeometryList = infraGeometryList,
-                    DemandPatternDict = demandPatternDict,
-                    ZoneDict = zoneDict
+                    DemandBaseList = infraInfraDemandBaseList,
                 };
 
                 return importedDataOutputLists;
             }
+        }
+        private List<InfraDemandPatternCurve> GetDemandPatternCurveList(IdahoPatternElementManager patternManager, List<InfraDemandPattern> demandPatternDict)
+        {
+            //int supportElementId = 19098;
+            var idahoPatternPatternCurveList = new List<InfraDemandPatternCurve>();
+
+            //ISupportElementManager patternManager =
+            //    idahoPatternElementManager.SupportElementManager((int)SupportElementType.IdahoPatternElementManager);
+
+            IEditField transientValveCurveField =
+                patternManager.SupportElementField(StandardFieldName.PatternCurve) as IEditField;
+            int id = 1;
+            foreach (var idahoPattern in demandPatternDict)
+            {
+                ICollectionFieldListManager cflm = (ICollectionFieldListManager)transientValveCurveField.GetValue(idahoPattern.DemandPatternId);
+
+                IUnitizedField timeFromStart = cflm.Field(StandardFieldName.PatternCurve_TimeFromStart) as IUnitizedField;
+                IUnitizedField multiplier = cflm.Field(StandardFieldName.PatternCurve_Multiplier) as IUnitizedField;
+
+                for (int i = 0; i < cflm.Count; ++i)
+                {
+                    idahoPatternPatternCurveList.Add(new InfraDemandPatternCurve()
+                    {
+                        DemandPatternCurveId = id++,
+                        DemandPatternId = idahoPattern.DemandPatternId,
+                        TimeFromStart = timeFromStart.GetDoubleValue(i),
+                        Multiplier = multiplier.GetDoubleValue(i),
+                    }); ;
+                }
+            }
+
+            return idahoPatternPatternCurveList;
         }
 
         private void ManageEnumerated(IField supportedField, int objId, InfraValue infraValue)
@@ -189,18 +226,34 @@ namespace GeometryReader
         }
 
         //private static List<string> _collectionList = new List<string>();
-        private void ManageCollection(IField supportedField, int objId, InfraValue infraValue)
+        private List<InfraDemandBase> GetDemandCollection(IField supportedField, int objId, InfraValue infraValue)
         {
             try
             {
+                if (supportedField.Name != "DemandCollection") { return new List<InfraDemandBase>(); }
+
                 //_collectionList.Add($"{objId}-{supportedField.Name}");
+                List<InfraDemandBase> list = new List<InfraDemandBase>();
+
                 var val = supportedField.GetValue(objId);
-                return;
+                var domainElementCollectionFieldListManager = (DomainElementCollectionFieldListManager)val;
+                var dataTable = domainElementCollectionFieldListManager.DataTable;
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    list.Add(new InfraDemandBase
+                    {
+                        ValueId = infraValue.ValueId,
+                        DemandBase = (double)dataTable.Rows[i][2],
+                        DemandPatternId = (int)(string.IsNullOrEmpty(dataTable.Rows[i][3].ToString()) ? -1 : dataTable.Rows[i][3]),
+                    });
+                }
+
+                return list;
             }
             catch (Exception ex)
             {
                 var message = ex.Message;
-                return;
+                return null;
             }
         }
         private void ManageReferenced(IField supportedField, int objId, InfraValue infraValue)

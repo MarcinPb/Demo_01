@@ -194,6 +194,49 @@ namespace Database.DataRepository.Infra
                 cnn.Execute(sql, list);
             }
         }
+        public static void InsertToInfraDemandPatternCurve(List<InfraDemandPatternCurve> list)
+        {
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    DELETE FROM dbo.tbInfraDemandPatternCurve;
+                ";
+                cnn.Execute(sql);
+
+                sql = $@"
+                    INSERT INTO dbo.tbInfraDemandPatternCurve (
+                        DemandPatternCurveId,  DemandPatternId,  TimeFromStart,  Multiplier
+                    ) VALUES (
+                        @DemandPatternCurveId, @DemandPatternId, @TimeFromStart, @Multiplier
+                    );
+                ";
+                cnn.Execute(sql, list);
+            }
+        }
+
+        public static void InsertToInfraDemandBase(List<InfraDemandBase> list)
+        {
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    DELETE FROM dbo.tbInfraDemandBase;
+                ";
+                cnn.Execute(sql);
+
+                sql = $@"
+                    INSERT INTO dbo.tbInfraDemandBase (
+                        ValueId,  DemandBase,  DemandPatternId
+                    ) VALUES (
+                        @ValueId, @DemandBase, @DemandPatternId
+                    );
+                ";
+                cnn.Execute(sql, list);
+            }
+        }
 
         public static void InsertToInfraValue(List<InfraValue> infraValueList)
         {

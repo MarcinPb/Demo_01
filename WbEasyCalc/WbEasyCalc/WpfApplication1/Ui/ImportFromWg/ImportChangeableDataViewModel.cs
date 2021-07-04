@@ -90,12 +90,13 @@ namespace WpfApplication1.Ui.ImportFromWg
                 importer.InnerProgressChanged -= OnInnerProgressChanged;
                 importer.OuterProgressChanged -= OnOuterProgressChanged;
 
-                InfraRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);                      //  14601
-                InfraRepo.InsertToInfraDemandPattern(importedDataOutputLists.DemandPatternDict);    //  
-                InfraRepo.InsertToInfraObj(importedDataOutputLists.InfraObjList);                   //     16
-                _logger.Info($"InsertToInfraValue = {importedDataOutputLists.InfraValueList.Count}.");
-                InfraRepo.InsertToInfraValue(importedDataOutputLists.InfraValueList);               // 518964
-                InfraRepo.InsertToInfraGeometry(importedDataOutputLists.InfraGeometryList);         //  25138
+                InfraRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);                              //  14601
+                InfraRepo.InsertToInfraDemandPattern(importedDataOutputLists.DemandPatternDict);            //  
+                InfraRepo.InsertToInfraDemandPatternCurve(importedDataOutputLists.DemandPatternCurveList);  //  
+                InfraRepo.InsertToInfraObj(importedDataOutputLists.InfraObjList);                           //     16
+                //_logger.Info($"InsertToInfraValue = {importedDataOutputLists.InfraValueList.Count}.");
+                InfraRepo.InsertToInfraValue(importedDataOutputLists.InfraValueList);                       // 518964
+                InfraRepo.InsertToInfraGeometry(importedDataOutputLists.InfraGeometryList);                 //  25138
 
                 ProgressMessage = "Data were saved to database successfully."; 
             }

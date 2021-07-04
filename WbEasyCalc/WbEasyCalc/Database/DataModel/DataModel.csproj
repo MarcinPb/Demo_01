@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="ConfigMatrix.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Infra\InfraDemandBase.cs" />
+    <Compile Include="Infra\InfraDemandPatternCurve.cs" />
     <Compile Include="Infra\ImportedBaseOutputLists.cs" />
     <Compile Include="Infra\ImportedField.cs" />
     <Compile Include="Infra\InfraChangeableDataLists.cs" />

@@ -10,6 +10,8 @@ namespace Database.DataModel.Infra
     {
         public List<InfraZone> ZoneDict { get; set; }
         public List<InfraDemandPattern> DemandPatternDict { get; set; }
+        public List<InfraDemandPatternCurve> DemandPatternCurveList { get; set; }
+        public List<InfraDemandBase> DemandBaseList { get; set; }
         public List<InfraObj> InfraObjList { get; set; } = new List<InfraObj>();
         public List<InfraValue> InfraValueList { get; set; } = new List<InfraValue>();
         public List<InfraGeometry> InfraGeometryList { get; set; } = new List<InfraGeometry>();

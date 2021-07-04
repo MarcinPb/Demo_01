@@ -39,9 +39,12 @@ namespace GeometryReader.Test
 
             InfraRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);
             InfraRepo.InsertToInfraDemandPattern(importedDataOutputLists.DemandPatternDict);
+            InfraRepo.InsertToInfraDemandPatternCurve(importedDataOutputLists.DemandPatternCurveList);
+
             InfraRepo.InsertToInfraObj(importedDataOutputLists.InfraObjList);
             InfraRepo.InsertToInfraValue(importedDataOutputLists.InfraValueList);
             InfraRepo.InsertToInfraGeometry(importedDataOutputLists.InfraGeometryList);
+            InfraRepo.InsertToInfraDemandBase(importedDataOutputLists.DemandBaseList);
         }
 
         private void OnProgressChanged(object sender, ProgressEventArgs e)
