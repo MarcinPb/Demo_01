@@ -1,6 +1,7 @@
 ﻿using Database.DataRepository.Infra;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -49,6 +50,24 @@ namespace WpfApplication1.Ui.PropertyGrid.CustomerNode
                 int relatedId = (int)fieldValue;
                 Demand_DemandPattern = infraDemandPatternList.FirstOrDefault(x => x.DemandPatternId == relatedId)?.Name;
             }
+            else
+            {
+                Demand_DemandPattern = infraDemandPatternList.FirstOrDefault(x => x.DemandPatternId == -1)?.Name;
+            }
         }
+
+        [Category("Demand")]
+        [DisplayName("DemandPatternItemsSource")]
+        [Browsable(false)]
+        public ObservableCollection<string> DemandPatternItemsSource
+        {
+            get
+            {
+                ObservableCollection<string> list = new ObservableCollection<string>(InfraRepo.GetInfraData().InfraChangeableData.DemandPatternDict.Select(x => x.Name));
+                return list;
+            }
+        }
+
+
     }
 }

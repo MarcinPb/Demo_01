@@ -37,6 +37,13 @@
                         </DataTemplate>
                     </xctk:EditorTemplateDefinition.EditingTemplate>
                 </xctk:EditorTemplateDefinition>
+                <xctk:EditorTemplateDefinition TargetProperties="Demand_DemandPattern">
+                    <xctk:EditorTemplateDefinition.EditingTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding Instance.DemandPatternItemsSource}" SelectedValue="{Binding Instance.Demand_DemandPattern}" />
+                        </DataTemplate>
+                    </xctk:EditorTemplateDefinition.EditingTemplate>
+                </xctk:EditorTemplateDefinition>
             </xctk:PropertyGrid.EditorDefinitions>
 
         </xctk:PropertyGrid>
