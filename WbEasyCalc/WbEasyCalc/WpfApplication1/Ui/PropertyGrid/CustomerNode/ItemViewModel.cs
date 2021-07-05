@@ -11,7 +11,7 @@ namespace WpfApplication1.Ui.PropertyGrid.CustomerNode
 {
     public class ItemViewModel : Ui.PropertyGrid.ItemXyViewModel
     {
-        [Category("Demand")]
+        [Category("Customer Meter Information")]
         [DisplayName("Associated Element")]
         public string Demand_AssociatedElement { get; set; }
 
