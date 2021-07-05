@@ -32,6 +32,13 @@ namespace WpfApplication1.Ui.PropertyGrid.CustomerNode
             {
                 int relatedId = (int)_model.Fields["Demand_AssociatedElement"];
                 Demand_AssociatedElement = infraValueList.FirstOrDefault(x => x.ObjId == relatedId && x.FieldId == InfraRepo.GetInfraData().InfraSpecialFieldId.Label).StringValue;
+
+                var zoneId = infraValueList.FirstOrDefault(f => f.ObjId == relatedId && f.FieldId == InfraRepo.GetInfraData().InfraSpecialFieldId.Physical_Zone)?.IntValue;
+                if (zoneId != null)
+                {
+                    var zoneList = InfraRepo.GetInfraData().InfraChangeableData.ZoneDict;
+                    Zone = zoneList.FirstOrDefault(x => x.ZoneId == zoneId)?.Name;
+                }
             }
 
             Demand_BaseFlow = (double)_model.Fields["Demand_BaseFlow"];
