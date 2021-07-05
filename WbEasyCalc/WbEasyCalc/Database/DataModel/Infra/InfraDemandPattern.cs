@@ -10,5 +10,10 @@ namespace Database.DataModel.Infra
     {
         public int DemandPatternId { get; set; }
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return $"{DemandPatternId} - {Name}";
+        }
     }
 }

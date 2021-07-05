@@ -432,6 +432,28 @@ namespace Database.DataRepository.Infra
                 demandPatternDict = cnn.Query<InfraDemandPattern>(sql).ToList();
             }
 
+            List<InfraDemandPatternCurve> demandPatternCurveList;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    SELECT * FROM dbo.tbInfraDemandPatternCurve;
+                ";
+                demandPatternCurveList = cnn.Query<InfraDemandPatternCurve>(sql).ToList();
+            }
+
+            List<InfraDemandBase> demandBaseList;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    SELECT * FROM dbo.tbInfraDemandBase;
+                ";
+                demandBaseList = cnn.Query<InfraDemandBase>(sql).ToList();
+            }
+
             InfraChangeableDataLists importedDataOutputLists = new InfraChangeableDataLists
             {
                 InfraObjList = infraObjList,
@@ -439,6 +461,8 @@ namespace Database.DataRepository.Infra
                 InfraGeometryList = infraGeometryList,
                 ZoneDict = zoneDict,
                 DemandPatternDict = demandPatternDict,
+                DemandPatternCurveList = demandPatternCurveList,
+                DemandBaseList = demandBaseList,
             };
 
             return importedDataOutputLists;
