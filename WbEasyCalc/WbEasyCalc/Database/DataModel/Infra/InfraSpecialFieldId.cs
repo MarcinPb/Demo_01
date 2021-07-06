@@ -13,5 +13,6 @@ namespace Database.DataModel.Infra
         public int Physical_Zone { get; set; }
         public int Demand_AssociatedElement { get; set; }
         public int Scada_TargetElement { get; set; }
+        public int DemandCollection { get; set; }
     }
 }

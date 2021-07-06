@@ -32,6 +32,7 @@ namespace Database.DataRepository.Infra
                 Physical_Zone = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Physical_Zone").FieldId,
                 Demand_AssociatedElement = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Demand_AssociatedElement").FieldId,
                 Scada_TargetElement = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Scada_TargetElement").FieldId,
+                DemandCollection = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "DemandCollection").FieldId,
             };
         }
 

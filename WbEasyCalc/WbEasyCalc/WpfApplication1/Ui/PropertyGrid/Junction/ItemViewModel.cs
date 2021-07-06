@@ -25,8 +25,7 @@ namespace WpfApplication1.Ui.PropertyGrid.Junction
         public ItemViewModel(int id) : base(id)
         {
             var infraChangeableData = InfraRepo.GetInfraData().InfraChangeableData;
-            //var valueId = infraChangeableData.InfraValueList.FirstOrDefault(f => f.ObjId == id && f.FieldId == InfraRepo.GetInfraData().InfraSpecialFieldId.DemandCollection)?.IntValue;
-            var valueId = infraChangeableData.InfraValueList.FirstOrDefault(f => f.ObjId == id && f.FieldId == 757)?.ValueId;
+            var valueId = infraChangeableData.InfraValueList.FirstOrDefault(f => f.ObjId == id && f.FieldId == InfraRepo.GetInfraData().InfraSpecialFieldId.DemandCollection)?.ValueId;
             if(valueId.HasValue)
             {
                 var demmandPatternIdList1 = infraChangeableData.DemandBaseList;           
