@@ -35,6 +35,9 @@
             <TabItem Header="Water Consumption Map" >
                 <ContentControl Content="{Binding WaterConsumptionMapViewModel}" />
             </TabItem>
+            <TabItem Header="Demand Pattern List" >
+                <ContentControl Content="{Binding DemandPatternViewModel}" />
+            </TabItem>
         </TabControl>
         <StatusBar Grid.Row="2" >
             <StatusBar.ItemsPanel>

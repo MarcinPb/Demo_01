@@ -34,6 +34,7 @@ namespace WpfApplication1
 
         public Ui.WaterBalanceList.ListViewModel WbEasyCalcDataViewModel { get; set; }
         public MapViewModel WaterConsumptionMapViewModel { get; set; }
+        public Ui.DemandPattern.ListViewModel DemandPatternViewModel { get; set; }
 
         
         public RelayCommand ExitCmd { get; set; }
@@ -80,6 +81,8 @@ namespace WpfApplication1
 
                 WaterConsumptionMapViewModel = new Ui.WaterConsumptionMap.MapViewModel(2021, 5, null);
                 WaterConsumptionMapViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList();
+
+                DemandPatternViewModel = new Ui.DemandPattern.ListViewModel();
 
                 // Singleton run before opening designer first time. It takes more or less 5 sek.
                 InvokeSingleton();
