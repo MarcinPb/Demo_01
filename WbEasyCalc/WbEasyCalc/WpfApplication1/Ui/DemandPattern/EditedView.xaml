@@ -45,7 +45,7 @@
 
         <TabControl Grid.Row="1">
             <TabItem Header="Water Consumption List" >
-                <ContentControl Content="{Binding ItemViewModel.WaterConsumptionListViewModel}" />
+                <ContentControl Content="{Binding ItemViewModel.DemandPatternCurveListViewModel}" />
             </TabItem>
         </TabControl>
         
