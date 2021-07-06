@@ -116,6 +116,10 @@
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\Configuration\EditedViewModel.cs" />
+    <Compile Include="Ui\DemandPattern\EditedView.xaml.cs">
+      <DependentUpon>EditedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\DemandPattern\EditedViewModel.cs" />
     <Compile Include="Ui\DemandPattern\ItemViewModel.cs" />
     <Compile Include="Ui\DemandPattern\ListView.xaml.cs">
       <DependentUpon>ListView.xaml</DependentUpon>
@@ -293,6 +297,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ui\Configuration\EditedView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\DemandPattern\EditedView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

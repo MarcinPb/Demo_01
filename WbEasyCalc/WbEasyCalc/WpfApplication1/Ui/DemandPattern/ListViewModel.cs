@@ -36,10 +36,6 @@ namespace WpfApplication1.Ui.DemandPattern
                 RaisePropertyChanged();
 
                 OpenRowCmd.RaiseCanExecuteChanged();
-                //RemoveRowCmd.RaiseCanExecuteChanged();
-                //CloneCmd.RaiseCanExecuteChanged();
-
-                //WbEasyCalcDataEditedViewModel = null;
             }
         }
 
@@ -96,9 +92,9 @@ namespace WpfApplication1.Ui.DemandPattern
                 return;
             }
 
-            //var editedViewModel = new EditedViewModel(SelectedRow.Model.DemandPatternId);
-            //var result = DialogUtility.ShowModal(editedViewModel);
-            //editedViewModel.Dispose();
+            var editedViewModel = new EditedViewModel(SelectedRow.Model.DemandPatternId);
+            var result = DialogUtility.ShowModal(editedViewModel);
+            editedViewModel.Dispose();
         }
         public bool OpenRowCmdCanExecute()
         {

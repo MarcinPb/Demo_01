@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="WpfApplication1.Ui.DemandPattern.EditedView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
+             mc:Ignorable="d"              
+             xmlns:converters="clr-namespace:WpfApplication1.Converters" 
+             xmlns:excel="clr-namespace:WpfApplication1.Ui.WaterBalanceList.Excel"
+             xmlns:waterConsumption="clr-namespace:WpfApplication1.Ui.WaterConsumptionList"
+             >
+    <UserControl.Resources>
+        <converters:FloatConverter x:Key="FloatConverter" />
+        <converters:PercentageConverter  x:Key="PercentageConverter" />
+        <converters:BooleanFlagSwitchConverter  x:Key="NegConverter" />
+
+        <DataTemplate DataType="{x:Type waterConsumption:ListViewModel}">
+            <waterConsumption:ListView />
+        </DataTemplate>
+
+    </UserControl.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"  Margin="0 0 0 10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Id" Grid.Row="0" Grid.Column="0" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="7 0 0 0" Text="Name"/>
+
+                <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=ItemViewModel.Id, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="7 0 0 0" Text="{Binding Path=ItemViewModel.Name, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" />
+            </Grid>
+
+        </Grid>
+
+        <TabControl Grid.Row="1">
+            <TabItem Header="Water Consumption List" >
+                <!--<ContentControl Content="{Binding ItemViewModel.WaterConsumptionListViewModel}" />-->
+            </TabItem>
+        </TabControl>
+        
+    </Grid>
+</UserControl>
