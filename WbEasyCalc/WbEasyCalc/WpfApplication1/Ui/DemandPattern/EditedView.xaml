@@ -6,7 +6,7 @@
              mc:Ignorable="d"              
              xmlns:converters="clr-namespace:WpfApplication1.Converters" 
              xmlns:excel="clr-namespace:WpfApplication1.Ui.WaterBalanceList.Excel"
-             xmlns:waterConsumption="clr-namespace:WpfApplication1.Ui.WaterConsumptionList"
+             xmlns:waterConsumption="clr-namespace:WpfApplication1.Ui.DemandPatternCurve"
              >
     <UserControl.Resources>
         <converters:FloatConverter x:Key="FloatConverter" />
@@ -45,7 +45,7 @@
 
         <TabControl Grid.Row="1">
             <TabItem Header="Water Consumption List" >
-                <!--<ContentControl Content="{Binding ItemViewModel.WaterConsumptionListViewModel}" />-->
+                <ContentControl Content="{Binding ItemViewModel.WaterConsumptionListViewModel}" />
             </TabItem>
         </TabControl>
         

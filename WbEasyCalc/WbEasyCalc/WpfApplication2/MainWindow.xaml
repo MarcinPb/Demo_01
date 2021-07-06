@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication2"
         mc:Ignorable="d"
-        Title="Water Utility Manager" 
+        Title="Water Utility Configurator" 
         Width="1800" Height="650"
         
         xmlns:uiDesigner1="clr-namespace:WpfApplication2.Ui.DesignerWithPropreryGrid" 
@@ -39,6 +39,9 @@
         <TabControl  Grid.Row="1" Margin="10" >
             <TabItem Header="Water Balance List"  >
                 <ContentControl  Content="{Binding SchemeViewModel}" />
+            </TabItem>
+            <TabItem Header="Demand Pattern List"  >
+                <ContentControl  Content="{Binding DemandPatternViewModel}" />
             </TabItem>
         </TabControl>
         <StatusBar Grid.Row="2" >

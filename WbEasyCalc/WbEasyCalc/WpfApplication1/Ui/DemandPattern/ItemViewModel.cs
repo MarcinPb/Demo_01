@@ -41,7 +41,7 @@ namespace WpfApplication1.Ui.DemandPattern
 
         #endregion
 
-        //public WaterConsumptionList.ListViewModel WaterConsumptionListViewModel { get; set; }
+        public DemandPatternCurve.ListViewModel WaterConsumptionListViewModel { get; set; }
 
 
         public Database.DataModel.Infra.InfraDemandPattern Model
@@ -65,7 +65,7 @@ namespace WpfApplication1.Ui.DemandPattern
 
             Name = model.Name;
 
-            //WaterConsumptionListViewModel = new WaterConsumptionList.ListViewModel(Id) {YearNo = this.YearNo, MonthNo = this.MonthNo, ZoneId = this.ZoneId};
+            WaterConsumptionListViewModel = new DemandPatternCurve.ListViewModel(Id);
 
         }
         public void Dispose()

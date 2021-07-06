@@ -33,6 +33,7 @@ namespace WpfApplication2
 
 
         public WpfApplication2.Ui.DesignerWithPropreryGrid.EditedViewModel SchemeViewModel { get; set; }
+        public WpfApplication1.Ui.DemandPattern.ListViewModel DemandPatternViewModel { get; set; }
 
         
         public RelayCommand ExitCmd { get; set; }
@@ -78,7 +79,7 @@ namespace WpfApplication2
                 GlobalConfig.InitializeConnection(DatabaseType.Sql);
 
                 SchemeViewModel = new WpfApplication2.Ui.DesignerWithPropreryGrid.EditedViewModel();
-
+                DemandPatternViewModel = new WpfApplication1.Ui.DemandPattern.ListViewModel();
 
                 // Singleton run before opening designer first time. It takes more or less 5 sek.
                 InvokeSingleton();
