@@ -18,9 +18,11 @@ namespace Database.DataRepository.Infra
         {
             if (IsRecalculated) { return; }
 
+            CalculateInfraSpecialFieldId();
+
             InfraChangeableData.InfraValueList.ForEach(x => RecalculateRealValue(x));
             RecalculateGeometryValue();
-            CalculateInfraSpecialFieldId();
+            RecalculateDemandBaseValue();
             IsRecalculated = true;
         }
         private void CalculateInfraSpecialFieldId()
@@ -40,6 +42,11 @@ namespace Database.DataRepository.Infra
         {
             var value = InfraConstantData.InfraUnitCorrectionList.FirstOrDefault(x => x.UnitCorrectionId == 1).Value;
             InfraChangeableData.InfraGeometryList.ForEach(x => { x.Xp = x.Xp * value; x.Yp = x.Yp * value; });
+        }
+        private void RecalculateDemandBaseValue()
+        {
+            var value = InfraConstantData.InfraUnitCorrectionList.FirstOrDefault(x => x.UnitCorrectionId == 2).Value;
+            InfraChangeableData.DemandBaseList.ForEach(x => { x.DemandBase = x.DemandBase * value; });
         }
 
         private void RecalculateRealValue(InfraValue infraValue)

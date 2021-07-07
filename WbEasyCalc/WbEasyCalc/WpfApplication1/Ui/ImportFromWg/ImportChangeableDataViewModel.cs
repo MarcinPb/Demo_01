@@ -91,12 +91,12 @@ namespace WpfApplication1.Ui.ImportFromWg
                 importer.OuterProgressChanged -= OnOuterProgressChanged;
 
                 InfraRepo.InsertToInfraZone(importedDataOutputLists.ZoneDict);                              //  14601
-                InfraRepo.InsertToInfraDemandPattern(importedDataOutputLists.DemandPatternDict);            //  
-                InfraRepo.InsertToInfraDemandPatternCurve(importedDataOutputLists.DemandPatternCurveList);  //  
+                InfraRepo.InsertToInfraDemandPattern(importedDataOutputLists.DemandPatternDict);            //     59 
+                InfraRepo.InsertToInfraDemandPatternCurve(importedDataOutputLists.DemandPatternCurveList);  // 192007
                 InfraRepo.InsertToInfraObj(importedDataOutputLists.InfraObjList);                           //     16
-                //_logger.Info($"InsertToInfraValue = {importedDataOutputLists.InfraValueList.Count}.");
                 InfraRepo.InsertToInfraValue(importedDataOutputLists.InfraValueList);                       // 518964
                 InfraRepo.InsertToInfraGeometry(importedDataOutputLists.InfraGeometryList);                 //  25138
+                InfraRepo.InsertToInfraDemandBase(importedDataOutputLists.DemandBaseList);                  //   2827
 
                 ProgressMessage = "Data were saved to database successfully."; 
             }

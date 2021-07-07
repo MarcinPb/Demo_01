@@ -129,19 +129,40 @@ namespace Database.DataRepository.Infra
                        ,[Value]
                        ,[Description]
                     ) VALUES (
-                        1
-                       ,0.3048                      -- 3.28084
-                       ,N'FootToMeter'
+                        1   ,0.304800000001219     ,N'[ft] -> [m]'
+                    );
+                    INSERT INTO [dbo].[tbInfraUnitCorrection](
+                        [UnitCorrectionId]
+                       ,[Value]
+                       ,[Description]
+                    ) VALUES (
+                        2   ,101.940646927238     ,N'[ft3/s] -> [m3/h]'
+                    );
+                    INSERT INTO [dbo].[tbInfraUnitCorrection](
+                        [UnitCorrectionId]
+                       ,[Value]
+                       ,[Description]
+                    ) VALUES (
+                        3   ,304.800000001219     ,N'[ft] -> [mm]'
                     );
                     
                     UPDATE [dbo].[tbInfraField] SET 
                         [UnitCorrectionId] = 1
-                    --WHERE [FieldId] IN (
-                    --    -334626530, 586, 588, 690, 192086302
-                    --);
-                    WHERE [Name] IN (
-                        'HMIGeometryYCoordinate', 'HMIGeometry', 'HMIGeometryScaledLength', 'Physical_HydrantLateralLength', 'HMIGeometryXCoordinate'
-                    );
+                    WHERE 
+                        --[FieldId] IN (-334626530, 586, 588, 690, 192086302);
+                        [Name] IN ('HMIGeometryYCoordinate', 'HMIGeometry', 'HMIGeometryScaledLength', 'Physical_HydrantLateralLength', 'HMIGeometryXCoordinate');
+
+                    UPDATE [dbo].[tbInfraField] SET 
+                        [UnitCorrectionId] = 2
+                    WHERE 
+                        --[FieldId] IN (767, 757);
+                        [Name] IN ('Demand_BaseFlow', 'DemandCollection');
+
+                    UPDATE [dbo].[tbInfraField] SET 
+                        [UnitCorrectionId] = 3
+                    WHERE 
+                        --[FieldId] IN (659);
+                        [Name] IN ('Physical_PipeDiameter');
                 ";
                 cnn.Execute(sql);
             }

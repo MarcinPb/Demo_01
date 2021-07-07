@@ -175,6 +175,7 @@
     </Compile>
     <Compile Include="Ui\PropertyGrid\Junction\EditedViewModel.cs" />
     <Compile Include="Ui\PropertyGrid\Junction\ItemViewModel.cs" />
+    <Compile Include="Ui\PropertyGrid\Junction\Model\InfraDemandBaseExtended.cs" />
     <Compile Include="Ui\PropertyGrid\Pipe\EditedView.xaml.cs">
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
@@ -561,6 +562,7 @@
     <Content Include="_Files\WaterUtilityDatabaseWithData.sql" />
     <Content Include="_Files\WaterInfraDatabase.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

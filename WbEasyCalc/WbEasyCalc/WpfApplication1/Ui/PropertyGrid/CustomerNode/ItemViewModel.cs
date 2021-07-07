@@ -17,7 +17,7 @@ namespace WpfApplication1.Ui.PropertyGrid.CustomerNode
         public string Demand_AssociatedElement { get; set; }
 
         [Category("Demand")]
-        [DisplayName("Base Flow")]
+        [DisplayName("Demand (Base) [m3/h]")]
         public double Demand_BaseFlow { get; set; }
 
         [Category("Demand")]
