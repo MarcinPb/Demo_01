@@ -68,10 +68,6 @@
     <Compile Include="ZoneItem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ExcelNpoi\ExcelNpoi\ExcelNpoi.csproj">
-      <Project>{72312fb8-0ea0-4e29-8d99-ea9cf6c1ccca}</Project>
-      <Name>ExcelNpoi</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Wb\WbEasyCalcModel\WbEasyCalcModel.csproj">
       <Project>{999ce3b3-3b81-4349-9bde-7eccadfa43fb}</Project>
       <Name>WbEasyCalcModel</Name>

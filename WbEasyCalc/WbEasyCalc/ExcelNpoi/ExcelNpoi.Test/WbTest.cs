@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace ExcelNpoi.ExcelNpoi.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class WbTest
     {
         [TestMethod]
         public void TestMethod1()

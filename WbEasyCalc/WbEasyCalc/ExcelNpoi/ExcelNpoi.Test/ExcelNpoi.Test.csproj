@@ -42,7 +42,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="PostCalcTest.cs" />
+    <Compile Include="WbTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,12 +55,21 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Database\DataModel\DataModel.csproj">
+      <Project>{84E205EB-B5E5-4E14-8F6B-BD3284D48E73}</Project>
+      <Name>DataModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Database\DataRepository\DataRepository.csproj">
+      <Project>{BA9D1B4B-4F94-466A-B5E9-2B8D21D6E941}</Project>
+      <Name>DataRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExcelNpoi\ExcelNpoi.csproj">
       <Project>{72312fb8-0ea0-4e29-8d99-ea9cf6c1ccca}</Project>
       <Name>ExcelNpoi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Data\TestFile.xlsx" />
     <None Include="Data\TestFileCreated.xlsx" />
   </ItemGroup>

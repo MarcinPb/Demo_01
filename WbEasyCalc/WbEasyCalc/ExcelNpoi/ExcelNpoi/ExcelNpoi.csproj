@@ -60,10 +60,17 @@
     <Compile Include="ExcelWriter.cs" />
     <Compile Include="Model\CellByRowColumnNo.cs" />
     <Compile Include="Model\CellByName.cs" />
+    <Compile Include="PostCalcExcelWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Database\DataModel\DataModel.csproj">
+      <Project>{84e205eb-b5e5-4e14-8f6b-bd3284d48e73}</Project>
+      <Name>DataModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
