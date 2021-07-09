@@ -8,6 +8,9 @@ using System;
 using System.Windows;
 using WpfApplication1.Ui.ImportFromWg;
 using System.Threading.Tasks;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using Database.DataRepository.Infra;
+using ExcelNpoi.ExcelNpoi;
 
 namespace WpfApplication1
 {
@@ -61,6 +64,35 @@ namespace WpfApplication1
             DialogUtility.ShowModal(new ImportChangeableDataViewModel());
         }
 
+
+        public RelayCommand CreatePostCalcExcelCmd { get; set; }
+        private void CreatePostCalcExcelCmdExecute()
+        {
+            try 
+            { 
+                CommonSaveFileDialog dialog = new CommonSaveFileDialog();
+                dialog.Filters.Add(new CommonFileDialogFilter()
+                {
+                    DisplayName = "Excel files",
+                    Extensions = { "xlsx" }
+                });
+                dialog.DefaultExtension = "xlsx";
+                if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    InfraData infraData = InfraRepo.GetInfraData();
+                    PostCalcExcelWriter.Write(
+                        dialog.FileName,
+                        infraData.InfraChangeableData
+                        );
+                    MessageBox.Show($"{dialog.FileName} file was created succesfully.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         public MainWindowViewModel()
         {
             try 
@@ -71,6 +103,7 @@ namespace WpfApplication1
                 OptionsCmd = new RelayCommand(OptionsCmdExecute);
                 ImportConstantDataCmd = new RelayCommand(ImportConstantDataCmdExecute);
                 ImportChangeableDataCmd = new RelayCommand(ImportChangeableDataCmdExecute);
+                CreatePostCalcExcelCmd = new RelayCommand(CreatePostCalcExcelCmdExecute);
 
                 //DatabaseName = $"{GetDatabaseName("WaterInfra_ConnStr")}, {GetDatabaseName("WaterUtility_ConnStr")}";
                 //SqliteFile = GetSqliteFile();

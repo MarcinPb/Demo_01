@@ -25,6 +25,8 @@
                 <MenuItem Header="Exit" Command="{Binding ExitCmd}" />
             </MenuItem>
             <MenuItem Header="Tools" IsEnabled="{Binding IsOpen}">
+                <MenuItem Header="Create PostCalc Excel" Command="{Binding CreatePostCalcExcelCmd}"/>
+                <Separator/>
                 <MenuItem Header="Settings" Command="{Binding OptionsCmd}"/>
             </MenuItem>
         </Menu>

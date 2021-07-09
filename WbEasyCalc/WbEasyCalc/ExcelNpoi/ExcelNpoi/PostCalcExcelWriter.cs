@@ -108,32 +108,6 @@ namespace ExcelNpoi.ExcelNpoi
                 row.CreateCell(3).SetCellValue("Enabled");
                 row.CreateCell(4).SetCellValue("OPC Tag");
                 row.CreateCell(5).SetCellValue("Result Attribute Label");
-                /*
-                // Pipe
-                foreach (var item in pipeList)
-                {
-                    rowIndex++;
-                    row = sheet4.CreateRow(rowIndex);
-                    row.CreateCell(0).SetCellValue("PipeStatus");
-                    row.CreateCell(1).SetCellValue(item.Id);
-                    row.CreateCell(2).SetCellValue(item.Label);
-                    row.CreateCell(3).SetCellValue(item.IsActive);
-                    row.CreateCell(4).SetCellValue($"PipeIsOpen.DEV.{item.Label}_{item.Id}");
-                    row.CreateCell(5).SetCellValue("Is Open?");
-                }
-                // Hydrant
-                foreach (var item in waterDemandDataList.Where(x => x.ObjectTypeID == 54))
-                {
-                    rowIndex++;
-                    row = sheet4.CreateRow(rowIndex);
-                    row.CreateCell(0).SetCellValue("TankPercentFull");
-                    row.CreateCell(1).SetCellValue(item.ObjectID);
-                    row.CreateCell(2).SetCellValue(item.ObjectName);
-                    row.CreateCell(3).SetCellValue(item.IsActive);
-                    row.CreateCell(4).SetCellValue($"Other.DEV.TankPrcFul_{item.ObjectName}_{item.ObjectID}");
-                    row.CreateCell(5).SetCellValue("Percent Full");
-                }
-                */
                 foreach (var item in GetOpcMappingSheetList(infraChangeableDataList).OrderByDescending(x => x.ObjTypeId).ThenBy(x => x.ObjId))
                 {
                     rowIndex++;
@@ -168,19 +142,6 @@ namespace ExcelNpoi.ExcelNpoi
                 row.CreateCell(3).SetCellValue("BaseDemandValue");
                 row.CreateCell(4).SetCellValue("ZoneName");
                 row.CreateCell(5).SetCellValue("IsActive");
-
-                //foreach (var item in waterDemandDataList)
-                //{
-                //    rowIndex++;
-                //    row = sheet5.CreateRow(rowIndex);
-                //    row.CreateCell(0).SetCellValue(item.ObjectID);
-                //    row.CreateCell(1).SetCellValue(item.ObjectTypeID);
-                //    row.CreateCell(2).SetCellValue(item.DemandPatternName);
-                //    row.CreateCell(3).SetCellValue(item.BaseDemandValue);
-                //    row.CreateCell(4).SetCellValue(item.ZoneName);
-                //    row.CreateCell(5).SetCellValue(item.IsActive);
-                //}
-                //foreach (var item in objIsActiveZoneDemandList)
                 foreach (var item in GetObjectDataSheetList(infraChangeableDataList))
                 {
                     rowIndex++;
@@ -280,14 +241,12 @@ namespace ExcelNpoi.ExcelNpoi
                 )
                 .Join(
                     infraChangeableDataList.InfraValueList.Where(f =>
-                        f.FieldId == 645 ||       // HMIActiveTopologyIsActive        
-                        f.FieldId == 645 ||       // HMIActiveTopologyIsActive        
+                        f.FieldId == 769 ||       // Demand_AssociatedElement
                         f.FieldId == 767 ||       // Demand_BaseFlow 
                         f.FieldId == 768 ||       // Demand_DemandPattern 
                         f.FieldId == 757 ||       // DemandCollection 
-                        f.FieldId == 647 ||       // Physical_Zone
-                        f.FieldId == 769 ||       // Demand_AssociatedElement
-                        f.FieldId == 757          // DemandCollection
+                        f.FieldId == 645 ||       // HMIActiveTopologyIsActive        
+                        f.FieldId == 647          // Physical_Zone
                     ),
                     l => l.ObjId,
                     r => r.ObjId,

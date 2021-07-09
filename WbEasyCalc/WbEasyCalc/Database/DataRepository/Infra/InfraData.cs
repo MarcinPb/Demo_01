@@ -29,12 +29,14 @@ namespace Database.DataRepository.Infra
         {
             InfraSpecialFieldId = new InfraSpecialFieldId
             {
-                Label = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Label").FieldId,
-                HMIActiveTopologyIsActive = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "HMIActiveTopologyIsActive").FieldId,
-                Physical_Zone = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Physical_Zone").FieldId,
                 Demand_AssociatedElement = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Demand_AssociatedElement").FieldId,
-                Scada_TargetElement = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Scada_TargetElement").FieldId,
+                Demand_BaseFlow = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Demand_BaseFlow").FieldId,
+                Demand_DemandPattern = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Demand_DemandPattern").FieldId,
                 DemandCollection = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "DemandCollection").FieldId,
+                HMIActiveTopologyIsActive = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "HMIActiveTopologyIsActive").FieldId,
+                Label = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Label").FieldId,
+                Physical_Zone = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Physical_Zone").FieldId,
+                Scada_TargetElement = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Scada_TargetElement").FieldId,
             };
         }
 
