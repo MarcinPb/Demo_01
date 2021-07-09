@@ -19,7 +19,8 @@ namespace ExcelNpoi.ExcelNpoi.Test
 
             PostCalcExcelWriter.Write(
                 _excelFile,
-                infraData.InfraChangeableData
+                infraData.InfraChangeableData,
+                infraData.InfraSpecialFieldId
                 );
         }
     }

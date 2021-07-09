@@ -31,7 +31,7 @@ namespace ExcelNpoi.ExcelNpoi
     
 
 
-        public static void Write(string excelFileName, InfraChangeableDataLists infraChangeableDataList)
+        public static void Write(string excelFileName, InfraChangeableDataLists infraChangeableDataList, InfraSpecialFieldId infraSpecialFieldId)
         {
             List<InfraDemandPattern> demandPatternList = infraChangeableDataList.DemandPatternDict;
             List<InfraDemandPatternCurve> demandPatternCurveList = infraChangeableDataList.DemandPatternCurveList;
@@ -95,8 +95,13 @@ namespace ExcelNpoi.ExcelNpoi
                     rowIndex++;
                     row = sheet3.CreateRow(rowIndex);
                     row.CreateCell(0).SetCellValue(item.Name);
-                    row.CreateCell(1).SetCellValue($"Control.DEV.ZoneDemand_{item.Name.Split(strArr, StringSplitOptions.None)[1]}");
+                    //row.CreateCell(1).SetCellValue($"Control.DEV.ZoneDemand_{item.Name.Split(strArr, StringSplitOptions.None)[1]}");
+                    row.CreateCell(1).SetCellValue($"Control.DEV.ZoneDemand_{GetOpcZoneDemandTag(item.Name)}");
                 }
+                rowIndex++;
+                row = sheet3.CreateRow(rowIndex);
+                row.CreateCell(0).SetCellValue("Total Demand");
+                row.CreateCell(1).SetCellValue("Control.DEV.ScadaTotalDemand");
 
 
                 ISheet sheet4 = workbook.CreateSheet("OpcMapping");
@@ -108,7 +113,7 @@ namespace ExcelNpoi.ExcelNpoi
                 row.CreateCell(3).SetCellValue("Enabled");
                 row.CreateCell(4).SetCellValue("OPC Tag");
                 row.CreateCell(5).SetCellValue("Result Attribute Label");
-                foreach (var item in GetOpcMappingSheetList(infraChangeableDataList).OrderByDescending(x => x.ObjTypeId).ThenBy(x => x.ObjId))
+                foreach (var item in GetOpcMappingSheetList(infraChangeableDataList, infraSpecialFieldId).OrderByDescending(x => x.ObjTypeId).ThenBy(x => x.ObjId))
                 {
                     rowIndex++;
                     row = sheet4.CreateRow(rowIndex);
@@ -128,7 +133,8 @@ namespace ExcelNpoi.ExcelNpoi
                     row.CreateCell(1).SetCellValue(item.ZoneId);
                     row.CreateCell(2).SetCellValue(item.Name);
                     row.CreateCell(3).SetCellValue(true);
-                    row.CreateCell(4).SetCellValue($"Other.DEV.ZoneAvgPrs_{item.Name.Split(strArr, StringSplitOptions.None)[1]}");
+                    //row.CreateCell(4).SetCellValue($"Other.DEV.ZoneAvgPrs_{item.Name.Split(strArr, StringSplitOptions.None)[1]}");
+                    row.CreateCell(4).SetCellValue($"Other.DEV.ZoneAvgPrs_{GetOpcZoneDemandTag(item.Name)}");
                     row.CreateCell(5).SetCellValue("None");
                 }
 
@@ -142,7 +148,7 @@ namespace ExcelNpoi.ExcelNpoi
                 row.CreateCell(3).SetCellValue("BaseDemandValue");
                 row.CreateCell(4).SetCellValue("ZoneName");
                 row.CreateCell(5).SetCellValue("IsActive");
-                foreach (var item in GetObjectDataSheetList(infraChangeableDataList))
+                foreach (var item in GetObjectDataSheetList(infraChangeableDataList, infraSpecialFieldId))
                 {
                     rowIndex++;
                     row = sheet5.CreateRow(rowIndex);
@@ -172,7 +178,7 @@ namespace ExcelNpoi.ExcelNpoi
                 workbook.Write(fs);
             }
         }
-        private static List<OpcMappingSheet> GetOpcMappingSheetList(InfraChangeableDataLists infraChangeableDataList)
+        private static List<OpcMappingSheet> GetOpcMappingSheetList(InfraChangeableDataLists infraChangeableDataList, InfraSpecialFieldId infraSpecialFieldId)
         {
             var objValueLabelList = infraChangeableDataList.InfraObjList
                 .Where(f =>
@@ -181,7 +187,7 @@ namespace ExcelNpoi.ExcelNpoi
                 )
                 .Join(
                     infraChangeableDataList.InfraValueList.Where(f =>
-                        f.FieldId == 2      // Label
+                        f.FieldId == infraSpecialFieldId.Label      // Label=2
                     ),
                     l => l.ObjId,
                     r => r.ObjId,
@@ -201,7 +207,7 @@ namespace ExcelNpoi.ExcelNpoi
                 )
                 .Join(
                     infraChangeableDataList.InfraValueList.Where(f =>
-                        f.FieldId == 645    // HMIActiveTopologyIsActive
+                        f.FieldId == infraSpecialFieldId.HMIActiveTopologyIsActive    // HMIActiveTopologyIsActive=645
                     ),
                     l => l.ObjId,
                     r => r.ObjId,
@@ -231,7 +237,7 @@ namespace ExcelNpoi.ExcelNpoi
             return objValueList;
         }
 
-        private static List<ObjectDataSheet> GetObjectDataSheetList(InfraChangeableDataLists infraChangeableDataList)
+        private static List<ObjectDataSheet> GetObjectDataSheetList(InfraChangeableDataLists infraChangeableDataList, InfraSpecialFieldId infraSpecialFieldId)
         {
             var objValueList = infraChangeableDataList.InfraObjList
                 .Where(f =>
@@ -241,12 +247,12 @@ namespace ExcelNpoi.ExcelNpoi
                 )
                 .Join(
                     infraChangeableDataList.InfraValueList.Where(f =>
-                        f.FieldId == 769 ||       // Demand_AssociatedElement
-                        f.FieldId == 767 ||       // Demand_BaseFlow 
-                        f.FieldId == 768 ||       // Demand_DemandPattern 
-                        f.FieldId == 757 ||       // DemandCollection 
-                        f.FieldId == 645 ||       // HMIActiveTopologyIsActive        
-                        f.FieldId == 647          // Physical_Zone
+                        f.FieldId == infraSpecialFieldId.Demand_AssociatedElement ||    // Demand_AssociatedElement=769
+                        f.FieldId == infraSpecialFieldId.Demand_BaseFlow ||             // Demand_BaseFlow=767 
+                        f.FieldId == infraSpecialFieldId.Demand_DemandPattern ||        // Demand_DemandPattern=768 
+                        f.FieldId == infraSpecialFieldId.DemandCollection ||            // DemandCollection=757 
+                        f.FieldId == infraSpecialFieldId.HMIActiveTopologyIsActive ||   // HMIActiveTopologyIsActive=645        
+                        f.FieldId == infraSpecialFieldId.Physical_Zone                  // Physical_Zone=647
                     ),
                     l => l.ObjId,
                     r => r.ObjId,
@@ -261,7 +267,7 @@ namespace ExcelNpoi.ExcelNpoi
             // Junction
             var junctionZoneList = objValueList
                 .Where(f =>
-                    f.FieldId == 647 &&          // Physical_Zone
+                    f.FieldId == infraSpecialFieldId.Physical_Zone &&          // Physical_Zone=647
                     (
                         f.ObjTypeId == 54 ||
                         f.ObjTypeId == 55
@@ -277,8 +283,8 @@ namespace ExcelNpoi.ExcelNpoi
             // CustomerMeter
             var customerMeterZoneList = objValueList
                 .Where(f =>
-                    f.ObjTypeId == 73 &&         // CustomerMeterTypeId
-                    f.FieldId == 769             // Demand_AssociatedElement
+                    f.ObjTypeId == 73 &&                                        // CustomerMeterTypeId
+                    f.FieldId == infraSpecialFieldId.Demand_AssociatedElement   // Demand_AssociatedElement=769
                 )
                 .Join(
                     junctionZoneList,
@@ -311,12 +317,12 @@ namespace ExcelNpoi.ExcelNpoi
                 .ToList();
             // CustomerMeter DemandBase
             var objCustomerMeterDemandBaseList = objValueList
-                .Where(f => f.FieldId == 767)   // Demand_BaseFlow
+                .Where(f => f.FieldId == infraSpecialFieldId.Demand_BaseFlow)           // Demand_BaseFlow=767
                 .Select(x => new { x.ObjId, DemandBase = (double)x.FloatValue })
                 .ToList();
             // CustomerMeter DemandPattern
             var objCustomerMeterDemandPatternIdList = objValueList
-                .Where(f => f.FieldId == 768)   // Demand_DemandPattern
+                .Where(f => f.FieldId == infraSpecialFieldId.Demand_DemandPattern)      // Demand_DemandPattern=768
                 .Select(x => new { x.ObjId, DemandPatternId = x.IntValue ?? -1 })
                 .ToList();
             // CustomerMeter
@@ -375,6 +381,25 @@ namespace ExcelNpoi.ExcelNpoi
                 .ToList();
 
             return objIsActiveZoneDemandList;
+        }
+
+        private static string GetOpcZoneDemandTag(string zoneName)
+        {
+            string[] strArr = { " - " };
+            zoneName = zoneName.Split(strArr, StringSplitOptions.None)[1];
+
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict.Add(" ", "");
+            dict.Add(".", "");
+            dict.Add("ó", "o");
+            dict.Add("ł", "l");
+
+            foreach(var item in dict)
+            {
+                zoneName = zoneName.Replace(item.Key, item.Value);
+            }
+
+            return zoneName;
         }
     }
 }
