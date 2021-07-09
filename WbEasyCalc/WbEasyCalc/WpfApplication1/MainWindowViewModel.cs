@@ -82,7 +82,8 @@ namespace WpfApplication1
                     InfraData infraData = InfraRepo.GetInfraData();
                     PostCalcExcelWriter.Write(
                         dialog.FileName,
-                        infraData.InfraChangeableData
+                        infraData.InfraChangeableData,
+                        infraData.InfraSpecialFieldId
                         );
                     MessageBox.Show($"{dialog.FileName} file was created succesfully.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
