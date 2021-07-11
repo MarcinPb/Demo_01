@@ -25,6 +25,7 @@
                 <MenuItem Header="Exit" Command="{Binding ExitCmd}" />
             </MenuItem>
             <MenuItem Header="Tools" IsEnabled="{Binding IsOpen}">
+                <MenuItem Header="Demand Pattern List" Command="{Binding ShowDemandPatternListCmd}"/>
                 <MenuItem Header="Create PostCalc Excel" Command="{Binding CreatePostCalcExcelCmd}"/>
                 <Separator/>
                 <MenuItem Header="Settings" Command="{Binding OptionsCmd}"/>
@@ -37,9 +38,11 @@
             <TabItem Header="Water Consumption Map" >
                 <ContentControl Content="{Binding WaterConsumptionMapViewModel}" />
             </TabItem>
+            <!--
             <TabItem Header="Demand Pattern List" >
                 <ContentControl Content="{Binding DemandPatternViewModel}" />
             </TabItem>
+            -->
         </TabControl>
         <StatusBar Grid.Row="2" >
             <StatusBar.ItemsPanel>

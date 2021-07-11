@@ -11,8 +11,25 @@ using WpfApplication1.Utility;
 
 namespace WpfApplication1.Ui.DemandPattern
 {
-    public class ListViewModel : ViewModelBase, IDisposable
+    public class ListViewModel : ViewModelBase, IDisposable, IDialogViewModel
     {
+        #region IDialogViewModel
+        public string Title { get; set; } = "Import Constant Data";
+
+        public bool Save()
+        {
+            return true;
+        }
+
+        public void Close()
+        {
+        }
+
+        #endregion
+
+
+
+
         #region Props: List, SelectedRow, RowsQty
 
         private ObservableCollection<RowViewModel> _list;

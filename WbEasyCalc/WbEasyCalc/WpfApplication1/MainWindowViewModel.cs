@@ -18,6 +18,7 @@ namespace WpfApplication1
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+        #region StatusBar Prop: DatabaseName, SqliteFile
 
         private string _databaseName;
         public string DatabaseName
@@ -33,23 +34,29 @@ namespace WpfApplication1
             set { _sqliteFile = value; RaisePropertyChanged(); }
         }
 
+        #endregion
 
+        #region ViewModel Prop: WbEasyCalcDataViewModel, WaterConsumptionMapViewModel, DemandPatternViewModel
 
         public Ui.WaterBalanceList.ListViewModel WbEasyCalcDataViewModel { get; set; }
         public MapViewModel WaterConsumptionMapViewModel { get; set; }
         public Ui.DemandPattern.ListViewModel DemandPatternViewModel { get; set; }
 
-        
+        #endregion
+
+        #region Commad Prop: ExitCmd, ShowDemandPatternListCmd, ImportConstantDataCmd, ImportChangeableDataCmd, CreatePostCalcExcelCmd, OptionsCmd,
+
         public RelayCommand ExitCmd { get; set; }
         private void ExitCmdExecute()
         {
             Application.Current.Shutdown();
         }
 
-        public RelayCommand OptionsCmd { get; set; }
-        private void OptionsCmdExecute()
+
+        public RelayCommand ShowDemandPatternListCmd { get; set; }
+        private void ShowDemandPatternListCmdExecute()
         {
-            DialogUtility.ShowModal(new Ui.Configuration.EditedViewModel());
+            DialogUtility.ShowModal(new Ui.DemandPattern.ListViewModel());
         }
 
         public RelayCommand ImportConstantDataCmd { get; set; }
@@ -58,12 +65,12 @@ namespace WpfApplication1
             DialogUtility.ShowModal(new ImportConstantDataViewModel());
         }
 
+
         public RelayCommand ImportChangeableDataCmd { get; set; }
         private void ImportChangeableDataCmdExecute()
         {
             DialogUtility.ShowModal(new ImportChangeableDataViewModel());
         }
-
 
         public RelayCommand CreatePostCalcExcelCmd { get; set; }
         private void CreatePostCalcExcelCmdExecute()
@@ -94,6 +101,14 @@ namespace WpfApplication1
             }
         }
 
+        public RelayCommand OptionsCmd { get; set; }
+        private void OptionsCmdExecute()
+        {
+            DialogUtility.ShowModal(new Ui.Configuration.EditedViewModel());
+        }
+
+        #endregion
+
         public MainWindowViewModel()
         {
             try 
@@ -101,13 +116,13 @@ namespace WpfApplication1
                 Logger.Info("'MainWindowViewModel' started.");
 
                 ExitCmd = new RelayCommand(ExitCmdExecute);
-                OptionsCmd = new RelayCommand(OptionsCmdExecute);
+
+                ShowDemandPatternListCmd = new RelayCommand(ShowDemandPatternListCmdExecute);
                 ImportConstantDataCmd = new RelayCommand(ImportConstantDataCmdExecute);
                 ImportChangeableDataCmd = new RelayCommand(ImportChangeableDataCmdExecute);
                 CreatePostCalcExcelCmd = new RelayCommand(CreatePostCalcExcelCmdExecute);
+                OptionsCmd = new RelayCommand(OptionsCmdExecute);
 
-                //DatabaseName = $"{GetDatabaseName("WaterInfra_ConnStr")}, {GetDatabaseName("WaterUtility_ConnStr")}";
-                //SqliteFile = GetSqliteFile();
 
                 GlobalConfig.InitializeConnection(DatabaseType.Sql);
 
@@ -116,7 +131,8 @@ namespace WpfApplication1
                 WaterConsumptionMapViewModel = new Ui.WaterConsumptionMap.MapViewModel(2021, 5, null);
                 WaterConsumptionMapViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList();
 
-                DemandPatternViewModel = new Ui.DemandPattern.ListViewModel();
+                // A "Demand Pattern List" tab was deleted. A new "Demand Pattern List" menu option was created instead. 
+                //DemandPatternViewModel = new Ui.DemandPattern.ListViewModel();
 
                 // Singleton run before opening designer first time. It takes more or less 5 sek.
                 InvokeSingleton();
@@ -139,13 +155,6 @@ namespace WpfApplication1
             DatabaseName = $"{GetDatabaseName("WaterInfra_ConnStr")}, {GetDatabaseName("WaterUtility_ConnStr")}";
             SqliteFile = GetSqliteFile();
         }
-
-
-        private void OnSaveOrDeleteModel(Ui.WaterBalanceList.ListViewModel model)
-        {
-            WaterConsumptionMapViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList();
-        }
-
         private string GetDatabaseName(string name)
         {
             var connString = GetConnectionString(name);
@@ -161,6 +170,12 @@ namespace WpfApplication1
         private string GetSqliteFile()
         {
             return System.Configuration.ConfigurationManager.AppSettings["SqliteFile"]; ;
+        }
+
+
+        private void OnSaveOrDeleteModel(Ui.WaterBalanceList.ListViewModel model)
+        {
+            WaterConsumptionMapViewModel.WaterConsumptionList = GlobalConfig.DataRepository.WaterConsumptionListRepository.GetList();
         }
     }
 }
