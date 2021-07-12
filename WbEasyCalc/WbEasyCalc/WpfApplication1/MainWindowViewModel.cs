@@ -59,19 +59,6 @@ namespace WpfApplication1
             DialogUtility.ShowModal(new Ui.DemandPattern.ListViewModel());
         }
 
-        public RelayCommand ImportConstantDataCmd { get; set; }
-        private void ImportConstantDataCmdExecute()
-        {
-            DialogUtility.ShowModal(new ImportConstantDataViewModel());
-        }
-
-
-        public RelayCommand ImportChangeableDataCmd { get; set; }
-        private void ImportChangeableDataCmdExecute()
-        {
-            DialogUtility.ShowModal(new ImportChangeableDataViewModel());
-        }
-
         public RelayCommand CreatePostCalcExcelCmd { get; set; }
         private void CreatePostCalcExcelCmdExecute()
         {
@@ -100,6 +87,21 @@ namespace WpfApplication1
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
+        public RelayCommand ImportConstantDataCmd { get; set; }
+        private void ImportConstantDataCmdExecute()
+        {
+            DialogUtility.ShowModal(new ImportConstantDataViewModel());
+        }
+
+
+        public RelayCommand ImportChangeableDataCmd { get; set; }
+        private void ImportChangeableDataCmdExecute()
+        {
+            DialogUtility.ShowModal(new ImportChangeableDataViewModel());
+        }
+
 
         public RelayCommand OptionsCmd { get; set; }
         private void OptionsCmdExecute()

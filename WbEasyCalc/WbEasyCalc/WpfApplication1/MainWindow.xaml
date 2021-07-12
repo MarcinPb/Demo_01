@@ -28,6 +28,9 @@
                 <MenuItem Header="Demand Pattern List" Command="{Binding ShowDemandPatternListCmd}"/>
                 <MenuItem Header="Create PostCalc Excel" Command="{Binding CreatePostCalcExcelCmd}"/>
                 <Separator/>
+                <MenuItem Header="Import Constant Data" Command="{Binding ImportConstantDataCmd}"/>
+                <MenuItem Header="Import Changeable Data" Command="{Binding ImportChangeableDataCmd}"/>
+                <Separator/>
                 <MenuItem Header="Settings" Command="{Binding OptionsCmd}"/>
             </MenuItem>
         </Menu>
