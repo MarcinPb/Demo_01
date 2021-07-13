@@ -13,8 +13,49 @@
     <DataSet Name="DataSet1">
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
-        <CommandType>StoredProcedure</CommandType>
-        <CommandText>spReportVersionCompare</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@Field">
+            <Value>=Parameters!Field.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>WITH tExcept AS (SELECT        ValueId, [ObjId], [FieldId], [IntValue], [FloatValue], [StringValue], [BooleanValue], [DateTimeValue]
+                                       FROM            dbo.tbInfraValue
+                                       EXCEPT
+                                       SELECT        ValueId, [ObjId], [FieldId], [IntValue], [FloatValue], [StringValue], [BooleanValue], [DateTimeValue]
+                                       FROM            WaterInfra_2020_06_24.dbo.tbInfraValue), tObjName AS
+    (SELECT        tVal.ObjId, tVal.StringValue AS ObjName
+      FROM            dbo.tbInfraValue tVal
+      WHERE        tVal.FieldId = 2/* Label*/ ), tObjZoneJunction AS
+    (SELECT        tVal.ObjId, tZone.ZoneId, tZone.Name AS ZoneName
+      FROM            dbo.tbInfraValue tVal INNER JOIN
+                                dbo.tbInfraZone tZone ON tVal.IntValue = tZone.ZoneId
+      WHERE        tVal.FieldId = 647/* Zone*/ ), tObjAssociated AS
+    (SELECT        tVal.ObjId, tVal.IntValue AS AssociatedObjId, tObjName.ObjName
+      FROM            dbo.tbInfraValue tVal INNER JOIN
+                                tObjName ON tVal.IntValue = tObjName.ObjId
+      WHERE        tVal.FieldId = 769/* Associated*/ ), tObjZoneMeter AS
+    (SELECT        tVal.ObjId, tObjZoneJunction.ZoneId, tObjZoneJunction.ZoneName AS ZoneName
+      FROM            tObjAssociated tVal INNER JOIN
+                                tObjZoneJunction ON tVal.AssociatedObjId = tObjZoneJunction.ObjId), tObjZone AS
+    (SELECT        *
+      FROM            tObjZoneJunction
+      UNION
+      SELECT        *
+      FROM            tObjZoneMeter)
+    SELECT        tExcept.ObjId, tObjName.ObjName AS ObjName, tObjAssociated.ObjName AS AssocObjName, tObjZone.ZoneId, tObjZone.ZoneName AS ZoneName, tExcept.FieldId, tField.DataTypeId, tField.Label AS FieldLabel, 
+                              CASE tField.DataTypeId WHEN 1 THEN LTRIM(STR(tValueNew.IntValue)) WHEN 8 THEN LTRIM(STR(tValueNew.IntValue)) WHEN 10 THEN LTRIM(STR(tValueNew.IntValue)) 
+                              WHEN 2 THEN CAST(tValueNew.FloatValue AS NVARCHAR(100)) WHEN 3 THEN tValueNew.StringValue WHEN 4 THEN tValueNew.StringValue WHEN 6 THEN STR(tValueNew.BooleanValue) ELSE '###' END AS NewValue, 
+                              CASE tField.DataTypeId WHEN 1 THEN LTRIM(STR(tValueOld.IntValue)) WHEN 8 THEN LTRIM(STR(tValueOld.IntValue)) WHEN 10 THEN LTRIM(STR(tValueOld.IntValue)) 
+                              WHEN 2 THEN CAST(tValueOld.FloatValue AS NVARCHAR(100)) WHEN 3 THEN tValueOld.StringValue WHEN 4 THEN tValueOld.StringValue WHEN 6 THEN STR(tValueOld.BooleanValue) ELSE '###' END AS OldValue
+     FROM            tExcept INNER JOIN
+                              dbo.tbInfraField tField ON tExcept.FieldId = tField.FieldId /* Object name*/ INNER JOIN
+                              tObjName ON tExcept.ObjId = tObjName.ObjId /* Zone name*/ LEFT OUTER JOIN
+                              tObjAssociated ON tExcept.ObjId = tObjAssociated.ObjId LEFT OUTER JOIN
+                              tObjZone ON tExcept.ObjId = tObjZone.ObjId /*-- New and old values*/ INNER JOIN
+                              dbo.tbInfraValue tValueNew ON tExcept.ValueId = tValueNew.ValueId INNER JOIN
+                              WaterInfra_2020_06_24.dbo.tbInfraValue tValueOld ON tExcept.ValueId = tValueOld.ValueId
+     WHERE        tExcept.[FieldId]  IN  (@Field);</CommandText>
       </Query>
       <Fields>
         <Field Name="ObjId">
@@ -55,6 +96,50 @@
         </Field>
         <Field Name="OldValue">
           <DataField>OldValue</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="FieldDataSet">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@Category">
+            <Value>=Parameters!Category.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT        tbInfraField.FieldId, tbInfraField.Label + '  (' + LTRIM(tbInfraCategory.Name) + ')' AS Label
+FROM            tbInfraField INNER JOIN
+                         tbInfraCategory ON tbInfraField.CategoryId = tbInfraCategory.CategoryId
+WHERE        (tbInfraField.CategoryId IN (@Category))
+ORDER BY tbInfraField.Label</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="FieldId">
+          <DataField>FieldId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Label">
+          <DataField>Label</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="CategoryDataSet">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>SELECT        CategoryId, Name
+FROM            tbInfraCategory
+ORDER BY Name</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="CategoryId">
+          <DataField>CategoryId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -703,7 +788,7 @@
             <DataSetName>DataSet1</DataSetName>
             <Top>0.43in</Top>
             <Height>0.85in</Height>
-            <Width>5.98958in</Width>
+            <Width>5.98959in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
@@ -711,7 +796,7 @@
         <Height>1.28in</Height>
         <Style />
       </Body>
-      <Width>5.98958in</Width>
+      <Width>5.98959in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
@@ -721,10 +806,60 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="Category">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>CategoryDataSet</DataSetName>
+          <ValueField>CategoryId</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Category</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>CategoryDataSet</DataSetName>
+          <ValueField>CategoryId</ValueField>
+          <LabelField>Name</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="Field">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>FieldDataSet</DataSetName>
+          <ValueField>FieldId</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Field</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>FieldDataSet</DataSetName>
+          <ValueField>FieldId</ValueField>
+          <LabelField>Label</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+  </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
       <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>Category</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>Field</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <Language>en-US</Language>
