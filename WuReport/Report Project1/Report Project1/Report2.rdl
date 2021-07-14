@@ -225,11 +225,13 @@ tObjName.ObjName,
             <rd:UserDefined>true</rd:UserDefined>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT        tbInfraField.FieldId, tbInfraField.Label + '  (' + LTRIM(tbInfraCategory.Name) + ')' AS Label
+        <CommandText>SELECT   tbInfraField.FieldId,      '[' + LTRIM(tbInfraCategory.Name) + ']  ' + tbInfraField.Label AS Label
 FROM            tbInfraField INNER JOIN
                          tbInfraCategory ON tbInfraField.CategoryId = tbInfraCategory.CategoryId
 WHERE        (tbInfraField.CategoryId IN (@Category))
-ORDER BY tbInfraField.Label</CommandText>
+ORDER BY 
+tbInfraCategory.Name,
+tbInfraField.Label</CommandText>
       </Query>
       <Fields>
         <Field Name="FieldId">
@@ -286,6 +288,22 @@ FROM            tbInfraRep01</CommandText>
       <Fields>
         <Field Name="FieldId">
           <DataField>FieldId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="CategoryFilteredDataSet">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>SELECT DISTINCT     
+	CategoryId
+FROM            
+	tbInfraField tField
+	INNER JOIN tbInfraRep01 tRep ON tField.FieldId = tRep.FieldId</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="CategoryId">
+          <DataField>CategoryId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
@@ -813,7 +831,7 @@ FROM            tbInfraRep01</CommandText>
       <DataType>Integer</DataType>
       <DefaultValue>
         <DataSetReference>
-          <DataSetName>CategoryDataSet</DataSetName>
+          <DataSetName>CategoryFilteredDataSet</DataSetName>
           <ValueField>CategoryId</ValueField>
         </DataSetReference>
       </DefaultValue>
