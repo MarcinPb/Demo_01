@@ -94,6 +94,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeshiftAdjuster.cs" />
     <Compile Include="TotalDemandCalculation.cs" />
+    <Compile Include="ZoneDemandDataListCreatorNew.cs" />
     <Compile Include="ZoneDemandDataListCreator.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -95,6 +95,7 @@
     <Compile Include="TimeshiftAdjusterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TotalDemandCalculationTests.cs" />
+    <Compile Include="ZoneDemandDataListCreatorNewTest.cs" />
     <Compile Include="ZoneDemandDataListCreatorTest.cs" />
   </ItemGroup>
   <ItemGroup>

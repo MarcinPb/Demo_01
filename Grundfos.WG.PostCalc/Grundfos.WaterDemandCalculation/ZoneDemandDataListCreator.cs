@@ -42,7 +42,7 @@ namespace Grundfos.WaterDemandCalculation
 
                 var demandPatternExcelReader = new DemandPatternExcelReader(excelReader);
 
-                // List<string> <- Excel.ExcludedItems["Excluded Object IDs"].
+                // List<int> <- Excel.ExcludedItems["Excluded Object IDs"].
                 // {257=PC, 2719=S5, 518=CP1, 701=CP2, 1323=CP3, 1336=CP4, 2255=S6, 2780=S7, 1247=W1, 1239=W2, 1548=CP6}    
                 var excludedObjectList = demandPatternExcelReader.ReadExcludedObjects();
                 this.UpdateObjectIsExcluded(objectDemandData, excludedObjectList);
@@ -107,7 +107,6 @@ namespace Grundfos.WaterDemandCalculation
                 }
 
                 // Calculate and update:
-                //  zone.demand.ActualDemandValue
                 //  zone.WgDemand
                 //  zone.DemandWgExcluded
                 //  zone.DemandAdjustmentRatio

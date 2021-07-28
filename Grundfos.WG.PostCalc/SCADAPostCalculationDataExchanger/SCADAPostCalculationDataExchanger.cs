@@ -54,14 +54,16 @@ namespace SCADAPostCalculationDataExchanger
 
         public string RepositoryPath { get; set; }
         public string DemandConfigurationWorkbook { get; private set; }
+        public string RatioFormula { get; set; }
+
+        // 
+        public string DumpOption { get; private set; }
+        public string DumpFolder { get; private set; }
         public bool IsLogToDb { get; set; }
         public string LogDbConnString { get; set; }
         public bool IsCalculationOnDb { get; set; }
-        public string RatioFormula { get; set; }
         public string OpcServerAddress { get; set; }
-
-        public string DumpOption { get; private set; }
-        public string DumpFolder { get; private set; }
+        public string WaterInfraConnString { get; set; }
 
         public override object NewDataExchangeContext(string[] arguments)
         {
@@ -89,6 +91,8 @@ namespace SCADAPostCalculationDataExchanger
             this.LogDbConnString = exchangeContext.GetString("LogDbConnString", @"Data Source=.\SQLEXPRESS;Initial Catalog=WG;Integrated Security=True").Replace(":",";");
             this.IsCalculationOnDb = bool.Parse(exchangeContext.GetString("IsCalculationOnDb", "false"));
             this.OpcServerAddress = "Kepware.KEPServerEX.V6";
+            //this.WaterInfraConnString = exchangeContext.GetString("WaterInfraConnString", @"Server=.;Database=WaterInfra;User Id=sa;Password=Gfosln123.;").Replace(":",";");
+            this.WaterInfraConnString = exchangeContext.GetString("WaterInfraConnString", @"Server=192.168.0.62\MSSQL2017;Database=WaterInfra;User Id=sa;Password=Gfosln123.;").Replace(":",";");
 
             //this.RatioFormula = exchangeContext.GetString("RatioFormula", string.Empty);
 
@@ -146,7 +150,7 @@ namespace SCADAPostCalculationDataExchanger
             {
                 this.Logger.WriteMessage(OutputLevel.Info, "-- PassQualityResults started -------------------------------------------");
 
-                var db = new DatabaseContext(this.RepositoryPath);
+                var db = new DatabaseContext(this.RepositoryPath);                      // ResultCache.sqlite
                 var mapper = BuildMapper();
                 var repo = new PostCalcRepository(db, mapper);
 
@@ -329,7 +333,7 @@ namespace SCADAPostCalculationDataExchanger
             }
 
             try
-            {               
+            {
                 // Step 1.
                 // Fill List<WaterDemandData> based on excel.ObjectData (11004), WG.Zones (16) and WG.DemandPatterns (51 with "Fixed").
                 // Fields AssociatedElementID and ActualDemandValue are not filled.
@@ -338,7 +342,7 @@ namespace SCADAPostCalculationDataExchanger
                 this.Logger.WriteMessage(OutputLevel.Info, $"{wgZones.Count} zones have been read from WaterGEMS model.");
                 foreach (var zone in wgZones)
                 {
-                    this.Logger.WriteMessage(OutputLevel.Info, $"\t{zone.Key}, \"{zone.Value}\"");                    
+                    this.Logger.WriteMessage(OutputLevel.Info, $"\t{zone.Key}, \"{zone.Value}\"");
                 }
 
                 // Dictionary<string, int> patterns (51 rec.) = WaterGEMS->DemandPattern {{"Urz", 1}, {"Mw", 2},... {"Fixed", -1}}
@@ -393,6 +397,7 @@ namespace SCADAPostCalculationDataExchanger
                 // List<ZoneDemandData>
                 var zoneDemands = this.GetZoneDemands(wgZones, objectDemandData, waterDemandExcelReader, demandTotalizer, now);
 
+
                 // Log only
                 foreach (var item in zoneDemands)
                 {
@@ -404,31 +409,34 @@ namespace SCADAPostCalculationDataExchanger
 
                 #region ZoneDemandDataListCreator.Create
 
-                ZoneDemandDataListCreator.DataContext dataContext = new ZoneDemandDataListCreator.DataContext()
-                {
-                    WgZoneDict = wgZones,
-                    WgDemandPatternDict = patterns.ToDictionary(x => x.Value, x => x.Key),
-                    ExcelFileName = this.DemandConfigurationWorkbook,
-                    OpcServerAddress = this.OpcServerAddress,
+                //ZoneDemandDataListCreator.DataContext dataContext = new ZoneDemandDataListCreator.DataContext()
+                //{
+                //    WgZoneDict = wgZones,
+                //    WgDemandPatternDict = patterns.ToDictionary(x => x.Value, x => x.Key),
+                //    ExcelFileName = this.DemandConfigurationWorkbook,
+                //    OpcServerAddress = this.OpcServerAddress,
+                //    StartComputeTime = DateTime.Now,    //new DateTime(2020, 05, 04, 0, 46, 32),
+                //};
+                //ZoneDemandDataListCreator zoneDemandDataListCreator = new ZoneDemandDataListCreator(dataContext, this.Logger);
+                //List<ZoneDemandData> zoneDemandDataList = zoneDemandDataListCreator.Create();
+                //if (this.IsLogToDb)
+                //{
+                //    //string conStr = @"Data Source=WIN-6SC244KSC3K\SQL2017;Initial Catalog=WG;Integrated Security=True";
+                //    string conStr = this.LogDbConnString;
+                //    //zoneDemandDataListCreator.SavePipeMeterListToDatabase(conStr);
 
-                    StartComputeTime = DateTime.Now,    //new DateTime(2020, 05, 04, 0, 46, 32),
+                //    zoneDemandDataListCreator.SaveToDatabase(zoneDemandDataList, conStr, RatioFormula);
+                //    if (this.IsCalculationOnDb)
+                //    {
+                //        zoneDemandDataListCreator.UpdateAndLoadFromDatabase(zoneDemandDataList, conStr);
+                //    }
+                //}
+                ZoneDemandDataListCreatorNew.DataContext dataContext = new ZoneDemandDataListCreatorNew.DataContext()
+                {
+                    WaterInfraConnString = WaterInfraConnString,
                 };
-
-                ZoneDemandDataListCreator zoneDemandDataListCreator = new ZoneDemandDataListCreator(dataContext, this.Logger);
-                List<ZoneDemandData> zoneDemandDataList = zoneDemandDataListCreator.Create();
-
-                if (this.IsLogToDb)
-                {
-                    //string conStr = @"Data Source=WIN-6SC244KSC3K\SQL2017;Initial Catalog=WG;Integrated Security=True";
-                    string conStr = this.LogDbConnString;
-                    //zoneDemandDataListCreator.SavePipeMeterListToDatabase(conStr);
-
-                    zoneDemandDataListCreator.SaveToDatabase(zoneDemandDataList, conStr, RatioFormula);
-                    if (this.IsCalculationOnDb)
-                    {
-                        zoneDemandDataListCreator.UpdateAndLoadFromDatabase(zoneDemandDataList, conStr);
-                    }
-                }
+                ZoneDemandDataListCreatorNew zoneDemandDataListCreator = new ZoneDemandDataListCreatorNew(dataContext, this.Logger);
+                List<ZoneDemandData> zoneDemandDataList = zoneDemandDataListCreator.Create(DateTime.Now);
 
                 // Log only
                 zoneDemandDataList.ForEach(x => this.Logger.WriteMessage(
