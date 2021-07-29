@@ -67,6 +67,7 @@ namespace Grundfos.WaterDemandCalculation
                 WgDemand = x.Field<double>("WgDemand"),
                 ScadaDemand = x.Field<double>("ScadaDemand"),
                 DemandAdjustmentRatio = x.Field<double>("DemandAdjustmentRatio"),
+                DemandAdjustmentRatioDb = x.Field<double>("DemandAdjustmentRatio"),
             })
             .Distinct()
             .Select(y => new ZoneDemandData { 
@@ -75,6 +76,7 @@ namespace Grundfos.WaterDemandCalculation
                 WgDemand = y.WgDemand,
                 ScadaDemand = y.ScadaDemand,
                 DemandAdjustmentRatio = y.DemandAdjustmentRatio,
+                DemandAdjustmentRatioDb = y.DemandAdjustmentRatioDb,
             })
             .ToList();
 
@@ -91,15 +93,20 @@ namespace Grundfos.WaterDemandCalculation
                 {
                     ZoneID = x.Field<int>("ZoneId"),
                     ZoneName = x.Field<string>("ZoneName"),
+
                     ObjectID = x.Field<int>("ObjectId"),
                     ObjectTypeID = x.Field<int>("ObjectTypeId"),
+                    ObjectIsExcluded = x.Field<bool>("ObjectIsExcluded"),
+
                     DemandPatternID = x.Field<int>("DemandPatternId"),
                     DemandPatternName = x.Field<string>("DemandPatternName"),
+                    DemandIsExcluded = x.Field<bool>("DemandIsExcluded"),
+
                     BaseDemandValue = x.Field<double>("BaseDemandValue"),
                     DemandFactorValue = x.Field<double>("DemandFactorValue"),
                     ActualDemandValue = x.Field<double>("ActualDemandValue"),
-                    DemandCalculatedValue = x.Field<double>("DemandCalculatedValue1"),
-                    DemandCalculatedValueDb = x.Field<double>("DemandCalculatedValue1"),
+                    DemandCalculatedValue = x.Field<double>("DemandCalculatedValue"),
+                    DemandCalculatedValueDb = x.Field<double>("DemandCalculatedValue"),
                 })
                 .ToList();
 

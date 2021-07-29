@@ -409,41 +409,45 @@ namespace SCADAPostCalculationDataExchanger
 
                 #region ZoneDemandDataListCreator.Create
 
-                //ZoneDemandDataListCreator.DataContext dataContext = new ZoneDemandDataListCreator.DataContext()
-                //{
-                //    WgZoneDict = wgZones,
-                //    WgDemandPatternDict = patterns.ToDictionary(x => x.Value, x => x.Key),
-                //    ExcelFileName = this.DemandConfigurationWorkbook,
-                //    OpcServerAddress = this.OpcServerAddress,
-                //    StartComputeTime = DateTime.Now,    //new DateTime(2020, 05, 04, 0, 46, 32),
-                //};
-                //ZoneDemandDataListCreator zoneDemandDataListCreator = new ZoneDemandDataListCreator(dataContext, this.Logger);
-                //List<ZoneDemandData> zoneDemandDataList = zoneDemandDataListCreator.Create();
-                //if (this.IsLogToDb)
-                //{
-                //    //string conStr = @"Data Source=WIN-6SC244KSC3K\SQL2017;Initial Catalog=WG;Integrated Security=True";
-                //    string conStr = this.LogDbConnString;
-                //    //zoneDemandDataListCreator.SavePipeMeterListToDatabase(conStr);
+                List<ZoneDemandData> zoneDemandDataList;
 
-                //    zoneDemandDataListCreator.SaveToDatabase(zoneDemandDataList, conStr, RatioFormula);
-                //    if (this.IsCalculationOnDb)
-                //    {
-                //        zoneDemandDataListCreator.UpdateAndLoadFromDatabase(zoneDemandDataList, conStr);
-                //    }
-                //}
-                ZoneDemandDataListCreatorNew.DataContext dataContext = new ZoneDemandDataListCreatorNew.DataContext()
+                ZoneDemandDataListCreator.DataContext dataContext = new ZoneDemandDataListCreator.DataContext()
                 {
-                    WaterInfraConnString = WaterInfraConnString,
+                    WgZoneDict = wgZones,
+                    WgDemandPatternDict = patterns.ToDictionary(x => x.Value, x => x.Key),
+                    ExcelFileName = this.DemandConfigurationWorkbook,
+                    OpcServerAddress = this.OpcServerAddress,
+                    StartComputeTime = DateTime.Now,    //new DateTime(2020, 05, 04, 0, 46, 32),
                 };
-                ZoneDemandDataListCreatorNew zoneDemandDataListCreator = new ZoneDemandDataListCreatorNew(dataContext, this.Logger);
-                List<ZoneDemandData> zoneDemandDataList = zoneDemandDataListCreator.Create(DateTime.Now);
+                ZoneDemandDataListCreator zoneDemandDataListCreator = new ZoneDemandDataListCreator(dataContext, this.Logger);
+                zoneDemandDataList = zoneDemandDataListCreator.Create();
+                if (this.IsLogToDb)
+                {
+                    //string conStr = @"Data Source=WIN-6SC244KSC3K\SQL2017;Initial Catalog=WG;Integrated Security=True";
+                    string conStr = this.LogDbConnString;
+                    //zoneDemandDataListCreator.SavePipeMeterListToDatabase(conStr);
 
+                    zoneDemandDataListCreator.SaveToDatabase(zoneDemandDataList, conStr, RatioFormula);
+                    if (this.IsCalculationOnDb)
+                    {
+                        zoneDemandDataListCreator.UpdateAndLoadFromDatabase(zoneDemandDataList, conStr);
+                    }
+                }
                 // Log only
                 zoneDemandDataList.ForEach(x => this.Logger.WriteMessage(
                     OutputLevel.Info,
                     $"# tal demand for zone {x.ZoneName}: WaterGEMS = {x.WgDemand}, SCADA: {x.ScadaDemand}, ratio: {x.DemandAdjustmentRatio}."
                     ));
                 Helper.DumpToFile(zoneDemandDataList.FirstOrDefault(x => x.ZoneName == TestedZoneName), Path.Combine(DumpFolder, $"Dump_{DateTime.Now.ToString(DateFormat)}_ZoneDemandData_2.xml"));
+
+
+                ZoneDemandDataListCreatorNew.DataContext dataContextNew = new ZoneDemandDataListCreatorNew.DataContext()
+                {
+                    WaterInfraConnString = WaterInfraConnString,
+                };
+                ZoneDemandDataListCreatorNew zoneDemandDataListCreatorNew = new ZoneDemandDataListCreatorNew(dataContextNew, this.Logger);
+                zoneDemandDataList = zoneDemandDataListCreatorNew.Create(DateTime.Now);
+                Helper.DumpToFile(zoneDemandDataList.FirstOrDefault(x => x.ZoneName == TestedZoneName), Path.Combine(DumpFolder, $"Dump_{DateTime.Now.ToString(DateFormat)}_ZoneDemandData_2_New.xml"));
 
                 #endregion
 
