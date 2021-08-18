@@ -139,7 +139,8 @@ namespace SCADAPostCalculationDataExchanger
             }
 
             // Calculate and set up BaseDemands for Junctions, Hydrants and customerMeters in WaterGEMS.
-            this.ExchangeWaterDemands(dataExchangeContext, excelReader, wgZones);
+            //this.ExchangeWaterDemands(dataExchangeContext, excelReader, wgZones);
+            this.ExchangeWaterDemands(dataExchangeContext);
 
             return true;
         }
@@ -326,29 +327,21 @@ namespace SCADAPostCalculationDataExchanger
 
         private const string TestedZoneName = "7 - Tranzyt";
         private const string DateFormat = "yyyy-MM-dd_HH-mm-ss_fffffff";
-        private void ExchangeWaterDemands(object dataExchangeContext, ExcelReader excelReader, Dictionary<int, string> wgZones)
+        //private void ExchangeWaterDemands(object dataExchangeContext, ExcelReader excelReader, Dictionary<int, string> wgZones)
+        private void ExchangeWaterDemands(object dataExchangeContext)
         {
             this.Logger.WriteMessage(OutputLevel.Info, "-- ExchangeWaterDemands started -----------------------------------------");
 
+            /*
             if (excelReader == null)
             {
                 throw new ArgumentNullException(nameof(excelReader));
             }
+            */
 
             try
             {
                 /*
-                // Step 1.
-                // Fill List<WaterDemandData> based on excel.ObjectData (11004), WG.Zones (16) and WG.DemandPatterns (51 with "Fixed").
-                // Fields AssociatedElementID and ActualDemandValue are not filled.
-
-                // Get zones (16 rec.) from WaterGEMS model.
-                this.Logger.WriteMessage(OutputLevel.Info, $"{wgZones.Count} zones have been read from WaterGEMS model.");
-                foreach (var zone in wgZones)
-                {
-                    this.Logger.WriteMessage(OutputLevel.Info, $"\t{zone.Key}, \"{zone.Value}\"");
-                }
-                */
                 // Dictionary<string, int> patterns (51 rec.) = WaterGEMS->DemandPattern {{"Urz", 1}, {"Mw", 2},... {"Fixed", -1}}
                 var patternReader = new WaterDemandPatternCurveReader(this.DomainDataSet);
                 var patterns = patternReader.GetPatterns();
@@ -357,95 +350,13 @@ namespace SCADAPostCalculationDataExchanger
                 {
                     this.Logger.WriteMessage(OutputLevel.Info, $"\t\"{pattern.Key}\", {pattern.Value}");
                 }
-                /*
-                // List<WaterDemandData> objectDemandData (11004 rec.) = Excel.ObjectData  (2986 rec. ???)
-                //  ObjectID=6871,
-                //  ObjectTypeID=73,
-                //  DemandPatternName="Mw",
-                //  DemandPatternID=,
-                //  ZoneName="1 - Przybków",
-                //  ZoneID=,
-                //  BaseDemandValue=0.0470416666666677,
-                //  AssociatedElementID=,
-                //  ActualDemandValue=,
-                var objectDataReader = new ObjectDataExcelReader(excelReader);
-                var objectDemandData = objectDataReader.ReadObjects();
-                // log: 11004 objects with demand information have been read from Excel file.
-                this.Logger.WriteMessage(OutputLevel.Info, $"{objectDemandData.Count} objects with demand information have been read from Excel file.");
 
-                // List<WaterDemandData> = Excel.ObjectData
-                //  ObjectID=6871,
-                //  ObjectTypeID=73,
-                //  DemandPatternName="Mw",
-                //  DemandPatternID=6842,               <--
-                //  ZoneName="1 - Przybków",
-                //  ZoneID=6773,                        <--
-                //  BaseDemandValue=0.0470416666666677,
-                //  AssociatedElementID=,
-                //  ActualDemandValue=,
-                // Fills objectDemandData DemandPatternID: objectDemandData[n].DemandPatternID <- patterns[where Name==Name].ID
-                this.FillPatternIds(objectDemandData, patterns);
-                // Fills objectDemandData ZoneID 
-                this.FillZoneIdsInWaterDemands(objectDemandData, wgZones.ToDictionary(x => x.Value, x => x.Key, StringComparer.OrdinalIgnoreCase));
-
-                // List<WaterDemandData> objectDemandData (2986 rec.) = Excel.ObjectData {{6871, 73, "Mw", 3333, 0.0470416666666677, "1 - Przybków", 2222, },... }
-                //DumpWaterDemandData(objectDemandData.ToList());
-
-                // Step 2.
-                // Get List<ZoneDemandData>. Prepare TotalDemandCalculation demandTotalizer 
-                */
                 var waterDemandExcelReader = new DemandPatternExcelReader(excelReader);
-                /*
-                var demandTotalizer = BuildDemandTotalizer(waterDemandExcelReader, excelReader);
-
-                var now = DateTime.Now;
-                // List<ZoneDemandData>
-                var zoneDemands = this.GetZoneDemands(wgZones, objectDemandData, waterDemandExcelReader, demandTotalizer, now);
-
-
-                // Log only
-                foreach (var item in zoneDemands)
-                {
-                    string message = $"Total demand for zone {item.ZoneName}: WaterGEMS = {item.WgDemand}, SCADA: {item.ScadaDemand}, ratio: {item.DemandAdjustmentRatio}.";
-                    this.Logger.WriteMessage(OutputLevel.Info, message);
-                }
-                Helper.DumpToFile(zoneDemands.FirstOrDefault(x => x.ZoneName == TestedZoneName), Path.Combine(DumpFolder, $"Dump_{DateTime.Now.ToString(DateFormat)}_ZoneDemandData_1.xml"));
                 */
 
                 #region ZoneDemandDataListCreator.Create
 
                 List<ZoneDemandData> zoneDemandDataList;
-
-                /*
-                ZoneDemandDataListCreator.DataContext dataContext = new ZoneDemandDataListCreator.DataContext()
-                {
-                    WgZoneDict = wgZones,
-                    WgDemandPatternDict = patterns.ToDictionary(x => x.Value, x => x.Key),
-                    ExcelFileName = this.DemandConfigurationWorkbook,
-                    OpcServerAddress = this.OpcServerAddress,
-                    StartComputeTime = DateTime.Now,    //new DateTime(2020, 05, 04, 0, 46, 32),
-                };
-                ZoneDemandDataListCreator zoneDemandDataListCreator = new ZoneDemandDataListCreator(dataContext, this.Logger);
-                zoneDemandDataList = zoneDemandDataListCreator.Create();
-                if (this.IsLogToDb)
-                {
-                    //string conStr = @"Data Source=WIN-6SC244KSC3K\SQL2017;Initial Catalog=WG;Integrated Security=True";
-                    string conStr = this.LogDbConnString;
-                    //zoneDemandDataListCreator.SavePipeMeterListToDatabase(conStr);
-
-                    zoneDemandDataListCreator.SaveToDatabase(zoneDemandDataList, conStr, RatioFormula);
-                    if (this.IsCalculationOnDb)
-                    {
-                        zoneDemandDataListCreator.UpdateAndLoadFromDatabase(zoneDemandDataList, conStr);
-                    }
-                }
-                // Log only
-                zoneDemandDataList.ForEach(x => this.Logger.WriteMessage(
-                    OutputLevel.Info,
-                    $"# tal demand for zone {x.ZoneName}: WaterGEMS = {x.WgDemand}, SCADA: {x.ScadaDemand}, ratio: {x.DemandAdjustmentRatio}."
-                    ));
-                Helper.DumpToFile(zoneDemandDataList.FirstOrDefault(x => x.ZoneName == TestedZoneName), Path.Combine(DumpFolder, $"Dump_{DateTime.Now.ToString(DateFormat)}_ZoneDemandData_2.xml"));
-                */
 
                 ZoneDemandDataListCreatorNew.DataContext dataContextNew = new ZoneDemandDataListCreatorNew.DataContext()
                 {
@@ -462,7 +373,8 @@ namespace SCADAPostCalculationDataExchanger
                 // Write data to WG.
 
                 // Two arrays of int: "Excluded Object IDs" and "Excluded Demand Patterns"
-                var demandConfig = this.GetDemandWriterConfig(patterns, waterDemandExcelReader);
+                //var demandConfig = this.GetDemandWriterConfig(patterns, waterDemandExcelReader);
+                var demandConfig = this.GetDemandWriterConfigNew(zoneDemandDataList);
                 demandConfig.IsCalculationOnDb = IsCalculationOnDb;
 
                 var demandWriter = new WaterDemandDataWriter(this.Logger, this.DomainDataSet, demandConfig, (DataExchangerContext)dataExchangeContext);
@@ -481,19 +393,6 @@ namespace SCADAPostCalculationDataExchanger
         }
 
         /*
-        private void DumpWaterDemandData(IList<WaterDemandData> demandData)
-        {
-            using (var file = new StreamWriter(@"C:\Temp\demand-data.txt"))
-            {
-                file.WriteLine("ObjectID\tObjectTypeID\tDemandPatternID\tDemandPatternName\tBaseDemandValue\tZoneID\tZoneName");
-                foreach (var item in demandData)
-                {
-                    file.WriteLine($"{item.ObjectID}\t{item.ObjectTypeID}\t{item.DemandPatternID}\t{item.DemandPatternName}\t{item.BaseDemandValue}\t{item.ZoneID}\t{item.ZoneName}");
-                }
-            }
-        }
-        */
-
         private WaterDemandDataWriterConfiguration GetDemandWriterConfig(Dictionary<string, int> patterns, DemandPatternExcelReader excelReader)
         {
             // List<string> <- Excel.ExcludedItems["Excluded Object IDs"].
@@ -516,6 +415,8 @@ namespace SCADAPostCalculationDataExchanger
             };
             return demandConfig;
         }
+        */
+
         private WaterDemandDataWriterConfiguration GetDemandWriterConfigNew(List<ZoneDemandData> zoneDemandDataList)
         {
             ZoneDemandDataListCreatorNew.DataContext dataContextNew = new ZoneDemandDataListCreatorNew.DataContext()
@@ -539,112 +440,6 @@ namespace SCADAPostCalculationDataExchanger
             return demandConfig;
         }
 
-        /*
-        private List<ZoneDemandData> GetZoneDemands(
-            Dictionary<int, string> wgZones, 
-            ICollection<WaterDemandData> demandData, 
-            DemandPatternExcelReader excelReader, 
-            TotalDemandCalculation demandTotalizer, 
-            DateTime now)
-        {
-            var zoneDemands = demandData
-                .GroupBy(x => x.ZoneName)
-                .Select(x => new ZoneDemandData { ZoneName = x.Key, Demands = x.ToList() })
-                .ToList();
-            var noZoneDemands = zoneDemands.Where(x => string.IsNullOrEmpty(x.ZoneName)).ToList();
-            if (noZoneDemands.Count > 0)
-            {
-                var numberOfItems = noZoneDemands.Sum(x => x.Demands.Count);
-                this.Logger.WriteMessage(OutputLevel.Warnings, $"Found {numberOfItems} demands with no zone specified.");
-                noZoneDemands.ForEach(x => zoneDemands.Remove(x));
-            }
-
-            foreach (var item in zoneDemands)
-            {
-                item.WgDemand = demandTotalizer.GetTotalDemand(item.Demands, now);
-            }
-
-            List<string> missingZoneOpcTags = GetMissingZoneOpcTags(excelReader, zoneDemands);
-            if (missingZoneOpcTags.Count > 0)
-            {
-                string message = string.Format("Could not find OPC tag for zones {0}", string.Join(", ", missingZoneOpcTags));
-                this.Logger.WriteMessage(OutputLevel.Warnings, message);
-            }
-
-            using (var opc = new OpcReader(this.OpcServerAddress))
-            {
-                foreach (var item in zoneDemands)
-                {
-                    item.ScadaDemand = opc.GetDouble(item.OpcTag);
-                    item.DemandAdjustmentRatio = item.WgDemand == 0 ? 0 : item.ScadaDemand / item.WgDemand;
-                }
-            }
-
-            return zoneDemands;
-        }
-
-        private static List<string> GetMissingZoneOpcTags(DemandPatternExcelReader excelReader, List<ZoneDemandData> zoneDemands)
-        {
-            var zoneDefinitions = excelReader.ReadZones();
-            var missingZones = new List<string>();
-            foreach (var item in zoneDemands)
-            {
-                var zoneDefinition = zoneDefinitions.FirstOrDefault(x => x.ZoneName.Equals(item.ZoneName, StringComparison.OrdinalIgnoreCase));
-                if (zoneDefinition == null)
-                {
-                    missingZones.Add(item.ZoneName);
-                    continue;
-                }
-
-                item.OpcTag = zoneDefinition.OpcTag;
-            }
-
-            return missingZones;
-        }
-
-        private static TotalDemandCalculation BuildDemandTotalizer(DemandPatternExcelReader waterDemandExcelReader, ExcelReader excelReader)
-        {
-            var adjuster = new TimeshiftAdjuster(7 * 24 * 60);
-            var interpolator = new Interpolator(adjuster);
-            var patternService = new DemandPatternService(waterDemandExcelReader);
-            var demandService = new DemandService(interpolator, patternService);
-            var settings = new SimulationTimeResolverConfiguration
-            {
-                // 30.09.2019  12:15:00
-                SimulationStartTime = excelReader.ReadSetting<DateTime>(Grundfos.WG.PostCalc.Constants.ApplicationSetting_SimulationStartDate),
-                // 10
-                SimulationIntervalMinutes = excelReader.ReadSetting<int>(Grundfos.WG.PostCalc.Constants.ApplicationSetting_SimulationIntervalMinutes)
-            };
-            var demandTotalizer = new TotalDemandCalculation(demandService, new SimulationTimeResolver(settings));
-            return demandTotalizer;
-        }
-
-        private void FillPatternIds(ICollection<WaterDemandData> demands, Dictionary<string, int> patterns)
-        {
-            foreach (var item in demands)
-            {
-                if (!patterns.TryGetValue(item.DemandPatternName, out int patternId))
-                {
-                    throw new DataExchangerException(string.Format("Could not find pattern definition for pattern ID: {0}.", item.DemandPatternName));
-                }
-
-                item.DemandPatternID = patternId;
-            }
-        }
-
-        private void FillZoneIdsInWaterDemands(ICollection<WaterDemandData> demands, Dictionary<string, int> zones)
-        {
-            foreach (var item in demands.Where(x => !string.IsNullOrWhiteSpace(x.ZoneName)))
-            {
-                if (!zones.TryGetValue(item.ZoneName, out int zoneId))
-                {
-                    throw new DataExchangerException(string.Format("Could not find zone definition for zone name: {0}.", item.ZoneName));
-                }
-
-                item.ZoneID = zoneId;
-            }
-        }
-        */
         #endregion
 
         private int GetDelayTimeFromSql()

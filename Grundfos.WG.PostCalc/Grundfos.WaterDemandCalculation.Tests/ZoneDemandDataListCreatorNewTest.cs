@@ -63,7 +63,7 @@ namespace Grundfos.WaterDemandCalculation.Tests
             List<ZoneDemandData> zoneDemandDataList = zoneDemandDataListCreatorNew.Create(calcTime);
 
 
-            var excludedObjectIdList = zoneDemandDataListCreatorNew.GetExcludedObjectId();
+            var excludedObjectIdList = zoneDemandDataListCreatorNew.GetExcludedObjectId(zoneDemandDataList);
             var excludedDemandPatternIdList = zoneDemandDataListCreatorNew.GetExcludedDemandPatternId(zoneDemandDataList);
         }
     }

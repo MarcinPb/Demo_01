@@ -131,37 +131,7 @@ namespace Grundfos.WaterDemandCalculation
                 .Distinct()
                 .ToList();
             
-            return list;
-            
-            /*
-            try
-            {
-                _logger?.WriteMessage(OutputLevel.Info, $"Run: ZoneDemandDataListCreatorNew.GetExcludedObjectId()");
-
-
-                DataSet dataSet = new DataSet();
-                using (SqlConnection sqlConn = new SqlConnection(_dataContext.WaterInfraConnString))
-                {
-                    SqlDataAdapter adapter = new SqlDataAdapter
-                    {
-                        SelectCommand = new SqlCommand("spGetExcludedObjectId", sqlConn)
-                        {
-                            CommandType = CommandType.StoredProcedure
-                        }
-                    };
-                    adapter.Fill(dataSet);
-                }
-
-                var list = dataSet.Tables[0].AsEnumerable().Select(x => x.Field<int>("Id")).ToList();
-
-                return list;
-            }
-            catch (Exception e)
-            {
-                _logger?.WriteMessage(OutputLevel.Errors, $"Getting MSSQL data: GetExcludedObjectId.\n{e.Message}");
-                throw;
-            }
-            */
+            return list;        
         }
 
         public List<int> GetExcludedDemandPatternId(List<ZoneDemandData> zoneDemandDataList)
