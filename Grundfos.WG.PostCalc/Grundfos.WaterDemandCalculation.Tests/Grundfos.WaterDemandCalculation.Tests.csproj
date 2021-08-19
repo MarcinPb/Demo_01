@@ -120,6 +120,10 @@
       <Project>{c93e4127-d77c-4818-9100-e5c2c459eb9f}</Project>
       <Name>Grundfos.WG.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Grundfos.WG.OPC.Publisher\Grundfos.WG.OPC.Publisher.csproj">
+      <Project>{5F8B376B-36E0-4C0D-9142-8D6C401008E5}</Project>
+      <Name>Grundfos.WG.OPC.Publisher</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Grundfos.Workbooks\Grundfos.Workbooks.csproj">
       <Project>{72312fb8-0ea0-4e29-8d99-ea9cf6c1ccca}</Project>
       <Name>Grundfos.Workbooks</Name>

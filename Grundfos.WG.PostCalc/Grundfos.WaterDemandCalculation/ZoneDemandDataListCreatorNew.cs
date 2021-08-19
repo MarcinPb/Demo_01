@@ -10,6 +10,7 @@ using Grundfos.WG.Model;
 using Grundfos.Workbooks;
 using Haestad.Support.OOP.Logging;
 using Grundfos.WaterDemandCalculation.ExtensionMethods;
+using Grundfos.WG.OPC.Publisher.Configuration;
 
 namespace Grundfos.WaterDemandCalculation
 {
@@ -142,6 +143,65 @@ namespace Grundfos.WaterDemandCalculation
                 .Select(y => y.DemandPatternID)
                 .Distinct()
                 .ToList();
+
+            return list;
+        }
+
+
+
+        public ICollection<OpcMapping> GetOpcMappingList()
+        {
+            try
+            {
+                DataSet dataSet = new DataSet();
+                using (SqlConnection sqlConn = new SqlConnection(_dataContext.WaterInfraConnString))
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter
+                    {
+                        SelectCommand = new SqlCommand("spPostCalcGetOpcTagList", sqlConn)
+                        {
+                            CommandType = CommandType.StoredProcedure
+                        }
+                    };
+                    adapter.Fill(dataSet);
+                }
+
+                ICollection<OpcMapping> list = GetOpcMappingList(dataSet);
+
+                return list;
+            }
+            catch (Exception e)
+            {
+                _logger?.WriteMessage(OutputLevel.Errors, $"Getting MSSQL data.\n{e.Message}");
+                throw;
+            }
+        }
+
+        private ICollection<OpcMapping> GetOpcMappingList(DataSet dataSet)
+        {
+            var list = dataSet.Tables[0].AsEnumerable().Select(x => new
+            {
+                FieldName = x.Field<string>("FieldName"),
+                Id = x.Field<int>("Id"),
+                Label = x.Field<string>("Label"),
+                IsActive = x.Field<bool>("IsActive"),
+                OpcTag = x.Field<string>("OpcTag"),
+            })
+            .GroupBy(
+                y => y.FieldName,
+                (key, g) => new OpcMapping
+                    {
+                        FieldName = key,
+                        Mappings = g.Select(z => new OpcMappingEntry 
+                        { 
+                            ElementID = z.Id,
+                            ElementLabel = z.Label,
+                            Enabled = z.IsActive,
+                            OpcTag = z.OpcTag
+                        })
+                        .ToList()
+                    })
+            .ToList();
 
             return list;
         }

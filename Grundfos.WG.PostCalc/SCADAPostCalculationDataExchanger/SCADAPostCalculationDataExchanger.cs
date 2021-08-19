@@ -40,23 +40,15 @@ namespace SCADAPostCalculationDataExchanger
         private IScenario Scenario { get; set; }
         private int ScenarioID { get; set; }
 
-        public SCADAPostCalculationDataExchanger() {}
-        public void SetDomainDataSet(IDomainDataSet domainDataSet)
-        {
-            DomainDataSet = domainDataSet;
-            ScenarioID = DomainDataSet.ScenarioManager.ActiveScenarioID;
-            Scenario = DomainDataSet.ScenarioManager.Element(ScenarioID) as IScenario;
-        }
 
         public override string DataExchangerTitle => "SCADAPostCalculationDataExchanger";
         public override Version DataExchangerVersion => new Version(1, 0, 0, 0);
         public override string DataExchangerCopyright => "Copyright (c) Grundfos";
 
         public string RepositoryPath { get; set; }
-        public string DemandConfigurationWorkbook { get; private set; }
-        public string RatioFormula { get; set; }
+        //public string DemandConfigurationWorkbook { get; private set; }
+        //public string RatioFormula { get; set; }
 
-        // 
         public string DumpOption { get; private set; }
         public string DumpFolder { get; private set; }
         public bool IsLogToDb { get; set; }
@@ -64,6 +56,17 @@ namespace SCADAPostCalculationDataExchanger
         public bool IsCalculationOnDb { get; set; }
         public string OpcServerAddress { get; set; }
         public string WaterInfraConnString { get; set; }
+
+
+
+        public SCADAPostCalculationDataExchanger() {}
+
+        public void SetDomainDataSet(IDomainDataSet domainDataSet)
+        {
+            DomainDataSet = domainDataSet;
+            ScenarioID = DomainDataSet.ScenarioManager.ActiveScenarioID;
+            Scenario = DomainDataSet.ScenarioManager.Element(ScenarioID) as IScenario;
+        }
 
         public override object NewDataExchangeContext(string[] arguments)
         {
@@ -82,24 +85,18 @@ namespace SCADAPostCalculationDataExchanger
             // exchangeContext already contains ResultCacheDb and DemandConfigurationWorkbook keyValues taken from *.ini file.
             var exchangeContext = (DataExchangerContext)dataExchangeContext;
             this.RepositoryPath = exchangeContext.GetString("ResultCacheDb", @"C:\WG2TW\Grundfos.WG.PostCalc\ResultCache.sqlite");
-            this.DemandConfigurationWorkbook = exchangeContext.GetString("DemandConfigurationWorkbook", @"C:\WG2TW\Grundfos.WG.PostCalc\WaterDemandSettings.xlsx");
+            //this.DemandConfigurationWorkbook = exchangeContext.GetString("DemandConfigurationWorkbook", @"C:\WG2TW\Grundfos.WG.PostCalc\WaterDemandSettings.xlsx");
 
             // Rest of *.ini file parameters.
             this.DumpOption = exchangeContext.GetString("DumpOption", @"1");
             this.DumpFolder = exchangeContext.GetString("DumpFolder", @"C:\Users\Administrator\AppData\Local\Bentley\SCADAConnect\10");
+            this.OpcServerAddress = "Kepware.KEPServerEX.V6";
+
             this.IsLogToDb = bool.Parse(exchangeContext.GetString("IsLogToDb", "false"));
             this.LogDbConnString = exchangeContext.GetString("LogDbConnString", @"Data Source=.\SQLEXPRESS;Initial Catalog=WG;Integrated Security=True").Replace(":",";");
             this.IsCalculationOnDb = bool.Parse(exchangeContext.GetString("IsCalculationOnDb", "false"));
-            this.OpcServerAddress = "Kepware.KEPServerEX.V6";
-            //this.WaterInfraConnString = exchangeContext.GetString("WaterInfraConnString", @"Server=.;Database=WaterInfra;User Id=sa;Password=Gfosln123.;").Replace(":",";");
+            
             this.WaterInfraConnString = exchangeContext.GetString("WaterInfraConnString", @"Server=192.168.0.62\MSSQL2017;Database=WaterInfra;User Id=sa;Password=Gfosln123.;").Replace(":",";");
-
-            //this.RatioFormula = exchangeContext.GetString("RatioFormula", string.Empty);
-
-            //this.Logger.WriteMessage(OutputLevel.Info, $"# IsLogToDb = {IsLogToDb}.");
-            //this.Logger.WriteMessage(OutputLevel.Info, $"# LogDbConnString = \"{LogDbConnString}\".");
-            //this.Logger.WriteMessage(OutputLevel.Info, $"# IsCalculationOnDb = {IsCalculationOnDb}.");
-            //this.Logger.WriteMessage(OutputLevel.Info, $"# RatioFormula = \"{RatioFormula}\".");
 
             return true;
         }
@@ -113,21 +110,14 @@ namespace SCADAPostCalculationDataExchanger
             var wgZones = zoneReader.GetZones();
 
             // XSSFWorkbook excelReader.Workbook <- Waterdemandsettings.xlsx
-            var excelReader = new ExcelReader(this.DemandConfigurationWorkbook);
+            //var excelReader = new ExcelReader(this.DemandConfigurationWorkbook);
 
             // dataExchangeContext <- ResultCache.sqlite
             this.PassQualityResults(dataExchangeContext);
 
             // publish results to OPC server
-            this.PublishOpcResults(dataExchangeContext, excelReader, wgZones);
-
-            /*
-            // Take PipeMeterFlowList from OPC and save to database. 
-            if (IsLogToDb)
-            {
-                DbConnector.SavePipeMeterListToDatabase(LogDbConnString, OpcServerAddress);
-            }
-            */
+            //this.PublishOpcResults(dataExchangeContext, excelReader, wgZones);
+            this.PublishOpcResults(dataExchangeContext, wgZones);
 
             // Wait for time in seconds taken from SQL.
             if (IsLogToDb)
@@ -138,8 +128,7 @@ namespace SCADAPostCalculationDataExchanger
                 this.Logger.WriteMessage(OutputLevel.Info, $"-- SCADAPostCalculationDataExchanger finished waiting.");
             }
 
-            // Calculate and set up BaseDemands for Junctions, Hydrants and customerMeters in WaterGEMS.
-            //this.ExchangeWaterDemands(dataExchangeContext, excelReader, wgZones);
+            // Calculate and set up BaseDemands for Junctions, Hydrants and CustomerMeters in WaterGEMS.
             this.ExchangeWaterDemands(dataExchangeContext);
 
             return true;
@@ -229,15 +218,24 @@ namespace SCADAPostCalculationDataExchanger
 
         #region PublishOpcResults
 
-        private void PublishOpcResults(object dataExchangeContext, ExcelReader excelReader, Dictionary<int, string> wgZones)
+        //private void PublishOpcResults(object dataExchangeContext, ExcelReader excelReader, Dictionary<int, string> wgZones)
+        private void PublishOpcResults(object dataExchangeContext, Dictionary<int, string> wgZones)
         {
             try
             {
                 this.Logger.WriteMessage(OutputLevel.Info, "-- PublishOpcResults started --------------------------------------------");
 
                 // ICollection<OpcMapping> mappings <- excel.OpcMapping group by FieldName without "Result Attribute Label" column.
+                /*
                 var mappingReader = new OpcMappingReader(this.Logger, excelReader);
                 ICollection<OpcMapping> mappings = mappingReader.ReadMappings();
+                */
+                ZoneDemandDataListCreatorNew.DataContext dataContextNew = new ZoneDemandDataListCreatorNew.DataContext()
+                {
+                    WaterInfraConnString = WaterInfraConnString,
+                };
+                var zoneDemandDataListCreatorNew = new ZoneDemandDataListCreatorNew(dataContextNew);
+                ICollection<OpcMapping> mappings = zoneDemandDataListCreatorNew.GetOpcMappingList();
 
                 // List<OpcPublisher> publishers <- ICollection<OpcMapping> * Dictionary<int, string>
                 List<OpcPublisher> publishers = this.BuildPublishers(mappings, wgZones);
@@ -327,33 +325,12 @@ namespace SCADAPostCalculationDataExchanger
 
         private const string TestedZoneName = "7 - Tranzyt";
         private const string DateFormat = "yyyy-MM-dd_HH-mm-ss_fffffff";
-        //private void ExchangeWaterDemands(object dataExchangeContext, ExcelReader excelReader, Dictionary<int, string> wgZones)
         private void ExchangeWaterDemands(object dataExchangeContext)
         {
             this.Logger.WriteMessage(OutputLevel.Info, "-- ExchangeWaterDemands started -----------------------------------------");
 
-            /*
-            if (excelReader == null)
-            {
-                throw new ArgumentNullException(nameof(excelReader));
-            }
-            */
-
             try
             {
-                /*
-                // Dictionary<string, int> patterns (51 rec.) = WaterGEMS->DemandPattern {{"Urz", 1}, {"Mw", 2},... {"Fixed", -1}}
-                var patternReader = new WaterDemandPatternCurveReader(this.DomainDataSet);
-                var patterns = patternReader.GetPatterns();
-                this.Logger.WriteMessage(OutputLevel.Info, $"{patterns.Count} demand patterns have been read from WaterGEMS model.");
-                foreach (var pattern in patterns)
-                {
-                    this.Logger.WriteMessage(OutputLevel.Info, $"\t\"{pattern.Key}\", {pattern.Value}");
-                }
-
-                var waterDemandExcelReader = new DemandPatternExcelReader(excelReader);
-                */
-
                 #region ZoneDemandDataListCreator.Create
 
                 List<ZoneDemandData> zoneDemandDataList;
@@ -373,7 +350,6 @@ namespace SCADAPostCalculationDataExchanger
                 // Write data to WG.
 
                 // Two arrays of int: "Excluded Object IDs" and "Excluded Demand Patterns"
-                //var demandConfig = this.GetDemandWriterConfig(patterns, waterDemandExcelReader);
                 var demandConfig = this.GetDemandWriterConfigNew(zoneDemandDataList);
                 demandConfig.IsCalculationOnDb = IsCalculationOnDb;
 
@@ -391,31 +367,6 @@ namespace SCADAPostCalculationDataExchanger
                 this.Logger.WriteException(ex, true);
             }
         }
-
-        /*
-        private WaterDemandDataWriterConfiguration GetDemandWriterConfig(Dictionary<string, int> patterns, DemandPatternExcelReader excelReader)
-        {
-            // List<string> <- Excel.ExcludedItems["Excluded Object IDs"].
-            // {257=PC, 2719=S5, 518=CP1, 701=CP2, 1323=CP3, 1336=CP4, 2255=S6, 2780=S7, 1247=W1, 1239=W2, 1548=CP6}    
-            var excludedObjects = excelReader.ReadExcludedObjects();
-
-            // List<string> <- Excel.ExcludedItems["Excluded Demand Patterns"]. {"nieaktywni", "Straty"}.    
-            var excludedPatterns = excelReader.ReadExcludedPatterns();
-
-            // Only that patterns which exist in WG
-            var patternsToExclude = patterns
-                .Where(x => excludedPatterns.Contains(x.Key))
-                .Select(x => x.Value)
-                .ToArray();
-
-            var demandConfig = new WaterDemandDataWriterConfiguration
-            {
-                ExcludedObjectIDs = excludedObjects.ToArray(),
-                ExcludedDemandPatterns = patternsToExclude,
-            };
-            return demandConfig;
-        }
-        */
 
         private WaterDemandDataWriterConfiguration GetDemandWriterConfigNew(List<ZoneDemandData> zoneDemandDataList)
         {

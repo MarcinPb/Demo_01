@@ -66,5 +66,21 @@ namespace Grundfos.WaterDemandCalculation.Tests
             var excludedObjectIdList = zoneDemandDataListCreatorNew.GetExcludedObjectId(zoneDemandDataList);
             var excludedDemandPatternIdList = zoneDemandDataListCreatorNew.GetExcludedDemandPatternId(zoneDemandDataList);
         }
+
+        [TestCase("2019-09-10 12:24:30", "2019-09-10 12:20:00")]
+        public void GetOpcMappingListTest(DateTime input, DateTime output)
+        {
+            var logger = new ActionLogger();
+            logger.InitializeLogger(new FileLogger(new FilePath(_logFolder), 10000), OutputLevel.Info);
+
+            ZoneDemandDataListCreatorNew.DataContext dataContext = new ZoneDemandDataListCreatorNew.DataContext()
+            {
+                WaterInfraConnString = _conStr
+            };
+
+            ZoneDemandDataListCreatorNew zoneDemandDataListCreatorNew = new ZoneDemandDataListCreatorNew(dataContext, logger);
+ 
+            var opcMappingList = zoneDemandDataListCreatorNew.GetOpcMappingList();
+        }
     }
 }
