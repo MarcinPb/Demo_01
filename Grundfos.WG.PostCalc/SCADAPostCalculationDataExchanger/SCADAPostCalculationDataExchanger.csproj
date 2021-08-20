@@ -147,6 +147,7 @@
     <Compile Include="PressureCalculation\ZonePressurePublisher.cs" />
     <Compile Include="PressureCalculation\ZonePressurePublisherConfiguration.cs" />
     <Compile Include="ProcessInfoService.cs" />
+    <Compile Include="ResultReader.cs" />
     <Compile Include="SCADAPostCalculationDataExchanger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

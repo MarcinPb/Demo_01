@@ -28,13 +28,16 @@ namespace Grundfos.WG.PostCalc.PressureCalculation
 
             // Acquire the numerical engine name that supports Water Quality results.
             // This could also be hard coded as: StandardCalculationOptionFieldName.EpaNetEngine
-            string engineName = scenario.GetActiveNumericalEngineTypeName(this.Configuration.ResultRecordName);
+            string engineName = scenario.GetActiveNumericalEngineTypeName(
+                this.Configuration.ResultRecordName
+                );
 
             // Acquire the relevant field or fields that we want to read results for.
             IResultTimeVariantField timeVariantField = domainDataSet.FieldManager.ResultField(
                 this.Configuration.ResultAttributeRecordName,
                 engineName,
-                this.Configuration.ResultRecordName) as IResultTimeVariantField;
+                this.Configuration.ResultRecordName
+                ) as IResultTimeVariantField;
 
             double[] timeSteps = domainDataSet.NumericalEngine(engineName).ResultDataConnection.TimeStepsInSeconds(scenario.Id);
 
@@ -83,6 +86,11 @@ namespace Grundfos.WG.PostCalc.PressureCalculation
             return result;
         }
 
+        /// <summary>
+        /// Creates dictionary for all jubctions (ObjType=55) with Key = JunctionId and Value = ZoneId
+        /// </summary>
+        /// <param name="domainDataSet">WaterGEMS IDomainDataSet</param>
+        /// <returns>Dictionary for all jubctions (ObjType=55) with Key = JunctionId and Value = ZoneId</returns>
         private Dictionary<int, int> ReadZones(IDomainDataSet domainDataSet)
         {
             var result = new Dictionary<int, int>();

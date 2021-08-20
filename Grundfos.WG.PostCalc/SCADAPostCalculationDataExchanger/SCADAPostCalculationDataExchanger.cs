@@ -41,16 +41,6 @@ namespace SCADAPostCalculationDataExchanger
         public override Version DataExchangerVersion => new Version(1, 0, 0, 0);
         public override string DataExchangerCopyright => "Copyright (c) Grundfos";
 
-        //public string DumpOption { get; private set; }
-        //public string OpcServerAddress { get; set; }
-        /*
-        public bool IsLogToDb { get; set; }
-        public string LogDbConnString { get; set; }
-        public bool IsCalculationOnDb { get; set; }
-        public string WaterInfraConnString { get; set; }
-        */
-
-
 
         public SCADAPostCalculationDataExchanger() {}
 
@@ -80,17 +70,9 @@ namespace SCADAPostCalculationDataExchanger
             
             _sqliteFile = exchangeContext.GetString("ResultCacheDb", @"C:\WG2TW\Grundfos.WG.PostCalc\ResultCache.sqlite");
             _dumpFolder = exchangeContext.GetString("DumpFolder", @"C:\Users\Administrator\AppData\Local\Bentley\SCADAConnect\10");
-            //this.DemandConfigurationWorkbook = exchangeContext.GetString("DemandConfigurationWorkbook", @"C:\WG2TW\Grundfos.WG.PostCalc\WaterDemandSettings.xlsx");
-
-            // Rest of *.ini file parameters.
-            //this.DumpOption = exchangeContext.GetString("DumpOption", @"1");
-            //this.OpcServerAddress = "Kepware.KEPServerEX.V6";            
-            //this.IsLogToDb = bool.Parse(exchangeContext.GetString("IsLogToDb", "false"));
-            //this.LogDbConnString = exchangeContext.GetString("LogDbConnString", @"Data Source=.\SQLEXPRESS;Initial Catalog=WG;Integrated Security=True").Replace(":",";");
-            //this.IsCalculationOnDb = bool.Parse(exchangeContext.GetString("IsCalculationOnDb", "false"));
-            
-
+          
             var waterInfraConnString = exchangeContext.GetString("WaterInfraConnString", @"Server=192.168.0.62\MSSQL2017;Database=WaterInfra;User Id=sa;Password=Gfosln123.;").Replace(":",";");
+            this.Logger.WriteMessage(OutputLevel.Info, waterInfraConnString);
             ZoneDemandDataListCreatorNew.DataContext dataContextNew = new ZoneDemandDataListCreatorNew.DataContext()
             {
                 WaterInfraConnString = waterInfraConnString,
@@ -114,14 +96,11 @@ namespace SCADAPostCalculationDataExchanger
             // publish results to OPC server
             this.PublishOpcResults(dataExchangeContext, wgZones);
 
+            // Test
+            ResultReader resultReader = new ResultReader(Logger, _domainDataSet, _scenario);
+            resultReader.GetResults();
+
             // Wait for time in seconds taken from SQL.
-            //if (IsLogToDb)
-            //{
-            //    int seconds = GetDelayTimeFromSql();
-            //    this.Logger.WriteMessage(OutputLevel.Info, $"-- SCADAPostCalculationDataExchanger started waiting for {seconds} seconds.");
-            //    Thread.Sleep(seconds*1000);
-            //    this.Logger.WriteMessage(OutputLevel.Info, $"-- SCADAPostCalculationDataExchanger finished waiting.");
-            //}
             int seconds = _zoneDemandDataListCreatorNew.GetDelayTimeFromSql();
             this.Logger.WriteMessage(OutputLevel.Info, $"-- SCADAPostCalculationDataExchanger started waiting for {seconds} seconds.");
             Thread.Sleep(seconds * 1000);
@@ -251,15 +230,15 @@ namespace SCADAPostCalculationDataExchanger
             {
                 var nodePressureConfig = new ZonePressurePublisherConfiguration
                 {
-                    ResultRecordName = StandardResultRecordName.IdahoPressureNodeResults,
-                    ResultAttributeRecordName = StandardResultRecordName.IdahoPressureNodeResults_NodePressure,
-                    FieldName = StandardFieldName.PipeStatus,
+                    ResultRecordName = StandardResultRecordName.IdahoPressureNodeResults,                       // "IdahoPressureNodeResults"
+                    ResultAttributeRecordName = StandardResultRecordName.IdahoPressureNodeResults_NodePressure, // "IdahoPressureNodeResults_NodePressure"
+                    FieldName = StandardFieldName.PipeStatus,                                                   // "PipeStatus"
                     ConversionFactor = 1,
                     ElementTypes = new DomainElementType[]
                     {
-                        DomainElementType.BaseIdahoNodeElementManager,
+                        DomainElementType.BaseIdahoNodeElementManager,                                          // 50
                     },
-                    Mappings = nodeMapping.Mappings.ToDictionary(x => x.ElementID, x => x),
+                    Mappings = nodeMapping.Mappings.ToDictionary(x => x.ElementID, x => x),                     // { 6773, {ElementID, ElementLabel, Enabled, OpcTag} }, ...
                     Zones = wgZones,
                 };
                 var nodePublisher = new ZonePressurePublisher(nodePressureConfig, this.Logger);
