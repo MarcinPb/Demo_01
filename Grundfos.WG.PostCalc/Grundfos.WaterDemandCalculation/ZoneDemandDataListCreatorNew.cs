@@ -135,6 +135,7 @@ namespace Grundfos.WaterDemandCalculation
             return list;        
         }
 
+
         public List<int> GetExcludedDemandPatternId(List<ZoneDemandData> zoneDemandDataList)
         {
             var list = zoneDemandDataList
@@ -236,5 +237,38 @@ namespace Grundfos.WaterDemandCalculation
             }
         }
 
+        public Dictionary<int, int> GetObjIdZoneIdDict()
+        {
+            try
+            {
+                DataSet dataSet = new DataSet();
+                using (SqlConnection sqlConn = new SqlConnection(_dataContext.WaterInfraConnString))
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter
+                    {
+                        SelectCommand = new SqlCommand("spPostCalcGetObjIdZoneIdList", sqlConn)
+                        {
+                            CommandType = CommandType.StoredProcedure
+                        }
+                    };
+                    adapter.Fill(dataSet);
+                }
+
+                var dict = dataSet.Tables[0].AsEnumerable()
+                    .Select(x => new
+                        {
+                            ObjId = x.Field<int>("ObjId"),
+                            ZoneId = x.Field<int>("ZoneId"),
+                        })
+                    .ToDictionary(d => d.ObjId, d => d.ZoneId);
+
+                return dict;
+            }
+            catch (Exception e)
+            {
+                _logger?.WriteMessage(OutputLevel.Errors, $"Getting MSSQL data.\n{e.Message}");
+                throw;
+            }
+        }
     }
 }

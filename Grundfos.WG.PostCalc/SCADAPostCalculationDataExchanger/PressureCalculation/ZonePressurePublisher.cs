@@ -45,9 +45,29 @@ namespace Grundfos.WG.PostCalc.PressureCalculation
 
             var simulationValues = this.GetSimulationValues(timeVariantField, timeSteps, elementTypes, scenario.Id);
             var objectsWithZones = this.ReadZones(domainDataSet);
+            
+            // Added 2021-08-20 in order to test
+            this.Logger?.WriteMessage(OutputLevel.Info, $"SimulationValues:");
+            //foreach(var item in simulationValues
+            //    .Where(f => objectsWithZones.Any(z => z.Key == f.Key && z.Value == 6775))
+            //    .OrderBy(o => o.Key)
+            //    )
+            //{
+            //    this.Logger?.WriteMessage(OutputLevel.Info, $"\t{item.Key}\t{item.Value}");
+            //}
+            //
 
             List<ZonePressureData> zonePressures = this.GetPressureData(simulationValues, objectsWithZones);
             var pressureDictionary = zonePressures.ToDictionary(x => x.ZoneID, x => x.AveragePressure);
+
+            // Added 2021-08-20 in order to test
+            this.Logger?.WriteMessage(OutputLevel.Info, $"Average pressure for zones:");
+            foreach(var item in pressureDictionary.OrderBy(o => o.Key))
+            {
+                this.Logger?.WriteMessage(OutputLevel.Info, $"\t{item.Key}\t{item.Value}");
+            }
+            //
+
             this.PublishValuesToOpc(pressureDictionary);
 
             this.Logger?.WriteMessage(OutputLevel.Info, $"Published {simulationValues.Count} {this.Configuration.ResultAttributeRecordName} values to OPC.");

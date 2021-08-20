@@ -94,11 +94,13 @@ namespace SCADAPostCalculationDataExchanger
             this.PassQualityResults(dataExchangeContext);
 
             // publish results to OPC server
-            this.PublishOpcResults(dataExchangeContext, wgZones);
+            //this.PublishOpcResults(dataExchangeContext, wgZones);
 
             // Test
+            Dictionary<int, int> objIdZoneIdDict = _zoneDemandDataListCreatorNew.GetObjIdZoneIdDict();
+            ICollection<OpcMapping> opcMappingList = _zoneDemandDataListCreatorNew.GetOpcMappingList();
             ResultReader resultReader = new ResultReader(Logger, _domainDataSet, _scenario);
-            resultReader.GetResults();
+            resultReader.GetResults(opcMappingList, objIdZoneIdDict);
 
             // Wait for time in seconds taken from SQL.
             int seconds = _zoneDemandDataListCreatorNew.GetDelayTimeFromSql();
@@ -108,7 +110,8 @@ namespace SCADAPostCalculationDataExchanger
 
             // Calculate and set up BaseDemands for Junctions, Hydrants and CustomerMeters in WaterGEMS.
             this.ExchangeWaterDemands(dataExchangeContext);
-
+            /*
+            */
             return true;
         }
 

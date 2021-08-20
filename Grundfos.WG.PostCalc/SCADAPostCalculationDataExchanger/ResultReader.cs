@@ -1,4 +1,6 @@
-﻿using Grundfos.WG.OPC.Publisher.Configuration;
+﻿using Grundfos.OPC;
+using Grundfos.OPC.Model;
+using Grundfos.WG.OPC.Publisher.Configuration;
 using Haestad.Domain;
 using Haestad.Support.OOP.Logging;
 using Haestad.Support.Support;
@@ -22,10 +24,11 @@ namespace Grundfos.WG.PostCalc
             _logger = logger;
             _domainDataSet = domainDataSet;
             _scenario = scenario;
+
         }
 
 
-        public void GetResults()
+        public void GetResults(ICollection<OpcMapping> opcMappingList, Dictionary<int, int> objIdZoneIdDict)
         {
             try
             {
@@ -43,11 +46,49 @@ namespace Grundfos.WG.PostCalc
                 };
 
                 var dict = GetResults(configuration);
+
                 _logger?.WriteMessage(OutputLevel.Info, $"Dictionary count: {dict.Count}.");
-                foreach (var item in dict.Take(20))
+                //foreach (var item in dict
+                //    .Where(f => objIdZoneIdDict.Any(z => z.Key == f.Key && z.Value == 6775))
+                //    .OrderBy(x => x.Key)
+                //    )
+                //{
+                //    _logger?.WriteMessage(OutputLevel.Info, $"\t{item.Key}, \t{item.Value}");
+                //}
+
+                _logger?.WriteMessage(OutputLevel.Info, $"Average pressure for zones.");
+                var zoneAveragelist = dict
+                    .Where(d => !double.IsNaN(d.Value))
+                    .Join(
+                        objIdZoneIdDict,
+                        l => l.Key,
+                        r => r.Key,
+                        (l, r) => new { ZoneId = r.Value, ObjPressure = l.Value * Constants.Pressure_PSI_2_mH2O }
+                        )
+                    .GroupBy(x => x.ZoneId)
+                    .Select(g => new { ZoneId = g.Key, Avg = g.Average(y => y.ObjPressure) })
+                    .ToDictionary(d => d.ZoneId, d => d.Avg);
+
+                foreach (var item in zoneAveragelist.OrderBy(x => x.Key))
                 {
                     _logger?.WriteMessage(OutputLevel.Info, $"\t{item.Key}, \t{item.Value}");
                 }
+
+                ICollection<OpcWriteValue> writeValues = zoneAveragelist.Join(
+                        opcMappingList.FirstOrDefault(x => x.FieldName== "ZoneAveragePressure").Mappings,
+                        l => l.Key,
+                        r => r.ElementID,
+                        (l,r) => new OpcWriteValue() { TagName = r.OpcTag, Value = l.Value }
+                    )
+                    .ToList();
+                foreach (var item in writeValues)
+                {
+                    _logger?.WriteMessage(OutputLevel.Info, $"\t{item.TagName}, \t{item.Value}");
+                }
+
+                var publisher = new OpcWriter("Kepware.KEPServerEX.V6");
+                publisher.Publish(writeValues.ToArray());
+                publisher.Dispose();
             }
             catch (Exception ex)
             {
