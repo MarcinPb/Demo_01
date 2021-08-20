@@ -6,6 +6,6 @@ namespace Grundfos.WG.PostCalc.DemandCalculation
     {
         public int[] ExcludedObjectIDs { get; set; }
         public int[] ExcludedDemandPatterns { get; set; }
-        public bool IsCalculationOnDb { get; set; }
+        //public bool IsCalculationOnDb { get; set; }
     }
 }

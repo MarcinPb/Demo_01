@@ -206,6 +206,35 @@ namespace Grundfos.WaterDemandCalculation
             return list;
         }
 
+        public int GetDelayTimeFromSql()
+        {
+            try
+            {
+                int delayTime;
+                using (SqlConnection sqlConn = new SqlConnection(_dataContext.WaterInfraConnString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("spPostCalcGetDelayTime", sqlConn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@Seconds", SqlDbType.Int).Direction = ParameterDirection.Output;
+                        cmd.Parameters["@Seconds"].Value = 0;
+
+                        sqlConn.Open();
+                        cmd.ExecuteNonQuery();
+                        delayTime = Convert.ToInt32(cmd.Parameters["@Seconds"].Value);
+                        sqlConn.Close();
+                    }
+                }
+
+                return delayTime;
+            }
+            catch (Exception e)
+            {
+                _logger?.WriteMessage(OutputLevel.Errors, $"Get delay time from database.\n{e.Message}");
+                throw;
+            }
+        }
 
     }
 }

@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using System.Threading;
 using AutoMapper;
-using Grundfos.OPC;
 using Grundfos.WaterDemandCalculation;
 using Grundfos.WG.Model;
 using Grundfos.WG.ObjectReaders;
@@ -19,12 +13,10 @@ using Grundfos.WG.OPC.Publisher.Configuration;
 using Grundfos.WG.PostCalc;
 using Grundfos.WG.PostCalc.DataExchangers;
 using Grundfos.WG.PostCalc.DemandCalculation;
-using Grundfos.WG.PostCalc.Exceptions;
 using Grundfos.WG.PostCalc.Persistence.MapperProfiles;
 using Grundfos.WG.PostCalc.Persistence.Repositories;
 using Grundfos.WG.PostCalc.PressureCalculation;
 using Grundfos.WG.PostCalc.SQLiteEf;
-using Grundfos.Workbooks;
 using Haestad.DataIntegration;
 using Haestad.Domain;
 using Haestad.Support.OOP.CommandLine;
@@ -36,26 +28,27 @@ namespace SCADAPostCalculationDataExchanger
 {
     public class SCADAPostCalculationDataExchanger : ToFileDataExchangerBase, IInProcessPluginDataExchanger
     {
-        private IDomainDataSet DomainDataSet { get; set; }
-        private IScenario Scenario { get; set; }
-        private int ScenarioID { get; set; }
+        private IDomainDataSet _domainDataSet;
+        private IScenario _scenario;
+        private int _scenarioID;
+
+        private string _sqliteFile;
+        private string _dumpFolder;
+        private ZoneDemandDataListCreatorNew _zoneDemandDataListCreatorNew;
 
 
         public override string DataExchangerTitle => "SCADAPostCalculationDataExchanger";
         public override Version DataExchangerVersion => new Version(1, 0, 0, 0);
         public override string DataExchangerCopyright => "Copyright (c) Grundfos";
 
-        public string RepositoryPath { get; set; }
-        //public string DemandConfigurationWorkbook { get; private set; }
-        //public string RatioFormula { get; set; }
-
-        public string DumpOption { get; private set; }
-        public string DumpFolder { get; private set; }
+        //public string DumpOption { get; private set; }
+        //public string OpcServerAddress { get; set; }
+        /*
         public bool IsLogToDb { get; set; }
         public string LogDbConnString { get; set; }
         public bool IsCalculationOnDb { get; set; }
-        public string OpcServerAddress { get; set; }
         public string WaterInfraConnString { get; set; }
+        */
 
 
 
@@ -63,16 +56,16 @@ namespace SCADAPostCalculationDataExchanger
 
         public void SetDomainDataSet(IDomainDataSet domainDataSet)
         {
-            DomainDataSet = domainDataSet;
-            ScenarioID = DomainDataSet.ScenarioManager.ActiveScenarioID;
-            Scenario = DomainDataSet.ScenarioManager.Element(ScenarioID) as IScenario;
+            _domainDataSet = domainDataSet;
+            _scenarioID = _domainDataSet.ScenarioManager.ActiveScenarioID;
+            _scenario = _domainDataSet.ScenarioManager.Element(_scenarioID) as IScenario;
         }
 
         public override object NewDataExchangeContext(string[] arguments)
         {
             const string SETTINGS_FILE_KEY = "INI";
             CommandLineArgumentsHelper commandLineArgumentsHelper = new CommandLineArgumentsHelper(arguments, new string[] { SETTINGS_FILE_KEY });
-            string settingsFileName = commandLineArgumentsHelper.GetCommandLineValue(SETTINGS_FILE_KEY);
+            var settingsFileName = commandLineArgumentsHelper.GetCommandLineValue(SETTINGS_FILE_KEY);
             IConfigurationReader configurationReader = new SettingsFileReader(Logger, new FilePath(settingsFileName));
 
             return new DataExchangerContext(Logger, configurationReader);
@@ -84,19 +77,25 @@ namespace SCADAPostCalculationDataExchanger
 
             // exchangeContext already contains ResultCacheDb and DemandConfigurationWorkbook keyValues taken from *.ini file.
             var exchangeContext = (DataExchangerContext)dataExchangeContext;
-            this.RepositoryPath = exchangeContext.GetString("ResultCacheDb", @"C:\WG2TW\Grundfos.WG.PostCalc\ResultCache.sqlite");
+            
+            _sqliteFile = exchangeContext.GetString("ResultCacheDb", @"C:\WG2TW\Grundfos.WG.PostCalc\ResultCache.sqlite");
+            _dumpFolder = exchangeContext.GetString("DumpFolder", @"C:\Users\Administrator\AppData\Local\Bentley\SCADAConnect\10");
             //this.DemandConfigurationWorkbook = exchangeContext.GetString("DemandConfigurationWorkbook", @"C:\WG2TW\Grundfos.WG.PostCalc\WaterDemandSettings.xlsx");
 
             // Rest of *.ini file parameters.
-            this.DumpOption = exchangeContext.GetString("DumpOption", @"1");
-            this.DumpFolder = exchangeContext.GetString("DumpFolder", @"C:\Users\Administrator\AppData\Local\Bentley\SCADAConnect\10");
-            this.OpcServerAddress = "Kepware.KEPServerEX.V6";
-
-            this.IsLogToDb = bool.Parse(exchangeContext.GetString("IsLogToDb", "false"));
-            this.LogDbConnString = exchangeContext.GetString("LogDbConnString", @"Data Source=.\SQLEXPRESS;Initial Catalog=WG;Integrated Security=True").Replace(":",";");
-            this.IsCalculationOnDb = bool.Parse(exchangeContext.GetString("IsCalculationOnDb", "false"));
+            //this.DumpOption = exchangeContext.GetString("DumpOption", @"1");
+            //this.OpcServerAddress = "Kepware.KEPServerEX.V6";            
+            //this.IsLogToDb = bool.Parse(exchangeContext.GetString("IsLogToDb", "false"));
+            //this.LogDbConnString = exchangeContext.GetString("LogDbConnString", @"Data Source=.\SQLEXPRESS;Initial Catalog=WG;Integrated Security=True").Replace(":",";");
+            //this.IsCalculationOnDb = bool.Parse(exchangeContext.GetString("IsCalculationOnDb", "false"));
             
-            this.WaterInfraConnString = exchangeContext.GetString("WaterInfraConnString", @"Server=192.168.0.62\MSSQL2017;Database=WaterInfra;User Id=sa;Password=Gfosln123.;").Replace(":",";");
+
+            var waterInfraConnString = exchangeContext.GetString("WaterInfraConnString", @"Server=192.168.0.62\MSSQL2017;Database=WaterInfra;User Id=sa;Password=Gfosln123.;").Replace(":",";");
+            ZoneDemandDataListCreatorNew.DataContext dataContextNew = new ZoneDemandDataListCreatorNew.DataContext()
+            {
+                WaterInfraConnString = waterInfraConnString,
+            };
+            _zoneDemandDataListCreatorNew = new ZoneDemandDataListCreatorNew(dataContextNew, this.Logger);
 
             return true;
         }
@@ -106,27 +105,27 @@ namespace SCADAPostCalculationDataExchanger
             this.Logger.WriteMessage(OutputLevel.Info, "-- DoDataExchange started --------------------------------------------------------------------");
 
             // Dictionary<int, string> <- WaterGEMS {{n, "1 - Przybków"},... {n, "16 - Pompownia"}}
-            var zoneReader = new ZoneReader(this.DomainDataSet);
+            var zoneReader = new ZoneReader(this._domainDataSet);
             var wgZones = zoneReader.GetZones();
-
-            // XSSFWorkbook excelReader.Workbook <- Waterdemandsettings.xlsx
-            //var excelReader = new ExcelReader(this.DemandConfigurationWorkbook);
 
             // dataExchangeContext <- ResultCache.sqlite
             this.PassQualityResults(dataExchangeContext);
 
             // publish results to OPC server
-            //this.PublishOpcResults(dataExchangeContext, excelReader, wgZones);
             this.PublishOpcResults(dataExchangeContext, wgZones);
 
             // Wait for time in seconds taken from SQL.
-            if (IsLogToDb)
-            {
-                int seconds = GetDelayTimeFromSql();
-                this.Logger.WriteMessage(OutputLevel.Info, $"-- SCADAPostCalculationDataExchanger started waiting for {seconds} seconds.");
-                Thread.Sleep(seconds*1000);
-                this.Logger.WriteMessage(OutputLevel.Info, $"-- SCADAPostCalculationDataExchanger finished waiting.");
-            }
+            //if (IsLogToDb)
+            //{
+            //    int seconds = GetDelayTimeFromSql();
+            //    this.Logger.WriteMessage(OutputLevel.Info, $"-- SCADAPostCalculationDataExchanger started waiting for {seconds} seconds.");
+            //    Thread.Sleep(seconds*1000);
+            //    this.Logger.WriteMessage(OutputLevel.Info, $"-- SCADAPostCalculationDataExchanger finished waiting.");
+            //}
+            int seconds = _zoneDemandDataListCreatorNew.GetDelayTimeFromSql();
+            this.Logger.WriteMessage(OutputLevel.Info, $"-- SCADAPostCalculationDataExchanger started waiting for {seconds} seconds.");
+            Thread.Sleep(seconds * 1000);
+            this.Logger.WriteMessage(OutputLevel.Info, $"-- SCADAPostCalculationDataExchanger finished waiting.");
 
             // Calculate and set up BaseDemands for Junctions, Hydrants and CustomerMeters in WaterGEMS.
             this.ExchangeWaterDemands(dataExchangeContext);
@@ -142,7 +141,7 @@ namespace SCADAPostCalculationDataExchanger
             {
                 this.Logger.WriteMessage(OutputLevel.Info, "-- PassQualityResults started -------------------------------------------");
 
-                var db = new DatabaseContext(this.RepositoryPath);                      // ResultCache.sqlite
+                var db = new DatabaseContext(this._sqliteFile);                      // ResultCache.sqlite
                 var mapper = BuildMapper();
                 var repo = new PostCalcRepository(db, mapper);
 
@@ -206,9 +205,9 @@ namespace SCADAPostCalculationDataExchanger
 
             var dataExchangers = new List<Grundfos.WG.PostCalc.DataExchangers.GenericDataExchanger>
             {
-                new GenericDataExchanger(this.Logger, this.Scenario, this.DomainDataSet, repository, ageConfig),
-                new GenericDataExchanger(this.Logger, this.Scenario, this.DomainDataSet, repository, traceConfig),
-                new GenericDataExchanger(this.Logger, this.Scenario, this.DomainDataSet, repository, concentrationConfig),
+                new GenericDataExchanger(this.Logger, this._scenario, this._domainDataSet, repository, ageConfig),
+                new GenericDataExchanger(this.Logger, this._scenario, this._domainDataSet, repository, traceConfig),
+                new GenericDataExchanger(this.Logger, this._scenario, this._domainDataSet, repository, concentrationConfig),
             };
 
             return dataExchangers;
@@ -218,7 +217,6 @@ namespace SCADAPostCalculationDataExchanger
 
         #region PublishOpcResults
 
-        //private void PublishOpcResults(object dataExchangeContext, ExcelReader excelReader, Dictionary<int, string> wgZones)
         private void PublishOpcResults(object dataExchangeContext, Dictionary<int, string> wgZones)
         {
             try
@@ -226,24 +224,14 @@ namespace SCADAPostCalculationDataExchanger
                 this.Logger.WriteMessage(OutputLevel.Info, "-- PublishOpcResults started --------------------------------------------");
 
                 // ICollection<OpcMapping> mappings <- excel.OpcMapping group by FieldName without "Result Attribute Label" column.
-                /*
-                var mappingReader = new OpcMappingReader(this.Logger, excelReader);
-                ICollection<OpcMapping> mappings = mappingReader.ReadMappings();
-                */
-                ZoneDemandDataListCreatorNew.DataContext dataContextNew = new ZoneDemandDataListCreatorNew.DataContext()
-                {
-                    WaterInfraConnString = WaterInfraConnString,
-                };
-                var zoneDemandDataListCreatorNew = new ZoneDemandDataListCreatorNew(dataContextNew);
-                ICollection<OpcMapping> mappings = zoneDemandDataListCreatorNew.GetOpcMappingList();
+                ICollection<OpcMapping> mappings = _zoneDemandDataListCreatorNew.GetOpcMappingList();
 
-                // List<OpcPublisher> publishers <- ICollection<OpcMapping> * Dictionary<int, string>
                 List<OpcPublisher> publishers = this.BuildPublishers(mappings, wgZones);
 
                 this.Logger.WriteMessage(OutputLevel.Info, "Start writing results to OPC.");
                 foreach (var publisher in publishers)
                 {
-                    publisher.PublishResults(this.DomainDataSet, this.Scenario);
+                    publisher.PublishResults(this._domainDataSet, this._scenario);
                 }
                 this.Logger.WriteMessage(OutputLevel.Info, "Finished writing results to OPC.");
             }
@@ -331,35 +319,36 @@ namespace SCADAPostCalculationDataExchanger
 
             try
             {
-                #region ZoneDemandDataListCreator.Create
+                #region Create List<ZoneDemandData>
 
                 List<ZoneDemandData> zoneDemandDataList;
 
-                ZoneDemandDataListCreatorNew.DataContext dataContextNew = new ZoneDemandDataListCreatorNew.DataContext()
-                {
-                    WaterInfraConnString = WaterInfraConnString,
-                };
-                ZoneDemandDataListCreatorNew zoneDemandDataListCreatorNew = new ZoneDemandDataListCreatorNew(dataContextNew, this.Logger);
-                zoneDemandDataList = zoneDemandDataListCreatorNew.Create(DateTime.Now);
-                Helper.DumpToFile(zoneDemandDataList.FirstOrDefault(x => x.ZoneName == TestedZoneName), Path.Combine(DumpFolder, $"Dump_{DateTime.Now.ToString(DateFormat)}_ZoneDemandData_2_New.xml"));
+                //ZoneDemandDataListCreatorNew.DataContext dataContextNew = new ZoneDemandDataListCreatorNew.DataContext()
+                //{
+                //    WaterInfraConnString = WaterInfraConnString,
+                //};
+                //ZoneDemandDataListCreatorNew zoneDemandDataListCreatorNew = new ZoneDemandDataListCreatorNew(dataContextNew, this.Logger);
+                zoneDemandDataList = _zoneDemandDataListCreatorNew.Create(DateTime.Now);
+                Helper.DumpToFile(zoneDemandDataList.FirstOrDefault(x => x.ZoneName == TestedZoneName), Path.Combine(_dumpFolder, $"Dump_{DateTime.Now.ToString(DateFormat)}_ZoneDemandData_2_New.xml"));
 
                 #endregion
 
 
-                // Step 3.
-                // Write data to WG.
+                #region  Write data to WaterGEMS.
 
                 // Two arrays of int: "Excluded Object IDs" and "Excluded Demand Patterns"
                 var demandConfig = this.GetDemandWriterConfigNew(zoneDemandDataList);
-                demandConfig.IsCalculationOnDb = IsCalculationOnDb;
+                
+                //demandConfig.IsCalculationOnDb = IsCalculationOnDb;
+                
+                var demandWriter = new WaterDemandDataWriter(this.Logger, this._domainDataSet, demandConfig, (DataExchangerContext)dataExchangeContext);
 
-                var demandWriter = new WaterDemandDataWriter(this.Logger, this.DomainDataSet, demandConfig, (DataExchangerContext)dataExchangeContext);
-
-                //foreach (var zoneDemand in zoneDemands.Where(x => x.ScadaDemand > 0.001))
                 foreach (var zoneDemand in zoneDemandDataList.Where(x => Math.Abs(x.ScadaDemand) > 0.001))
                 {
                     demandWriter.WriteDemands(zoneDemand);
                 }
+
+                #endregion
             }
             catch (Exception ex)
             {
@@ -370,18 +359,18 @@ namespace SCADAPostCalculationDataExchanger
 
         private WaterDemandDataWriterConfiguration GetDemandWriterConfigNew(List<ZoneDemandData> zoneDemandDataList)
         {
-            ZoneDemandDataListCreatorNew.DataContext dataContextNew = new ZoneDemandDataListCreatorNew.DataContext()
-            {
-                WaterInfraConnString = WaterInfraConnString,
-            };
-            ZoneDemandDataListCreatorNew zoneDemandDataListCreatorNew = new ZoneDemandDataListCreatorNew(dataContextNew, this.Logger);
+            //ZoneDemandDataListCreatorNew.DataContext dataContextNew = new ZoneDemandDataListCreatorNew.DataContext()
+            //{
+            //    WaterInfraConnString = WaterInfraConnString,
+            //};
+            //ZoneDemandDataListCreatorNew zoneDemandDataListCreatorNew = new ZoneDemandDataListCreatorNew(dataContextNew, this.Logger);
 
             // List<string> <- Excel.ExcludedItems["Excluded Object IDs"].
             // {257=PC, 2719=S5, 518=CP1, 701=CP2, 1323=CP3, 1336=CP4, 2255=S6, 2780=S7, 1240=W1, 1239=W2, 1548=CP6}    
-            var excludedObjects = zoneDemandDataListCreatorNew.GetExcludedObjectId(zoneDemandDataList);
+            var excludedObjects = _zoneDemandDataListCreatorNew.GetExcludedObjectId(zoneDemandDataList);
 
             // List<string> <- Excel.ExcludedItems["Excluded Demand Patterns"]. {"nieaktywni1", "Straty1"}.    
-            var excludedPatterns = zoneDemandDataListCreatorNew.GetExcludedDemandPatternId(zoneDemandDataList);
+            var excludedPatterns = _zoneDemandDataListCreatorNew.GetExcludedDemandPatternId(zoneDemandDataList);
 
             var demandConfig = new WaterDemandDataWriterConfiguration
             {
@@ -393,34 +382,5 @@ namespace SCADAPostCalculationDataExchanger
 
         #endregion
 
-        private int GetDelayTimeFromSql()
-        {
-            try
-            {
-                int delayTime;
-                using (SqlConnection sqlConn = new SqlConnection(LogDbConnString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("spGetDelayTime", sqlConn))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        cmd.Parameters.Add("@Seconds", SqlDbType.Int).Direction = ParameterDirection.Output;
-                        cmd.Parameters["@Seconds"].Value = 0;
-
-                        sqlConn.Open();
-                        cmd.ExecuteNonQuery();
-                        delayTime = Convert.ToInt32(cmd.Parameters["@Seconds"].Value);
-                        sqlConn.Close();
-                    }
-                }
-
-                return delayTime;
-            }
-            catch (Exception e)
-            {
-                this.Logger.WriteMessage(OutputLevel.Errors, $"Saving data to database.\n{e.Message}");
-                throw;
-            }
-        }
     }
 }

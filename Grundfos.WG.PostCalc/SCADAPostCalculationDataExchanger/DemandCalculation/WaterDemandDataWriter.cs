@@ -135,9 +135,12 @@ namespace Grundfos.WG.PostCalc.DemandCalculation
                         }
 
                         double valueOld = demandItem.ActualDemandValue * zoneDemandData.DemandAdjustmentRatio * Constants.Flow_M3H_2_WG;
+                        /*
                         double demandCalculated = this.Configuration.IsCalculationOnDb
                             ? demandItem.DemandCalculatedValueDb
                             : demandItem.DemandCalculatedValue;
+                        */
+                        double demandCalculated = demandItem.DemandCalculatedValue;
                         double value = demandCalculated * Constants.Flow_M3H_2_WG;
                         if (zoneDemandData.ZoneName == _testedZoneName)
                         {
@@ -233,9 +236,12 @@ namespace Grundfos.WG.PostCalc.DemandCalculation
                 }
 
                 double valueOld = element.ActualDemandValue * zoneDemandData.DemandAdjustmentRatio * Constants.Flow_M3H_2_WG;
+                /*
                 double demandCalculated = this.Configuration.IsCalculationOnDb
                     ? element.DemandCalculatedValueDb
                     : element.DemandCalculatedValue;
+                */
+                double demandCalculated = element.DemandCalculatedValue;
                 double value = demandCalculated * Constants.Flow_M3H_2_WG;
                 if (zoneDemandData.ZoneName == _testedZoneName)
                 {
