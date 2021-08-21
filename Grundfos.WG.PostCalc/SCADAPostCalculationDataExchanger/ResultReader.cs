@@ -8,8 +8,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Grundfos.WG.PostCalc
 {
@@ -24,7 +22,6 @@ namespace Grundfos.WG.PostCalc
             _logger = logger;
             _domainDataSet = domainDataSet;
             _scenario = scenario;
-
         }
 
 
@@ -34,7 +31,11 @@ namespace Grundfos.WG.PostCalc
             {
                 _logger?.WriteMessage(OutputLevel.Info, $"-- Test: GetResults(). ----------------------------------------");
 
-                var configuration = new PublisherConfiguration
+                GetResultParam getResultParam;
+                Dictionary<int, double> resultDict;
+
+                // ZoneAveragePressure
+                getResultParam = new GetResultParam
                 {
                     ResultRecordName = StandardResultRecordName.IdahoPressureNodeResults,                       // "IdahoPressureNodeResults"
                     ResultAttributeRecordName = StandardResultRecordName.IdahoPressureNodeResults_NodePressure, // "IdahoPressureNodeResults_NodePressure"
@@ -44,20 +45,9 @@ namespace Grundfos.WG.PostCalc
                             DomainElementType.BaseIdahoNodeElementManager,                                      // 50
                     },
                 };
-
-                var dict = GetResults(configuration);
-
-                _logger?.WriteMessage(OutputLevel.Info, $"Dictionary count: {dict.Count}.");
-                //foreach (var item in dict
-                //    .Where(f => objIdZoneIdDict.Any(z => z.Key == f.Key && z.Value == 6775))
-                //    .OrderBy(x => x.Key)
-                //    )
-                //{
-                //    _logger?.WriteMessage(OutputLevel.Info, $"\t{item.Key}, \t{item.Value}");
-                //}
-
-                _logger?.WriteMessage(OutputLevel.Info, $"Average pressure for zones.");
-                var zoneAveragelist = dict
+                resultDict = GetResults(getResultParam);
+                //_logger?.WriteMessage(OutputLevel.Info, $"ZoneAveragePressure count: {resultDict.Count}.");
+                var zoneAveragelist = resultDict
                     .Where(d => !double.IsNaN(d.Value))
                     .Join(
                         objIdZoneIdDict,
@@ -68,27 +58,40 @@ namespace Grundfos.WG.PostCalc
                     .GroupBy(x => x.ZoneId)
                     .Select(g => new { ZoneId = g.Key, Avg = g.Average(y => y.ObjPressure) })
                     .ToDictionary(d => d.ZoneId, d => d.Avg);
+                //_logger?.WriteMessage(OutputLevel.Info, $"Average pressure for zones.");
+                //foreach (var item in zoneAveragelist.OrderBy(x => x.Key))
+                //{
+                //    _logger?.WriteMessage(OutputLevel.Info, $"\t{item.Key}, \t{item.Value}");
+                //}
+                SendToOpc(zoneAveragelist, opcMappingList, "ZoneAveragePressure");
 
-                foreach (var item in zoneAveragelist.OrderBy(x => x.Key))
+                // TankPercentFull
+                getResultParam = new GetResultParam
                 {
-                    _logger?.WriteMessage(OutputLevel.Info, $"\t{item.Key}, \t{item.Value}");
-                }
+                    ResultRecordName = StandardResultRecordName.IdahoConventionalTankResults,
+                    ResultAttributeRecordName = StandardResultRecordName.IdahoConventionalTankResults_CalculatedPercentFull,
+                    FieldName = StandardFieldName.ElementType_TankPercentFull,
+                    ElementTypes = new DomainElementType[]
+                    {
+                        DomainElementType.IdahoTankElementManager,
+                    },
+                };
+                resultDict = GetResults(getResultParam);
+                SendToOpc(resultDict, opcMappingList, "TankPercentFull");
 
-                ICollection<OpcWriteValue> writeValues = zoneAveragelist.Join(
-                        opcMappingList.FirstOrDefault(x => x.FieldName== "ZoneAveragePressure").Mappings,
-                        l => l.Key,
-                        r => r.ElementID,
-                        (l,r) => new OpcWriteValue() { TagName = r.OpcTag, Value = l.Value }
-                    )
-                    .ToList();
-                foreach (var item in writeValues)
+                // PipeStatus
+                getResultParam = new GetResultParam
                 {
-                    _logger?.WriteMessage(OutputLevel.Info, $"\t{item.TagName}, \t{item.Value}");
-                }
-
-                var publisher = new OpcWriter("Kepware.KEPServerEX.V6");
-                publisher.Publish(writeValues.ToArray());
-                publisher.Dispose();
+                    ResultRecordName = StandardResultRecordName.IdahoPipeResults,
+                    ResultAttributeRecordName = StandardResultRecordName.PipeResultControlStatus,
+                    FieldName = StandardFieldName.PipeStatus,
+                    ElementTypes = new DomainElementType[]
+                    {
+                        DomainElementType.IdahoPipeElementManager,
+                    },
+                };
+                resultDict = GetResults(getResultParam);
+                SendToOpc(resultDict, opcMappingList, "PipeStatus");
             }
             catch (Exception ex)
             {
@@ -97,7 +100,9 @@ namespace Grundfos.WG.PostCalc
             }
         }
 
-        private Dictionary<int, double> GetResults(PublisherConfiguration configuration)
+
+
+        private Dictionary<int, double> GetResults(GetResultParam configuration)
         {
             // Log the start of the process with the "Info" level priority.
             // (Users can control the verbosity of log output to only see the level of detail they want).
@@ -139,5 +144,40 @@ namespace Grundfos.WG.PostCalc
 
             return result;
         }
+
+        private void SendToOpc(Dictionary<int, double> simulationValueList, ICollection<OpcMapping> opcMappingList, string fieldName)
+        {
+            _logger?.WriteMessage(OutputLevel.Info, $"\"{fieldName}\" simulation values count: {simulationValueList.Count}.");
+
+            ICollection<OpcWriteValue> writeValues = simulationValueList.Join(
+                    opcMappingList.FirstOrDefault(x => x.FieldName == fieldName).Mappings,
+                    l => l.Key,
+                    r => r.ElementID,
+                    (l, r) => new OpcWriteValue() { TagName = r.OpcTag, Value = l.Value }
+                )
+                .ToList();
+
+            _logger?.WriteMessage(OutputLevel.Info, $"\"{fieldName}\" OPC values count: {writeValues.Count}.");
+            //foreach (var item in writeValues)
+            //{
+            //    _logger?.WriteMessage(OutputLevel.Info, $"\t{item.TagName}, \t{item.Value}");
+            //}
+
+            var publisher = new OpcWriter("Kepware.KEPServerEX.V6");
+            publisher.Publish(writeValues.ToArray());
+            publisher.Dispose();
+        }
+
+        private class GetResultParam
+        {
+            public string ResultRecordName { get; set; }
+            public string ResultAttributeRecordName { get; set; }
+            public string FieldName { get; set; }
+            public DomainElementType[] ElementTypes { get; set; }
+
+            //public AlternativeType Alternative { get; set; }
+        }
+
+
     }
 }
