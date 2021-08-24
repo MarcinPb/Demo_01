@@ -202,16 +202,16 @@ namespace Grundfos.WG.PostCalc.DataExchangers
             }
         }
 
-        private bool TryGetAtrributeValue(bool useDefault, int key, Dictionary<int, double> data, double defaultValue, out double result)
-        {
-            if (!useDefault)
-            {
-                result = defaultValue;
-                return true;
-            }
+        //private bool TryGetAtrributeValue(bool useDefault, int key, Dictionary<int, double> data, double defaultValue, out double result)
+        //{
+        //    if (!useDefault)
+        //    {
+        //        result = defaultValue;
+        //        return true;
+        //    }
 
-            return data.TryGetValue(key, out result);
-        }
+        //    return data.TryGetValue(key, out result);
+        //}
 
         private Dictionary<int, double> GetSimulationValues(IResultTimeVariantField timeVariantField, double[] timeSteps, HmIDCollection elementTypes)
         {

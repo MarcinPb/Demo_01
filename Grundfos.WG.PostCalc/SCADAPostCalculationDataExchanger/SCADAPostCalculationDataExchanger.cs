@@ -86,19 +86,12 @@ namespace SCADAPostCalculationDataExchanger
         {
             this.Logger.WriteMessage(OutputLevel.Info, "-- DoDataExchange started --------------------------------------------------------------------");
 
-            // Dictionary<int, string> <- WaterGEMS {{n, "1 - Przybków"},... {n, "16 - Pompownia"}}
-            var zoneReader = new ZoneReader(this._domainDataSet);
-            var wgZones = zoneReader.GetZones();
-
-            // dataExchangeContext <- ResultCache.sqlite
+            // Quality result save to cache and load from cache. dataExchangeContext <- ResultCache.sqlite
             this.PassQualityResults(dataExchangeContext);
 
-            // publish results to OPC server
-            //this.PublishOpcResults(dataExchangeContext, wgZones);
-
-            // Test
-            Dictionary<int, int> objIdZoneIdDict = _zoneDemandDataListCreatorNew.GetObjIdZoneIdDict();
+            // Publish results to OPC server
             ICollection<OpcMapping> opcMappingList = _zoneDemandDataListCreatorNew.GetOpcMappingList();
+            Dictionary<int, int> objIdZoneIdDict = _zoneDemandDataListCreatorNew.GetObjIdZoneIdDict();
             ResultReader resultReader = new ResultReader(Logger, _domainDataSet, _scenario);
             resultReader.GetResults(opcMappingList, objIdZoneIdDict);
 
@@ -110,8 +103,7 @@ namespace SCADAPostCalculationDataExchanger
 
             // Calculate and set up BaseDemands for Junctions, Hydrants and CustomerMeters in WaterGEMS.
             this.ExchangeWaterDemands(dataExchangeContext);
-            /*
-            */
+
             return true;
         }
 
@@ -197,100 +189,6 @@ namespace SCADAPostCalculationDataExchanger
 
         #endregion
 
-        #region PublishOpcResults
-
-        private void PublishOpcResults(object dataExchangeContext, Dictionary<int, string> wgZones)
-        {
-            try
-            {
-                this.Logger.WriteMessage(OutputLevel.Info, "-- PublishOpcResults started --------------------------------------------");
-
-                // ICollection<OpcMapping> mappings <- excel.OpcMapping group by FieldName without "Result Attribute Label" column.
-                ICollection<OpcMapping> mappings = _zoneDemandDataListCreatorNew.GetOpcMappingList();
-
-                List<OpcPublisher> publishers = this.BuildPublishers(mappings, wgZones);
-
-                this.Logger.WriteMessage(OutputLevel.Info, "Start writing results to OPC.");
-                foreach (var publisher in publishers)
-                {
-                    publisher.PublishResults(this._domainDataSet, this._scenario);
-                }
-                this.Logger.WriteMessage(OutputLevel.Info, "Finished writing results to OPC.");
-            }
-            catch (Exception ex)
-            {
-                this.Logger.WriteMessage(OutputLevel.Errors, "Errors occured when publishing the results to OPC.");
-                this.Logger.WriteException(ex, true);
-            }
-        }
-
-        private List<OpcPublisher> BuildPublishers(ICollection<OpcMapping> mappings, Dictionary<int, string> wgZones)
-        {
-            var publishers = new List<OpcPublisher>();
-
-            var nodeMapping = mappings.FirstOrDefault(x => x.FieldName.Equals("ZoneAveragePressure", StringComparison.OrdinalIgnoreCase));
-            if (nodeMapping != null)
-            {
-                var nodePressureConfig = new ZonePressurePublisherConfiguration
-                {
-                    ResultRecordName = StandardResultRecordName.IdahoPressureNodeResults,                       // "IdahoPressureNodeResults"
-                    ResultAttributeRecordName = StandardResultRecordName.IdahoPressureNodeResults_NodePressure, // "IdahoPressureNodeResults_NodePressure"
-                    FieldName = StandardFieldName.PipeStatus,                                                   // "PipeStatus"
-                    ConversionFactor = 1,
-                    ElementTypes = new DomainElementType[]
-                    {
-                        DomainElementType.BaseIdahoNodeElementManager,                                          // 50
-                    },
-                    Mappings = nodeMapping.Mappings.ToDictionary(x => x.ElementID, x => x),                     // { 6773, {ElementID, ElementLabel, Enabled, OpcTag} }, ...
-                    Zones = wgZones,
-                };
-                var nodePublisher = new ZonePressurePublisher(nodePressureConfig, this.Logger);
-                publishers.Add(nodePublisher);
-            }
-
-            var tankPercentMapping = mappings.FirstOrDefault(x => x.FieldName.Equals("TankPercentFull", StringComparison.OrdinalIgnoreCase));
-            if (tankPercentMapping != null)
-            {
-                var tankPercentFillConfig = new PublisherConfiguration
-                {
-                    ResultRecordName = StandardResultRecordName.IdahoConventionalTankResults,
-                    ResultAttributeRecordName = StandardResultRecordName.IdahoConventionalTankResults_CalculatedPercentFull,
-                    FieldName = StandardFieldName.ElementType_TankPercentFull,
-                    ConversionFactor = 1,
-                    ElementTypes = new DomainElementType[]
-                    {
-                        DomainElementType.IdahoTankElementManager,
-                    },
-                    Mappings = tankPercentMapping.Mappings.ToDictionary(x => x.ElementID, x => x),
-                };
-                var publisher = new OpcPublisher(tankPercentFillConfig, this.Logger);
-                publishers.Add(publisher);
-            }
-
-            var pipeMapping = mappings.FirstOrDefault(x => x.FieldName.Equals("PipeStatus", StringComparison.OrdinalIgnoreCase));
-            if (pipeMapping != null)
-            {
-                var pipeOpenStateConfig = new PublisherConfiguration
-                {
-                    ResultRecordName = StandardResultRecordName.IdahoPipeResults,
-                    ResultAttributeRecordName = StandardResultRecordName.PipeResultControlStatus,
-                    FieldName = StandardFieldName.PipeStatus,
-                    ConversionFactor = 1,
-                    ElementTypes = new DomainElementType[]
-                    {
-                        DomainElementType.IdahoPipeElementManager,
-                    },
-                    Mappings = pipeMapping.Mappings.ToDictionary(x => x.ElementID, x => x),
-                };
-                var pipeOpenPublisher = new OpcPublisher(pipeOpenStateConfig, this.Logger);
-                publishers.Add(pipeOpenPublisher);
-            }
-
-            return publishers;
-        }
-
-        #endregion
-
         #region ExchangeWaterDemands
 
         private const string TestedZoneName = "7 - Tranzyt";
@@ -305,23 +203,15 @@ namespace SCADAPostCalculationDataExchanger
 
                 List<ZoneDemandData> zoneDemandDataList;
 
-                //ZoneDemandDataListCreatorNew.DataContext dataContextNew = new ZoneDemandDataListCreatorNew.DataContext()
-                //{
-                //    WaterInfraConnString = WaterInfraConnString,
-                //};
-                //ZoneDemandDataListCreatorNew zoneDemandDataListCreatorNew = new ZoneDemandDataListCreatorNew(dataContextNew, this.Logger);
                 zoneDemandDataList = _zoneDemandDataListCreatorNew.Create(DateTime.Now);
                 Helper.DumpToFile(zoneDemandDataList.FirstOrDefault(x => x.ZoneName == TestedZoneName), Path.Combine(_dumpFolder, $"Dump_{DateTime.Now.ToString(DateFormat)}_ZoneDemandData_2_New.xml"));
 
                 #endregion
 
-
                 #region  Write data to WaterGEMS.
 
                 // Two arrays of int: "Excluded Object IDs" and "Excluded Demand Patterns"
                 var demandConfig = this.GetDemandWriterConfigNew(zoneDemandDataList);
-                
-                //demandConfig.IsCalculationOnDb = IsCalculationOnDb;
                 
                 var demandWriter = new WaterDemandDataWriter(this.Logger, this._domainDataSet, demandConfig, (DataExchangerContext)dataExchangeContext);
 
@@ -341,12 +231,6 @@ namespace SCADAPostCalculationDataExchanger
 
         private WaterDemandDataWriterConfiguration GetDemandWriterConfigNew(List<ZoneDemandData> zoneDemandDataList)
         {
-            //ZoneDemandDataListCreatorNew.DataContext dataContextNew = new ZoneDemandDataListCreatorNew.DataContext()
-            //{
-            //    WaterInfraConnString = WaterInfraConnString,
-            //};
-            //ZoneDemandDataListCreatorNew zoneDemandDataListCreatorNew = new ZoneDemandDataListCreatorNew(dataContextNew, this.Logger);
-
             // List<string> <- Excel.ExcludedItems["Excluded Object IDs"].
             // {257=PC, 2719=S5, 518=CP1, 701=CP2, 1323=CP3, 1336=CP4, 2255=S6, 2780=S7, 1240=W1, 1239=W2, 1548=CP6}    
             var excludedObjects = _zoneDemandDataListCreatorNew.GetExcludedObjectId(zoneDemandDataList);
