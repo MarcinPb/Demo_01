@@ -53,10 +53,22 @@ namespace WpfApplication1
         }
 
 
+        public RelayCommand ShowCustomerMeterTableCmd { get; set; }
+        private void ShowCustomerMeterTableCmdExecute()
+        {
+            DialogUtility.ShowModal(new Ui.TableCustomerMeter.ListViewModel());
+        }
+
         public RelayCommand ShowDemandPatternListCmd { get; set; }
         private void ShowDemandPatternListCmdExecute()
         {
             DialogUtility.ShowModal(new Ui.DemandPattern.ListViewModel());
+        }
+
+        public RelayCommand ShowJunctionListCmd { get; set; }
+        private void ShowJunctionListCmdExecute()
+        {
+            DialogUtility.ShowModal(new Ui.ObjectDemand.ListViewModel());
         }
 
         public RelayCommand CreatePostCalcExcelCmd { get; set; }
@@ -119,6 +131,8 @@ namespace WpfApplication1
 
                 ExitCmd = new RelayCommand(ExitCmdExecute);
 
+                ShowCustomerMeterTableCmd = new RelayCommand(ShowCustomerMeterTableCmdExecute);
+                ShowJunctionListCmd = new RelayCommand(ShowJunctionListCmdExecute);
                 ShowDemandPatternListCmd = new RelayCommand(ShowDemandPatternListCmdExecute);
                 ImportConstantDataCmd = new RelayCommand(ImportConstantDataCmdExecute);
                 ImportChangeableDataCmd = new RelayCommand(ImportChangeableDataCmdExecute);

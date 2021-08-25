@@ -25,7 +25,10 @@
                 <MenuItem Header="Exit" Command="{Binding ExitCmd}" />
             </MenuItem>
             <MenuItem Header="Tools" IsEnabled="{Binding IsOpen}">
+                <MenuItem Header="Tablix - CustomerMeter" Command="{Binding ShowCustomerMeterTableCmd}"/>
                 <MenuItem Header="Demand Pattern List" Command="{Binding ShowDemandPatternListCmd}"/>
+                <MenuItem Header="Demand - Junction List" Command="{Binding ShowJunctionListCmd}"/>
+                <Separator/>
                 <MenuItem Header="Create PostCalc Excel" Command="{Binding CreatePostCalcExcelCmd}"/>
                 <Separator/>
                 <MenuItem Header="Import Constant Data" Command="{Binding ImportConstantDataCmd}"/>

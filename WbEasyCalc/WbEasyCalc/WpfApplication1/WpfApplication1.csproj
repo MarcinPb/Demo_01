@@ -116,6 +116,21 @@
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\Configuration\EditedViewModel.cs" />
+    <Compile Include="Ui\TableCustomerMeter\EditedView.xaml.cs">
+      <DependentUpon>EditedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\TableCustomerMeter\EditedViewModel.cs" />
+    <Compile Include="Ui\TableCustomerMeter\ItemViewModel.cs" />
+    <Compile Include="Ui\TableCustomerMeter\ListView.xaml.cs">
+      <DependentUpon>ListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\TableCustomerMeter\ListViewModel.cs" />
+    <Compile Include="Ui\TableCustomerMeter\RowViewModel.cs" />
+    <Compile Include="Ui\ObjectDemand\ListView.xaml.cs">
+      <DependentUpon>ListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\ObjectDemand\ListViewModel.cs" />
+    <Compile Include="Ui\ObjectDemand\RowViewModel.cs" />
     <Compile Include="Ui\DemandPatternCurve\ListView.xaml.cs">
       <DependentUpon>ListView.xaml</DependentUpon>
     </Compile>
@@ -303,6 +318,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ui\Configuration\EditedView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\TableCustomerMeter\EditedView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\TableCustomerMeter\ListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ui\ObjectDemand\ListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -6,6 +6,8 @@
     xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
     xmlns:controls="clr-namespace:WpfApplication1.Controls"
     xmlns:demandPatternList="clr-namespace:WpfApplication1.Ui.DemandPattern"
+    xmlns:objectDemandList="clr-namespace:WpfApplication1.Ui.ObjectDemand"
+    xmlns:tableCustomerMeter="clr-namespace:WpfApplication1.Ui.TableCustomerMeter"
     xmlns:waterBalanceList="clr-namespace:WpfApplication1.Ui.WaterBalanceList"
     xmlns:map="clr-namespace:WpfApplication1.Map"
     xmlns:importFromWg="clr-namespace:WpfApplication1.Ui.ImportFromWg"
@@ -32,6 +34,13 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type demandPatternList:EditedViewModel}">
         <demandPatternList:EditedView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type objectDemandList:ListViewModel}">
+        <objectDemandList:ListView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type tableCustomerMeter:ListViewModel}">
+        <tableCustomerMeter:ListView />
     </DataTemplate>
     
     
