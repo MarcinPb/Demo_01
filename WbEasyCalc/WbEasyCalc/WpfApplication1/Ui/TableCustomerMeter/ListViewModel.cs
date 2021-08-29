@@ -81,8 +81,15 @@ namespace WpfApplication1.Ui.TableCustomerMeter
             {
                 if (SelectedRow == null) { return; }
 
-                //var editedViewModel = new EditedViewModel(SelectedRow.Model.DemandPatternCurveId);
-                //var result = DialogUtility.ShowModal(editedViewModel);
+                var id = SelectedRow.ObjModel.ObjId;
+
+                var editedViewModel = new EditedViewModel(SelectedRow);
+                var result = DialogUtility.ShowModal(editedViewModel);
+                if ((bool)result) 
+                {
+                    LoadData();
+                    SelectedRow = List.FirstOrDefault(x => x.ObjModel.ObjId == id);
+                }
             }
             catch (Exception e)
             {
@@ -98,12 +105,12 @@ namespace WpfApplication1.Ui.TableCustomerMeter
 
         #endregion
 
-        public ListViewModel(int typeId = 1)
+        public ListViewModel()
         {
             try
             {
                 OpenRowCmd = new RelayCommand(OpenRowCmdExecute, OpenRowCmdCanExecute);
-                LoadData(typeId);
+                LoadData();
             }
             catch (Exception e)
             {
@@ -115,7 +122,7 @@ namespace WpfApplication1.Ui.TableCustomerMeter
         {
         }
 
-        private void LoadData(int typeId)
+        private void LoadData()
         {
             InfraData infraData = InfraRepo.GetInfraData();
 
@@ -126,6 +133,19 @@ namespace WpfApplication1.Ui.TableCustomerMeter
             var demandPatternDict = infraData.InfraChangeableData.DemandPatternDict;
             var zoneDict = infraData.InfraChangeableData.ZoneDict;
 
+            //var demandSettingObjList = infraData.InfraChangeableData.DemandSettingObjList;
+            var demandSettingsObjList = InfraRepo.TableCustomerMeter.GetList();
+            
+            // Reading data for DemandSettings
+            var demandSettingsList = demandSettingsObjList
+                .Join(
+                    demandPatternDict,
+                    l => l.DemandPatternId,
+                    r => r.DemandPatternId,
+                    (l, r) => new { l.ObjId, l.IsExcluded, l.DemandBaseValue, DemandPattern = r }
+                    )
+                .ToList()
+                ;
 
             var junctionZoneDict = infraObjList.Where(f => f.ObjTypeId==55)
                 .Join(
@@ -162,37 +182,67 @@ namespace WpfApplication1.Ui.TableCustomerMeter
                     r => r.ObjId,
                     (l, r) => new { l.Obj, l.ObjName, l.IsActive, AssociatedElementId = r.IntValue }
                     )
-                //.Join(
-                //    infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Demand_BaseFlow),
-                //    l => l.Obj.ObjId,
-                //    r => r.ObjId,
-                //    (l, r) => new { l.Obj, l.ObjName, l.IsActive, l.AssociatedElementId, DemandBase = r.FloatValue }
-                //    )
-                //.Join(
-                //    infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Demand_DemandPattern),
-                //    l => l.Obj.ObjId,
-                //    r => r.ObjId,
-                //    (l, r) => new { l.Obj, l.ObjName, l.IsActive, l.AssociatedElementId, l.DemandBase, DemandPatternId = r.IntValue }
-                //    )
-                //.ToList()
-                ;
-
-            var list = baseList
+                .Join(
+                    infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Label),
+                    l => l.AssociatedElementId,
+                    r => r.ObjId,
+                    (l, r) => new { l.Obj, l.ObjName, l.IsActive, l.AssociatedElementId, AssociatedElementName = r.StringValue }
+                    )
                 .Join(
                     infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Demand_BaseFlow),
                     l => l.Obj.ObjId,
                     r => r.ObjId,
-                    (l, r) => new { l.Obj, l.ObjName, l.IsActive, l.AssociatedElementId, DemandBase = r.FloatValue }
+                    (l, r) => new { l.Obj, l.ObjName, l.IsActive, l.AssociatedElementId, l.AssociatedElementName, DemandBase = r.FloatValue }
                     )
                 .Join(
                     infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Demand_DemandPattern),
                     l => l.Obj.ObjId,
                     r => r.ObjId,
-                    (l, r) => new { l.Obj, l.ObjName, l.IsActive, l.AssociatedElementId, l.DemandBase, DemandPatternId = r.IntValue }
+                    (l, r) => new { l.Obj, l.ObjName, l.IsActive, l.AssociatedElementId, l.AssociatedElementName, l.DemandBase, DemandPatternId = r.IntValue }
                     )
-                .Select(x => new RowViewModel(x.Obj, x.ObjName, x.IsActive ?? false, GetZone(x.AssociatedElementId, junctionZoneDict), x.DemandBase, GetDemandPattern(x.DemandPatternId)))
+                .ToList()
+                ;
+
+            //var list = baseList
+            //    .Join(
+            //        infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Demand_BaseFlow),
+            //        l => l.Obj.ObjId,
+            //        r => r.ObjId,
+            //        (l, r) => new { l.Obj, l.ObjName, l.IsActive, l.AssociatedElementId, DemandBaseDmSet = r.FloatValue }
+            //        )
+            //    .Join(
+            //        infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Demand_DemandPattern),
+            //        l => l.Obj.ObjId,
+            //        r => r.ObjId,
+            //        (l, r) => new { l.Obj, l.ObjName, l.IsActive, l.AssociatedElementId, l.DemandBaseDmSet, DemandPatternId = r.IntValue }
+            //        )
+            //    .Select(x => new RowViewModel(x.Obj, x.ObjName, x.IsActive ?? false, GetZone(x.AssociatedElementId, junctionZoneDict), x.DemandBaseDmSet, GetDemandPattern(x.DemandPatternId)))
+            //    .OrderBy(x => x.ObjModel.ObjId)
+            //    .ThenBy(x => x.DemandPatternModelDmSet?.Name)
+            //    ;
+
+
+            var list = baseList
+                .Select(x => new
+                    {
+                        Object = x,
+                        DemandSettings = demandSettingsList.FirstOrDefault(f => f.ObjId == x.Obj.ObjId)
+                    })
+                .Select(x => new RowViewModel(
+                    x.Object.Obj, 
+                    x.Object.ObjName, 
+                    x.Object.AssociatedElementName,
+                    x.Object.DemandBase,
+                    GetDemandPattern(x.Object.DemandPatternId),
+                    x.Object.IsActive ?? false, 
+                    GetZone(x.Object.AssociatedElementId, junctionZoneDict), 
+                    x.DemandSettings.DemandBaseValue,
+                    x.DemandSettings.DemandPattern,
+                    x.DemandSettings.IsExcluded        //x.Object.DemandPatternId != -1
+                    ))
                 .OrderBy(x => x.ObjModel.ObjId)
-                .ThenBy(x => x.DemandPatternModel?.Name)
+                .ThenBy(x => x.DemandPatternNameDmSet)
+                .ToList()
                 ;
 
             List = new ObservableCollection<RowViewModel>(list);

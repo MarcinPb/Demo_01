@@ -20,20 +20,39 @@ namespace WpfApplication1.Ui.TableCustomerMeter
 {
     public class EditedViewModel : ViewModelBase, IDialogViewModel, IDisposable
     {
-        private ItemViewModel _model;
-        public ItemViewModel ItemViewModel
+        private RowViewModel _rowViewModel;
+        public RowViewModel RowViewModel
         {
-            get => _model;
-            set { _model = value; RaisePropertyChanged(); }
+            get => _rowViewModel;
+            set { _rowViewModel = value; RaisePropertyChanged(); }
         }
+
+        public List<InfraDemandPattern> DemandPatternList => InfraRepo.GetInfraData().InfraChangeableData.DemandPatternDict;
 
         #region IDialogViewModel
 
-        public string Title { get; set; } = "Demand Patern";
+        public string Title { get; set; } = "Demand Patern Base and Value";
 
         public bool Save()
         {
-            return true;
+            try
+            {
+                var demandSettingObj = new DemandSettingObj()
+                {
+                    ObjId = RowViewModel.ObjModel.ObjId,
+                    DemandBaseValue = RowViewModel.DemandBaseDmSet ?? 0,
+                    DemandPatternId = RowViewModel.DemandPatternIdDmSet ?? -1,
+                    IsExcluded = RowViewModel.IsExcluded,
+                };
+
+                InfraRepo.TableCustomerMeter.SaveItem(demandSettingObj);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
         }
 
         public void Close()
@@ -42,16 +61,14 @@ namespace WpfApplication1.Ui.TableCustomerMeter
 
         #endregion
 
-        public EditedViewModel(int id)
+        public EditedViewModel(RowViewModel rowViewModel)
         {
-
-            var model = InfraRepo.GetInfraData().InfraChangeableData.DemandPatternDict.FirstOrDefault(x => x.DemandPatternId == id);
-            ItemViewModel = new ItemViewModel(model);
+            RowViewModel = rowViewModel;
         }
 
         public void Dispose()
         {
-            ItemViewModel.Dispose();
+            RowViewModel.Dispose();
         }
     }
 }

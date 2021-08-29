@@ -8,11 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Database.DataModel.Infra;
+using Database.DataRepository.Infra.Table;
 
 namespace Database.DataRepository.Infra
 {
     public class InfraRepo
     {
+        public static TableCustomerMeter TableCustomerMeter { get; } = new TableCustomerMeter(GetConnectionString());
+
 
         #region Fill constant data: tbInfraObjType, tbInfraObjTypeField, tbInfraField, tbInfraCategory, tbInfraUnitCorrection, (tbInfraFieldTemp) 
 
@@ -475,6 +478,17 @@ namespace Database.DataRepository.Infra
                 demandBaseList = cnn.Query<InfraDemandBase>(sql).ToList();
             }
 
+            List<DemandSettingObj> demandSettingObjList;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    SELECT ObjectId AS ObjId, DemandPatternId, BaseDemandValue AS DemandBaseValue FROM dbo.tbExcelObjectData;
+                ";
+                demandSettingObjList = cnn.Query<DemandSettingObj>(sql).ToList();
+            }
+
             InfraChangeableDataLists importedDataOutputLists = new InfraChangeableDataLists
             {
                 InfraObjList = infraObjList,
@@ -484,6 +498,7 @@ namespace Database.DataRepository.Infra
                 DemandPatternDict = demandPatternDict,
                 DemandPatternCurveList = demandPatternCurveList,
                 DemandBaseList = demandBaseList,
+                DemandSettingObjList = demandSettingObjList,
             };
 
             return importedDataOutputLists;

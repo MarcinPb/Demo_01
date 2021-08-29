@@ -15,5 +15,6 @@ namespace Database.DataModel.Infra
         public List<InfraObj> InfraObjList { get; set; } = new List<InfraObj>();
         public List<InfraValue> InfraValueList { get; set; } = new List<InfraValue>();
         public List<InfraGeometry> InfraGeometryList { get; set; } = new List<InfraGeometry>();
+        public List<DemandSettingObj> DemandSettingObjList { get; set; } = new List<DemandSettingObj>();
     }
 }

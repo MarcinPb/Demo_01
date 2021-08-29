@@ -120,7 +120,6 @@
       <DependentUpon>EditedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\TableCustomerMeter\EditedViewModel.cs" />
-    <Compile Include="Ui\TableCustomerMeter\ItemViewModel.cs" />
     <Compile Include="Ui\TableCustomerMeter\ListView.xaml.cs">
       <DependentUpon>ListView.xaml</DependentUpon>
     </Compile>

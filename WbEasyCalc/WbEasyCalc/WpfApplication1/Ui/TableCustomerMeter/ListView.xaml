@@ -41,13 +41,16 @@
                         <MouseBinding Gesture="LeftDoubleClick" Command="{Binding OpenRowCmd}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns >
-                        <!--<DataGridTextColumn Header="Id" Width="150" IsReadOnly="True" Binding="{Binding Model.DemandPatternCurveId}"/>-->
                         <DataGridTextColumn Header="Object ID" Width="150" IsReadOnly="True" Binding="{Binding ObjModel.ObjId}"/>
                         <DataGridTextColumn Header="Label" Width="150" IsReadOnly="True" Binding="{Binding Label}"/>
-                        <DataGridCheckBoxColumn Header="Active" Width="70" IsReadOnly="True" Binding="{Binding IsActive}"/>
-                        <DataGridTextColumn Header="Demand Base" Width="150" IsReadOnly="True" Binding="{Binding DemandBase}"/>
-                        <DataGridTextColumn Header="Demand Pattern" Width="150" IsReadOnly="True" Binding="{Binding DemandPatternModel.Name}"/>
+                        <DataGridTextColumn Header="Associated Element" Width="150" IsReadOnly="True" Binding="{Binding AssociatedElementName}"/>
+                        <DataGridTextColumn Header="Demand Base" Width="200" IsReadOnly="True" Binding="{Binding DemandBase}"/>
+                        <DataGridTextColumn Header="Demand Pattern" Width="200" IsReadOnly="True" Binding="{Binding DemandPatternModel.Name}"/>
+                        <DataGridCheckBoxColumn Header="Active" Width="100" IsReadOnly="True" Binding="{Binding Path=IsActive, Mode=OneWay}"/>
                         <DataGridTextColumn Header="Zone" Width="150" IsReadOnly="True" Binding="{Binding Zone.Name}"/>
+                        <DataGridTextColumn Header="Demand Base (Settings)" Width="200" IsReadOnly="True" Binding="{Binding DemandBaseDmSet}"/>
+                        <DataGridTextColumn Header="Demand Pattern (Settings)" Width="200" IsReadOnly="True" Binding="{Binding DemandPatternNameDmSet}"/>
+                        <DataGridCheckBoxColumn Header="Excluded (Settings)" Width="150" IsReadOnly="True" Binding="{Binding IsExcluded}"/>
                     </DataGrid.Columns>
                 </controls:FilteredDataGridCtrl>
                 <StatusBar Grid.Row="2">

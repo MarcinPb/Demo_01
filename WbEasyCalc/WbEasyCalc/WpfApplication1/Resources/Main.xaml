@@ -39,8 +39,12 @@
     <DataTemplate DataType="{x:Type objectDemandList:ListViewModel}">
         <objectDemandList:ListView />
     </DataTemplate>
+    
     <DataTemplate DataType="{x:Type tableCustomerMeter:ListViewModel}">
         <tableCustomerMeter:ListView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type tableCustomerMeter:EditedViewModel}">
+        <tableCustomerMeter:EditedView/>
     </DataTemplate>
     
     
