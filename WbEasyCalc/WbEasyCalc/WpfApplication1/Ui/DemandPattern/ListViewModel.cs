@@ -214,7 +214,7 @@ namespace WpfApplication1.Ui.DemandPattern
             var excludedPatternList = InfraRepo.ExcludedDemmandPattern.GetList();
 
             var list = InfraRepo.GetInfraData().InfraChangeableData.DemandPatternDict
-                .Select(x => new RowViewModel(x, excludedPatternList.Any(f => f.DemandPatternId==x.DemandPatternId)))
+                .Select(x => new RowViewModel(x, excludedPatternList.Any(f => f.Id==x.DemandPatternId)))
                 .OrderBy(x => x.Model.DemandPatternId)
                 .ToList()
                 ;

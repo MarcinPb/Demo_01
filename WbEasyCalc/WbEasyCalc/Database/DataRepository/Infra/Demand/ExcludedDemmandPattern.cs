@@ -19,7 +19,7 @@ namespace Database.DataRepository.Infra.Demand
             _connectionString = connectionString;
         }
 
-        public List<DemandSettingObj> GetList()
+        public List<DemandSettingDemandPattern> GetList()
         {
             using (IDbConnection cnn = new SqlConnection(_connectionString))
             {
@@ -27,12 +27,12 @@ namespace Database.DataRepository.Infra.Demand
 
                 sql = $@"
                     SELECT 
-	                    DemandPatternId
+	                    Id
                     FROM 
 	                    tbExcelExcludedDemPatt
                         ;
                 ";
-                return cnn.Query<DemandSettingObj>(sql).ToList();
+                return cnn.Query<DemandSettingDemandPattern>(sql).ToList();
             }
         }
 

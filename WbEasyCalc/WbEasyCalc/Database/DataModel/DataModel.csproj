@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ConfigMatrix.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Infra\DemandSettingDemandPattern.cs" />
     <Compile Include="Infra\DemandSettingObj.cs" />
     <Compile Include="Infra\InfraDemandBase.cs" />
     <Compile Include="Infra\InfraDemandPatternCurve.cs" />
