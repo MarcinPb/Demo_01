@@ -9,12 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Database.DataModel.Infra;
 using Database.DataRepository.Infra.Table;
+using Database.DataRepository.Infra.Demand;
 
 namespace Database.DataRepository.Infra
 {
     public class InfraRepo
     {
         public static TableCustomerMeter TableCustomerMeter { get; } = new TableCustomerMeter(GetConnectionString());
+        public static ExcludedDemmandPattern ExcludedDemmandPattern { get; } = new ExcludedDemmandPattern(GetConnectionString());
 
 
         #region Fill constant data: tbInfraObjType, tbInfraObjTypeField, tbInfraField, tbInfraCategory, tbInfraUnitCorrection, (tbInfraFieldTemp) 

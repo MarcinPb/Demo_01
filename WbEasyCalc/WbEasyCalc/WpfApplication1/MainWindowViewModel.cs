@@ -58,6 +58,11 @@ namespace WpfApplication1
         {
             DialogUtility.ShowModal(new Ui.TableCustomerMeter.ListViewModel());
         }
+        public RelayCommand ShowJunctionTableCmd { get; set; }
+        private void ShowJunctionTableCmdExecute()
+        {
+            DialogUtility.ShowModal(new Ui.TableJunction.ListViewModel());
+        }
 
         public RelayCommand ShowDemandPatternListCmd { get; set; }
         private void ShowDemandPatternListCmdExecute()
@@ -132,6 +137,7 @@ namespace WpfApplication1
                 ExitCmd = new RelayCommand(ExitCmdExecute);
 
                 ShowCustomerMeterTableCmd = new RelayCommand(ShowCustomerMeterTableCmdExecute);
+                ShowJunctionTableCmd = new RelayCommand(ShowJunctionTableCmdExecute);
                 ShowJunctionListCmd = new RelayCommand(ShowJunctionListCmdExecute);
                 ShowDemandPatternListCmd = new RelayCommand(ShowDemandPatternListCmdExecute);
                 ImportConstantDataCmd = new RelayCommand(ImportConstantDataCmdExecute);

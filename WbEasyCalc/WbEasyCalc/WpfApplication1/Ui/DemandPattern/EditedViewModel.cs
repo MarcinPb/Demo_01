@@ -33,7 +33,16 @@ namespace WpfApplication1.Ui.DemandPattern
 
         public bool Save()
         {
-            return true;
+            try
+            {
+                InfraRepo.ExcludedDemmandPattern.SaveItem(ItemViewModel.Id, ItemViewModel.IsExcluded);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
         }
 
         public void Close()
@@ -42,11 +51,11 @@ namespace WpfApplication1.Ui.DemandPattern
 
         #endregion
 
-        public EditedViewModel(int id)
+        public EditedViewModel(RowViewModel rowViewModel)
         {
-
-            var model = InfraRepo.GetInfraData().InfraChangeableData.DemandPatternDict.FirstOrDefault(x => x.DemandPatternId==id);
-            ItemViewModel = new ItemViewModel(model);
+            var model = InfraRepo.GetInfraData().InfraChangeableData.DemandPatternDict.FirstOrDefault(x => x.DemandPatternId == rowViewModel.Model.DemandPatternId);
+            var isExcluded = rowViewModel.IsExcluded;
+            ItemViewModel = new ItemViewModel(model, isExcluded);
         }
 
         public void Dispose()

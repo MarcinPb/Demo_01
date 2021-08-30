@@ -16,5 +16,6 @@ namespace Database.DataModel.Infra
         public int Label { get; set; }
         public int Physical_Zone { get; set; }
         public int Scada_TargetElement { get; set; }
+        public int Physical_NodeElevation { get; set; }
     }
 }

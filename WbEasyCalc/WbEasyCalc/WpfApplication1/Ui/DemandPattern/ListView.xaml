@@ -39,6 +39,7 @@
                 <DataGrid.Columns >
                     <DataGridTextColumn Header="Id" Width="50" IsReadOnly="True" Binding="{Binding Model.DemandPatternId}"/>
                     <DataGridTextColumn Header="Name" Width="250" IsReadOnly="True" Binding="{Binding Model.Name}"/>
+                    <DataGridCheckBoxColumn Header="Excluded (Excel)" Width="150" IsReadOnly="True" Binding="{Binding IsExcluded}"/>
                 </DataGrid.Columns>
             </controls:FilteredDataGridCtrl>
             <StatusBar Grid.Row="2">

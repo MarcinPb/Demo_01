@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WpfApplication1.Ui.DemandPattern.EditedView"
+﻿<UserControl x:Class="WpfApplication1.Ui.TableJunction.EditedView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -31,26 +31,25 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Id" />
-                <TextBlock Grid.Row="0" Grid.Column="1" Margin="7 0 0 0" Text="Name"/>
-                <TextBlock Grid.Row="0" Grid.Column="2" Margin="7 0 0 0" Text="Excluded"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0 0 7 0" Text="Object ID" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="0 0 7 0" Text="Base Demand" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Margin="0 0 7 0" Text="Demand Pattern"  />
+                <TextBlock Grid.Row="0" Grid.Column="3" Margin="0 0 7 0" Text="Excluded (Settings)" />
 
-                <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=ItemViewModel.Id, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" />
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="7 0 0 0" Text="{Binding Path=ItemViewModel.Name, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" />
-                <CheckBox Grid.Row="1" Grid.Column="2" Margin="7 0 0 0" IsChecked="{Binding Path=ItemViewModel.IsExcluded, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Margin="0 0 7 0" Grid.Row="1" Grid.Column="0" Text="{Binding Path=RowViewModel.ObjModel.ObjId, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" />
+                <TextBox Margin="0 0 7 0" Grid.Row="1" Grid.Column="1" Text="{Binding Path=RowViewModel.DemandBaseDmSet, UpdateSourceTrigger=PropertyChanged}" />
+                <!--<TextBox Text="{Binding Path=RowViewModel.DemandPatternIdDmSet, UpdateSourceTrigger=PropertyChanged}" />-->
+                <ComboBox Margin="0 0 7 0" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=DemandPatternList}" DisplayMemberPath="Name" SelectedValue="{Binding Path=RowViewModel.DemandPatternIdDmSet}" SelectedValuePath="DemandPatternId" />
+                <CheckBox Margin="0 0 7 0"  Grid.Row="1" Grid.Column="3" IsChecked="{Binding Path=RowViewModel.IsExcluded, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
 
         </Grid>
 
-        <TabControl Grid.Row="1">
-            <TabItem Header="Water Consumption List" >
-                <ContentControl Content="{Binding ItemViewModel.DemandPatternCurveListViewModel}" />
-            </TabItem>
-        </TabControl>
         
     </Grid>
 </UserControl>

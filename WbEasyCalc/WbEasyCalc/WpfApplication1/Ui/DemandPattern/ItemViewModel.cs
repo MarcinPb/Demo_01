@@ -39,6 +39,18 @@ namespace WpfApplication1.Ui.DemandPattern
             }
         }
 
+        private bool _isExcluded;
+        public bool IsExcluded
+        {
+            get
+            {
+                return _isExcluded;
+            }
+            set
+            {
+                _isExcluded = value; RaisePropertyChanged(nameof(IsExcluded));
+            }
+        }
         #endregion
 
         public DemandPatternCurve.ListViewModel DemandPatternCurveListViewModel { get; set; }
@@ -56,11 +68,11 @@ namespace WpfApplication1.Ui.DemandPattern
             }
         }
 
-        public ItemViewModel(Database.DataModel.Infra.InfraDemandPattern model)
+        public ItemViewModel(Database.DataModel.Infra.InfraDemandPattern model, bool isExcluded)
         {
             Id = model.DemandPatternId;
-
             Name = model.Name;
+            IsExcluded = isExcluded;
 
             DemandPatternCurveListViewModel = new DemandPatternCurve.ListViewModel(Id);
         }

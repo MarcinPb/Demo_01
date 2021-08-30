@@ -37,6 +37,7 @@ namespace Database.DataRepository.Infra
                 Label = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Label").FieldId,
                 Physical_Zone = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Physical_Zone").FieldId,
                 Scada_TargetElement = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Scada_TargetElement").FieldId,
+                Physical_NodeElevation = InfraConstantData.InfraFieldList.FirstOrDefault(f => f.Name == "Physical_NodeElevation").FieldId,
             };
         }
 

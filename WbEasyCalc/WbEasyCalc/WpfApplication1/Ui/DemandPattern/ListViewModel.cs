@@ -104,13 +104,17 @@ namespace WpfApplication1.Ui.DemandPattern
      
         private void OpenRowCmdExecute()
         {
-            if (SelectedRow == null)
-            {
-                return;
-            }
+            if (SelectedRow == null) { return; }
 
-            var editedViewModel = new EditedViewModel(SelectedRow.Model.DemandPatternId);
+            var id = SelectedRow.Model.DemandPatternId;
+
+            var editedViewModel = new EditedViewModel(SelectedRow);
             var result = DialogUtility.ShowModal(editedViewModel);
+            if ((bool)result)
+            {
+                LoadData();
+                SelectedRow = List.FirstOrDefault(x => x.Model.DemandPatternId == id);
+            }
             editedViewModel.Dispose();
         }
         public bool OpenRowCmdCanExecute()
@@ -207,7 +211,15 @@ namespace WpfApplication1.Ui.DemandPattern
 
         private void LoadData()
         {
-            List = new ObservableCollection<RowViewModel>(InfraRepo.GetInfraData().InfraChangeableData.DemandPatternDict.Select(x => new RowViewModel(x)).OrderBy(x => x.Model.DemandPatternId).ToList());
+            var excludedPatternList = InfraRepo.ExcludedDemmandPattern.GetList();
+
+            var list = InfraRepo.GetInfraData().InfraChangeableData.DemandPatternDict
+                .Select(x => new RowViewModel(x, excludedPatternList.Any(f => f.DemandPatternId==x.DemandPatternId)))
+                .OrderBy(x => x.Model.DemandPatternId)
+                .ToList()
+                ;
+
+            List = new ObservableCollection<RowViewModel>(list);
             RowsQty = List.Count;
         }
 

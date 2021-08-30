@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Database.DataRepository.Infra.Table
 {
-    public class TableCustomerMeter
+    public class TableJunction
     {
         private string _connectionString;
 
-        public TableCustomerMeter(string connectionString)
+        public TableJunction(string connectionString)
         {
             _connectionString = connectionString;
         }

@@ -45,8 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infra\Demand\ExcludedDemmandPattern.cs" />
     <Compile Include="Infra\InfraData.cs" />
     <Compile Include="Infra\InfraRepo.cs" />
+    <Compile Include="Infra\Table\TableJunction.cs" />
     <Compile Include="Infra\Table\TableCustomerMeter.cs" />
     <Compile Include="MainRepo.cs" />
     <Compile Include="IBaseItemRepository.cs" />

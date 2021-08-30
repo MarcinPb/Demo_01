@@ -12,14 +12,14 @@ using GlobalRepository;
 using NLog;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.TableCustomerMeter
+namespace WpfApplication1.Ui.TableJunction
 {
     public class ListViewModel : ViewModelBase, IDisposable, IDialogViewModel
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         #region IDialogViewModel
-        public string Title { get; set; } = "Customer Meter Table";
+        public string Title { get; set; } = "Junction Table";
 
         public bool Save()
         {
@@ -133,6 +133,7 @@ namespace WpfApplication1.Ui.TableCustomerMeter
             var demandPatternDict = infraData.InfraChangeableData.DemandPatternDict;
             var zoneDict = infraData.InfraChangeableData.ZoneDict;
 
+            //var demandSettingObjList = infraData.InfraChangeableData.DemandSettingObjList;
             var demandSettingsObjList = InfraRepo.TableCustomerMeter.GetList();
             
             // Reading data for DemandSettings
@@ -146,23 +147,27 @@ namespace WpfApplication1.Ui.TableCustomerMeter
                 .ToList()
                 ;
 
-            var junctionZoneDict = infraObjList.Where(f => f.ObjTypeId==55)
+            var junctionDemandPatternList = infraObjList.Where(f => f.ObjTypeId == 55)
                 .Join(
-                    infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Physical_Zone),
+                    infraValueList,
                     l => l.ObjId,
                     r => r.ObjId,
-                    (l, r) => new { l.ObjId, ZoneId = r.IntValue }
+                    (l, r) => new { l.ObjId, r.ValueId }
                     )
                 .Join(
-                    zoneDict,
-                    l => l.ZoneId,
-                    r => r.ZoneId,
-                    (l, r) => new { l.ObjId, Zone = r }
+                    demandBaseList,
+                    l => l.ValueId,
+                    r => r.ValueId,
+                    (l, r) => new { l.ObjId, r.DemandPatternId }
                     )
-                .ToDictionary(x => x.ObjId, x => x.Zone);
+                .GroupBy(x => x.ObjId)
+                .Select(group => new { ObjId = group.Key, Count = group.Count() })
+                .ToList()
+                //.ToDictionary(x => x.ObjId, x => x.Count)
+                ;
 
 
-            var baseList = infraObjList.Where(f => f.ObjTypeId == 73)
+            var baseList = infraObjList.Where(f => f.ObjTypeId == 55)
                 .Join(
                     infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Label),
                     l => l.ObjId,
@@ -176,28 +181,16 @@ namespace WpfApplication1.Ui.TableCustomerMeter
                     (l, r) => new { Obj = l.Obj, l.ObjName, IsActive = r.BooleanValue }
                     )
                 .Join(
-                    infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Demand_AssociatedElement),
+                    infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Physical_Zone),
                     l => l.Obj.ObjId,
                     r => r.ObjId,
-                    (l, r) => new { l.Obj, l.ObjName, l.IsActive, AssociatedElementId = r.IntValue }
+                    (l, r) => new { Obj = l.Obj, l.ObjName, l.IsActive, ZoneId = r.IntValue }
                     )
                 .Join(
-                    infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Label),
-                    l => l.AssociatedElementId,
-                    r => r.ObjId,
-                    (l, r) => new { l.Obj, l.ObjName, l.IsActive, l.AssociatedElementId, AssociatedElementName = r.StringValue }
-                    )
-                .Join(
-                    infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Demand_BaseFlow),
+                    infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Physical_NodeElevation),
                     l => l.Obj.ObjId,
                     r => r.ObjId,
-                    (l, r) => new { l.Obj, l.ObjName, l.IsActive, l.AssociatedElementId, l.AssociatedElementName, DemandBase = r.FloatValue }
-                    )
-                .Join(
-                    infraValueList.Where(f => f.FieldId == infraData.InfraSpecialFieldId.Demand_DemandPattern),
-                    l => l.Obj.ObjId,
-                    r => r.ObjId,
-                    (l, r) => new { l.Obj, l.ObjName, l.IsActive, l.AssociatedElementId, l.AssociatedElementName, l.DemandBase, DemandPatternId = r.IntValue }
+                    (l, r) => new { Obj = l.Obj, l.ObjName, l.IsActive, l.ZoneId, NodeElevation = r.FloatValue }
                     )
                 .ToList()
                 ;
@@ -230,14 +223,15 @@ namespace WpfApplication1.Ui.TableCustomerMeter
                 .Select(x => new RowViewModel(
                     x.Object.Obj, 
                     x.Object.ObjName, 
-                    x.Object.AssociatedElementName,
-                    x.Object.DemandBase,
-                    GetDemandPattern(x.Object.DemandPatternId),
+                    GetDemandPatternCountFormated(junctionDemandPatternList.FirstOrDefault(f => f.ObjId == x.Object.Obj.ObjId)?.Count), 
+                    0,                                                              
+                    null,                                                             
                     x.Object.IsActive ?? false, 
-                    GetZone(x.Object.AssociatedElementId, junctionZoneDict), 
-                    x.DemandSettings.DemandBaseValue,
-                    x.DemandSettings.DemandPattern,
-                    x.DemandSettings.IsExcluded        //x.Object.DemandPatternId != -1
+                    GetZone(x.Object.ZoneId), 
+                    x.Object.NodeElevation,
+                    x.DemandSettings?.DemandBaseValue,
+                    x.DemandSettings?.DemandPattern,
+                    x.DemandSettings?.IsExcluded ?? false       
                     ))
                 .OrderBy(x => x.ObjModel.ObjId)
                 .ThenBy(x => x.DemandPatternNameDmSet)
@@ -253,9 +247,13 @@ namespace WpfApplication1.Ui.TableCustomerMeter
             return InfraRepo.GetInfraData().InfraChangeableData.DemandPatternDict.FirstOrDefault(f => f.DemandPatternId == (demandPatternId ?? -1));
         }
 
-        private InfraZone GetZone(int? associatedElementId, Dictionary<int, InfraZone> junctionZoneDict)
+        private InfraZone GetZone(int? zoneId)
         {
-            return junctionZoneDict.FirstOrDefault(f => f.Key == associatedElementId).Value;
+            return InfraRepo.GetInfraData().InfraChangeableData.ZoneDict.FirstOrDefault(f => f.ZoneId == zoneId);
+        }
+        private string GetDemandPatternCountFormated(int? count)
+        {
+            return $"<Collection: {count ?? 0} items>";
         }
     }
 }

@@ -8,6 +8,7 @@
     xmlns:demandPatternList="clr-namespace:WpfApplication1.Ui.DemandPattern"
     xmlns:objectDemandList="clr-namespace:WpfApplication1.Ui.ObjectDemand"
     xmlns:tableCustomerMeter="clr-namespace:WpfApplication1.Ui.TableCustomerMeter"
+    xmlns:tableJunction="clr-namespace:WpfApplication1.Ui.TableJunction"
     xmlns:waterBalanceList="clr-namespace:WpfApplication1.Ui.WaterBalanceList"
     xmlns:map="clr-namespace:WpfApplication1.Map"
     xmlns:importFromWg="clr-namespace:WpfApplication1.Ui.ImportFromWg"
@@ -47,26 +48,17 @@
         <tableCustomerMeter:EditedView/>
     </DataTemplate>
     
+    <DataTemplate DataType="{x:Type tableJunction:ListViewModel}">
+        <tableJunction:ListView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type tableJunction:EditedViewModel}">
+        <tableJunction:EditedView/>
+    </DataTemplate>
     
-    <!--<DataTemplate DataType="{x:Type waterConsumption:ListViewModel}">
-        <waterConsumption:ListView />
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type waterConsumption:EditedViewModel}">
-        <waterConsumption:EditedView />
-    </DataTemplate>
-    
-    <DataTemplate DataType="{x:Type waterExcelConsumption:EditedViewModel}">
-            <waterExcelConsumption:EditedView />
-    </DataTemplate>
-    -->
     <DataTemplate DataType="{x:Type waterConsumptionMap:MapViewModel}">
         <waterConsumptionMap:MapView />
     </DataTemplate>
-    <!--
-    <DataTemplate DataType="{x:Type waterConsumptionReport:EditedViewModel}">
-        <waterConsumptionReport:EditedView />
-    </DataTemplate>
-    -->
+
     <DataTemplate DataType="{x:Type configuration:EditedViewModel}">
         <configuration:EditedView />
     </DataTemplate>

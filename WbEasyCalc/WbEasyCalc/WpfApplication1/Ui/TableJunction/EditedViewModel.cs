@@ -16,7 +16,7 @@ using WbEasyCalcModel.WbEasyCalc;
 using WpfApplication1.Ui.WaterBalanceList.Excel;
 using WpfApplication1.Utility;
 
-namespace WpfApplication1.Ui.TableCustomerMeter
+namespace WpfApplication1.Ui.TableJunction
 {
     public class EditedViewModel : ViewModelBase, IDialogViewModel, IDisposable
     {
@@ -31,7 +31,7 @@ namespace WpfApplication1.Ui.TableCustomerMeter
 
         #region IDialogViewModel
 
-        public string Title { get; set; } = "Customer Meter";
+        public string Title { get; set; } = "Junction";
 
         public bool Save()
         {
