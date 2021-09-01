@@ -24,13 +24,19 @@
             <MenuItem Header="File">
                 <MenuItem Header="Exit" Command="{Binding ExitCmd}" />
             </MenuItem>
-            <MenuItem Header="Tools" IsEnabled="{Binding IsOpen}">
-                <MenuItem Header="Tablix - Junction" Command="{Binding ShowJunctionTableCmd}"/>
-                <MenuItem Header="Tablix - Customer Meter" Command="{Binding ShowCustomerMeterTableCmd}"/>
-                <MenuItem Header="Demand Pattern List" Command="{Binding ShowDemandPatternListCmd}"/>
-                <MenuItem Header="Demand - Junction List" Command="{Binding ShowJunctionListCmd}"/>
+            <MenuItem Header="Model" IsEnabled="{Binding IsOpen}">
+                <MenuItem Header="Tablix" IsEnabled="{Binding IsOpen}">
+                    <MenuItem Header="Junction" Command="{Binding ShowJunctionTableCmd}"/>
+                    <MenuItem Header="Customer Meter" Command="{Binding ShowCustomerMeterTableCmd}"/>
+                </MenuItem>
+                <MenuItem Header="Demand" IsEnabled="{Binding IsOpen}">
+                    <MenuItem Header="Patterns" Command="{Binding ShowDemandPatternListCmd}"/>
+                    <MenuItem Header="Demand Center" Command="{Binding ShowJunctionListCmd}"/>
+                </MenuItem>
                 <Separator/>
                 <MenuItem Header="Create PostCalc Excel" Command="{Binding CreatePostCalcExcelCmd}"/>
+            </MenuItem>
+            <MenuItem Header="Tools" IsEnabled="{Binding IsOpen}">
                 <Separator/>
                 <MenuItem Header="Import Constant Data" Command="{Binding ImportConstantDataCmd}"/>
                 <MenuItem Header="Import Changeable Data" Command="{Binding ImportChangeableDataCmd}"/>
