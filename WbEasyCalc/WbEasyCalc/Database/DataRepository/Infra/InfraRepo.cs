@@ -491,6 +491,28 @@ namespace Database.DataRepository.Infra
                 demandSettingObjList = cnn.Query<DemandSettingObj>(sql).ToList();
             }
 
+            List<int> demandSettingExcludedObjList;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    SELECT Id FROM dbo.tbExcelExcludedObj;
+                ";
+                demandSettingExcludedObjList = cnn.Query<int>(sql).ToList();
+            }
+
+            List<int> demandSettingExcludedDemandPatternList;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                string sql;
+
+                sql = $@"
+                    SELECT Id FROM dbo.tbExcelExcludedDemPatt;
+                ";
+                demandSettingExcludedDemandPatternList = cnn.Query<int>(sql).ToList();
+            }
+
             InfraChangeableDataLists importedDataOutputLists = new InfraChangeableDataLists
             {
                 InfraObjList = infraObjList,
@@ -501,6 +523,8 @@ namespace Database.DataRepository.Infra
                 DemandPatternCurveList = demandPatternCurveList,
                 DemandBaseList = demandBaseList,
                 DemandSettingObjList = demandSettingObjList,
+                DemandSettingExcludedObjList = demandSettingExcludedObjList,
+                DemandSettingExcludedDemandPatternList = demandSettingExcludedDemandPatternList,
             };
 
             return importedDataOutputLists;

@@ -36,6 +36,8 @@ namespace ExcelNpoi.ExcelNpoi
             List<InfraDemandPattern> demandPatternList = infraChangeableDataList.DemandPatternDict;
             List<InfraDemandPatternCurve> demandPatternCurveList = infraChangeableDataList.DemandPatternCurveList;
             List<InfraZone> zoneList = infraChangeableDataList.ZoneDict;
+            var demandSettingExcludedObjList = infraChangeableDataList.DemandSettingExcludedObjList;
+            var demandSettingExcludedDemandPatternList = infraChangeableDataList.DemandSettingExcludedDemandPatternList;
 
             // Validation
             int? missingSupportElementId = demandPatternCurveList
@@ -83,7 +85,19 @@ namespace ExcelNpoi.ExcelNpoi
                 row = sheet2.CreateRow(rowIndex);
                 row.CreateCell(0).SetCellValue("Excluded Object IDs");
                 row.CreateCell(1).SetCellValue("Excluded Demand Patterns");
-
+                for (int i = 1; i < Math.Max(demandSettingExcludedObjList.Count, demandSettingExcludedDemandPatternList.Count); i++)
+                {
+                    row = sheet2.CreateRow(i);
+                    if (i <= demandSettingExcludedObjList.Count)
+                    {
+                        row.CreateCell(0).SetCellValue(demandSettingExcludedObjList[i - 1]);
+                    }
+                    if (i <= demandSettingExcludedDemandPatternList.Count)
+                    {
+                        string demandPatternName = demandPatternList.FirstOrDefault(f => f.DemandPatternId == demandSettingExcludedDemandPatternList[i - 1])?.Name;
+                        row.CreateCell(1).SetCellValue(demandPatternName);
+                    }
+                }
 
                 ISheet sheet3 = workbook.CreateSheet("Zones");
                 rowIndex = 0;
